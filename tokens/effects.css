@@ -5,6 +5,8 @@
   --radius-lg: 2px;
   --radius-xl: 2px;
   --radius-full: 999px;
+  /* Window frame — the one rounded container; controls and panels stay sharp. */
+  --radius-win: 10px;
 
   --border-width: 1px;
   --blur-panel: 20px;

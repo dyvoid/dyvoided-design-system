@@ -255,7 +255,7 @@
 </div>
 
 <!-- Toast -->
-<div class="toast-stack" id="toasts"></div>
+<div class="toast-stack" id="toasts" role="region" aria-live="polite" aria-label="Notifications"></div>
 
 <script>
 const projects = ['Intro Pad','Kick Drum','Snare Rim','Bass Layer 02','Lead — bright pluck','Lead — soft','FX sweep','Ambient tail'];
@@ -406,6 +406,7 @@ function showToast(msg) {
   const el = document.createElement('div');
   el.className = 'ds-toast';
   el.style.width = '340px';
+  el.setAttribute('role', 'status');
   el.innerHTML = '<span class="ds-toast-dot success"></span><div class="ds-toast-body"><span class="ds-toast-title">' + msg + '</span></div>';
   stack.appendChild(el);
   setTimeout(() => el.remove(), 4000);
