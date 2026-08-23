@@ -260,5 +260,5 @@ bindSlider('vol', 'vol-val', v => ((v - 100) * 0.2).toFixed(1) + ' dB');
 bindSlider('pan', 'pan-val', v => v < 50 ? 'L ' + (50 - v) : v > 50 ? 'R ' + (v - 50) : 'C');
 bindSlider('rev', 'rev-val', v => v + '%');
 </script>
-</body>
+<script src="../../scripts/ds-eval-apply.js"></script></body>
 </html>

@@ -23,6 +23,8 @@
   .eval-bar .title { color: var(--text-primary); font-weight: 600; }
   .eval-bar .spacer { flex: 1; }
   .eval-bar .group { display: flex; align-items: center; gap: var(--space-3); color: var(--text-tertiary); }
+  .eval-bar .b-slider { width: 80px; accent-color: var(--primary); cursor: pointer; }
+  .eval-bar .b-val { min-width: 32px; text-align: right; }
   .eval-bar button {
     background: var(--surface-raised); border: var(--border-width) solid var(--border-subtle);
     color: var(--text-secondary); font-family: var(--font-mono); font-size: var(--font-size-xs);
@@ -71,6 +73,25 @@
   .color-chip .swatch { height: 48px; }
   .color-chip .meta { padding: 6px 10px; font-family: var(--font-mono); font-size: var(--font-size-2xs); color: var(--text-secondary); background: var(--surface-panel); }
   .color-chip .meta .name { color: var(--text-primary); display: block; margin-bottom: 2px; }
+
+  /* ===== Live workbench (direct DOM specimen) ===== */
+  .workbench-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); max-width: 1080px; margin: 0 auto; }
+  .workbench-stack { display: flex; flex-direction: column; gap: var(--space-5); }
+  .workbench-row { display: flex; gap: var(--space-3); align-items: center; flex-wrap: wrap; }
+  .workbench-row.tight { gap: 12px; }
+  .workbench-field-grow { flex: 1; }
+  .workbench-field-fixed { width: 130px; }
+  .workbench-slider-field { margin-bottom: 0; }
+  .workbench-row.wide { gap: 20px; }
+  .workbench-subcard {
+    background: var(--surface-raised); border: var(--border-width) solid var(--border-subtle);
+    border-radius: var(--radius-md); padding: 14px;
+    box-shadow: var(--shadow-sm), var(--inset-highlight);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .workbench-subcard-text { display: flex; flex-direction: column; gap: 2px; }
+  .workbench-subcard-title { font-size: var(--text-sm); font-weight: 600; color: var(--text-primary); }
+  .workbench-subcard-sub { font-size: var(--text-xs); color: var(--text-tertiary); }
 </style>
 </head>
 <body data-theme="dark">
@@ -78,6 +99,11 @@
 <div class="eval-bar">
   <span class="title">dyvoided.2 — refinement eval</span>
   <span class="spacer"></span>
+  <div class="group">
+    <span>boldness</span>
+    <input type="range" id="b-slider" class="b-slider" min="0" max="100" value="50">
+    <span id="b-val" class="b-val">50%</span>
+  </div>
   <div class="group">
     <span>theme</span>
     <button id="t-dark" aria-pressed="true">dark</button>
@@ -87,6 +113,111 @@
     <span>density</span>
     <button id="d-spacious" aria-pressed="true">spacious</button>
     <button id="d-compact" aria-pressed="false">compact</button>
+  </div>
+</div>
+
+<!-- ==================== LIVE INTERACTIVE WORKBENCH (Direct DOM) ==================== -->
+<div class="eval-section">
+  <div class="eval-note">Live Interactive Workbench — Direct DOM Specimen (Drag boldness slider above)</div>
+  <h2 class="eval-h2">Interactive Boldness & Texture Preview</h2>
+
+  <div class="workbench-grid">
+
+    <!-- Panel 1: Surface & Controls -->
+    <div class="ds-panel">
+      <div class="ds-panel-head">
+        <span class="ds-panel-title">1. Control Surface & Bevels</span>
+        <div class="ds-badge ds-badge-accent">Tactile</div>
+      </div>
+      <div class="ds-panel-body workbench-stack">
+        <!-- Tabs -->
+        <div class="ds-tabs">
+          <button class="ds-tab active">Overview</button>
+          <button class="ds-tab">Parameters</button>
+          <button class="ds-tab">Modulation</button>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="workbench-row">
+          <button class="ds-btn ds-btn-primary">Primary Gradient</button>
+          <button class="ds-btn ds-btn-secondary">Secondary Bevel</button>
+          <button class="ds-btn ds-btn-danger">Danger</button>
+        </div>
+
+        <!-- Input & Select Field -->
+        <div class="workbench-row tight">
+          <div class="ds-input-field workbench-field-grow">
+            <span class="ds-input-label">Filter Name</span>
+            <div class="ds-input-box">
+              <input class="ds-input" value="LFO 1 -> Cutoff" readonly>
+            </div>
+          </div>
+          <div class="ds-input-field workbench-field-fixed">
+            <span class="ds-input-label">Sample Rate</span>
+            <div class="ds-select-field">
+              <span>48 kHz</span>
+              <svg class="ds-select-chev" viewBox="0 0 16 16" fill="currentColor"><path d="M4 6l4 4 4-4"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slider & Controls -->
+        <div class="ds-slider-field workbench-slider-field">
+          <div class="ds-slider-head">
+            <span class="ds-slider-label">Cutoff Frequency</span>
+            <span class="ds-slider-value">4.20 kHz</span>
+          </div>
+          <div class="ds-slider-track">
+            <div class="ds-slider-fill" style="width: 68%;"></div>
+            <div class="ds-slider-knob" style="left: 68%;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel 2: Surface Hierarchy & Elevation Depth -->
+    <div class="ds-panel">
+      <div class="ds-panel-head">
+        <span class="ds-panel-title">2. Elevation & Progress</span>
+        <div class="ds-badge ds-badge-success">Multi-Layer</div>
+      </div>
+      <div class="ds-panel-body workbench-stack">
+
+        <!-- Progress Bar -->
+        <div class="ds-progress-row">
+          <div class="ds-progress-label">
+            <span>Buffer Load</span>
+            <span class="ds-progress-pct">74%</span>
+          </div>
+          <div class="ds-progress-track">
+            <div class="ds-progress-fill" style="width: 74%;"></div>
+          </div>
+        </div>
+
+        <!-- Switches & Checkboxes -->
+        <div class="workbench-row wide">
+          <label class="ds-switch-item">
+            <div class="ds-switch-track on"><div class="ds-switch-thumb"></div></div>
+            <span class="ds-switch-label">High-Pass Filter</span>
+          </label>
+          <label class="ds-check">
+            <div class="ds-checkbox on"><div class="ds-checkbox-inner"></div></div>
+            <span class="ds-check-label">Phase Invert</span>
+          </label>
+        </div>
+
+        <!-- Inner Elevated Sub-Card -->
+        <div class="workbench-subcard">
+          <div class="workbench-subcard-text">
+            <span class="workbench-subcard-title">Sunken Elevation Box</span>
+            <span class="workbench-subcard-sub">Layered drop shadows & specular edge highlight</span>
+          </div>
+          <div class="ds-badge ds-badge-warning">Elevated</div>
+        </div>
+
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -309,31 +440,64 @@
   const tLight = document.getElementById('t-light');
   const dSpacious = document.getElementById('d-spacious');
   const dCompact = document.getElementById('d-compact');
+  const bSlider = document.getElementById('b-slider');
+  const bVal = document.getElementById('b-val');
+
+  let currentTheme = 'dark';
+  let currentBoldness = '0.50';
+  let currentDensity = 'spacious';
+
+  // Iframes are loaded from file://, where cross-origin DOM access is blocked.
+  // Instead, pass theme + density + boldness as query params on the iframe src.
+  // Each iframe loads scripts/ds-eval-apply.js (eval-only) which reads the params.
+  const iframes = document.querySelectorAll('iframe');
+  iframes.forEach(iframe => {
+    iframe.dataset.baseSrc = iframe.getAttribute('src').split('?')[0];
+  });
+
+  function updateIframeSrcs() {
+    const qs = '?theme=' + encodeURIComponent(currentTheme)
+             + '&density=' + encodeURIComponent(currentDensity)
+             + '&boldness=' + currentBoldness;
+    iframes.forEach(iframe => {
+      iframe.setAttribute('src', iframe.dataset.baseSrc + qs);
+    });
+  }
 
   function setTheme(theme) {
+    currentTheme = theme;
     body.setAttribute('data-theme', theme);
     const isDark = theme === 'dark';
     tDark.setAttribute('aria-pressed', isDark);
     tLight.setAttribute('aria-pressed', !isDark);
-    // Sync theme to specimen iframes
-    document.querySelectorAll('.specimen iframe').forEach(iframe => {
-      try {
-        const doc = iframe.contentDocument;
-        if (doc && doc.body) { doc.body.setAttribute('data-theme', theme); }
-      } catch(e) {}
-    });
+    updateIframeSrcs();
   }
+
   function setDensity(compact) {
+    currentDensity = compact ? 'compact' : 'spacious';
     dSpacious.setAttribute('aria-pressed', !compact);
     dCompact.setAttribute('aria-pressed', compact);
+    if (compact) document.documentElement.setAttribute('data-density', 'compact');
+    else document.documentElement.removeAttribute('data-density');
+    updateIframeSrcs();
+  }
+
+  // Live update for the main page + workbench (instant, no iframe reload).
+  function setBoldness(val) {
+    currentBoldness = (val / 100).toFixed(2);
+    document.documentElement.style.setProperty('--boldness', currentBoldness);
+    if (bVal) bVal.textContent = val + '%';
   }
 
   tDark.addEventListener('click', () => setTheme('dark'));
   tLight.addEventListener('click', () => setTheme('light'));
   dSpacious.addEventListener('click', () => setDensity(false));
   dCompact.addEventListener('click', () => setDensity(true));
-
-
+  if (bSlider) {
+    // Live update during drag (main page only), reload iframes on release.
+    bSlider.addEventListener('input', (e) => setBoldness(e.target.value));
+    bSlider.addEventListener('change', () => updateIframeSrcs());
+  }
 </script>
 
 </body>
