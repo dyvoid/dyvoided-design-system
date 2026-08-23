@@ -63,6 +63,8 @@ Rules:
 
 **Elevation** — Soft layered shadows, never a single hard drop. Panels float on `--surface-panel` with a signature top edge and inset highlight. Raised elements (dialogs, popovers) get `--shadow-md`/`--shadow-lg` plus a hairline border. Recessed controls (slider track, checkbox, switch track) use `--inset-rail`.
 
+**Presence** — A single `--presence` knob (0.0 to 1.0) controls how strongly surfaces assert themselves. At 0, the system is nearly flat: minimal shadows, no gradients, no inset highlights. At 1, it's lush and tactile: full layered shadows, gradient fills on buttons and controls, visible inset rails and specular edge highlights. Default is 0.5. One value drives every shadow, highlight, and muted-bg fill opacity in the system. Set it once per app to match the desired feel — a calm reading tool might sit at 0.2, a creative DAW at 0.8.
+
 **Corners** — Sharp 2px on all controls and panels. Full pill (999px) only for switches, badges, dots, avatars, and scrollbar thumbs.
 
 **Density** — Every spacing token has a `[data-density="compact"]` override. Default is spacious; compact exists for power-user and data-dense views.

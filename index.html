@@ -100,8 +100,8 @@
   <span class="title">dyvoided.2 — showcase</span>
   <span class="spacer"></span>
   <div class="group">
-    <span>boldness</span>
-    <input type="range" id="b-slider" class="b-slider" aria-label="Boldness" min="0" max="100" value="50">
+    <span>presence</span>
+    <input type="range" id="b-slider" class="b-slider" aria-label="Presence" min="0" max="100" value="50">
     <span id="b-val" class="b-val">50%</span>
   </div>
   <div class="group">
@@ -118,8 +118,8 @@
 
 <!-- ==================== LIVE INTERACTIVE WORKBENCH (Direct DOM) ==================== -->
 <div class="eval-section">
-  <div class="eval-note">Live Interactive Workbench — Direct DOM Specimen (Drag boldness slider above)</div>
-  <h2 class="eval-h2">Interactive Boldness & Texture Preview</h2>
+  <div class="eval-note">Live Interactive Workbench — Direct DOM Specimen (Drag presence slider above)</div>
+  <h2 class="eval-h2">Interactive Presence & Texture Preview</h2>
 
   <div class="workbench-grid">
 
@@ -444,11 +444,11 @@
   const bVal = document.getElementById('b-val');
 
   let currentTheme = 'dark';
-  let currentBoldness = '0.50';
+  let currentPresence = '0.50';
   let currentDensity = 'spacious';
 
   // Iframes are loaded from file://, where cross-origin DOM access is blocked.
-  // Instead, pass theme + density + boldness as query params on the iframe src.
+  // Instead, pass theme + density + presence as query params on the iframe src.
   // Each iframe loads scripts/ds-eval-apply.js (eval-only) which reads the params.
   const iframes = document.querySelectorAll('iframe');
   iframes.forEach(iframe => {
@@ -464,7 +464,7 @@
   function stateQueryString() {
     return '?theme=' + encodeURIComponent(currentTheme)
          + '&density=' + encodeURIComponent(currentDensity)
-         + '&boldness=' + currentBoldness;
+         + '&presence=' + currentPresence;
   }
 
   function updateIframeSrcs() {
@@ -502,9 +502,9 @@
   }
 
   // Live update for the main page + workbench (instant, no iframe reload).
-  function setBoldness(val) {
-    currentBoldness = (val / 100).toFixed(2);
-    document.documentElement.style.setProperty('--boldness', currentBoldness);
+  function setPresence(val) {
+    currentPresence = (val / 100).toFixed(2);
+    document.documentElement.style.setProperty('--presence', currentPresence);
     if (bVal) bVal.textContent = val + '%';
   }
 
@@ -514,7 +514,7 @@
   dCompact.addEventListener('click', () => setDensity(true));
   if (bSlider) {
     // Live update during drag (main page only), reload iframes on release.
-    bSlider.addEventListener('input', (e) => setBoldness(e.target.value));
+    bSlider.addEventListener('input', (e) => setPresence(e.target.value));
     bSlider.addEventListener('change', () => { updateIframeSrcs(); updateOpenLinks(); });
   }
 </script>
