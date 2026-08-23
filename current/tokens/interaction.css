@@ -1,0 +1,29 @@
+/* Behavior layer. Components carry inline styles for their *appearance*;
+   states that inline styles cannot express (:hover, :active, :focus-visible,
+   reduced motion) live here and read per-instance values the component sets
+   as inline custom properties. Nothing here paints unless the matching
+   data-ds-* attribute is present. */
+
+[data-ds-hover]:not(:disabled):hover { background: var(--_bg-hover); }
+[data-ds-hover]:not(:disabled):hover [data-ds-hover-fg] { color: var(--_fg-hover, inherit); }
+
+[data-ds-press]:not(:disabled):active { transform: translateY(1px); box-shadow: var(--_shadow-press, none); }
+
+[data-ds-focus]:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+[data-ds-focus]:focus:not(:focus-visible) { outline: none; }
+
+/* Visually hidden native control that still receives keyboard focus. */
+[data-ds-peer] { position: absolute; opacity: 0; width: 0; height: 0; margin: 0; pointer-events: none; }
+[data-ds-peer]:focus-visible + [data-ds-peer-target] { box-shadow: var(--focus-ring); }
+
+/* Range input is transparent; ring the track that wraps it instead. */
+[data-ds-track]:has(:focus-visible) { box-shadow: var(--focus-ring); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

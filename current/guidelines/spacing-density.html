@@ -1,0 +1,20 @@
+<!-- @dsCard group="Spacing" viewport="700x200" subtitle="data-density=\"compact\" tightens the same tokens" name="Density Modes" -->
+<html><head><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@600;700&family=Schibsted+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"><link rel="stylesheet" href="../styles.css"><style>
+body{margin:0;background:var(--surface-app);padding:16px;display:flex;gap:16px;font-family:var(--font-body)}
+.panel{flex:1;background:var(--surface-panel);border:1px solid var(--border-subtle);border-radius:var(--radius-lg);padding:var(--space-4)}
+.item{display:flex;align-items:center;gap:var(--space-3);padding:var(--space-2) 0;color:var(--text-primary);font-size:var(--text-sm)}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--primary-500)}
+.label{font-family:var(--font-mono);font-size:10px;color:var(--text-tertiary);margin-bottom:var(--space-2)}
+</style></head>
+<body data-theme="dark">
+<div class="panel"><div class="label">default</div>
+<div class="item"><span class="dot"></span>Track 01</div>
+<div class="item"><span class="dot"></span>Track 02</div>
+<div class="item"><span class="dot"></span>Track 03</div>
+</div>
+<div class="panel" data-density="compact"><div class="label">compact</div>
+<div class="item"><span class="dot"></span>Track 01</div>
+<div class="item"><span class="dot"></span>Track 02</div>
+<div class="item"><span class="dot"></span>Track 03</div>
+</div>
+</body></html>

@@ -1,0 +1,14 @@
+<!-- @dsCard group="Effects" viewport="700x280" name="Scrollbars" subtitle="Standard properties plus webkit pseudo-elements — scroll each panel" -->
+<html><head><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@600;700&family=Schibsted+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"><link rel="stylesheet" href="../styles.css"><style>
+body{margin:0;background:var(--surface-app);font-family:var(--font-body);padding:20px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;color:var(--text-primary)}
+.col{display:flex;flex-direction:column;gap:8px;min-width:0}
+.lbl{font-family:var(--font-mono);font-size:var(--text-xs);color:var(--text-tertiary);letter-spacing:.02em}
+.box{height:180px;background:var(--surface-panel);border:1px solid var(--border-subtle);border-radius:var(--radius-md);padding:12px}
+.box p{margin:0 0 10px;font-size:var(--text-sm);color:var(--text-secondary);line-height:1.6}
+</style></head>
+<body data-theme="dark">
+<div class="col"><div class="lbl">.ds-scroll</div><div class="box ds-scroll"><p>Default container. Reserves the gutter with scrollbar-gutter: stable, so content never shifts when the thumb appears.</p><p>Thumb is gray-600 in dark, gray-300 in light, and lifts one step on hover.</p><p>Ten pixels wide with a three pixel transparent inset, so the visible thumb reads as a four pixel pill.</p></div></div>
+<div class="col"><div class="lbl">.ds-scroll-subtle</div><div class="box ds-scroll-subtle"><p>Thumb is transparent at rest and fades in on hover or focus-within.</p><p>For panels, sidebars and inspectors, where a resting scrollbar is visual noise against the chrome.</p><p>Hover this panel to see the thumb appear.</p></div></div>
+<div class="col"><div class="lbl">.ds-scroll-thin</div><div class="box ds-scroll-thin"><p>Six pixels instead of ten, with a two pixel inset.</p><p>For dense lists, code blocks and anywhere the scroll region is narrow enough that a full-width thumb would crowd the content.</p><p>Narrows the webkit track directly, so it adds no token scope.</p></div></div>
+<div class="col"><div class="lbl">.ds-scroll-accent</div><div class="box ds-scroll ds-scroll-accent"><p>Thumb takes the primary color instead of the neutral ramp.</p><p>Reserve it for a scroll region that is itself the focus of the view — a single long editor pane, not every panel on screen.</p><p>Rebrands automatically with the primary seed.</p></div></div>
+</body></html>

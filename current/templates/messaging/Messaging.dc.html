@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Messaging Shell" description="Chat rail + thread view with bubbles, presence, and a composer" -->
+<helmet><script src="./ds-base.js"></script></helmet>
+<div style="width:1280px;height:800px" data-theme="dark">
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.WindowChrome" title="Relay" platform="mac" hint-size="1280px,800px">
+<div style="display:flex;height:100%;font-family:var(--font-body)" data-screen-label="messaging">
+<div style="width:300px;flex-shrink:0;border-right:1px solid var(--border-subtle);background:linear-gradient(180deg,var(--surface-panel),var(--surface-app));display:flex;flex-direction:column;min-height:0">
+<div style="padding:var(--space-6) var(--space-5) var(--space-4)">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-4)"><span style="font-family:var(--font-display);font-weight:700;font-size:var(--text-xl);color:var(--text-primary);letter-spacing:var(--tracking-tight)">Messages</span></div>
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Input" placeholder="Search conversations" value="{{ search }}" onChange="{{ setSearch }}" hint-size="100%,44px"></x-import>
+</div>
+<div style="flex:1;overflow:auto;padding:var(--space-2) var(--space-3)">
+<div style="display:flex;gap:12px;padding:var(--space-3);border-radius:var(--radius-md);background:var(--primary-muted-bg)">
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Avatar" name="Design Lab" size="md" status="online" hint-size="42px,42px"></x-import>
+<div style="flex:1;min-width:0"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><span style="font-size:var(--text-base);font-weight:600;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Design Lab</span><span style="font-family:var(--font-mono);font-size:10px;color:var(--text-tertiary);flex-shrink:0">9:41</span></div><div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:2px"><span style="font-size:var(--text-sm);color:var(--text-tertiary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Priya: pushed the new detents build</span><span style="flex-shrink:0;min-width:18px;height:18px;padding:0 5px;border-radius:var(--radius-full);background:var(--primary);color:var(--text-on-accent);font-family:var(--font-mono);font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center">3</span></div></div>
+</div>
+<div style="display:flex;gap:12px;padding:var(--space-3);border-radius:var(--radius-md)">
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Avatar" name="Mara Whitfield" size="md" status="online" hint-size="42px,42px"></x-import>
+<div style="flex:1;min-width:0"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><span style="font-size:var(--text-base);font-weight:600;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Mara Whitfield</span><span style="font-family:var(--font-mono);font-size:10px;color:var(--text-tertiary);flex-shrink:0">9:12</span></div><div style="font-size:var(--text-sm);color:var(--text-tertiary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px">Perfect, ship it whenever you're ready</div></div>
+</div>
+<div style="display:flex;gap:12px;padding:var(--space-3);border-radius:var(--radius-md)">
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Avatar" name="Jonas Tran" size="md" status="away" hint-size="42px,42px"></x-import>
+<div style="flex:1;min-width:0"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><span style="font-size:var(--text-base);font-weight:600;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Jonas Tran</span><span style="font-family:var(--font-mono);font-size:10px;color:var(--text-tertiary);flex-shrink:0">Yest</span></div><div style="font-size:var(--text-sm);color:var(--text-tertiary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px">You: sent the mixer specs</div></div>
+</div>
+<div style="display:flex;gap:12px;padding:var(--space-3);border-radius:var(--radius-md)">
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Avatar" name="Rhea Sen" size="md" status="offline" hint-size="42px,42px"></x-import>
+<div style="flex:1;min-width:0"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><span style="font-size:var(--text-base);font-weight:600;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Rhea Sen</span><span style="font-family:var(--font-mono);font-size:10px;color:var(--text-tertiary);flex-shrink:0">Yest</span></div><div style="font-size:var(--text-sm);color:var(--text-tertiary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px">Voice message · 0:42</div></div>
+</div>
+</div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;min-width:0;background-image:radial-gradient(circle at 85% -5%,var(--primary-muted-bg) 0%,transparent 40%),radial-gradient(circle at 5% 105%,var(--accent-2-muted-bg) 0%,transparent 40%),radial-gradient(var(--dot-grid) 1px, transparent 1px);background-size:100% 100%,100% 100%,22px 22px;background-position:0 0,0 0,-4px -4px">
+<div style="height:64px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:0 var(--space-6);border-bottom:1px solid var(--border-subtle);background:color-mix(in srgb,var(--surface-panel) 82%,transparent);backdrop-filter:blur(var(--blur-panel))">
+<div style="display:flex;align-items:center;gap:12px"><x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Avatar" name="Design Lab" size="md" status="online" hint-size="36px,36px"></x-import><div><div style="font-size:var(--text-md);font-weight:600;color:var(--text-primary)">Design Lab</div><div style="font-family:var(--font-mono);font-size:11px;color:var(--success-500)">Priya, Jonas + 4 online</div></div></div>
+<div style="display:flex;gap:8px"><x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Button" variant="ghost" hint-size="80px,32px">Call</x-import></div>
+</div>
+<div style="flex:1;overflow:auto;padding:var(--space-6) var(--space-8);display:flex;flex-direction:column;gap:var(--space-3)">
+<div style="align-self:center;font-family:var(--font-mono);font-size:10px;letter-spacing:var(--tracking-wide);text-transform:uppercase;color:var(--text-tertiary);padding:3px 12px;border-radius:var(--radius-full);background:var(--surface-panel);border:1px solid var(--border-subtle);margin:var(--space-3) 0">Today</div>
+<div style="display:flex;gap:10px;max-width:74%;align-self:flex-start">
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Avatar" name="Priya" size="sm" hint-size="28px,28px"></x-import>
+<div style="display:flex;flex-direction:column;gap:3px;align-items:flex-start"><div style="padding:10px 14px;border-radius:var(--radius-lg);font-size:var(--text-base);line-height:var(--leading-snug);color:var(--text-primary);background:var(--surface-raised);border:1px solid var(--border-subtle);box-shadow:var(--shadow-sm);text-wrap:pretty">Morning! Pushed the build with the tactile detents on the macro sliders. Feels miles better.</div><span style="font-family:var(--font-mono);font-size:10px;color:var(--text-tertiary);padding:0 4px">Priya · 9:32</span></div>
+</div>
+<div style="display:flex;gap:10px;max-width:74%;align-self:flex-end;flex-direction:row-reverse">
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Avatar" name="You" size="sm" hint-size="28px,28px"></x-import>
+<div style="display:flex;flex-direction:column;gap:3px;align-items:flex-end"><div style="padding:10px 14px;border-radius:var(--radius-lg);font-size:var(--text-base);line-height:var(--leading-snug);color:var(--text-on-accent);background:linear-gradient(180deg,var(--primary-400),var(--primary-600));border:1px solid var(--border-subtle);box-shadow:var(--shadow-sm);text-wrap:pretty">That's gorgeous. The center detent on Mix is exactly what Mara asked for in the piece.</div><span style="font-family:var(--font-mono);font-size:10px;color:var(--text-tertiary);padding:0 4px">9:38</span></div>
+</div>
+<div style="display:flex;gap:10px;max-width:74%;align-self:flex-end;flex-direction:row-reverse">
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Avatar" name="You" size="sm" hint-size="28px,28px"></x-import>
+<div style="display:flex;flex-direction:column;gap:3px;align-items:flex-end"><div style="padding:10px 14px;border-radius:var(--radius-lg);font-size:var(--text-base);line-height:var(--leading-snug);color:var(--text-on-accent);background:linear-gradient(180deg,var(--primary-400),var(--primary-600));border:1px solid var(--border-subtle);box-shadow:var(--shadow-sm);text-wrap:pretty">Can we get the same feel on the resonance control before Friday?</div><span style="font-family:var(--font-mono);font-size:10px;color:var(--text-tertiary);padding:0 4px">9:39</span></div>
+</div>
+<div style="display:flex;gap:10px;max-width:74%;align-self:flex-start">
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Avatar" name="Jonas" size="sm" hint-size="28px,28px"></x-import>
+<div style="display:flex;flex-direction:column;gap:3px;align-items:flex-start"><div style="padding:10px 14px;border-radius:var(--radius-lg);font-size:var(--text-base);line-height:var(--leading-snug);color:var(--text-primary);background:var(--surface-raised);border:1px solid var(--border-subtle);box-shadow:var(--shadow-sm);text-wrap:pretty">Already on it — should have a build for you by end of day.</div><span style="font-family:var(--font-mono);font-size:10px;color:var(--text-tertiary);padding:0 4px">Jonas · 9:41</span></div>
+</div>
+</div>
+<div style="flex-shrink:0;padding:var(--space-4) var(--space-6) var(--space-6);border-top:1px solid var(--border-subtle);background:var(--surface-panel)">
+<div style="display:flex;align-items:center;gap:10px">
+<div style="flex:1"><x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Input" placeholder="Message Design Lab…" value="{{ draft }}" onChange="{{ setDraft }}" hint-size="100%,44px"></x-import></div>
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Button" variant="primary" hint-size="70px,44px">Send</x-import>
+</div>
+</div>
+</div>
+</div>
+</x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { search: '', draft: '' };
+  renderVals() {
+    return {
+      search: this.state.search, setSearch: (v) => this.setState({ search: v }),
+      draft: this.state.draft, setDraft: (v) => this.setState({ draft: v }),
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Creative Studio Shell" description="Three-pane creative app shell (sidebar, canvas, inspector) for image/audio/media tools" -->
+<helmet><script src="./ds-base.js"></script></helmet>
+<div style="width:1280px;height:800px" data-theme="{{ theme }}">
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.WindowChrome" title="{{ appTitle }}" platform="mac" hint-size="1280px,800px">
+<div style="display:flex;height:100%;min-height:0;overflow:hidden;font-family:var(--font-body)" data-density="{{ density }}">
+<div style="width:220px;flex-shrink:0;min-height:0;overflow:hidden;border-right:1px solid var(--border-subtle);display:flex;flex-direction:column;background:linear-gradient(165deg,var(--surface-raised) 0%,var(--surface-panel) 55%,var(--panel-tint) 160%)">
+<div style="flex-shrink:0"><x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.SidebarNav" sections="{{ sidebarSections }}" activeId="{{ activeNav }}" onChange="{{ setActiveNav }}" width="{{ 220 }}" hint-size="220px,220px"></x-import></div>
+<div style="padding:0 var(--space-5);margin-top:var(--space-4)">
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Input" placeholder="Search library" value="{{ search }}" onChange="{{ setSearch }}" hint-size="180px,56px"></x-import>
+</div>
+<div style="padding:0 var(--space-5);margin-top:var(--space-4);font-family:var(--font-mono);font-size:10px;letter-spacing:var(--tracking-wide);color:var(--text-secondary);text-transform:uppercase">Layers</div>
+<div style="padding:var(--space-3) var(--space-5);display:flex;flex-direction:column;gap:1px;flex:1;min-height:0;overflow:auto;scrollbar-gutter:stable">
+<sc-for list="{{ projects }}" as="p" hint-placeholder-count="4">
+<sc-if value="{{ p.active }}" hint-placeholder-val="{{ false }}">
+<div onClick="{{ p.select }}" style="padding:var(--space-2) var(--space-3);border-radius:var(--radius-xs);cursor:pointer;font-size:var(--text-sm);color:var(--text-primary);background:var(--primary-muted-bg)">{{ p.label }}</div>
+</sc-if>
+<sc-if value="{{ p.inactive }}" hint-placeholder-val="{{ true }}">
+<div onClick="{{ p.select }}" style="padding:var(--space-2) var(--space-3);border-radius:var(--radius-xs);cursor:pointer;font-size:var(--text-sm);color:var(--text-secondary)">{{ p.label }}</div>
+</sc-if>
+</sc-for>
+</div>
+<div style="padding:var(--space-5);border-top:1px solid var(--border-subtle);display:flex;flex-direction:column;gap:var(--space-4);flex-shrink:0">
+<div style="display:flex;align-items:center;gap:10px">
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Avatar" name="{{ operatorName }}" size="sm" status="online" hint-size="32px,32px"></x-import>
+<span style="font-size:var(--text-sm);color:var(--text-secondary);font-weight:600">{{ operatorName }}</span>
+</div>
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Switch" checked="{{ isLight }}" onChange="{{ toggleTheme }}" label="Light theme" hint-size="200px,24px"></x-import>
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Switch" checked="{{ isCompact }}" onChange="{{ toggleDensity }}" label="Compact density" hint-size="200px,24px"></x-import>
+</div>
+</div>
+<div style="flex:1;min-width:0;min-height:0;padding:var(--space-7);overflow:auto;scrollbar-gutter:stable;position:relative;background-image:radial-gradient(circle at 10% -10%, var(--primary-muted-bg) 0%, transparent 45%),radial-gradient(circle at 95% 10%, var(--accent-3-muted-bg) 0%, transparent 40%),radial-gradient(circle at 60% 100%, var(--accent-2-muted-bg) 0%, transparent 35%),radial-gradient(var(--dot-grid) 1px, transparent 1px);background-size:100% 100%,100% 100%,100% 100%,22px 22px;background-position:0 0,0 0,0 0,-4px -4px">
+<div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:var(--space-7)">
+<div>
+<div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-3xl);color:var(--text-primary);letter-spacing:var(--tracking-tight)">{{ currentProject }}</div>
+<div style="display:flex;gap:8px;margin-top:8px">
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Badge" variant="accent" hint-size="80px,24px">Session</x-import>
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Badge" variant="success" hint-size="80px,24px">Saved</x-import>
+</div>
+</div>
+<div style="display:flex;gap:10px;position:relative">
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Button" variant="ghost" onClick="{{ openCmd }}" hint-size="90px,36px">⌘K</x-import>
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Button" variant="ghost" size="sm" onClick="{{ toggleProjMenu }}" hint-size="36px,36px">⋯</x-import>
+<sc-if value="{{ projMenuOpen }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;top:40px;left:96px;z-index:50">
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Menu" items="{{ projMenuItems }}" onSelect="{{ onProjMenuSelect }}" width="{{ 180 }}" hint-size="180px,120px"></x-import>
+</div>
+</sc-if>
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Button" variant="secondary" onClick="{{ openDialog }}" hint-size="90px,36px">Export</x-import>
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Button" variant="primary" onClick="{{ renderNow }}" hint-size="90px,36px">Render</x-import>
+</div>
+</div>
+<div style="position:relative;border-radius:var(--radius-lg);overflow:hidden">
+<div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--signature-500) 0%,transparent 75%);z-index:1"></div>
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Panel" title="Macro Controls" hint-size="100%,280px">
+<div style="margin-bottom:var(--space-5)">
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Tabs" items="{{ tabItems }}" activeId="{{ activeTab }}" onChange="{{ setTab }}" hint-size="180px,32px"></x-import>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-7)">
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Slider" label="Cutoff" value="{{ cutoff }}" valueLabel="{{ cutoffLabel }}" onChange="{{ setCutoff }}" hint-size="240px,56px"></x-import>
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Slider" label="Resonance" value="{{ resonance }}" valueLabel="{{ resonanceLabel }}" onChange="{{ setResonance }}" hint-size="240px,56px"></x-import>
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Slider" label="Drive" value="{{ drive }}" valueLabel="{{ driveLabel }}" accent="secondary" onChange="{{ setDrive }}" hint-size="240px,56px"></x-import>
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Slider" label="Mix" value="{{ mix }}" valueLabel="{{ mixLabel }}" onChange="{{ setMix }}" hint-size="240px,56px"></x-import>
+</div>
+</x-import>
+</div>
+<div style="display:grid;grid-template-columns:1.4fr 1fr;gap:var(--space-6);margin-top:var(--space-6)">
+<div style="position:relative;border-radius:var(--radius-lg);overflow:hidden">
+<div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--signature-500) 0%,transparent 75%);z-index:1"></div>
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Panel" title="Effects Chain" padding="sm" hint-size="100%,180px">
+<div style="display:flex;flex-direction:column;gap:4px">
+<sc-for list="{{ effects }}" as="e" hint-placeholder-count="3">
+<div style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-2) var(--space-3)">
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Checkbox" checked="{{ e.checked }}" onChange="{{ e.toggle }}" label="{{ e.label }}" hint-size="220px,20px"></x-import>
+<span style="font-family:var(--font-mono);font-size:12px;color:var(--text-tertiary)">{{ e.percentLabel }}</span>
+</div>
+</sc-for>
+</div>
+</x-import>
+</div>
+<div style="position:relative;border-radius:var(--radius-lg);overflow:hidden">
+<div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--signature-500) 0%,transparent 75%);z-index:1"></div>
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Panel" title="Output Levels" hint-size="100%,180px">
+<div style="display:flex;align-items:flex-end;gap:4px;height:100px;box-shadow:inset 0 -1px 0 0 var(--border-strong)">
+<span style="flex:1;height:30%;background:var(--control-track);border-radius:2px"></span>
+<span style="flex:1;height:60%;background:var(--primary-500);border-radius:2px"></span>
+<span style="flex:1;height:45%;background:var(--accent-2-500);border-radius:2px"></span>
+<span style="flex:1;height:85%;background:var(--accent-1-500);border-radius:2px"></span>
+<span style="flex:1;height:25%;background:var(--control-track);border-radius:2px"></span>
+<span style="flex:1;height:70%;background:var(--accent-3-500);border-radius:2px"></span>
+<span style="flex:1;height:15%;background:var(--control-track);border-radius:2px"></span>
+</div>
+</x-import>
+</div>
+</div>
+</div>
+<div style="width:260px;flex-shrink:0;min-height:0;overflow:auto;border-left:1px solid var(--border-subtle);background:linear-gradient(195deg,var(--surface-raised) 0%,var(--surface-panel) 55%,var(--panel-tint) 160%);padding:var(--space-6)">
+<div style="font-family:var(--font-mono);font-size:10px;letter-spacing:var(--tracking-wide);color:var(--text-secondary);text-transform:uppercase;margin-bottom:var(--space-5)">Inspector</div>
+<div style="display:flex;align-items:baseline;justify-content:space-between;padding:var(--space-3) 0;border-bottom:1px solid var(--border-subtle)"><span style="font-size:var(--text-sm);color:var(--text-secondary);font-weight:600">Sample rate</span><span style="font-size:var(--text-sm);font-family:var(--font-mono);color:var(--text-primary)">48 kHz</span></div>
+<div style="display:flex;align-items:baseline;justify-content:space-between;padding:var(--space-3) 0;border-bottom:1px solid var(--border-subtle)"><span style="font-size:var(--text-sm);color:var(--text-secondary);font-weight:600">Bit depth</span><span style="font-size:var(--text-sm);font-family:var(--font-mono);color:var(--text-primary)">24-bit</span></div>
+<div style="display:flex;align-items:baseline;justify-content:space-between;padding:var(--space-3) 0"><span style="font-size:var(--text-sm);color:var(--text-secondary);font-weight:600">Buffer</span><span style="font-size:var(--text-sm);font-family:var(--font-mono);color:var(--text-primary)">512</span></div>
+</div>
+</div>
+</x-import>
+</div>
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Dialog" open="{{ dialogOpen }}" title="Export settings" onClose="{{ closeDialog }}" hint-size="420px,280px">
+<div style="display:flex;flex-direction:column;gap:var(--space-4)">
+<div>Format, bit depth, and sample rate for the rendered file.</div>
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Select" label="Format" options="{{ formatOptions }}" value="{{ format }}" onChange="{{ setFormat }}" hint-size="100%,60px"></x-import>
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Slider" label="Sample rate" value="{{ sampleRate }}" valueLabel="{{ sampleRateLabel }}" onChange="{{ setSampleRate }}" hint-size="340px,56px"></x-import>
+<div style="display:flex;justify-content:flex-end;gap:8px;padding-top:var(--space-3);border-top:1px solid var(--border-subtle)">
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Button" variant="ghost" onClick="{{ closeDialog }}" hint-size="80px,36px">Cancel</x-import>
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Button" variant="primary" onClick="{{ closeDialog }}" hint-size="80px,36px">Export</x-import>
+</div>
+</div>
+</x-import>
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.CommandPalette" open="{{ cmdOpen }}" query="{{ cmdQuery }}" onQueryChange="{{ setCmdQuery }}" groups="{{ cmdGroups }}" onSelect="{{ onCmdSelect }}" onClose="{{ closeCmd }}" hint-size="560px,300px"></x-import>
+<sc-if value="{{ toastMsg }}" hint-placeholder-val="{{ false }}">
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.ToastStack" placement="bottom-right" hint-size="340px,80px">
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Toast" variant="success" title="{{ toastMsg }}" onClose="{{ closeToast }}" hint-size="340px,60px"></x-import>
+</x-import>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    theme: 'dark', density: false, activeNav: 'sessions', activeProject: 0, tab: 'macro',
+    cutoff: 72, resonance: 38, drive: 22, mix: 64, sampleRate: 80,
+    search: '', format: 'wav',
+    effects: [
+      { label: 'LFO 1 → Cutoff', percent: 42, checked: true },
+      { label: 'Envelope 2 → Amp', percent: 68, checked: true },
+      { label: 'Velocity → Drive', percent: 15, checked: false }
+    ],
+    dialogOpen: false, cmdOpen: false, cmdQuery: '', toastMsg: null, projMenuOpen: false
+  };
+  NAV = [
+    { id: 'sessions', label: 'Sessions' },
+    { id: 'library', label: 'Sound Library' },
+    { id: 'automation', label: 'Automation' },
+    { id: 'mixer', label: 'Mixer' },
+    { id: 'export', label: 'Export' }
+  ];
+  PROJECTS = ['Intro Pad', 'Bass Layer 02', 'Lead — bright pluck', 'Ambient tail'];
+
+  renderVals() {
+    const s = this.state;
+    const filteredProjects = this.PROJECTS
+      .map((label, i) => ({ label, i }))
+      .filter(p => p.label.toLowerCase().includes(s.search.toLowerCase()));
+    return {
+      appTitle: 'Oscilla',
+      theme: s.theme === 'light' ? 'light' : undefined,
+      isLight: s.theme === 'light',
+      isCompact: s.density,
+      density: s.density ? 'compact' : undefined,
+      toggleTheme: () => this.setState(st => ({ theme: st.theme === 'light' ? 'dark' : 'light' })),
+      toggleDensity: () => this.setState(st => ({ density: !st.density })),
+      search: s.search,
+      setSearch: (v) => this.setState({ search: v }),
+      navItems: this.NAV.map(n => ({
+        label: n.label,
+        active: n.id === s.activeNav,
+        inactive: n.id !== s.activeNav,
+        select: () => this.setState({ activeNav: n.id })
+      })),
+      activeNav: s.activeNav,
+      setActiveNav: (id) => this.setState({ activeNav: id }),
+      sidebarSections: [{ label: 'Workspace', items: this.NAV.map(n => ({ id: n.id, label: n.label })) }],
+      operatorName: 'Mo Okonkwo',
+      openCmd: () => this.setState({ cmdOpen: true, cmdQuery: '' }),
+      closeCmd: () => this.setState({ cmdOpen: false }),
+      cmdOpen: s.cmdOpen,
+      cmdQuery: s.cmdQuery,
+      setCmdQuery: (v) => this.setState({ cmdQuery: v }),
+      cmdGroups: [
+        { label: 'Navigate', items: this.NAV.filter(n => n.label.toLowerCase().includes(s.cmdQuery.toLowerCase())).map(n => ({ id: 'nav-' + n.id, label: n.label })) },
+        { label: 'Projects', items: this.PROJECTS.filter(p => p.toLowerCase().includes(s.cmdQuery.toLowerCase())).map((p, i) => ({ id: 'proj-' + i, label: p })) }
+      ],
+      onCmdSelect: (id) => {
+        if (id.startsWith('nav-')) this.setState({ activeNav: id.slice(4), cmdOpen: false });
+        else if (id.startsWith('proj-')) this.setState({ activeProject: Number(id.slice(5)), cmdOpen: false });
+      },
+      toastMsg: s.toastMsg,
+      closeToast: () => this.setState({ toastMsg: null }),
+      renderNow: () => this.setState({ toastMsg: 'Render complete' }),
+      projMenuOpen: s.projMenuOpen,
+      toggleProjMenu: () => this.setState(st => ({ projMenuOpen: !st.projMenuOpen })),
+      projMenuItems: [
+        { id: 'rename', label: 'Rename' },
+        { id: 'duplicate', label: 'Duplicate' },
+        { separator: true },
+        { id: 'delete', label: 'Delete', danger: true }
+      ],
+      onProjMenuSelect: (id) => this.setState({ projMenuOpen: false, toastMsg: id === 'delete' ? 'Project deleted' : (id === 'duplicate' ? 'Project duplicated' : 'Project renamed') }),
+      formatOptions: [{ value: 'wav', label: 'WAV' }, { value: 'aiff', label: 'AIFF' }, { value: 'mp3', label: 'MP3' }],
+      format: s.format,
+      setFormat: (v) => this.setState({ format: v }),
+      projects: filteredProjects.map(p => ({
+        label: p.label,
+        active: p.i === s.activeProject,
+        inactive: p.i !== s.activeProject,
+        select: () => this.setState({ activeProject: p.i })
+      })),
+      currentProject: this.PROJECTS[s.activeProject],
+      tabItems: [{ id: 'macro', label: 'Macro' }, { id: 'env', label: 'Envelope' }],
+      activeTab: s.tab,
+      setTab: (id) => this.setState({ tab: id }),
+      cutoff: s.cutoff, cutoffLabel: (s.cutoff / 10).toFixed(1) + ' kHz', setCutoff: (v) => this.setState({ cutoff: v }),
+      resonance: s.resonance, resonanceLabel: s.resonance + '%', setResonance: (v) => this.setState({ resonance: v }),
+      drive: s.drive, driveLabel: s.drive + '%', setDrive: (v) => this.setState({ drive: v }),
+      mix: s.mix, mixLabel: s.mix + '%', setMix: (v) => this.setState({ mix: v }),
+      sampleRate: s.sampleRate, sampleRateLabel: (s.sampleRate * 0.6).toFixed(1) + ' kHz', setSampleRate: (v) => this.setState({ sampleRate: v }),
+      effects: s.effects.map((e, i) => ({
+        label: e.label, checked: e.checked, percentLabel: (e.checked ? '+' : '') + e.percent + '%',
+        toggle: () => this.setState(st => {
+          const eff = st.effects.slice();
+          eff[i] = { ...eff[i], checked: !eff[i].checked };
+          return { effects: eff };
+        })
+      })),
+      dialogOpen: s.dialogOpen,
+      openDialog: () => this.setState({ dialogOpen: true }),
+      closeDialog: () => this.setState({ dialogOpen: false })
+    };
+  }
+}
+</script>
+</body>
+</html>

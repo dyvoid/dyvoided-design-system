@@ -1,0 +1,25 @@
+<!-- @dsCard group="Components" viewport="700x220" name="Select" subtitle="Closed field and open popover" -->
+<html><head>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@600;700&family=Schibsted+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/lucide@0.462.0/dist/umd/lucide.js"></script>
+<script>window.addEventListener('DOMContentLoaded',()=>lucide.createIcons({color:'var(--text-tertiary)',strokeWidth:1.75}));</script>
+
+<style>
+body{margin:0;background:var(--surface-app);padding:24px;font-family:var(--font-body);display:flex;gap:32px;align-items:flex-start}
+.col{width:220px;display:flex;flex-direction:column;gap:6px}
+.lbl{font-size:var(--text-sm);color:var(--text-secondary);font-weight:600}
+.field{display:flex;align-items:center;justify-content:space-between;height:var(--control-height-md);padding:0 10px 0 12px;border-radius:var(--radius-sm);background:var(--surface-sunken);border:1px solid var(--border-subtle);color:var(--text-primary);font-size:var(--text-base)}
+.field.open{border-color:var(--primary);box-shadow:var(--focus-ring)}
+.chev{width:16px;height:16px;flex-shrink:0}
+.pop{margin-top:6px;padding:4px;background:var(--surface-overlay);border-radius:var(--radius-md);border:1px solid var(--border-subtle);box-shadow:var(--shadow-md)}
+.row{display:flex;align-items:center;justify-content:space-between;padding:7px 10px;border-radius:var(--radius-xs);font-size:var(--text-base);color:var(--text-secondary)}
+.row.sel{background:var(--primary-muted-bg);color:var(--text-primary)}
+.hint{font-family:var(--font-mono);font-size:var(--text-xs);color:var(--text-tertiary)}
+</style></head>
+<body data-theme="dark">
+<div class="col"><span class="lbl">Output device</span>
+<div class="field"><span>Built-in output</span><i data-lucide="chevron-down" class="chev"></i></div></div>
+<div class="col"><span class="lbl">Sample rate</span>
+<div class="field open"><span>48 kHz</span><i data-lucide="chevron-up" class="chev"></i></div>
+<div class="pop"><div class="row">44.1 kHz</div><div class="row sel"><span>48 kHz</span><span class="hint">default</span></div><div class="row">96 kHz</div></div></div>
+</body></html>

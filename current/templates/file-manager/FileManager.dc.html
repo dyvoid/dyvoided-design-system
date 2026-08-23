@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="File Manager Shell" description="File browser with a Breadcrumb path, sort/filter Selects, row-level Menu, upload ProgressBar, empty Trash state, and a Cmd-K CommandPalette" -->
+<helmet><script src="./ds-base.js"></script></helmet>
+<div style="width:1280px;height:800px" data-theme="dark">
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.WindowChrome" title="Vault" platform="mac" hint-size="1280px,800px">
+<div style="display:flex;height:100%;font-family:var(--font-body);position:relative" data-screen-label="file-manager">
+<div style="width:200px;flex-shrink:0;border-right:1px solid var(--border-subtle);background:linear-gradient(165deg,var(--surface-raised) 0%,var(--surface-panel) 55%,var(--accent-2-muted-bg) 160%)">
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.SidebarNav" sections="{{ sidebarSections }}" activeId="{{ activeNav }}" onChange="{{ setActiveNav }}" width="{{ 200 }}" hint-size="200px,100%"></x-import>
+</div>
+<div style="flex:1;padding:var(--space-7);overflow:auto;position:relative;background-image:radial-gradient(circle at 10% -10%, var(--primary-muted-bg) 0%, transparent 45%),radial-gradient(circle at 95% 10%, var(--accent-3-muted-bg) 0%, transparent 40%),radial-gradient(var(--dot-grid) 1px, transparent 1px);background-size:100% 100%,100% 100%,22px 22px;background-position:0 0,0 0,-4px -4px">
+<div style="margin-bottom:var(--space-3)"><x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Breadcrumb" items="{{ crumbs }}" hint-size="260px,20px"></x-import></div>
+<div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:var(--space-6)">
+<div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-3xl);color:var(--text-primary);letter-spacing:var(--tracking-tight)">Project files</div>
+<div style="display:flex;gap:10px">
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Button" variant="ghost" onClick="{{ openPalette }}" hint-size="130px,36px">⌘K Search</x-import>
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Button" variant="primary" onClick="{{ showUploadToast }}" hint-size="100px,36px">Upload</x-import>
+</div>
+</div>
+<div style="display:flex;gap:var(--space-4);margin-bottom:var(--space-5);max-width:520px">
+<div style="width:180px"><x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Select" label="Sort by" options="{{ sortOptions }}" value="{{ sortValue }}" onChange="{{ setSortValue }}" hint-size="180px,56px"></x-import></div>
+<div style="width:180px"><x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Select" label="Type" options="{{ typeOptions }}" value="{{ typeValue }}" onChange="{{ setTypeValue }}" hint-size="180px,56px"></x-import></div>
+</div>
+<sc-if value="{{ uploading }}" hint-placeholder-val="{{ false }}"><div style="margin-bottom:var(--space-5);max-width:340px"><x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.ProgressBar" value="{{ uploadPct }}" label="Uploading website-redesign.fig" hint-size="340px,28px"></x-import></div></sc-if>
+<sc-if value="{{ isTrash }}" hint-placeholder-val="{{ false }}">
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Panel" padding="sm" hint-size="100%,420px">
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.EmptyState" title="Trash is empty" description="Deleted files land here for 30 days before they're permanently removed." hint-size="100%,240px"></x-import>
+</x-import>
+</sc-if>
+<sc-if value="{{ isFiles }}" hint-placeholder-val="{{ true }}">
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Panel" padding="sm" hint-size="100%,420px">
+<div style="display:flex;flex-direction:column">
+<div style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-3);border-bottom:1px solid var(--border-subtle)">
+<div style="display:flex;align-items:center;gap:12px"><x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Avatar" name="Website Redesign" size="sm" square="{{ true }}" tint="{{ 0 }}" hint-size="26px,26px"></x-import><span style="font-size:var(--text-sm);color:var(--text-primary);font-weight:600">website-redesign.fig</span></div>
+<div style="display:flex;align-items:center;gap:var(--space-6)"><span style="font-family:var(--font-mono);font-size:var(--font-size-2xs);color:var(--text-tertiary)">4.2 MB</span><span style="font-family:var(--font-mono);font-size:var(--font-size-2xs);color:var(--text-tertiary);width:70px">Aug 10</span><div style="position:relative"><x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Button" variant="ghost" size="sm" onClick="{{ toggleMenu0 }}" hint-size="28px,28px">⋮</x-import>
+<sc-if value="{{ menu0Open }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;top:32px;right:0;z-index:10"><x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Menu" items="{{ rowMenuItems }}" onSelect="{{ closeMenus }}" width="{{ 180 }}" hint-size="180px,150px"></x-import></div></sc-if></div></div>
+</div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-3);border-bottom:1px solid var(--border-subtle)">
+<div style="display:flex;align-items:center;gap:12px"><x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Avatar" name="Mobile App" size="sm" square="{{ true }}" tint="{{ 1 }}" hint-size="26px,26px"></x-import><span style="font-size:var(--text-sm);color:var(--text-primary);font-weight:600">mobile-app-v2.sketch</span></div>
+<div style="display:flex;align-items:center;gap:var(--space-6)"><span style="font-family:var(--font-mono);font-size:var(--font-size-2xs);color:var(--text-tertiary)">18.7 MB</span><span style="font-family:var(--font-mono);font-size:var(--font-size-2xs);color:var(--text-tertiary);width:70px">Aug 8</span><div style="position:relative"><x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Button" variant="ghost" size="sm" onClick="{{ toggleMenu1 }}" hint-size="28px,28px">⋮</x-import>
+<sc-if value="{{ menu1Open }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;top:32px;right:0;z-index:10"><x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Menu" items="{{ rowMenuItems }}" onSelect="{{ closeMenus }}" width="{{ 180 }}" hint-size="180px,150px"></x-import></div></sc-if></div></div>
+</div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-3);border-bottom:1px solid var(--border-subtle)">
+<div style="display:flex;align-items:center;gap:12px"><x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Avatar" name="Q3 Report" size="sm" square="{{ true }}" tint="{{ 2 }}" hint-size="26px,26px"></x-import><span style="font-size:var(--text-sm);color:var(--text-primary);font-weight:600">q3-report.pdf</span></div>
+<div style="display:flex;align-items:center;gap:var(--space-6)"><span style="font-family:var(--font-mono);font-size:var(--font-size-2xs);color:var(--text-tertiary)">1.1 MB</span><span style="font-family:var(--font-mono);font-size:var(--font-size-2xs);color:var(--text-tertiary);width:70px">Aug 2</span><div style="position:relative"><x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Button" variant="ghost" size="sm" onClick="{{ toggleMenu2 }}" hint-size="28px,28px">⋮</x-import>
+<sc-if value="{{ menu2Open }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;top:32px;right:0;z-index:10"><x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Menu" items="{{ rowMenuItems }}" onSelect="{{ closeMenus }}" width="{{ 180 }}" hint-size="180px,150px"></x-import></div></sc-if></div></div>
+</div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-3)">
+<div style="display:flex;align-items:center;gap:12px"><x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Avatar" name="Marketing Site" size="sm" square="{{ true }}" tint="{{ 3 }}" hint-size="26px,26px"></x-import><span style="font-size:var(--text-sm);color:var(--text-primary);font-weight:600">marketing-site.zip</span></div>
+<div style="display:flex;align-items:center;gap:var(--space-6)"><span style="font-family:var(--font-mono);font-size:var(--font-size-2xs);color:var(--text-tertiary)">62.4 MB</span><span style="font-family:var(--font-mono);font-size:var(--font-size-2xs);color:var(--text-tertiary);width:70px">Jul 29</span><div style="position:relative"><x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Button" variant="ghost" size="sm" onClick="{{ toggleMenu3 }}" hint-size="28px,28px">⋮</x-import>
+<sc-if value="{{ menu3Open }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;top:32px;right:0;z-index:10"><x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Menu" items="{{ rowMenuItems }}" onSelect="{{ closeMenus }}" width="{{ 180 }}" hint-size="180px,150px"></x-import></div></sc-if></div></div>
+</div>
+</div>
+</x-import>
+</sc-if>
+</div>
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.ToastStack" placement="bottom-right" hint-size="340px,140px">
+<sc-if value="{{ uploadToastOpen }}" hint-placeholder-val="{{ false }}"><x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Toast" variant="success" title="Upload complete" onClose="{{ closeUploadToast }}" hint-size="340px,70px">website-redesign.fig finished syncing.</x-import></sc-if>
+</x-import>
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.CommandPalette" open="{{ paletteOpen }}" query="{{ paletteQuery }}" onQueryChange="{{ setPaletteQuery }}" groups="{{ paletteGroups }}" onClose="{{ closePalette }}" onSelect="{{ closePalette }}" hint-size="560px,300px"></x-import>
+</div>
+</x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { activeNav: 'files', sortValue: 'modified', typeValue: 'all', menuOpen: null, uploadToastOpen: false, paletteOpen: false, paletteQuery: '', uploading: false, uploadPct: 0 };
+  componentWillUnmount() { clearInterval(this._timer); }
+  startUpload = () => {
+    clearInterval(this._timer);
+    this.setState({ uploading: true, uploadPct: 0, uploadToastOpen: false });
+    this._timer = setInterval(() => {
+      const next = this.state.uploadPct + 8;
+      if (next >= 100) { clearInterval(this._timer); this.setState({ uploadPct: 100, uploading: false, uploadToastOpen: true }); }
+      else this.setState({ uploadPct: next });
+    }, 90);
+  };
+  renderVals() {
+    const menuVals = {};
+    for (let i = 0; i < 4; i++) {
+      menuVals['toggleMenu' + i] = () => this.setState({ menuOpen: this.state.menuOpen === i ? null : i });
+      menuVals['menu' + i + 'Open'] = this.state.menuOpen === i;
+    }
+    return {
+      ...menuVals,
+      activeNav: this.state.activeNav, setActiveNav: (id) => this.setState({ activeNav: id }),
+      sidebarSections: [{ items: [{ id: 'files', label: 'Files' }, { id: 'shared', label: 'Shared' }, { id: 'trash', label: 'Trash' }] }],
+      sortOptions: [{ value: 'modified', label: 'Last modified' }, { value: 'name', label: 'Name' }, { value: 'size', label: 'Size' }],
+      sortValue: this.state.sortValue, setSortValue: (v) => this.setState({ sortValue: v }),
+      typeOptions: [{ value: 'all', label: 'All types' }, { value: 'design', label: 'Design files' }, { value: 'docs', label: 'Documents' }],
+      typeValue: this.state.typeValue, setTypeValue: (v) => this.setState({ typeValue: v }),
+      rowMenuItems: [
+        { id: 'open', label: 'Open' }, { id: 'rename', label: 'Rename' }, { id: 'download', label: 'Download' },
+        { separator: true }, { id: 'delete', label: 'Delete', danger: true },
+      ],
+      closeMenus: () => this.setState({ menuOpen: null }),
+      crumbs: [
+        { label: 'Vault', onClick: () => this.setState({ activeNav: 'files' }) },
+        { label: 'Clients', onClick: () => this.setState({ activeNav: 'files' }) },
+        { label: 'Project files' },
+      ],
+      isTrash: this.state.activeNav === 'trash',
+      isFiles: this.state.activeNav !== 'trash',
+      uploading: this.state.uploading, uploadPct: this.state.uploadPct,
+      showUploadToast: this.startUpload,
+      uploadToastOpen: this.state.uploadToastOpen, closeUploadToast: () => this.setState({ uploadToastOpen: false }),
+      openPalette: () => this.setState({ paletteOpen: true }), closePalette: () => this.setState({ paletteOpen: false }),
+      paletteOpen: this.state.paletteOpen, paletteQuery: this.state.paletteQuery, setPaletteQuery: (v) => this.setState({ paletteQuery: v }),
+      paletteGroups: [
+        { label: 'Actions', items: [{ id: 'upload', label: 'Upload file', shortcut: '⌘U' }, { id: 'new-folder', label: 'New folder' }] },
+        { label: 'Files', items: [{ id: 'f1', label: 'website-redesign.fig' }, { id: 'f2', label: 'mobile-app-v2.sketch' }, { id: 'f3', label: 'q3-report.pdf' }] },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

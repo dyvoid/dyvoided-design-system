@@ -1,0 +1,19 @@
+<!-- @dsCard group="Components" viewport="700x340" name="Window Chrome" -->
+<html><head>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@600;700&family=Schibsted+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../styles.css">
+<style>
+body{margin:0;background:var(--surface-sunken);padding:24px;display:flex;gap:16px;font-family:var(--font-body)}
+.win{width:320px;height:280px;border-radius:10px;overflow:hidden;border:1px solid var(--border-strong);box-shadow:var(--shadow-lg);display:flex;flex-direction:column}
+.win.win-platform{border-radius:0}
+.bar{height:40px;flex-shrink:0;display:flex;align-items:center;padding:0 14px;background:var(--surface-panel);border-bottom:1px solid var(--border-subtle);position:relative}
+.dots{display:flex;gap:8px}
+.dot{width:11px;height:11px;border-radius:50%}
+.title{position:absolute;left:0;right:0;text-align:center;font-family:var(--font-display);font-weight:600;font-size:12px;letter-spacing:var(--tracking-wide);color:var(--text-tertiary);text-transform:uppercase}
+.winbtns{display:flex;gap:18px;color:var(--text-tertiary);font-size:13px;margin-left:auto}
+.content{flex:1;padding:20px;color:var(--text-secondary);font-size:13px}
+</style></head>
+<body data-theme="dark">
+<div class="win"><div class="bar"><div class="dots"><span class="dot" style="background:var(--danger-500)"></span><span class="dot" style="background:var(--accent-1-500)"></span><span class="dot" style="background:var(--success-500)"></span></div><span class="title">Oscilla</span></div><div class="content">mac</div></div>
+<div class="win win-platform"><div class="bar"><span></span><span class="title">Oscilla</span><div class="winbtns"><span>—</span><span>▢</span><span>✕</span></div></div><div class="content">windows</div></div>
+</body></html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Dashboard Kanban Shell" description="Sidebar-nav project dashboard with a Kanban board, badges, and card avatars" -->
+<helmet><script src="./ds-base.js"></script></helmet>
+<div style="width:1280px;height:800px" data-theme="{{ theme }}">
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.WindowChrome" title="Cadre" platform="mac" hint-size="1280px,800px">
+<div style="display:flex;height:100%;font-family:var(--font-body)" data-density="{{ density }}">
+<div style="width:220px;flex-shrink:0;display:flex;flex-direction:column;background:linear-gradient(165deg,var(--surface-raised) 0%,var(--surface-panel) 55%,var(--primary-muted-bg) 160%);border-right:1px solid var(--border-subtle)">
+<div style="flex:1;min-height:0">
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.SidebarNav" sections="{{ sidebarSections }}" activeId="{{ activeNav }}" onChange="{{ setActiveNav }}" width="{{ 220 }}" hint-size="220px,100%"></x-import>
+</div>
+<div style="padding:var(--space-5);border-top:1px solid var(--border-subtle);display:flex;flex-direction:column;gap:var(--space-4)">
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Switch" checked="{{ isLight }}" onChange="{{ toggleTheme }}" label="Light theme" hint-size="200px,24px"></x-import>
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Switch" checked="{{ notifOn }}" onChange="{{ toggleNotif }}" label="Notifications" hint-size="200px,24px"></x-import>
+</div>
+</div>
+<div style="flex:1;padding:var(--space-7);overflow:auto;position:relative;background-image:radial-gradient(circle at 10% -10%, var(--primary-muted-bg) 0%, transparent 45%),radial-gradient(circle at 95% 10%, var(--accent-3-muted-bg) 0%, transparent 40%),radial-gradient(circle at 60% 100%, var(--accent-2-muted-bg) 0%, transparent 35%),radial-gradient(var(--dot-grid) 1px, transparent 1px);background-size:100% 100%,100% 100%,100% 100%,22px 22px;background-position:0 0,0 0,0 0,-4px -4px">
+<div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:var(--space-7)" data-screen-label="dashboard">
+<div>
+<div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-3xl);color:var(--text-primary);letter-spacing:var(--tracking-tight)">Website Redesign</div>
+<div style="display:flex;gap:8px;margin-top:8px">
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Badge" variant="success" hint-size="90px,24px">On track</x-import>
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Badge" variant="warning" hint-size="110px,24px">Needs review</x-import>
+</div>
+</div>
+<div style="display:flex;gap:10px">
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Button" variant="ghost" hint-size="90px,36px">Share</x-import>
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Button" variant="primary" hint-size="110px,36px">New task</x-import>
+</div>
+</div>
+<div style="display:flex;gap:var(--space-5);height:calc(100% - 100px);align-items:flex-start">
+<div style="width:270px;flex-shrink:0;display:flex;flex-direction:column;gap:var(--space-3)">
+<div style="display:flex;align-items:center;justify-content:space-between;padding:0 var(--space-2);font-family:var(--font-mono);font-size:var(--font-size-2xs);letter-spacing:var(--tracking-wide);color:var(--text-secondary);text-transform:uppercase">Backlog<span style="background:var(--surface-raised);border-radius:var(--radius-full);padding:1px 7px;font-size:10px">3</span></div>
+<div style="background:linear-gradient(160deg,var(--surface-raised) 0%,var(--surface-panel) 70%);border:1px solid var(--border-subtle);border-radius:var(--radius-md);box-shadow:var(--shadow-sm);padding:var(--space-4);position:relative;overflow:hidden"><span style="position:absolute;top:0;left:0;bottom:0;width:2px;background:var(--border-strong)"></span><div style="font-size:var(--text-sm);font-weight:600;color:var(--text-primary);margin-bottom:var(--space-3)">Audit accessibility on pricing page</div><div style="display:flex;align-items:center;justify-content:space-between"><x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Avatar" name="Erin Kaplan" size="xs" hint-size="20px,20px"></x-import><span style="font-family:var(--font-mono);font-size:var(--font-size-2xs);color:var(--text-tertiary)">Aug 22</span></div></div>
+<div style="background:linear-gradient(160deg,var(--surface-raised) 0%,var(--surface-panel) 70%);border:1px solid var(--border-subtle);border-radius:var(--radius-md);box-shadow:var(--shadow-sm);padding:var(--space-4);position:relative;overflow:hidden"><span style="position:absolute;top:0;left:0;bottom:0;width:2px;background:var(--border-strong)"></span><div style="font-size:var(--text-sm);font-weight:600;color:var(--text-primary);margin-bottom:var(--space-3)">Draft Q4 content calendar</div><div style="display:flex;align-items:center;justify-content:space-between"><x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Avatar" name="Alex Novak" size="xs" hint-size="20px,20px"></x-import><span style="font-family:var(--font-mono);font-size:var(--font-size-2xs);color:var(--text-tertiary)">Aug 25</span></div></div>
+<div style="background:linear-gradient(160deg,var(--surface-raised) 0%,var(--surface-panel) 70%);border:1px solid var(--border-subtle);border-radius:var(--radius-md);box-shadow:var(--shadow-sm);padding:var(--space-4);position:relative;overflow:hidden"><span style="position:absolute;top:0;left:0;bottom:0;width:2px;background:var(--border-strong)"></span><div style="font-size:var(--text-sm);font-weight:600;color:var(--text-primary);margin-bottom:var(--space-3)">Vendor contract renewal</div><div style="display:flex;align-items:center;justify-content:space-between"><x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Avatar" name="Rhea Sen" size="xs" hint-size="20px,20px"></x-import><span style="font-family:var(--font-mono);font-size:var(--font-size-2xs);color:var(--text-tertiary)">Sep 2</span></div></div>
+</div>
+<div style="width:270px;flex-shrink:0;display:flex;flex-direction:column;gap:var(--space-3)">
+<div style="display:flex;align-items:center;justify-content:space-between;padding:0 var(--space-2);font-family:var(--font-mono);font-size:var(--font-size-2xs);letter-spacing:var(--tracking-wide);color:var(--text-secondary);text-transform:uppercase">In progress<span style="background:var(--surface-raised);border-radius:var(--radius-full);padding:1px 7px;font-size:10px">2</span></div>
+<div style="background:linear-gradient(160deg,var(--surface-raised) 0%,var(--surface-panel) 70%);border:1px solid var(--border-subtle);border-radius:var(--radius-md);box-shadow:var(--shadow-sm);padding:var(--space-4);position:relative;overflow:hidden"><span style="position:absolute;top:0;left:0;bottom:0;width:2px;background:var(--primary-500)"></span><div style="font-size:var(--text-sm);font-weight:600;color:var(--text-primary);margin-bottom:var(--space-3)">Build checkout flow</div><div style="display:flex;align-items:center;justify-content:space-between"><x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Avatar" name="Alex Novak" size="xs" hint-size="20px,20px"></x-import><span style="font-family:var(--font-mono);font-size:var(--font-size-2xs);color:var(--text-tertiary)">Aug 14</span></div></div>
+<div style="background:linear-gradient(160deg,var(--surface-raised) 0%,var(--surface-panel) 70%);border:1px solid var(--border-subtle);border-radius:var(--radius-md);box-shadow:var(--shadow-sm);padding:var(--space-4);position:relative;overflow:hidden"><span style="position:absolute;top:0;left:0;bottom:0;width:2px;background:var(--accent-1-500)"></span><div style="font-size:var(--text-sm);font-weight:600;color:var(--text-primary);margin-bottom:var(--space-3)">Cross-browser QA pass</div><div style="display:flex;align-items:center;justify-content:space-between"><x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Avatar" name="Rhea Sen" size="xs" hint-size="20px,20px"></x-import><span style="font-family:var(--font-mono);font-size:var(--font-size-2xs);color:var(--text-tertiary)">Aug 16</span></div></div>
+</div>
+<div style="width:270px;flex-shrink:0;display:flex;flex-direction:column;gap:var(--space-3)">
+<div style="display:flex;align-items:center;justify-content:space-between;padding:0 var(--space-2);font-family:var(--font-mono);font-size:var(--font-size-2xs);letter-spacing:var(--tracking-wide);color:var(--text-secondary);text-transform:uppercase">Review<span style="background:var(--surface-raised);border-radius:var(--radius-full);padding:1px 7px;font-size:10px">1</span></div>
+<div style="background:linear-gradient(160deg,var(--surface-raised) 0%,var(--surface-panel) 70%);border:1px solid var(--border-subtle);border-radius:var(--radius-md);box-shadow:var(--shadow-sm);padding:var(--space-4);position:relative;overflow:hidden"><span style="position:absolute;top:0;left:0;bottom:0;width:2px;background:var(--accent-3-500)"></span><div style="font-size:var(--text-sm);font-weight:600;color:var(--text-primary);margin-bottom:var(--space-3)">Approve homepage copy</div><div style="display:flex;align-items:center;justify-content:space-between"><x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Avatar" name="Erin Kaplan" size="xs" hint-size="20px,20px"></x-import><span style="font-family:var(--font-mono);font-size:var(--font-size-2xs);color:var(--text-tertiary)">Aug 12</span></div></div>
+</div>
+<div style="width:270px;flex-shrink:0;display:flex;flex-direction:column;gap:var(--space-3)">
+<div style="display:flex;align-items:center;justify-content:space-between;padding:0 var(--space-2);font-family:var(--font-mono);font-size:var(--font-size-2xs);letter-spacing:var(--tracking-wide);color:var(--text-secondary);text-transform:uppercase">Done<span style="background:var(--surface-raised);border-radius:var(--radius-full);padding:1px 7px;font-size:10px">2</span></div>
+<div style="background:linear-gradient(160deg,var(--surface-raised) 0%,var(--surface-panel) 70%);border:1px solid var(--border-subtle);border-radius:var(--radius-md);box-shadow:var(--shadow-sm);padding:var(--space-4);position:relative;overflow:hidden;opacity:.6"><span style="position:absolute;top:0;left:0;bottom:0;width:2px;background:var(--success-500)"></span><div style="font-size:var(--text-sm);font-weight:600;color:var(--text-primary);margin-bottom:var(--space-3)">Finalize navigation structure</div><div style="display:flex;align-items:center;justify-content:space-between"><x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Avatar" name="Alex Novak" size="xs" hint-size="20px,20px"></x-import><span style="font-family:var(--font-mono);font-size:var(--font-size-2xs);color:var(--text-tertiary)">Aug 9</span></div></div>
+<div style="background:linear-gradient(160deg,var(--surface-raised) 0%,var(--surface-panel) 70%);border:1px solid var(--border-subtle);border-radius:var(--radius-md);box-shadow:var(--shadow-sm);padding:var(--space-4);position:relative;overflow:hidden;opacity:.6"><span style="position:absolute;top:0;left:0;bottom:0;width:2px;background:var(--success-500)"></span><div style="font-size:var(--text-sm);font-weight:600;color:var(--text-primary);margin-bottom:var(--space-3)">Wireframe review with client</div><div style="display:flex;align-items:center;justify-content:space-between"><x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Avatar" name="Erin Kaplan" size="xs" hint-size="20px,20px"></x-import><span style="font-family:var(--font-mono);font-size:var(--font-size-2xs);color:var(--text-tertiary)">Aug 5</span></div></div>
+</div>
+</div>
+</div>
+</x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { theme: 'dark', density: 'spacious', activeNav: 'overview', notifOn: true };
+  renderVals() {
+    return {
+      theme: this.state.theme, density: this.state.density,
+      isLight: this.state.theme === 'light', toggleTheme: (v) => this.setState({ theme: v ? 'light' : 'dark' }),
+      notifOn: this.state.notifOn, toggleNotif: (v) => this.setState({ notifOn: v }),
+      activeNav: this.state.activeNav, setActiveNav: (id) => this.setState({ activeNav: id }),
+      sidebarSections: [
+        { items: [
+          { id: 'overview', label: 'Overview' }, { id: 'projects', label: 'Projects' },
+          { id: 'team', label: 'Team' }, { id: 'calendar', label: 'Calendar' }, { id: 'settings', label: 'Settings' },
+        ] },
+        { label: 'Projects', items: [
+          { id: 'website-redesign', label: 'Website Redesign' }, { id: 'mobile-app', label: 'Mobile App v2' },
+          { id: 'q3-report', label: 'Q3 Report' }, { id: 'marketing-site', label: 'Marketing Site' },
+        ] },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

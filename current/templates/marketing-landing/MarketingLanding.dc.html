@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Marketing Landing Shell" description="Landing page with hero, feature cards, and a three-tier pricing table" -->
+<helmet><script src="./ds-base.js"></script></helmet>
+<div style="width:1280px;height:800px" data-theme="dark">
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.WindowChrome" title="reverb.fm" platform="mac" hint-size="1280px,800px">
+<div style="height:100%;overflow:auto;font-family:var(--font-body)" data-screen-label="landing">
+<nav style="position:sticky;top:0;z-index:20;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 var(--space-9);background:color-mix(in srgb,var(--surface-app) 78%,transparent);backdrop-filter:blur(var(--blur-panel));border-bottom:1px solid var(--border-subtle)">
+<div style="display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:700;font-size:var(--text-lg);color:var(--text-primary);letter-spacing:var(--tracking-tight)"><span style="width:26px;height:26px;border-radius:var(--radius-sm);background:linear-gradient(140deg,var(--primary-400),var(--accent-3-500))"></span>Reverb</div>
+<div style="display:flex;gap:var(--space-7);align-items:center;font-size:var(--text-base);color:var(--text-secondary)"><span>Product</span><span>Sounds</span><span>Pricing</span><span>Docs</span></div>
+<div style="display:flex;gap:10px;align-items:center">
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Button" variant="ghost" hint-size="70px,36px">Sign in</x-import>
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Button" variant="primary" hint-size="100px,36px">Start free</x-import>
+</div>
+</nav>
+<section style="position:relative;padding:var(--space-12) var(--space-9) var(--space-11);text-align:center;overflow:hidden;background-image:radial-gradient(ellipse 60% 50% at 50% -10%,var(--primary-muted-bg),transparent 70%),radial-gradient(circle at 12% 40%,var(--accent-3-muted-bg),transparent 45%),radial-gradient(circle at 90% 30%,var(--accent-2-muted-bg),transparent 45%),radial-gradient(var(--dot-grid) 1px, transparent 1px);background-size:100% 100%,100% 100%,100% 100%,22px 22px;background-position:0 0,0 0,0 0,-4px -4px">
+<span style="display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:var(--text-xs);letter-spacing:var(--tracking-wide);text-transform:uppercase;color:var(--primary);background:var(--primary-muted-bg);border:1px solid color-mix(in srgb,var(--primary-500) 30%,transparent);padding:5px 12px;border-radius:var(--radius-full);margin-bottom:var(--space-6)">Now with tactile macro controls</span>
+<h1 style="font-family:var(--font-display);font-weight:700;font-size:var(--text-5xl);line-height:var(--leading-tight);letter-spacing:var(--tracking-tight);color:var(--text-primary);margin:0 auto var(--space-6);max-width:900px;text-wrap:balance">The studio that feels like <span style="background:linear-gradient(120deg,var(--primary-400),var(--accent-3-500));-webkit-background-clip:text;background-clip:text;color:transparent">hardware</span>.</h1>
+<p style="font-size:var(--text-xl);line-height:var(--leading-snug);color:var(--text-secondary);max-width:600px;margin:0 auto var(--space-8);font-weight:400;text-wrap:pretty">Design sound with controls that push back. Detents, drive, and modulation you can feel — right in the browser.</p>
+<div style="display:flex;gap:14px;justify-content:center;margin-bottom:var(--space-5)">
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Button" variant="primary" size="lg" hint-size="140px,48px">Start free</x-import>
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Button" variant="ghost" size="lg" hint-size="150px,48px">Watch the tour</x-import>
+</div>
+<div style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--text-tertiary);letter-spacing:.03em">No card required · Free for solo artists · Cancel anytime</div>
+<div style="max-width:920px;margin:var(--space-9) auto 0;height:300px;border-radius:var(--radius-xl);border:1px solid var(--border-strong);background:linear-gradient(160deg,var(--surface-raised),var(--surface-panel));box-shadow:var(--shadow-lg);position:relative;overflow:hidden">
+<div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--signature-500),transparent 75%)"></div>
+<div style="position:absolute;left:0;right:0;bottom:0;top:44px;display:flex;align-items:flex-end;gap:8px;padding:var(--space-7) var(--space-8)">
+<span style="flex:1;border-radius:3px 3px 0 0;height:40%;background:var(--control-track)"></span><span style="flex:1;border-radius:3px 3px 0 0;height:72%;background:var(--primary-500)"></span><span style="flex:1;border-radius:3px 3px 0 0;height:55%;background:var(--accent-2-500)"></span><span style="flex:1;border-radius:3px 3px 0 0;height:88%;background:var(--accent-1-500)"></span><span style="flex:1;border-radius:3px 3px 0 0;height:34%;background:var(--control-track)"></span><span style="flex:1;border-radius:3px 3px 0 0;height:66%;background:var(--accent-3-500)"></span><span style="flex:1;border-radius:3px 3px 0 0;height:48%;background:var(--primary-400)"></span><span style="flex:1;border-radius:3px 3px 0 0;height:78%;background:var(--accent-2-500)"></span><span style="flex:1;border-radius:3px 3px 0 0;height:28%;background:var(--control-track)"></span><span style="flex:1;border-radius:3px 3px 0 0;height:60%;background:var(--accent-1-500)"></span><span style="flex:1;border-radius:3px 3px 0 0;height:82%;background:var(--primary-500)"></span><span style="flex:1;border-radius:3px 3px 0 0;height:44%;background:var(--accent-3-500)"></span>
+</div>
+</div>
+</section>
+<section style="padding:var(--space-11) var(--space-9);border-top:1px solid var(--border-subtle)">
+<div style="text-align:center;max-width:600px;margin:0 auto var(--space-9)"><span style="font-family:var(--font-mono);font-size:var(--text-xs);letter-spacing:var(--tracking-wide);text-transform:uppercase;color:var(--accent-2-500);font-weight:500">Why Reverb</span><h2 style="font-family:var(--font-display);font-weight:700;font-size:var(--text-3xl);letter-spacing:var(--tracking-tight);color:var(--text-primary);margin:var(--space-3) 0">Everything responds to your hand</h2><p style="font-size:var(--text-md);color:var(--text-secondary);line-height:var(--leading-body);margin:0">Three ideas we obsess over, so your sessions feel less like software and more like an instrument.</p></div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-6);max-width:1000px;margin:0 auto">
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Panel" hint-size="100%,180px">
+<span style="width:44px;height:44px;border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;color:#fff;margin-bottom:var(--space-5);background:linear-gradient(180deg,var(--primary-400),var(--primary-600))">↕</span>
+<h3 style="font-family:var(--font-display);font-weight:600;font-size:var(--text-lg);color:var(--text-primary);margin:0 0 var(--space-2)">Tactile controls</h3>
+<p style="font-size:var(--text-sm);color:var(--text-tertiary);line-height:var(--leading-body);margin:0">Sliders with detents you can feel. Return to center without looking, every time.</p>
+</x-import>
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Panel" hint-size="100%,180px">
+<span style="width:44px;height:44px;border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;color:#fff;margin-bottom:var(--space-5);background:linear-gradient(180deg,var(--accent-2-400),var(--accent-2-600))">⚡</span>
+<h3 style="font-family:var(--font-display);font-weight:600;font-size:var(--text-lg);color:var(--text-primary);margin:0 0 var(--space-2)">Live modulation</h3>
+<p style="font-size:var(--text-sm);color:var(--text-tertiary);line-height:var(--leading-body);margin:0">Route any source to any parameter and hear it move in real time — no reloading.</p>
+</x-import>
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Panel" hint-size="100%,180px">
+<span style="width:44px;height:44px;border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;color:#fff;margin-bottom:var(--space-5);background:linear-gradient(180deg,var(--accent-3-400),var(--accent-3-600))">↓</span>
+<h3 style="font-family:var(--font-display);font-weight:600;font-size:var(--text-lg);color:var(--text-primary);margin:0 0 var(--space-2)">One-click export</h3>
+<p style="font-size:var(--text-sm);color:var(--text-tertiary);line-height:var(--leading-body);margin:0">Render stems at studio quality and share a link before the idea gets cold.</p>
+</x-import>
+</div>
+</section>
+<section style="padding:var(--space-11) var(--space-9);border-top:1px solid var(--border-subtle)">
+<div style="text-align:center;max-width:600px;margin:0 auto var(--space-9)"><span style="font-family:var(--font-mono);font-size:var(--text-xs);letter-spacing:var(--tracking-wide);text-transform:uppercase;color:var(--accent-2-500);font-weight:500">Pricing</span><h2 style="font-family:var(--font-display);font-weight:700;font-size:var(--text-3xl);letter-spacing:var(--tracking-tight);color:var(--text-primary);margin:var(--space-3) 0">Start free, scale when you ship</h2><p style="font-size:var(--text-md);color:var(--text-secondary);line-height:var(--leading-body);margin:0">Every plan includes the full control surface. Pay only when your work grows.</p></div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-6);max-width:1000px;margin:0 auto;align-items:start">
+<div style="padding:var(--space-8) var(--space-7);border-radius:var(--radius-lg);border:1px solid var(--border-subtle);background:linear-gradient(160deg,var(--surface-raised),var(--surface-panel));display:flex;flex-direction:column;gap:var(--space-5);position:relative">
+<span style="font-family:var(--font-mono);font-size:var(--text-xs);letter-spacing:var(--tracking-wide);text-transform:uppercase;color:var(--text-tertiary)">Solo</span>
+<div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-4xl);color:var(--text-primary);letter-spacing:var(--tracking-tight);line-height:1">$0<span style="font-family:var(--font-mono);font-size:var(--text-base);font-weight:400;color:var(--text-tertiary)">/mo</span></div>
+<div style="font-size:var(--text-sm);color:var(--text-secondary);line-height:var(--leading-body)">For hobbyists and first sessions.</div>
+<div style="border-radius:var(--radius-sm);border:1px solid var(--border-strong)"><x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Button" variant="ghost" hint-size="100%,44px">Get started</x-import></div>
+</div>
+<div style="padding:var(--space-8) var(--space-7);border-radius:var(--radius-lg);border:1px solid var(--border-subtle);background:linear-gradient(160deg,var(--surface-raised),var(--surface-panel));display:flex;flex-direction:column;gap:var(--space-5);position:relative;transform:translateY(-10px)">
+<span style="font-family:var(--font-mono);font-size:var(--text-xs);letter-spacing:var(--tracking-wide);text-transform:uppercase;color:var(--text-tertiary)">Studio</span>
+<div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-4xl);color:var(--text-primary);letter-spacing:var(--tracking-tight);line-height:1">$18<span style="font-family:var(--font-mono);font-size:var(--text-base);font-weight:400;color:var(--text-tertiary)">/mo</span></div>
+<div style="font-size:var(--text-sm);color:var(--text-secondary);line-height:var(--leading-body)">For working producers who ship weekly.</div>
+<x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Button" variant="primary" hint-size="100%,44px">Start free trial</x-import>
+</div>
+<div style="padding:var(--space-8) var(--space-7);border-radius:var(--radius-lg);border:1px solid var(--border-subtle);background:linear-gradient(160deg,var(--surface-raised),var(--surface-panel));display:flex;flex-direction:column;gap:var(--space-5);position:relative">
+<span style="font-family:var(--font-mono);font-size:var(--text-xs);letter-spacing:var(--tracking-wide);text-transform:uppercase;color:var(--text-tertiary)">Label</span>
+<div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-4xl);color:var(--text-primary);letter-spacing:var(--tracking-tight);line-height:1">$52<span style="font-family:var(--font-mono);font-size:var(--text-base);font-weight:400;color:var(--text-tertiary)">/mo</span></div>
+<div style="font-size:var(--text-sm);color:var(--text-secondary);line-height:var(--leading-body)">For teams and studios collaborating live.</div>
+<div style="border-radius:var(--radius-sm);border:1px solid var(--border-strong)"><x-import component-from-global-scope="DyvoidedDesignSystem_7b704c.Button" variant="ghost" hint-size="100%,44px">Contact sales</x-import></div>
+</div>
+</div>
+</section>
+<div style="padding:var(--space-9);border-top:1px solid var(--border-subtle);display:flex;justify-content:space-between;align-items:center;color:var(--text-tertiary);font-size:var(--text-sm);background:var(--surface-panel)">
+<div style="display:flex;align-items:center;gap:8px;font-family:var(--font-display);font-weight:700;color:var(--text-primary)"><span style="width:20px;height:20px;border-radius:var(--radius-sm);background:linear-gradient(140deg,var(--primary-400),var(--accent-3-500))"></span>Reverb</div>
+<div style="display:flex;gap:var(--space-6)"><span>Product</span><span>Pricing</span><span>Changelog</span><span>Privacy</span></div>
+<div>© 2026 Reverb Audio</div>
+</div>
+</div>
+</x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>
