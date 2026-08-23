@@ -38,20 +38,21 @@
   .article h2 { font-family: var(--font-display); font-weight: 600; font-size: var(--font-size-2xl); letter-spacing: var(--tracking-tight); color: var(--text-primary); margin: var(--space-9) 0 var(--space-4); }
   .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: var(--space-8); padding-top: var(--space-6); border-top: 1px solid var(--border-subtle); }
 
-  .rail { width: 300px; flex-shrink: 0; border-left: 1px solid var(--border-subtle); background: var(--surface-panel); overflow: auto; padding: var(--space-8) var(--space-6); display: flex; flex-direction: column; gap: var(--space-8); }
+  .rail { width: 300px; flex-shrink: 0; border-left: 1px solid var(--border-subtle); background: var(--surface-panel); overflow: auto; padding: var(--space-6) var(--space-5); display: flex; flex-direction: column; gap: var(--space-5); }
+  .rail .newsletter { margin-top: auto; }
   .related-list { display: flex; flex-direction: column; gap: var(--space-2); }
-  .related-item { display: flex; gap: 12px; padding: var(--space-3); border-radius: var(--radius-md); }
+  .related-item { display: flex; gap: 10px; padding: var(--space-2); border-radius: var(--radius-md); }
   .related-num { font-family: var(--font-mono); font-size: var(--text-lg); color: var(--text-tertiary); font-weight: 500; width: 22px; flex-shrink: 0; }
   .related-body { display: flex; flex-direction: column; gap: 4px; }
   .related-cat { font-family: var(--font-mono); font-size:var(--font-size-2xs); letter-spacing: 0.08em; text-transform: uppercase; }
   .related-title { font-size: var(--text-base); font-weight: 600; color: var(--text-primary); line-height: var(--leading-snug); }
   .related-time { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-tertiary); }
 
-  .newsletter { padding: var(--space-6); border-radius: var(--radius-lg); border: 1px solid var(--border-subtle); background: linear-gradient(160deg, var(--surface-raised), var(--surface-panel)); position: relative; overflow: hidden; }
+  .newsletter { padding: var(--space-5); border-radius: var(--radius-lg); border: 1px solid var(--border-subtle); background: linear-gradient(160deg, var(--surface-raised), var(--surface-panel)); }
   .newsletter-title { font-family: var(--font-display); font-weight: 600; font-size: var(--text-lg); color: var(--text-primary); margin-bottom: var(--space-2); }
   .newsletter-desc { font-size: var(--text-sm); color: var(--text-tertiary); line-height: var(--leading-body); margin: 0 0 var(--space-4); }
-  .newsletter-row { display: flex; gap: 8px; align-items: flex-end; }
-  .newsletter-row .ds-input-box { flex: 1; min-width: 0; }
+  .newsletter-row { display: flex; flex-direction: column; gap: var(--space-3); }
+  .newsletter-row .ds-btn { width: 100%; }
 </style>
 </head>
 <body data-theme="dark">
