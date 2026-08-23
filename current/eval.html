@@ -50,7 +50,7 @@
   .cs-body { display: flex; flex: 1; min-height: 0; overflow: hidden; font-family: var(--font-body); }
 
   /* Sidebar */
-  .cs-sidebar { width: 220px; flex-shrink: 0; min-height: 0; overflow: hidden; border-right: 1px solid var(--border-subtle); display: flex; flex-direction: column; background: linear-gradient(165deg, var(--surface-raised) 0%, var(--surface-panel) 55%, var(--panel-tint) 160%); }
+  .cs-sidebar { width: 220px; flex-shrink: 0; min-height: 0; overflow: hidden; border-right: 1px solid var(--border-subtle); display: flex; flex-direction: column; background: var(--surface-panel); }
   .cs-nav { padding: var(--space-3) var(--space-2); display: flex; flex-direction: column; gap: 2px; flex-shrink: 0; }
   .cs-nav-label { font-family: var(--font-mono); font-size: var(--font-size-2xs); letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--text-tertiary); padding: 4px 10px 6px; }
   .cs-nav-item { display: flex; align-items: center; gap: 10px; padding: 7px 10px; border: none; background: transparent; color: var(--text-secondary); font-family: var(--font-body); font-size: var(--font-size-sm); font-weight: 500; border-radius: var(--radius-sm); cursor: pointer; text-align: left; transition: background var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard); position: relative; }
@@ -79,7 +79,7 @@
   .cs-switch.on .cs-switch-thumb { left: 15px; background: var(--primary-500); }
 
   /* Main canvas */
-  .cs-main { flex: 1; min-width: 0; min-height: 0; padding: var(--space-7); overflow: auto; scrollbar-gutter: stable; position: relative; background-image: radial-gradient(circle at 10% -10%, var(--primary-muted-bg) 0%, transparent 45%), radial-gradient(circle at 95% 10%, var(--accent-3-muted-bg) 0%, transparent 40%), radial-gradient(circle at 60% 100%, var(--accent-2-muted-bg) 0%, transparent 35%), radial-gradient(var(--dot-grid) 1px, transparent 1px); background-size: 100% 100%, 100% 100%, 100% 100%, 22px 22px; background-position: 0 0, 0 0, 0 0, -4px -4px; }
+  .cs-main { flex: 1; min-width: 0; min-height: 0; padding: var(--space-7); overflow: auto; scrollbar-gutter: stable; position: relative; background: var(--surface-app); background-image: radial-gradient(var(--dot-grid) 1px, transparent 1px); background-size: 22px 22px; background-position: -4px -4px; }
   .cs-main-head { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: var(--space-7); }
   .cs-project-name { font-family: var(--font-display); font-weight: 600; font-size: var(--font-size-3xl); color: var(--text-primary); letter-spacing: var(--tracking-tight); line-height: 1.05; }
   .cs-badges { display: flex; gap: 8px; margin-top: 10px; }
@@ -131,7 +131,7 @@
   .cs-meter .p4 { background: var(--accent-3-500); }
 
   /* Inspector */
-  .cs-inspector { width: 260px; flex-shrink: 0; min-height: 0; overflow: auto; border-left: 1px solid var(--border-subtle); background: linear-gradient(195deg, var(--surface-raised) 0%, var(--surface-panel) 55%, var(--panel-tint) 160%); padding: var(--space-6); }
+  .cs-inspector { width: 260px; flex-shrink: 0; min-height: 0; overflow: auto; border-left: 1px solid var(--border-subtle); background: var(--surface-panel); padding: var(--space-6); }
   .cs-insp-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: var(--tracking-wide); color: var(--text-secondary); text-transform: uppercase; margin-bottom: var(--space-5); }
   .cs-insp-row { display: flex; align-items: baseline; justify-content: space-between; padding: var(--space-3) 0; border-bottom: 1px solid var(--border-subtle); }
   .cs-insp-row:last-child { border-bottom: none; }
