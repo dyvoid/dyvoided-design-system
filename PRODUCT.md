@@ -32,7 +32,7 @@ Procedural theming via four `oklch` color seeds: one override rebrands an entire
 ## Capabilities and Constraints
 
 - Token layer is the commitment: colors, typography, spacing, effects (shadow/radius/blur), motion, interaction, scrollbar. Consuming apps bring their own framework. Corners are sharp 2px on all controls and panels (`--radius-xs` through `--radius-xl`); full pill (`--radius-full`) only for switches, badges, dots, avatars, scrollbar thumbs. Browser surfaces (`::selection`, `caret-color`, `::placeholder`, `accent-color`) are themed via `tokens/interaction.css` and flip with `[data-theme]`.
-- JSX components in `current/components/` are reference implementations, not the committed component layer. HTML `.card.html` previews are the canonical visual specimens. All interactive specimens use semantic HTML (`<button>`, `<input>`, ARIA roles) with `:focus-visible` rings; `.jsx` mirrors these patterns.
+- JSX components in `components/` are reference implementations, not the committed component layer. HTML `.card.html` previews are the canonical visual specimens. All interactive specimens use semantic HTML (`<button>`, `<input>`, ARIA roles) with `:focus-visible` rings; `.jsx` mirrors these patterns.
 - Procedural color: four `*-seed` custom properties drive all identity color. `--signature`, `--success`, `--danger`, `--warning` are fixed and must not be rebranded. Identity color is expressed by category (slider modulation source, layer category), not by individual element — most of the UI stays primary; accents carry meaning.
 - Density: every spacing token has a `[data-density="compact"]` override. Default is spacious; compact exists for power-user and data-dense views.
 - Theming rule: never hardcode a hue in a component or screen; always reference the tokens. Token names are positional (`--accent-1`), never hue-named.
@@ -40,7 +40,7 @@ Procedural theming via four `oklch` color seeds: one override rebrands an entire
 - Icons: Lucide, used sparingly. `.card.html` previews load the real CDN build; `.jsx` references vendor Lucide path data and instruct real apps to `npm install lucide-react`.
 - Window chrome: custom Electron titlebar, not OS-native, so macOS and Windows look identical. macOS traffic lights re-colored to brand danger/amber/success.
 - Current scope: 18 components, 10 app-shell templates. Component set is sized to the four app categories, not exhaustively enumerated from a real product yet.
-- `current/eval.html` is a sanctioned validation surface: an app-shell composition that assembles multiple components into a realistic layout. It imports `styles.css` and iframes the canonical `.card.html` specimens, so it stays in sync with the component layer automatically. The drift script (`current/scripts/drift.mjs`) scans it alongside cards and JSX to catch banned patterns, hardcoded hues, and non-token font sizes.
+- `index.html` is the landing page and sanctioned validation surface: an app-shell composition that assembles multiple components into a realistic layout. It imports `styles.css` and iframes the canonical `.card.html` specimens, so it stays in sync with the component layer automatically. The drift script (`scripts/drift.mjs`) scans it alongside cards and JSX to catch banned patterns, hardcoded hues, and non-token font sizes.
 
 ## Brand Commitments
 
@@ -51,9 +51,8 @@ Procedural theming via four `oklch` color seeds: one override rebrands an entire
 
 ## Evidence on Hand
 
-- `current/` — the full incumbent system: tokens, guidelines, components, templates, readme. This is the primary evidence and the anti-reference for the refinement work ahead.
-- `current/readme.md` — the system's own foundation doc, written when the system was built.
-- `current/templates/*/.thumbnail` — rendered previews of each app-shell template.
+- The repo root holds the full incumbent system: tokens, guidelines, components, templates, readme. This is the primary evidence and the anti-reference for the refinement work ahead.
+- `readme.md` — the system's own foundation doc, written when the system was built.
 - No real consuming app exists yet; no real product copy exists. All copy in templates is provisional.
 
 ## Product Principles

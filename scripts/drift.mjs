@@ -1,6 +1,6 @@
 // drift.mjs — design-system drift detector.
 // Scans canonical specimens (*.card.html), reference JSX (*.jsx), and the
-// eval.html validation surface for patterns that drift from the token layer.
+// index.html landing page for patterns that drift from the token layer.
 //
 // Banned:
 //   1. Unpinned or @latest lucide script tags
@@ -20,7 +20,7 @@ import { fileURLToPath } from 'node:url';
 const root = fileURLToPath(new URL('..', import.meta.url));
 const componentsDir = join(root, 'components');
 const templatesDir = join(root, 'templates');
-const evalFile = join(root, 'eval.html');
+const indexFile = join(root, 'index.html');
 
 const CANONICAL_FONT_URL = 'https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap';
 
@@ -44,7 +44,7 @@ function walkTemplates(dir, acc = []) {
 
 const targets = walk(componentsDir);
 for (const t of walkTemplates(templatesDir)) targets.push(t);
-if (statSync(evalFile).isFile()) targets.push(evalFile);
+if (statSync(indexFile).isFile()) targets.push(indexFile);
 
 const findings = [];
 
