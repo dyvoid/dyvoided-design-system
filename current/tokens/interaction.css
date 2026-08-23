@@ -19,6 +19,15 @@
 /* Range input is transparent; ring the track that wraps it instead. */
 [data-ds-track]:has(:focus-visible) { box-shadow: var(--focus-ring); }
 
+/* Native browser surfaces. The token layer owns these so every consuming
+   app inherits a themed selection, caret, placeholder and accent without
+   per-component work. Values read the color tokens, so they flip with
+   [data-theme] automatically. */
+::selection { background: var(--primary-muted-bg); color: var(--text-primary); }
+:where(input, textarea, [contenteditable="true"]) { caret-color: var(--primary); }
+:where(input, textarea)::placeholder { color: var(--text-disabled); }
+:where(input[type="checkbox"], input[type="radio"], input[type="range"]) { accent-color: var(--primary); }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
