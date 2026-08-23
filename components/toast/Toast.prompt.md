@@ -4,6 +4,6 @@ State is carried by a single tinted dot, not a colored panel or an icon — the 
 
 ```jsx
 <ToastStack>
-  <Toast variant="success" title="Render complete" onClose={dismiss}>Bounced 2 stems to /exports.</Toast>
+  <Toast variant="success" title="Build complete" onClose={dismiss}>Shipped 2 files to /dist.</Toast>
 </ToastStack>
 ```

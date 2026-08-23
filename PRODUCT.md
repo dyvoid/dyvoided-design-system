@@ -45,7 +45,7 @@ Procedural theming via four `oklch` color seeds: one override rebrands an entire
 ## Brand Commitments
 
 - Name "dyvoided" is provisional. Compile namespace is auto-derived from the project name (`window.DyvoidedDesignSystem_7b704c` at time of writing); renaming the project changes it.
-- Voice: short, literal labels over cleverness. Second person, direct. Numbers and units in monospace wherever they are measurements or live values. No emoji. No exclamation points in UI copy. Sentence case for buttons and labels. Panel titles use mono uppercase at `--font-size-xs`; sidebar group headers use the body font at `--font-size-2xs`, 600 weight, uppercase — a deliberate hierarchy step down from panel titles. Data keys (Sample rate, Cutoff) stay small/mono/uppercase.
+- Voice: short, literal labels over cleverness. Second person, direct. Numbers and units in monospace wherever they are measurements or live values. No emoji. No exclamation points in UI copy. Sentence case for buttons and labels. Panel titles use mono uppercase at `--font-size-xs`; sidebar group headers use the body font at `--font-size-2xs`, 600 weight, uppercase — a deliberate hierarchy step down from panel titles. Data keys (File size, Opacity) stay small/mono/uppercase.
 - Reference taste on record: Arturia Pigments (rich, precise creative-tool UI) and Obsidian (clean, calm, dark-first productivity). Explicitly avoided: flat/lifeless Microsoft-era UI and trend-driven "style over clarity" agency sites.
 - A separate reference (Cape Town Dam Levels) was considered for its finesse and lightness, not its structure or topic. Its overuse of italics and uppercase, and its neon turquoise accent, are explicitly rejected.
 

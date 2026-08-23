@@ -50,7 +50,7 @@ Rules:
   - Tabs, Breadcrumb, SidebarNav
   - Dialog, Menu, CommandPalette, Scrim
   - Avatar, WindowChrome
-- `templates/` — 10 full app-shell templates built with `ds-*` classes: Creative Studio, DAW Sequencer, Image Editor, Dev Dashboard, Dashboard Kanban, Editorial Reader, Messaging, File Manager, Marketing Landing, Account Settings.
+- `templates/` — 10 full app-shell templates built with `ds-*` classes: Video Editor, DAW Sequencer, Image Editor, Dev Dashboard, Dashboard Kanban, Editorial Reader, Messaging, File Manager, Marketing Landing, Account Settings.
 - `guidelines/` — foundation specimen cards (colors, type, spacing, elevation, radii, scrollbars, density).
 - `scripts/drift.mjs` — drift detector. Scans all specimens, templates, and JSX for banned patterns (unpinned lucide, inline `oklch(from var())`, hardcoded hues, non-token px font sizes, stale font links). Run `node scripts/drift.mjs` from the repo root.
 - `index.html` — the showcase. Assembles components into a realistic layout and iframes every specimen and template.
@@ -59,11 +59,11 @@ Rules:
 
 **Color** — A cool graphite neutral scale carries the majority of the UI. Four identity colors (primary + three accents) sit on top, assigned by category not per-element. Dense control surfaces read at a glance without becoming a rainbow. A fixed signature neutral reserved for one decorative detail (the panel top-edge line). Functional colors (success/danger/warning) are fixed.
 
-**Type** — Familjen Grotesk for display (page titles, big numbers, negative tracking). Hanken Grotesk for body (labels, paragraphs, buttons). JetBrains Mono for technical voice: uppercase micro-labels (panel headers, data keys) and anything numeric (timestamps, Hz, dB), with tabular figures on changing values.
+**Type** — Familjen Grotesk for display (page titles, big numbers, negative tracking). Hanken Grotesk for body (labels, paragraphs, buttons). JetBrains Mono for technical voice: uppercase micro-labels (panel headers, data keys) and anything numeric (timestamps, percentages, sizes), with tabular figures on changing values.
 
 **Elevation** — Soft layered shadows, never a single hard drop. Panels float on `--surface-panel` with a signature top edge and inset highlight. Raised elements (dialogs, popovers) get `--shadow-md`/`--shadow-lg` plus a hairline border. Recessed controls (slider track, checkbox, switch track) use `--inset-rail`.
 
-**Presence** — A single `--presence` knob (0.0 to 1.0) controls how strongly surfaces assert themselves. At 0, the system is nearly flat: minimal shadows, no gradients, no inset highlights. At 1, it's lush and tactile: full layered shadows, gradient fills on buttons and controls, visible inset rails and specular edge highlights. Default is 0.5. One value drives every shadow, highlight, and muted-bg fill opacity in the system. Set it once per app to match the desired feel — a calm reading tool might sit at 0.2, a creative DAW at 0.8.
+**Presence** — A single `--presence` knob (0.0 to 1.0) controls how strongly surfaces assert themselves. At 0, the system is nearly flat: minimal shadows, no gradients, no inset highlights. At 1, it's lush and tactile: full layered shadows, gradient fills on buttons and controls, visible inset rails and specular edge highlights. Default is 0.5. One value drives every shadow, highlight, and muted-bg fill opacity in the system. Set it once per app to match the desired feel — a calm reading tool might sit at 0.2, a dense creative tool at 0.8.
 
 **Corners** — Sharp 2px on all controls and panels. Full pill (999px) only for switches, badges, dots, avatars, and scrollbar thumbs.
 
@@ -81,7 +81,7 @@ Rules:
 - Second person, direct. "Save changes", not "Your changes will be saved."
 - Numbers and units in monospace wherever they're measurements or live values.
 - No emoji. No exclamation points in UI copy.
-- Sentence case for buttons and labels. Uppercase only for mono micro-labels (data keys like "Sample rate", "Cutoff"). Panel titles use mono uppercase at `--font-size-xs`. Sidebar group headers use body font at `--font-size-2xs`, 600 weight, uppercase.
+- Sentence case for buttons and labels. Uppercase only for mono micro-labels (data keys like "File size", "Opacity"). Panel titles use mono uppercase at `--font-size-xs`. Sidebar group headers use body font at `--font-size-2xs`, 600 weight, uppercase.
 
 ## Icons
 
