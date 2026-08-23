@@ -52,7 +52,7 @@
   /* Sidebar */
   .cs-sidebar { width: 220px; flex-shrink: 0; min-height: 0; overflow: hidden; border-right: 1px solid var(--border-subtle); display: flex; flex-direction: column; background: var(--surface-panel); }
   .cs-nav { padding: var(--space-3) var(--space-2); display: flex; flex-direction: column; gap: 2px; flex-shrink: 0; }
-  .cs-nav-label { font-family: var(--font-mono); font-size: var(--font-size-xs); font-weight: 500; letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--text-tertiary); padding: 4px 10px 6px; }
+  .cs-nav-label { font-family: var(--font-body); font-size: var(--font-size-2xs); font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-tertiary); padding: 4px 10px 6px; }
   .cs-nav-item { display: flex; align-items: center; padding: 7px 10px; border: none; background: transparent; color: var(--text-secondary); font-family: var(--font-body); font-size: var(--font-size-sm); font-weight: 500; border-radius: var(--radius-sm); cursor: pointer; text-align: left; transition: background var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard); position: relative; }
   .cs-nav-item:hover { background: var(--surface-hover); color: var(--text-primary); }
   .cs-nav-item.active { background: var(--surface-active); color: var(--text-primary); font-weight: 600; }
@@ -61,7 +61,7 @@
   .cs-search input { width: 100%; height: var(--control-height-sm); padding: 0 12px; background: var(--surface-sunken); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); color: var(--text-primary); font-family: var(--font-body); font-size: var(--font-size-sm); outline: none; transition: border-color var(--duration-fast) var(--ease-standard); }
   .cs-search input:focus { border-color: var(--primary); box-shadow: var(--focus-ring); }
   .cs-search input::placeholder { color: var(--text-tertiary); }
-  .cs-layers-label { padding: 0 var(--space-5); margin-top: var(--space-4); font-family: var(--font-mono); font-size: var(--font-size-xs); font-weight: 500; letter-spacing: var(--tracking-wide); color: var(--text-tertiary); text-transform: uppercase; }
+  .cs-layers-label { padding: 0 var(--space-5); margin-top: var(--space-4); font-family: var(--font-body); font-size: var(--font-size-2xs); font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-tertiary); }
   .cs-layers { padding: var(--space-3) var(--space-5); display: flex; flex-direction: column; gap: 1px; flex: 1; min-height: 0; overflow: auto; scrollbar-gutter: stable; }
   .cs-layer { padding: var(--space-2) var(--space-3); border-radius: var(--radius-xs); cursor: pointer; font-size: var(--font-size-sm); color: var(--text-secondary); transition: background var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard); }
   .cs-layer:hover { background: var(--surface-hover); color: var(--text-primary); }
@@ -84,7 +84,7 @@
   .cs-head-actions { display: flex; gap: 8px; align-items: center; }
 
   /* Panel (refined) */
-  .panel { background: var(--surface-panel); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); position: relative; }
+  .panel { background: var(--surface-panel); border-top: 1px solid var(--border-strong); border-radius: var(--radius-lg); position: relative; box-shadow: var(--shadow-sm); }
   .panel-head { display: flex; align-items: center; justify-content: space-between; padding: var(--space-4) var(--space-6); border-bottom: 1px solid var(--border-subtle); }
   .panel-title { font-family: var(--font-mono); font-weight: 500; font-size: var(--font-size-xs); letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--text-secondary); }
   .panel-body { padding: var(--space-6); }
@@ -102,10 +102,10 @@
   .slider-head { display: flex; justify-content: space-between; margin-bottom: 8px; }
   .slider-label { font-size: var(--font-size-sm); color: var(--text-secondary); font-weight: 500; }
   .slider-value { font-size: var(--font-size-base); font-family: var(--font-mono); color: var(--text-primary); font-weight: 500; font-feature-settings: var(--tnum); letter-spacing: -0.01em; }
-  .slider-track { height: 3px; border-radius: 2px; background: var(--control-track); position: relative; }
-  .slider-fill { height: 3px; border-radius: 2px; position: absolute; left: 0; top: 0; background: var(--primary); }
+  .slider-track { height: 4px; border-radius: 2px; background: var(--control-track); position: relative; }
+  .slider-fill { height: 4px; border-radius: 2px; position: absolute; left: 0; top: 0; background: var(--primary); }
   .slider-fill.alt { background: var(--accent-1-500); }
-  .slider-thumb { position: absolute; top: -5px; width: 13px; height: 13px; box-sizing: border-box; border-radius: 50%; background: linear-gradient(180deg, var(--gray-50), var(--gray-100)); border: 2px solid var(--primary); box-shadow: var(--shadow-sm); }
+  .slider-thumb { position: absolute; top: -5px; width: 14px; height: 14px; box-sizing: border-box; border-radius: 50%; background: linear-gradient(180deg, var(--gray-50), var(--gray-100)); border: 2px solid var(--primary); box-shadow: var(--shadow-sm); }
   .slider-thumb.alt { border-color: var(--accent-1-500); }
   .slider-ticks { display: flex; justify-content: space-between; margin-top: 6px; padding: 0 1px; }
   .slider-ticks span { width: 1px; height: 4px; background: var(--gray-600); opacity: 0.6; }
@@ -130,7 +130,7 @@
 
   /* Inspector */
   .cs-inspector { width: 260px; flex-shrink: 0; min-height: 0; overflow: auto; border-left: 1px solid var(--border-subtle); background: var(--surface-panel); padding: var(--space-6); }
-  .cs-insp-label { font-family: var(--font-mono); font-size: var(--font-size-xs); font-weight: 500; letter-spacing: var(--tracking-wide); color: var(--text-tertiary); text-transform: uppercase; margin-bottom: var(--space-5); }
+  .cs-insp-label { font-family: var(--font-body); font-size: var(--font-size-2xs); font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: var(--space-5); }
   .cs-insp-row { display: flex; align-items: baseline; justify-content: space-between; padding: var(--space-3) 0; border-bottom: 1px solid var(--border-subtle); }
   .cs-insp-row:last-child { border-bottom: none; }
   .cs-insp-key { font-size: var(--font-size-sm); color: var(--text-secondary); font-weight: 500; }
@@ -277,22 +277,22 @@
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6)">
               <div class="slider">
                 <div class="slider-head"><span class="slider-label">Cutoff</span><span class="slider-value">7.2 kHz</span></div>
-                <div class="slider-track"><div class="slider-fill" style="width: 72%"></div><div class="slider-thumb" style="left: calc(72% - 6.5px)"></div></div>
+                <div class="slider-track"><div class="slider-fill" style="width: 72%"></div><div class="slider-thumb" style="left: calc(72% - 7px)"></div></div>
                 <div class="slider-ticks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
               </div>
               <div class="slider">
                 <div class="slider-head"><span class="slider-label">Resonance</span><span class="slider-value">38%</span></div>
-                <div class="slider-track"><div class="slider-fill" style="width: 38%"></div><div class="slider-thumb" style="left: calc(38% - 6.5px)"></div></div>
+                <div class="slider-track"><div class="slider-fill" style="width: 38%"></div><div class="slider-thumb" style="left: calc(38% - 7px)"></div></div>
                 <div class="slider-ticks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
               </div>
               <div class="slider">
                 <div class="slider-head"><span class="slider-label">Drive</span><span class="slider-value">22%</span></div>
-                <div class="slider-track"><div class="slider-fill alt" style="width: 22%"></div><div class="slider-thumb alt" style="left: calc(22% - 6.5px)"></div></div>
+                <div class="slider-track"><div class="slider-fill alt" style="width: 22%"></div><div class="slider-thumb alt" style="left: calc(22% - 7px)"></div></div>
                 <div class="slider-ticks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
               </div>
               <div class="slider">
                 <div class="slider-head"><span class="slider-label">Mix</span><span class="slider-value">64%</span></div>
-                <div class="slider-track"><div class="slider-fill" style="width: 64%"></div><div class="slider-thumb" style="left: calc(64% - 6.5px)"></div></div>
+                <div class="slider-track"><div class="slider-fill" style="width: 64%"></div><div class="slider-thumb" style="left: calc(64% - 7px)"></div></div>
                 <div class="slider-ticks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
               </div>
             </div>
@@ -391,12 +391,12 @@
     <div style="max-width: 360px; display: flex; flex-direction: column; gap: var(--space-5)">
       <div class="slider">
         <div class="slider-head"><span class="slider-label">Cutoff</span><span class="slider-value">7.2 kHz</span></div>
-        <div class="slider-track"><div class="slider-fill" style="width: 72%"></div><div class="slider-thumb" style="left: calc(72% - 6.5px)"></div></div>
+        <div class="slider-track"><div class="slider-fill" style="width: 72%"></div><div class="slider-thumb" style="left: calc(72% - 7px)"></div></div>
         <div class="slider-ticks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
       </div>
       <div class="slider">
         <div class="slider-head"><span class="slider-label">Drive</span><span class="slider-value">22%</span></div>
-        <div class="slider-track"><div class="slider-fill alt" style="width: 22%"></div><div class="slider-thumb alt" style="left: calc(22% - 6.5px)"></div></div>
+        <div class="slider-track"><div class="slider-fill alt" style="width: 22%"></div><div class="slider-thumb alt" style="left: calc(22% - 7px)"></div></div>
         <div class="slider-ticks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
       </div>
     </div>
