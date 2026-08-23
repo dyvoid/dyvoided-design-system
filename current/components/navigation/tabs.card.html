@@ -5,10 +5,11 @@
 <style>
 body{margin:0;background:var(--surface-app);padding:24px;font-family:var(--font-body)}
 .tabs{display:flex;gap:4px;border-bottom:1px solid var(--border-subtle);max-width:420px}
-.tab{position:relative;padding:10px 4px;margin-right:20px;font-size:var(--text-sm);font-weight:600;color:var(--text-tertiary)}
-.tab.active{color:var(--text-primary)}
-.tab.active::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;border-radius:1px;background:linear-gradient(90deg,var(--primary-400),var(--primary-600));box-shadow:0 0 6px 0 var(--primary-muted-bg)}
+.tab{position:relative;padding:8px 4px;margin-right:20px;font-size:var(--text-sm);font-weight:500;color:var(--text-tertiary);background:none;border:none;cursor:pointer;font-family:var(--font-body)}
+.tab.active{color:var(--text-primary);font-weight:600}
+.tab.active::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;border-radius:1px;background:var(--primary)}
+.tab:focus-visible{outline:none;box-shadow:var(--focus-ring)}
 </style></head>
 <body data-theme="dark">
-<div class="tabs"><span class="tab active">General</span><span class="tab">Audio</span><span class="tab">Shortcuts</span></div>
+<div class="tabs" role="tablist"><button class="tab active" role="tab" aria-selected="true">General</button><button class="tab" role="tab" aria-selected="false">Audio</button><button class="tab" role="tab" aria-selected="false">Shortcuts</button></div>
 </body></html>

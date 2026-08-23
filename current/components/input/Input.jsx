@@ -1,9 +1,11 @@
 import React from 'react';
 
-export function Input({ label, placeholder, value, onChange, error, iconLeft, disabled, type = 'text' }) {
+export function Input({ label, placeholder, value, onChange, error, iconLeft, disabled, type = 'text', id }) {
   const [focused, setFocused] = React.useState(false);
+  const inputId = React.useId();
+  const fieldId = id || inputId;
   return (
-    <label style={{ display: 'flex', flexDirection: 'column', gap: 6, fontFamily: 'var(--font-body)' }}>
+    <label htmlFor={fieldId} style={{ display: 'flex', flexDirection: 'column', gap: 6, fontFamily: 'var(--font-body)' }}>
       {label && <span style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)', fontWeight: 500 }}>{label}</span>}
       <div style={{
         display: 'flex', alignItems: 'center', gap: 8,
@@ -16,7 +18,7 @@ export function Input({ label, placeholder, value, onChange, error, iconLeft, di
       }}>
         {iconLeft}
         <input
-          type={type} value={value} placeholder={placeholder} disabled={disabled}
+          id={fieldId} type={type} value={value} placeholder={placeholder} disabled={disabled}
           onChange={(e) => onChange && onChange(e.target.value)}
           onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
           style={{ flex: 1, border: 'none', outline: 'none', background: 'transparent', color: 'var(--text-primary)', fontSize: 'var(--text-base)', fontFamily: 'var(--font-body)' }}

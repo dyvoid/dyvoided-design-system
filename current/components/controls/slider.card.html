@@ -6,19 +6,20 @@
 body{margin:0;background:var(--surface-app);padding:24px;font-family:var(--font-body)}
 .field{max-width:420px;margin-bottom:24px}
 .top{display:flex;justify-content:space-between;margin-bottom:8px}
-.label{font-size:var(--text-sm);color:var(--text-secondary);font-weight:600}
-.val{font-size:var(--text-sm);font-family:var(--font-mono);color:var(--text-tertiary)}
-.track{height:4px;border-radius:2px;background:var(--control-track);position:relative}
-.fill{height:4px;border-radius:2px;position:absolute;left:0;top:0}
-.knob{position:absolute;top:-5px;width:14px;height:14px;box-sizing:border-box;border-radius:50%;background:linear-gradient(180deg,oklch(100% 0 0),oklch(95.5% 0.002 260));box-shadow:inset 0 1px 1px oklch(100% 0 0 / .8),0 0 0 4px var(--primary-muted-bg),var(--shadow-md);border:3px solid var(--primary)}
-.ticks{display:flex;justify-content:space-between;margin-top:4px;padding:0 1px}
-.ticks span{width:1px;height:5px;background:var(--gray-500);opacity:.85}
+.label{font-size:var(--text-sm);color:var(--text-secondary);font-weight:500}
+.val{font-size:var(--text-base);font-family:var(--font-mono);color:var(--text-primary);font-weight:500;font-feature-settings:var(--tnum);letter-spacing:-0.01em}
+.track{height:3px;border-radius:2px;background:var(--control-track);position:relative}
+.fill{height:3px;border-radius:2px;position:absolute;left:0;top:0}
+.knob{position:absolute;top:-5px;width:13px;height:13px;box-sizing:border-box;border-radius:50%;background:linear-gradient(180deg,var(--gray-50),var(--gray-100));box-shadow:var(--shadow-sm);border:2px solid var(--primary)}
+.track input{position:absolute;inset:-8px 0;width:100%;height:20px;margin:0;opacity:0;cursor:pointer}
+.ticks{display:flex;justify-content:space-between;margin-top:6px;padding:0 1px}
+.ticks span{width:1px;height:4px;background:var(--gray-600);opacity:.6}
 </style></head>
 <body data-theme="dark">
 <div class="field"><div class="top"><span class="label">Resonance</span><span class="val">62%</span></div>
-<div class="track"><div class="fill" style="width:62%;background:var(--primary)"></div><div class="knob" style="left:calc(62% - 7px);border-color:var(--primary);box-shadow:inset 0 1px 1px oklch(100% 0 0 / .8),0 0 0 4px var(--primary-muted-bg),var(--shadow-md)"></div></div>
+<div class="track" data-ds-track><div class="fill" style="width:62%;background:var(--primary)"></div><div class="knob" style="left:calc(62% - 6.5px)"></div><input type="range" min="0" max="100" value="62" aria-label="Resonance"></div>
 <div class="ticks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
 <div class="field"><div class="top"><span class="label">Drive</span><span class="val">30%</span></div>
-<div class="track"><div class="fill" style="width:30%;background:var(--accent-1-500)"></div><div class="knob" style="left:calc(30% - 7px);border-color:var(--accent-1-500);box-shadow:inset 0 1px 1px oklch(100% 0 0 / .8),0 0 0 4px var(--accent-1-muted-bg),var(--shadow-md)"></div></div>
+<div class="track" data-ds-track><div class="fill" style="width:30%;background:var(--accent-1-500)"></div><div class="knob" style="left:calc(30% - 6.5px);border-color:var(--accent-1-500)"></div><input type="range" min="0" max="100" value="30" aria-label="Drive"></div>
 <div class="ticks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
 </body></html>
