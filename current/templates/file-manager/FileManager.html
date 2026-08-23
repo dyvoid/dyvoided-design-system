@@ -66,15 +66,15 @@
         <div class="ds-nav">
           <div class="ds-nav-section">
             <span class="ds-nav-header">Library</span>
-            <button class="ds-nav-item active" data-nav="files" aria-current="page"><i data-lucide="folder" style="width:16px;height:16px"></i><span class="l">Files</span></button>
-            <button class="ds-nav-item" data-nav="recents"><i data-lucide="clock" style="width:16px;height:16px"></i><span class="l">Recents</span></button>
-            <button class="ds-nav-item" data-nav="shared"><i data-lucide="users" style="width:16px;height:16px"></i><span class="l">Shared</span><span class="ds-nav-meta">4</span></button>
-            <button class="ds-nav-item" data-nav="starred"><i data-lucide="star" style="width:16px;height:16px"></i><span class="l">Starred</span></button>
+            <button class="ds-nav-item active" data-nav="files" aria-current="page"><i data-lucide="folder"></i><span class="l">Files</span></button>
+            <button class="ds-nav-item" data-nav="recents"><i data-lucide="clock"></i><span class="l">Recents</span></button>
+            <button class="ds-nav-item" data-nav="shared"><i data-lucide="users"></i><span class="l">Shared</span><span class="ds-nav-meta">4</span></button>
+            <button class="ds-nav-item" data-nav="starred"><i data-lucide="star"></i><span class="l">Starred</span></button>
           </div>
           <div class="ds-nav-section">
             <span class="ds-nav-header">System</span>
-            <button class="ds-nav-item" data-nav="trash"><i data-lucide="trash-2" style="width:16px;height:16px"></i><span class="l">Trash</span></button>
-            <button class="ds-nav-item" data-nav="settings"><i data-lucide="settings" style="width:16px;height:16px"></i><span class="l">Settings</span></button>
+            <button class="ds-nav-item" data-nav="trash"><i data-lucide="trash-2"></i><span class="l">Trash</span></button>
+            <button class="ds-nav-item" data-nav="settings"><i data-lucide="settings"></i><span class="l">Settings</span></button>
           </div>
         </div>
       </div>
@@ -109,8 +109,8 @@
           <div style="width:220px">
             <div class="ds-input-box"><input class="ds-input" placeholder="Search files" id="search"></div>
           </div>
-          <button class="ds-btn ds-btn-ghost" id="open-cmd"><i data-lucide="command" style="width:14px;height:14px"></i>Search</button>
-          <button class="ds-btn ds-btn-primary" id="upload-btn"><i data-lucide="upload" style="width:14px;height:14px"></i>Upload</button>
+          <button class="ds-btn ds-btn-ghost" id="open-cmd"><i data-lucide="command"></i>Search</button>
+          <button class="ds-btn ds-btn-primary" id="upload-btn"><i data-lucide="upload"></i>Upload</button>
         </div>
       </div>
 
@@ -201,7 +201,7 @@ function renderFiles() {
   const html = list.map((f, i) => `
     <div class="file-row" data-idx="${i}">
       <div class="file-name">
-        <div class="file-icon"><i data-lucide="${f.icon}" style="width:16px;height:16px"></i></div>
+        <div class="file-icon"><i data-lucide="${f.icon}"></i></div>
         <span class="file-label">${f.name}</span>
       </div>
       <div class="file-owner">
@@ -211,7 +211,7 @@ function renderFiles() {
       <div class="file-meta col-modified">${f.modified}</div>
       <div class="file-meta col-size">${f.size}</div>
       <div class="col-status"><span class="ds-badge ${statusBadgeClass(f.status)}">${f.statusLabel}</span></div>
-      <div class="col-menu"><button class="row-menu-btn" data-row-menu="${i}"><i data-lucide="more-horizontal" style="width:16px;height:16px"></i></button></div>
+      <div class="col-menu"><button class="row-menu-btn" data-row-menu="${i}"><i data-lucide="more-horizontal"></i></button></div>
     </div>`).join('');
   document.getElementById('file-rows').innerHTML = html || '<div class="ds-empty"><div class="ds-empty-icon"><i data-lucide="inbox" width="20" height="20"></i></div><span class="ds-empty-title">No files</span><span class="ds-empty-desc">Nothing matches the current filter.</span></div>';
   lucide.createIcons();
@@ -229,12 +229,12 @@ const rowMenu = document.getElementById('row-menu');
 function openRowMenu(idx, anchor) {
   const f = files[idx];
   rowMenu.innerHTML = `
-    <button class="ds-menu-item"><i data-lucide="download" style="width:14px;height:14px"></i><span class="l">Download</span></button>
-    <button class="ds-menu-item"><i data-lucide="share-2" style="width:14px;height:14px"></i><span class="l">Share link</span></button>
-    <button class="ds-menu-item"><i data-lucide="star" style="width:14px;height:14px"></i><span class="l">Add to starred</span></button>
-    <button class="ds-menu-item"><i data-lucide="pencil" style="width:14px;height:14px"></i><span class="l">Rename</span></button>
+    <button class="ds-menu-item"><i data-lucide="download"></i><span class="l">Download</span></button>
+    <button class="ds-menu-item"><i data-lucide="share-2"></i><span class="l">Share link</span></button>
+    <button class="ds-menu-item"><i data-lucide="star"></i><span class="l">Add to starred</span></button>
+    <button class="ds-menu-item"><i data-lucide="pencil"></i><span class="l">Rename</span></button>
     <div class="ds-menu-sep"></div>
-    <button class="ds-menu-item danger"><i data-lucide="trash-2" style="width:14px;height:14px"></i><span class="l">Move to trash</span></button>`;
+    <button class="ds-menu-item danger"><i data-lucide="trash-2"></i><span class="l">Move to trash</span></button>`;
   const rect = anchor.getBoundingClientRect();
   rowMenu.style.top = (rect.bottom + 4) + 'px';
   rowMenu.style.left = (rect.right - 180) + 'px';
@@ -327,14 +327,14 @@ function renderCmd(q) {
   const fileMatches = files.filter(f => f.name.toLowerCase().includes(q.toLowerCase()));
   cmdList.innerHTML = `
     <div class="ds-cmd-group"><span class="ds-cmd-header">Navigate</span>
-      ${navMatches.map(n => `<button class="ds-cmd-item" data-cmd="nav-${n}"><i data-lucide="corner-down-right" style="width:14px;height:14px"></i><span class="l">${n.charAt(0).toUpperCase()+n.slice(1)}</span></button>`).join('') || '<span class="ds-cmd-header">No matches</span>'}
+      ${navMatches.map(n => `<button class="ds-cmd-item" data-cmd="nav-${n}"><i data-lucide="corner-down-right"></i><span class="l">${n.charAt(0).toUpperCase()+n.slice(1)}</span></button>`).join('') || '<span class="ds-cmd-header">No matches</span>'}
     </div>
     <div class="ds-cmd-group"><span class="ds-cmd-header">Files</span>
-      ${fileMatches.map(f => `<button class="ds-cmd-item" data-cmd="file-${f.name}"><i data-lucide="${f.icon}" style="width:14px;height:14px"></i><span class="l">${f.name}</span><span class="ds-cmd-hint">${f.size}</span></button>`).join('') || ''}
+      ${fileMatches.map(f => `<button class="ds-cmd-item" data-cmd="file-${f.name}"><i data-lucide="${f.icon}"></i><span class="l">${f.name}</span><span class="ds-cmd-hint">${f.size}</span></button>`).join('') || ''}
     </div>
     <div class="ds-cmd-group"><span class="ds-cmd-header">Actions</span>
-      <button class="ds-cmd-item" data-cmd="act-upload"><i data-lucide="upload" style="width:14px;height:14px"></i><span class="l">Upload files</span><span class="ds-cmd-sc">U</span></button>
-      <button class="ds-cmd-item" data-cmd="act-newfolder"><i data-lucide="folder-plus" style="width:14px;height:14px"></i><span class="l">New folder</span><span class="ds-cmd-sc">N</span></button>
+      <button class="ds-cmd-item" data-cmd="act-upload"><i data-lucide="upload"></i><span class="l">Upload files</span><span class="ds-cmd-sc">U</span></button>
+      <button class="ds-cmd-item" data-cmd="act-newfolder"><i data-lucide="folder-plus"></i><span class="l">New folder</span><span class="ds-cmd-sc">N</span></button>
     </div>`;
   lucide.createIcons();
   cmdList.querySelectorAll('[data-cmd]').forEach(btn => {
