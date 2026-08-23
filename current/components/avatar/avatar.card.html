@@ -1,26 +1,9 @@
 <!-- @dsCard group="Components" viewport="700x200" name="Avatar" subtitle="Initials, image, status, group" -->
 <html><head>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../styles.css">
-<style>
-body{margin:0;background:var(--surface-app);padding:28px;font-family:var(--font-body);display:flex;flex-direction:column;gap:22px}
-.r{display:flex;align-items:center;gap:14px}
-.av{display:inline-flex;align-items:center;justify-content:center;border-radius:var(--radius-full);border:1px solid var(--border-subtle);box-sizing:border-box;font-weight:600;letter-spacing:0.01em}
-.s20{width:20px;height:20px;font-size:9px}.s26{width:26px;height:26px;font-size:10px}.s32{width:32px;height:32px;font-size:12px}.s44{width:44px;height:44px;font-size:17px}
-.t0{background:var(--primary-muted-bg);color:var(--primary-400)}
-.t1{background:var(--accent-1-muted-bg);color:var(--accent-1-400)}
-.t2{background:var(--accent-2-muted-bg);color:var(--accent-2-400)}
-.t3{background:var(--accent-3-muted-bg);color:var(--accent-3-400)}
-.sq{border-radius:var(--radius-sm)}
-.wrap{position:relative;display:inline-flex}
-.dot{position:absolute;right:-1px;bottom:-1px;width:10px;height:10px;border-radius:var(--radius-full);border:2px solid var(--surface-app);box-sizing:border-box}
-.on{background:var(--success-500)}.busy{background:var(--danger-500)}
-.grp{display:inline-flex;align-items:center}
-.grp .av,.grp .more{margin-left:-10px}.grp .av:first-child{margin-left:0}
-.more{width:32px;height:32px;border-radius:var(--radius-full);display:inline-flex;align-items:center;justify-content:center;background:var(--surface-raised);border:1px solid var(--border-subtle);color:var(--text-tertiary);font-family:var(--font-mono);font-size:var(--font-size-2xs);box-sizing:border-box}
-.cap{font-family:var(--font-mono);font-size:var(--text-xs);text-transform:uppercase;letter-spacing:var(--tracking-wide);color:var(--text-tertiary)}
-</style></head>
+<style>body{margin:0;background:var(--surface-app);padding:28px;font-family:var(--font-body);display:flex;flex-direction:column;gap:22px}.r{display:flex;align-items:center;gap:14px}.cap{font-family:var(--font-mono);font-size:var(--text-xs);text-transform:uppercase;letter-spacing:var(--tracking-wide);color:var(--text-tertiary)}</style></head>
 <body data-theme="dark">
-<div class="r"><span class="cap">Sizes</span><span class="av s20 t0">MO</span><span class="av s26 t1">TK</span><span class="av s32 t2">AL</span><span class="av s44 t3">DR</span></div>
-<div class="r"><span class="cap">Status</span><span class="wrap"><span class="av s32 t0">MO</span><span class="dot on"></span></span><span class="wrap"><span class="av s32 t3">DR</span><span class="dot busy"></span></span><span class="av s32 t2 sq">PX</span></div>
-<div class="r"><span class="cap">Group</span><span class="grp"><span class="av s32 t0">MO</span><span class="av s32 t1">TK</span><span class="av s32 t2">AL</span><span class="more">+4</span></span></div>
+<div class="r"><span class="cap">Sizes</span><span class="ds-avatar ds-avatar-20 ds-avatar-t0">MO</span><span class="ds-avatar ds-avatar-26 ds-avatar-t1">TK</span><span class="ds-avatar ds-avatar-32 ds-avatar-t2">AL</span><span class="ds-avatar ds-avatar-44 ds-avatar-t3">DR</span></div>
+<div class="r"><span class="cap">Status</span><span class="ds-avatar-wrap"><span class="ds-avatar ds-avatar-32 ds-avatar-t0">MO</span><span class="ds-avatar-status online"></span></span><span class="ds-avatar-wrap"><span class="ds-avatar ds-avatar-32 ds-avatar-t3">DR</span><span class="ds-avatar-status busy"></span></span><span class="ds-avatar ds-avatar-32 ds-avatar-t2 ds-avatar-sq">PX</span></div>
+<div class="r"><span class="cap">Group</span><span class="ds-avatar-group"><span class="ds-avatar ds-avatar-32 ds-avatar-t0">MO</span><span class="ds-avatar ds-avatar-32 ds-avatar-t1">TK</span><span class="ds-avatar ds-avatar-32 ds-avatar-t2">AL</span><span class="ds-avatar-more">+4</span></span></div>
 </body></html>

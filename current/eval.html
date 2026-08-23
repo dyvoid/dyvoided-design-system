@@ -52,16 +52,10 @@
   /* Sidebar */
   .cs-sidebar { width: 220px; flex-shrink: 0; min-height: 0; overflow: hidden; border-right: 1px solid var(--border-subtle); display: flex; flex-direction: column; background: var(--surface-panel); }
   .cs-nav { padding: var(--space-3) var(--space-2); display: flex; flex-direction: column; gap: 2px; flex-shrink: 0; }
-  .cs-nav-label { font-family: var(--font-body); font-size: var(--font-size-2xs); font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-tertiary); padding: 4px 10px 6px; }
-  .cs-nav-item { display: flex; align-items: center; padding: 7px 10px; border: none; background: transparent; color: var(--text-secondary); font-family: var(--font-body); font-size: var(--font-size-sm); font-weight: 500; border-radius: var(--radius-sm); cursor: pointer; text-align: left; transition: background var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard); position: relative; }
-  .cs-nav-item:hover { background: var(--surface-hover); color: var(--text-primary); }
-  .cs-nav-item.active { background: var(--surface-active); color: var(--text-primary); font-weight: 600; }
-  .cs-nav-item.active::before { content: ''; position: absolute; left: 0; top: 7px; bottom: 7px; width: 2px; border-radius: 1px; background: var(--primary); }
   .cs-search { padding: 0 var(--space-5); margin-top: var(--space-4); }
   .cs-search input { width: 100%; height: var(--control-height-sm); padding: 0 12px; background: var(--surface-sunken); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); color: var(--text-primary); font-family: var(--font-body); font-size: var(--font-size-sm); outline: none; transition: border-color var(--duration-fast) var(--ease-standard); }
   .cs-search input:focus { border-color: var(--primary); box-shadow: var(--focus-ring); }
   .cs-search input::placeholder { color: var(--text-tertiary); }
-  .cs-layers-label { padding: 0 var(--space-5); margin-top: var(--space-4); font-family: var(--font-body); font-size: var(--font-size-2xs); font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-tertiary); }
   .cs-layers { padding: var(--space-3) var(--space-5); display: flex; flex-direction: column; gap: 1px; flex: 1; min-height: 0; overflow: auto; scrollbar-gutter: stable; }
   .cs-layer { padding: var(--space-2) var(--space-3); border-radius: var(--radius-xs); cursor: pointer; font-size: var(--font-size-sm); color: var(--text-secondary); border-left: 2px solid transparent; transition: background var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard); }
   .cs-layer:hover { background: var(--surface-hover); color: var(--text-primary); }
@@ -72,13 +66,8 @@
   .cs-layer.a3 { border-left-color: var(--accent-3-500); }
   .cs-sidebar-foot { padding: var(--space-5); border-top: 1px solid var(--border-subtle); display: flex; flex-direction: column; gap: var(--space-4); flex-shrink: 0; }
   .cs-operator { display: flex; align-items: center; gap: 10px; }
-  .cs-avatar { width: 26px; height: 26px; border-radius: 50%; background: var(--accent-2-muted-bg); color: var(--accent-2-400); display: inline-flex; align-items: center; justify-content: center; font-family: var(--font-body); font-weight: 600; font-size: var(--font-size-2xs); border: 1px solid var(--border-subtle); }
   .cs-operator-name { font-size: var(--font-size-sm); color: var(--text-secondary); font-weight: 500; }
   .cs-toggle { display: flex; align-items: center; justify-content: space-between; font-size: var(--font-size-sm); color: var(--text-secondary); }
-  .cs-switch { width: 30px; height: 17px; border-radius: var(--radius-xs); background: var(--control-track); border: 1px solid var(--border-strong); position: relative; cursor: pointer; transition: border-color var(--duration-base) var(--ease-standard), background var(--duration-base) var(--ease-standard); flex-shrink: 0; }
-  .cs-switch.on { background: var(--primary-muted-bg); border-color: var(--primary); }
-  .cs-switch-thumb { position: absolute; top: 1px; left: 1px; width: 13px; height: 13px; border-radius: 2px; background: var(--gray-500); transition: transform var(--duration-base) var(--ease-spring), background var(--duration-base); }
-  .cs-switch.on .cs-switch-thumb { transform: translateX(14px); background: var(--primary-500); }
 
   /* Main canvas */
   .cs-main { flex: 1; min-width: 0; min-height: 0; padding: var(--space-8); overflow: auto; scrollbar-gutter: stable; position: relative; background: var(--surface-app); }
@@ -87,49 +76,20 @@
   .cs-badges { display: flex; gap: 8px; margin-top: 10px; }
   .cs-head-actions { display: flex; gap: 8px; align-items: center; }
 
-  /* Panel (refined) */
-  .panel { background: var(--surface-panel); border-top: 1px solid var(--border-strong); border-radius: var(--radius-lg); position: relative; box-shadow: var(--shadow-sm); }
-  .panel-head { display: flex; align-items: center; justify-content: space-between; padding: var(--space-4) var(--space-6); border-bottom: 1px solid var(--border-subtle); }
-  .panel-title { font-family: var(--font-mono); font-weight: 500; font-size: var(--font-size-xs); letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--text-secondary); }
-  .panel-body { padding: var(--space-6); }
-  .panel-body.sm { padding: var(--space-5); }
+  /* Slider color modifiers (eval-only, layout uses ds- classes) */
+  .ds-slider-fill.a1 { background: var(--accent-1-500); }
+  .ds-slider-fill.a2 { background: var(--accent-2-500); }
+  .ds-slider-fill.a3 { background: var(--accent-3-500); }
+  .ds-slider-knob.a1 { border-color: var(--accent-1-500); }
+  .ds-slider-knob.a2 { border-color: var(--accent-2-500); }
+  .ds-slider-knob.a3 { border-color: var(--accent-3-500); }
 
-  /* Tabs (refined) */
-  .tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--border-subtle); }
-  .tab { background: none; border: none; cursor: pointer; position: relative; padding: 8px 4px; margin-bottom: -1px; font-family: var(--font-body); font-size: var(--font-size-sm); font-weight: 500; color: var(--text-tertiary); transition: color var(--duration-fast) var(--ease-standard); }
-  .tab:hover { color: var(--text-secondary); }
-  .tab.active { color: var(--text-primary); font-weight: 600; }
-  .tab.active::after { content: ''; position: absolute; left: 4px; right: 4px; bottom: -1px; height: 2px; border-radius: 1px; background: var(--primary); }
-
-  /* Slider (refined) */
-  .slider { font-family: var(--font-body); width: 100%; }
-  .slider-head { display: flex; justify-content: space-between; margin-bottom: 8px; }
-  .slider-label { font-size: var(--font-size-sm); color: var(--text-secondary); font-weight: 500; }
-  .slider-value { font-size: var(--font-size-base); font-family: var(--font-mono); color: var(--text-primary); font-weight: 500; font-feature-settings: var(--tnum); letter-spacing: -0.01em; }
-  .slider-track { height: 4px; border-radius: 2px; background: var(--control-track); position: relative; }
-  .slider-fill { height: 4px; border-radius: 2px; position: absolute; left: 0; top: 0; background: var(--primary); }
-  .slider-fill.primary { background: var(--primary); }
-  .slider-fill.a1 { background: var(--accent-1-500); }
-  .slider-fill.a2 { background: var(--accent-2-500); }
-  .slider-fill.a3 { background: var(--accent-3-500); }
-  .slider-thumb { position: absolute; top: -5px; width: 14px; height: 14px; box-sizing: border-box; border-radius: 50%; background: linear-gradient(180deg, var(--gray-50), var(--gray-100)); border: 2px solid var(--primary); box-shadow: var(--shadow-sm); }
-  .slider-thumb.primary { border-color: var(--primary); }
-  .slider-thumb.a1 { border-color: var(--accent-1-500); }
-  .slider-thumb.a2 { border-color: var(--accent-2-500); }
-  .slider-thumb.a3 { border-color: var(--accent-3-500); }
-  .slider-ticks { display: flex; justify-content: space-between; margin-top: 6px; padding: 0 1px; }
-  .slider-ticks span { width: 1px; height: 4px; background: var(--gray-600); opacity: 0.6; }
-
-  /* Checkbox row (refined) */
+  /* Effects chain row (eval-only layout) */
   .cs-effect-row { display: flex; align-items: center; justify-content: space-between; padding: var(--space-2) var(--space-3); border-radius: var(--radius-xs); transition: background var(--duration-fast) var(--ease-standard); }
   .cs-effect-row:hover { background: var(--surface-hover); }
-  .cs-check { display: inline-flex; align-items: center; gap: 10px; cursor: pointer; font-family: var(--font-body); font-size: var(--font-size-sm); color: var(--text-primary); }
-  .cs-check-box { width: 15px; height: 15px; box-sizing: border-box; border-radius: var(--radius-xs); border: 1px solid var(--border-strong); background: var(--control-track); display: flex; align-items: center; justify-content: center; transition: border-color var(--duration-fast) var(--ease-standard), background var(--duration-fast) var(--ease-standard); flex-shrink: 0; }
-  .cs-check.on .cs-check-box { background: var(--primary); border-color: var(--primary); }
-  .cs-check.on .cs-check-box::after { content: ''; width: 7px; height: 7px; border-radius: 2px; background: var(--text-on-accent); }
   .cs-effect-pct { font-family: var(--font-mono); font-size: var(--font-size-base); color: var(--text-primary); font-weight: 500; font-feature-settings: var(--tnum); letter-spacing: -0.01em; }
 
-  /* Output meter */
+  /* Output meter (eval-only) */
   .cs-meter { display: flex; align-items: flex-end; gap: 3px; height: 100px; box-shadow: inset 0 -1px 0 0 var(--border-strong); }
   .cs-meter span { flex: 1; border-radius: 1px; }
   .cs-meter .track { background: var(--control-track); }
@@ -138,40 +98,18 @@
   .cs-meter .p3 { background: var(--accent-1-500); }
   .cs-meter .p4 { background: var(--accent-3-500); }
 
-  /* Inspector */
+  /* Inspector (eval-only) */
   .cs-inspector { width: 260px; flex-shrink: 0; min-height: 0; overflow: auto; border-left: 1px solid var(--border-subtle); background: var(--surface-panel); padding: var(--space-6); }
-  .cs-insp-label { font-family: var(--font-body); font-size: var(--font-size-2xs); font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: var(--space-5); }
   .cs-insp-row { display: flex; align-items: baseline; justify-content: space-between; padding: var(--space-3) 0; border-bottom: 1px solid var(--border-subtle); }
   .cs-insp-row:last-child { border-bottom: none; }
   .cs-insp-key { font-size: var(--font-size-sm); color: var(--text-secondary); font-weight: 500; }
   .cs-insp-val { font-size: var(--font-size-base); font-family: var(--font-mono); color: var(--text-primary); font-weight: 500; font-feature-settings: var(--tnum); letter-spacing: -0.01em; }
 
-  /* ===== Button (refined) ===== */
-  .btn { display: inline-flex; align-items: center; justify-content: center; height: var(--control-height-md); padding: 0 14px; font-family: var(--font-body); font-size: var(--font-size-sm); font-weight: 500; border-radius: var(--radius-sm); border: 1px solid transparent; cursor: pointer; transition: background var(--duration-fast) var(--ease-standard), border-color var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard); }
-  .btn.primary { background: var(--primary-500); color: var(--text-on-accent); }
-  .btn.primary:hover { background: var(--primary-400); }
-  .btn.primary:active { background: var(--primary-600); }
-  .btn.secondary { background: var(--surface-raised); color: var(--text-primary); border-color: var(--border-strong); }
-  .btn.secondary:hover { background: var(--surface-hover); border-color: var(--border-strong); }
-  .btn.ghost { background: transparent; color: var(--text-secondary); }
-  .btn.ghost:hover { background: var(--surface-hover); color: var(--text-primary); }
-  .btn.danger { background: var(--danger-500); color: var(--text-on-accent); }
-  .btn.danger:hover { background: var(--danger-400); }
-  .btn.disabled { background: var(--surface-raised); color: var(--text-disabled); cursor: not-allowed; border-color: var(--border-subtle); }
-  .btn.sm { height: var(--control-height-sm); font-size: var(--font-size-xs); padding: 0 10px; }
-  .btn-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
-
-  /* ===== Badge (refined) ===== */
-  .badge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 8px; border-radius: var(--radius-full); font-family: var(--font-mono); font-size: var(--font-size-2xs); font-weight: 500; letter-spacing: var(--tracking-wide); text-transform: uppercase; }
-  .badge.accent { background: var(--primary-muted-bg); color: var(--primary-hover); }
-  .badge.success { background: var(--success-muted-bg); color: var(--success-500); }
-  .badge.neutral { background: var(--surface-raised); color: var(--text-secondary); }
-  .badge.warning { background: var(--warning-muted-bg); color: var(--warning-500); }
-
   /* ===== Specimen row ===== */
-  .specimen { display: flex; flex-direction: column; gap: var(--space-4); padding: var(--space-5); background: var(--surface-panel); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); }
+  .specimen { display: flex; flex-direction: column; gap: var(--space-3); padding: var(--space-4); background: var(--surface-panel); border-top: 1px solid var(--border-strong); border-radius: var(--radius-lg); }
   .specimen + .specimen { margin-top: var(--space-4); }
   .specimen-label { font-family: var(--font-mono); font-size: var(--font-size-xs); font-weight: 500; letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--text-tertiary); }
+  .specimen iframe { width: 100%; border: none; border-radius: var(--radius-sm); background: var(--surface-app); display: block; }
 
   /* ===== Type scale specimen ===== */
   .type-row { display: flex; align-items: baseline; gap: var(--space-4); border-bottom: 1px solid var(--border-subtle); padding: var(--space-2) 0; }
@@ -223,17 +161,17 @@
       <!-- Sidebar -->
       <div class="cs-sidebar">
         <div class="cs-nav">
-          <div class="cs-nav-label">Workspace</div>
-          <button class="cs-nav-item active">Sessions</button>
-          <button class="cs-nav-item">Sound Library</button>
-          <button class="cs-nav-item">Automation</button>
-          <button class="cs-nav-item">Mixer</button>
-          <button class="cs-nav-item">Export</button>
+          <div class="ds-group-label" style="padding: 4px 10px 6px">Workspace</div>
+          <button class="ds-nav-item active">Sessions</button>
+          <button class="ds-nav-item">Sound Library</button>
+          <button class="ds-nav-item">Automation</button>
+          <button class="ds-nav-item">Mixer</button>
+          <button class="ds-nav-item">Export</button>
         </div>
         <div class="cs-search">
           <input type="text" placeholder="Search library">
         </div>
-        <div class="cs-layers-label">Layers</div>
+        <div class="ds-group-label" style="padding: 0 var(--space-5); margin-top: var(--space-4)">Layers</div>
         <div class="cs-layers">
           <div class="cs-layer active primary">Intro Pad</div>
           <div class="cs-layer a1">Kick Drum</div>
@@ -246,16 +184,16 @@
         </div>
         <div class="cs-sidebar-foot">
           <div class="cs-operator">
-            <span class="cs-avatar">MO</span>
+            <span class="ds-avatar ds-avatar-26 ds-avatar-t2">MO</span>
             <span class="cs-operator-name">Mo Okonkwo</span>
           </div>
           <div class="cs-toggle">
             <span>Light theme</span>
-            <span class="cs-switch" id="cs-theme-toggle"><span class="cs-switch-thumb"></span></span>
+            <span class="ds-switch-track" id="cs-theme-toggle"><span class="ds-switch-thumb"></span></span>
           </div>
           <div class="cs-toggle">
             <span>Compact density</span>
-            <span class="cs-switch" id="cs-density-toggle"><span class="cs-switch-thumb"></span></span>
+            <span class="ds-switch-track" id="cs-density-toggle"><span class="ds-switch-thumb"></span></span>
           </div>
         </div>
       </div>
@@ -266,58 +204,58 @@
           <div>
             <div class="cs-project-name">Intro Pad</div>
             <div class="cs-badges">
-              <span class="badge accent">Session</span>
-              <span class="badge success">Saved</span>
+              <span class="ds-badge ds-badge-accent">Session</span>
+              <span class="ds-badge ds-badge-success">Saved</span>
             </div>
           </div>
           <div class="cs-head-actions">
-            <button class="btn ghost sm">⌘K</button>
-            <button class="btn ghost sm">⋯</button>
-            <button class="btn secondary">Export</button>
-            <button class="btn primary">Render</button>
+            <button class="ds-btn ds-btn-ghost ds-btn-sm">⌘K</button>
+            <button class="ds-btn ds-btn-ghost ds-btn-sm">⋯</button>
+            <button class="ds-btn ds-btn-secondary">Export</button>
+            <button class="ds-btn ds-btn-primary">Render</button>
           </div>
         </div>
 
         <!-- Macro Controls panel -->
-        <div class="panel" style="margin-bottom: var(--space-5)">
-          <div class="panel-head">
-            <span class="panel-title">Macro Controls</span>
+        <div class="ds-panel" style="margin-bottom: var(--space-5)">
+          <div class="ds-panel-head">
+            <span class="ds-panel-title">Macro Controls</span>
           </div>
-          <div class="panel-body">
-            <div class="tabs" style="margin-bottom: var(--space-5)">
-              <button class="tab active">Macro</button>
-              <button class="tab">Envelope</button>
+          <div class="ds-panel-body">
+            <div class="ds-tabs" style="margin-bottom: var(--space-5)">
+              <button class="ds-tab active">Macro</button>
+              <button class="ds-tab">Envelope</button>
             </div>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6)">
-              <div class="slider">
-                <div class="slider-head"><span class="slider-label">Cutoff</span><span class="slider-value">7.2 kHz</span></div>
-                <div class="slider-track"><div class="slider-fill a2" style="width: 72%"></div><div class="slider-thumb a2" style="left: calc(72% - 7px)"></div></div>
-                <div class="slider-ticks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+              <div class="ds-slider-field" style="margin-bottom:0">
+                <div class="ds-slider-head"><span class="ds-slider-label">Cutoff</span><span class="ds-slider-value">7.2 kHz</span></div>
+                <div class="ds-slider-track"><div class="ds-slider-fill a2" style="width: 72%"></div><div class="ds-slider-knob a2" style="left: calc(72% - 7px)"></div></div>
+                <div class="ds-slider-ticks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
               </div>
-              <div class="slider">
-                <div class="slider-head"><span class="slider-label">Resonance</span><span class="slider-value">38%</span></div>
-                <div class="slider-track"><div class="slider-fill" style="width: 38%"></div><div class="slider-thumb" style="left: calc(38% - 7px)"></div></div>
-                <div class="slider-ticks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+              <div class="ds-slider-field" style="margin-bottom:0">
+                <div class="ds-slider-head"><span class="ds-slider-label">Resonance</span><span class="ds-slider-value">38%</span></div>
+                <div class="ds-slider-track"><div class="ds-slider-fill" style="width: 38%"></div><div class="ds-slider-knob" style="left: calc(38% - 7px)"></div></div>
+                <div class="ds-slider-ticks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
               </div>
-              <div class="slider">
-                <div class="slider-head"><span class="slider-label">Drive</span><span class="slider-value">22%</span></div>
-                <div class="slider-track"><div class="slider-fill" style="width: 22%"></div><div class="slider-thumb" style="left: calc(22% - 7px)"></div></div>
-                <div class="slider-ticks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+              <div class="ds-slider-field" style="margin-bottom:0">
+                <div class="ds-slider-head"><span class="ds-slider-label">Drive</span><span class="ds-slider-value">22%</span></div>
+                <div class="ds-slider-track"><div class="ds-slider-fill" style="width: 22%"></div><div class="ds-slider-knob" style="left: calc(22% - 7px)"></div></div>
+                <div class="ds-slider-ticks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
               </div>
-              <div class="slider">
-                <div class="slider-head"><span class="slider-label">Mix</span><span class="slider-value">64%</span></div>
-                <div class="slider-track"><div class="slider-fill" style="width: 64%"></div><div class="slider-thumb" style="left: calc(64% - 7px)"></div></div>
-                <div class="slider-ticks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+              <div class="ds-slider-field" style="margin-bottom:0">
+                <div class="ds-slider-head"><span class="ds-slider-label">Mix</span><span class="ds-slider-value">64%</span></div>
+                <div class="ds-slider-track"><div class="ds-slider-fill" style="width: 64%"></div><div class="ds-slider-knob" style="left: calc(64% - 7px)"></div></div>
+                <div class="ds-slider-ticks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
               </div>
-              <div class="slider">
-                <div class="slider-head"><span class="slider-label">Attack</span><span class="slider-value">12 ms</span></div>
-                <div class="slider-track"><div class="slider-fill" style="width: 15%"></div><div class="slider-thumb" style="left: calc(15% - 7px)"></div></div>
-                <div class="slider-ticks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+              <div class="ds-slider-field" style="margin-bottom:0">
+                <div class="ds-slider-head"><span class="ds-slider-label">Attack</span><span class="ds-slider-value">12 ms</span></div>
+                <div class="ds-slider-track"><div class="ds-slider-fill" style="width: 15%"></div><div class="ds-slider-knob" style="left: calc(15% - 7px)"></div></div>
+                <div class="ds-slider-ticks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
               </div>
-              <div class="slider">
-                <div class="slider-head"><span class="slider-label">Release</span><span class="slider-value">480 ms</span></div>
-                <div class="slider-track"><div class="slider-fill" style="width: 55%"></div><div class="slider-thumb" style="left: calc(55% - 7px)"></div></div>
-                <div class="slider-ticks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+              <div class="ds-slider-field" style="margin-bottom:0">
+                <div class="ds-slider-head"><span class="ds-slider-label">Release</span><span class="ds-slider-value">480 ms</span></div>
+                <div class="ds-slider-track"><div class="ds-slider-fill" style="width: 55%"></div><div class="ds-slider-knob" style="left: calc(55% - 7px)"></div></div>
+                <div class="ds-slider-ticks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
               </div>
             </div>
           </div>
@@ -325,19 +263,19 @@
 
         <!-- Effects + Output row -->
         <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: var(--space-6)">
-          <div class="panel">
-            <div class="panel-head"><span class="panel-title">Effects Chain</span></div>
-            <div class="panel-body sm">
+          <div class="ds-panel">
+            <div class="ds-panel-head"><span class="ds-panel-title">Effects Chain</span></div>
+            <div class="ds-panel-body ds-panel-body-sm">
               <div style="display: flex; flex-direction: column; gap: 2px">
-                <div class="cs-effect-row"><label class="cs-check on"><span class="cs-check-box"></span>LFO 1 → Cutoff</label><span class="cs-effect-pct">+42%</span></div>
-                <div class="cs-effect-row"><label class="cs-check on"><span class="cs-check-box"></span>Envelope 2 → Amp</label><span class="cs-effect-pct">+68%</span></div>
-                <div class="cs-effect-row"><label class="cs-check"><span class="cs-check-box"></span>Velocity → Drive</label><span class="cs-effect-pct">15%</span></div>
+                <div class="cs-effect-row"><label class="ds-check"><input type="checkbox" data-ds-peer checked><span class="ds-checkbox on" data-ds-peer-target><span class="ds-checkbox-inner"></span></span>LFO 1 → Cutoff</label><span class="cs-effect-pct">+42%</span></div>
+                <div class="cs-effect-row"><label class="ds-check"><input type="checkbox" data-ds-peer checked><span class="ds-checkbox on" data-ds-peer-target><span class="ds-checkbox-inner"></span></span>Envelope 2 → Amp</label><span class="cs-effect-pct">+68%</span></div>
+                <div class="cs-effect-row"><label class="ds-check"><input type="checkbox" data-ds-peer><span class="ds-checkbox" data-ds-peer-target></span>Velocity → Drive</label><span class="cs-effect-pct">15%</span></div>
               </div>
             </div>
           </div>
-          <div class="panel">
-            <div class="panel-head"><span class="panel-title">Output Levels</span></div>
-            <div class="panel-body sm">
+          <div class="ds-panel">
+            <div class="ds-panel-head"><span class="ds-panel-title">Output Levels</span></div>
+            <div class="ds-panel-body ds-panel-body-sm">
               <div class="cs-meter">
                 <span class="track" style="height: 30%"></span>
                 <span class="p1" style="height: 60%"></span>
@@ -354,7 +292,7 @@
 
       <!-- Inspector -->
       <div class="cs-inspector">
-        <div class="cs-insp-label">Inspector</div>
+        <div class="ds-group-label" style="margin-bottom: var(--space-5)">Inspector</div>
         <div class="cs-insp-row"><span class="cs-insp-key">Sample rate</span><span class="cs-insp-val">48 kHz</span></div>
         <div class="cs-insp-row"><span class="cs-insp-key">Bit depth</span><span class="cs-insp-val">24-bit</span></div>
         <div class="cs-insp-row"><span class="cs-insp-key">Buffer</span><span class="cs-insp-val">512</span></div>
@@ -364,83 +302,114 @@
   </div>
 </div>
 
-<!-- ==================== COMPONENT SPECIMENS ==================== -->
+<!-- ==================== COMPONENT SPECIMENS (iframed from .card.html) ==================== -->
 <div class="eval-section">
-  <div class="eval-note">Validation component — Panel + key primitives</div>
+  <div class="eval-note">Validation component — iframed from canonical .card.html specimens</div>
   <h2 class="eval-h2">Components</h2>
 
   <div class="specimen">
     <span class="specimen-label">Button</span>
-    <div class="btn-row">
-      <button class="btn primary">Primary</button>
-      <button class="btn secondary">Secondary</button>
-      <button class="btn ghost">Ghost</button>
-      <button class="btn danger">Delete</button>
-      <button class="btn primary disabled">Disabled</button>
-      <button class="btn primary sm">Small</button>
-    </div>
+    <iframe src="components/button/button.card.html" loading="lazy"></iframe>
   </div>
 
   <div class="specimen">
     <span class="specimen-label">Badge</span>
-    <div class="btn-row">
-      <span class="badge accent">Session</span>
-      <span class="badge success">Saved</span>
-      <span class="badge neutral">Draft</span>
-      <span class="badge warning">Warning</span>
-    </div>
+    <iframe src="components/badge/badge.card.html" loading="lazy"></iframe>
   </div>
 
   <div class="specimen">
     <span class="specimen-label">Panel</span>
-    <div class="panel" style="max-width: 420px">
-      <div class="panel-head"><span class="panel-title">Output routing</span></div>
-      <div class="panel-body">
-        <div style="color: var(--text-secondary); font-size: var(--font-size-sm); line-height: 1.6">Main out → Master bus → Limiter</div>
-      </div>
-    </div>
+    <iframe src="components/surfaces/panel.card.html" loading="lazy"></iframe>
   </div>
 
   <div class="specimen">
     <span class="specimen-label">Tabs</span>
-    <div class="tabs" style="max-width: 320px">
-      <button class="tab active">Macro</button>
-      <button class="tab">Envelope</button>
-      <button class="tab">LFO</button>
-    </div>
+    <iframe src="components/navigation/tabs.card.html" loading="lazy"></iframe>
   </div>
 
   <div class="specimen">
     <span class="specimen-label">Slider</span>
-    <div style="max-width: 360px; display: flex; flex-direction: column; gap: var(--space-5)">
-      <div class="slider">
-        <div class="slider-head"><span class="slider-label">Cutoff</span><span class="slider-value">7.2 kHz</span></div>
-        <div class="slider-track"><div class="slider-fill" style="width: 72%"></div><div class="slider-thumb" style="left: calc(72% - 7px)"></div></div>
-        <div class="slider-ticks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-      </div>
-      <div class="slider">
-        <div class="slider-head"><span class="slider-label">Drive</span><span class="slider-value">22%</span></div>
-        <div class="slider-track"><div class="slider-fill a1" style="width: 22%"></div><div class="slider-thumb a1" style="left: calc(22% - 7px)"></div></div>
-        <div class="slider-ticks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-      </div>
-    </div>
+    <iframe src="components/controls/slider.card.html" loading="lazy"></iframe>
   </div>
 
   <div class="specimen">
-    <span class="specimen-label">Checkbox + Switch</span>
-    <div style="display: flex; flex-direction: column; gap: var(--space-3)">
-      <label class="cs-check on"><span class="cs-check-box"></span>LFO 1 → Cutoff</label>
-      <label class="cs-check"><span class="cs-check-box"></span>Velocity → Drive</label>
-      <div class="cs-toggle" style="max-width: 200px"><span>Light theme</span><span class="cs-switch on"><span class="cs-switch-thumb"></span></span></div>
-      <div class="cs-toggle" style="max-width: 200px"><span>Compact density</span><span class="cs-switch"><span class="cs-switch-thumb"></span></span></div>
-    </div>
+    <span class="specimen-label">Checkbox</span>
+    <iframe src="components/checkbox/checkbox.card.html" loading="lazy"></iframe>
+  </div>
+
+  <div class="specimen">
+    <span class="specimen-label">Switch</span>
+    <iframe src="components/switch/switch.card.html" loading="lazy"></iframe>
   </div>
 
   <div class="specimen">
     <span class="specimen-label">Input</span>
-    <div style="max-width: 320px">
-      <input type="text" placeholder="Search library" style="width: 100%; height: var(--control-height-md); padding: 0 12px; background: var(--surface-sunken); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); color: var(--text-primary); font-family: var(--font-body); font-size: var(--font-size-sm); outline: none;">
-    </div>
+    <iframe src="components/input/input.card.html" loading="lazy"></iframe>
+  </div>
+
+  <div class="specimen">
+    <span class="specimen-label">Select</span>
+    <iframe src="components/select/select.card.html" loading="lazy"></iframe>
+  </div>
+
+  <div class="specimen">
+    <span class="specimen-label">Menu</span>
+    <iframe src="components/menu/menu.card.html" loading="lazy"></iframe>
+  </div>
+
+  <div class="specimen">
+    <span class="specimen-label">Tooltip</span>
+    <iframe src="components/tooltip/tooltip.card.html" loading="lazy"></iframe>
+  </div>
+
+  <div class="specimen">
+    <span class="specimen-label">Toast</span>
+    <iframe src="components/toast/toast.card.html" loading="lazy"></iframe>
+  </div>
+
+  <div class="specimen">
+    <span class="specimen-label">Progress</span>
+    <iframe src="components/feedback/progress.card.html" loading="lazy"></iframe>
+  </div>
+
+  <div class="specimen">
+    <span class="specimen-label">EmptyState</span>
+    <iframe src="components/feedback/emptystate.card.html" loading="lazy"></iframe>
+  </div>
+
+  <div class="specimen">
+    <span class="specimen-label">Avatar</span>
+    <iframe src="components/avatar/avatar.card.html" loading="lazy"></iframe>
+  </div>
+
+  <div class="specimen">
+    <span class="specimen-label">Breadcrumb</span>
+    <iframe src="components/navigation/breadcrumb.card.html" loading="lazy"></iframe>
+  </div>
+
+  <div class="specimen">
+    <span class="specimen-label">DataTable</span>
+    <iframe src="components/surfaces/datatable.card.html" loading="lazy"></iframe>
+  </div>
+
+  <div class="specimen">
+    <span class="specimen-label">SidebarNav</span>
+    <iframe src="components/sidebar/sidebarnav.card.html" loading="lazy"></iframe>
+  </div>
+
+  <div class="specimen">
+    <span class="specimen-label">CommandPalette</span>
+    <iframe src="components/command/commandpalette.card.html" loading="lazy"></iframe>
+  </div>
+
+  <div class="specimen">
+    <span class="specimen-label">Dialog</span>
+    <iframe src="components/overlays/dialog.card.html" loading="lazy"></iframe>
+  </div>
+
+  <div class="specimen">
+    <span class="specimen-label">WindowChrome</span>
+    <iframe src="components/chrome/windowchrome.card.html" loading="lazy"></iframe>
   </div>
 </div>
 
@@ -504,6 +473,13 @@
     tDark.setAttribute('aria-pressed', isDark);
     tLight.setAttribute('aria-pressed', !isDark);
     csThemeToggle.classList.toggle('on', !isDark);
+    // Sync theme to specimen iframes
+    document.querySelectorAll('.specimen iframe').forEach(iframe => {
+      try {
+        const doc = iframe.contentDocument;
+        if (doc && doc.body) { doc.body.setAttribute('data-theme', theme); }
+      } catch(e) {}
+    });
   }
   function setDensity(compact) {
     if (compact) { csBody.setAttribute('data-density', 'compact'); } else { csBody.removeAttribute('data-density'); }
@@ -518,6 +494,20 @@
   dCompact.addEventListener('click', () => setDensity(true));
   csThemeToggle.addEventListener('click', () => setTheme(body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
   csDensityToggle.addEventListener('click', () => setDensity(!csBody.hasAttribute('data-density')));
+
+  // Auto-size specimen iframes to content height
+  function resizeIframe(iframe) {
+    try {
+      const doc = iframe.contentDocument;
+      if (doc && doc.body) { iframe.style.height = doc.body.scrollHeight + 'px'; }
+    } catch(e) {}
+  }
+  document.querySelectorAll('.specimen iframe').forEach(iframe => {
+    iframe.addEventListener('load', () => resizeIframe(iframe));
+  });
+  // Re-resize on theme change (colors shift, scrollHeight can change)
+  tDark.addEventListener('click', () => setTimeout(() => document.querySelectorAll('.specimen iframe').forEach(resizeIframe), 50));
+  tLight.addEventListener('click', () => setTimeout(() => document.querySelectorAll('.specimen iframe').forEach(resizeIframe), 50));
 </script>
 
 </body>

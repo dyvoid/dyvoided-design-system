@@ -1,31 +1,12 @@
 <!-- @dsCard group="Components" viewport="700x220" name="Button" -->
 <html><head>
-
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../styles.css">
-<style>
-body{margin:0;background:var(--surface-app);padding:24px;font-family:var(--font-body)}
-.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:var(--control-height-md);padding:0 16px;font-size:var(--text-base);font-weight:500;border-radius:var(--radius-sm);border:1px solid transparent;font-family:var(--font-body);transition:background var(--duration-fast) var(--ease-standard),border-color var(--duration-fast) var(--ease-standard),color var(--duration-fast) var(--ease-standard);cursor:pointer}
-.btn:focus-visible{outline:none;box-shadow:var(--focus-ring)}
-.btn.primary{background:var(--primary-500);color:var(--text-on-accent)}
-.btn.primary:not(:disabled):hover{background:var(--primary-400)}
-.btn.primary:not(:disabled):active{background:var(--primary-600)}
-.btn.secondary{background:var(--surface-raised);color:var(--text-primary);border-color:var(--border-strong)}
-.btn.secondary:not(:disabled):hover{background:var(--surface-hover)}
-.btn.ghost{background:transparent;color:var(--text-secondary)}
-.btn.ghost:not(:disabled):hover{background:var(--surface-hover);color:var(--text-primary)}
-.btn.danger{background:var(--danger-500);color:var(--text-on-accent)}
-.btn.danger:not(:disabled):hover{background:var(--danger-400)}
-.btn:disabled{background:var(--surface-raised);color:var(--text-disabled);border-color:var(--border-subtle);cursor:not-allowed}
-.btn.sm{height:var(--control-height-sm);font-size:var(--text-sm);padding:0 12px}
-</style></head>
+<style>body{margin:0;background:var(--surface-app);padding:24px;font-family:var(--font-body);display:flex;gap:12px;flex-wrap:wrap;align-items:center}</style></head>
 <body data-theme="dark">
-<div class="row">
-<button class="btn primary">Primary</button>
-<button class="btn secondary">Secondary</button>
-<button class="btn ghost">Ghost</button>
-<button class="btn danger">Delete</button>
-<button class="btn primary" disabled>Disabled</button>
-<button class="btn primary sm">Small</button>
-</div>
+<button class="ds-btn ds-btn-primary">Primary</button>
+<button class="ds-btn ds-btn-secondary">Secondary</button>
+<button class="ds-btn ds-btn-ghost">Ghost</button>
+<button class="ds-btn ds-btn-danger">Delete</button>
+<button class="ds-btn ds-btn-primary" disabled>Disabled</button>
+<button class="ds-btn ds-btn-primary ds-btn-sm">Small</button>
 </body></html>

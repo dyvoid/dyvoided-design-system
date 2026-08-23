@@ -1,19 +1,9 @@
 <!-- @dsCard group="Components" viewport="700x140" name="Switch" -->
 <html><head>
-
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../styles.css">
-<style>
-body{margin:0;background:var(--surface-app);padding:24px;font-family:var(--font-body);display:flex;gap:24px;align-items:center}
-.item{display:flex;align-items:center;gap:10px;cursor:pointer}
-.item.disabled{cursor:not-allowed;opacity:.5}
-.track{width:30px;height:17px;box-sizing:border-box;border-radius:var(--radius-xs);position:relative;background:var(--control-track);border:1px solid var(--border-strong)}
-.track.on{border-color:var(--primary);background:var(--primary-muted-bg)}
-.thumb{position:absolute;top:1px;left:1px;width:13px;height:13px;border-radius:2px;background:var(--gray-500)}
-.track.on .thumb{left:15px;background:var(--primary-500)}
-.lbl{font-size:var(--text-base);color:var(--text-primary)}
-</style></head>
+<style>body{margin:0;background:var(--surface-app);padding:24px;font-family:var(--font-body);display:flex;gap:24px;align-items:center}</style></head>
 <body data-theme="dark">
-<label class="item"><input type="checkbox" role="switch" data-ds-peer checked><span class="track on" data-ds-peer-target><span class="thumb"></span></span><span class="lbl">On</span></label>
-<label class="item"><input type="checkbox" role="switch" data-ds-peer><span class="track" data-ds-peer-target><span class="thumb"></span></span><span class="lbl">Off</span></label>
-<label class="item disabled"><input type="checkbox" role="switch" data-ds-peer checked disabled><span class="track on" data-ds-peer-target><span class="thumb"></span></span><span class="lbl">Disabled</span></label>
+<label class="ds-switch-item"><input type="checkbox" role="switch" data-ds-peer checked><span class="ds-switch-track on" data-ds-peer-target><span class="ds-switch-thumb"></span></span><span class="ds-switch-label">On</span></label>
+<label class="ds-switch-item"><input type="checkbox" role="switch" data-ds-peer><span class="ds-switch-track" data-ds-peer-target><span class="ds-switch-thumb"></span></span><span class="ds-switch-label">Off</span></label>
+<label class="ds-switch-item disabled"><input type="checkbox" role="switch" data-ds-peer checked disabled><span class="ds-switch-track on" data-ds-peer-target><span class="ds-switch-thumb"></span></span><span class="ds-switch-label">Disabled</span></label>
 </body></html>

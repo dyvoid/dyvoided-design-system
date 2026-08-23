@@ -1,22 +1,10 @@
 <!-- @dsCard group="Components" viewport="700x160" name="Checkbox" -->
 <html><head>
-
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../styles.css">
-<style>
-body{margin:0;background:var(--surface-app);padding:24px;font-family:var(--font-body);display:flex;gap:24px;align-items:center}
-.item{display:flex;align-items:center;gap:10px;cursor:pointer}
-.item.disabled{cursor:not-allowed}
-.box{width:15px;height:15px;box-sizing:border-box;border-radius:var(--radius-xs);display:flex;align-items:center;justify-content:center;border:1px solid var(--border-strong);background:var(--control-track)}
-.box.on{border-color:var(--primary);background:var(--primary)}
-.inner{width:7px;height:7px;border-radius:2px;background:var(--text-on-accent)}
-.inner.mixed{height:2px;border-radius:1px}
-.box.off-disabled{opacity:.5}
-.lbl{font-size:var(--text-base);color:var(--text-primary)}
-.lbl.disabled{color:var(--text-disabled)}
-</style></head>
+<style>body{margin:0;background:var(--surface-app);padding:24px;font-family:var(--font-body);display:flex;gap:24px;align-items:center}</style></head>
 <body data-theme="dark">
-<label class="item"><input type="checkbox" data-ds-peer checked><span class="box on" data-ds-peer-target><span class="inner"></span></span><span class="lbl">Checked</span></label>
-<label class="item"><input type="checkbox" data-ds-peer><span class="box" data-ds-peer-target></span><span class="lbl">Unchecked</span></label>
-<label class="item"><input type="checkbox" data-ds-peer aria-checked="mixed"><span class="box on" data-ds-peer-target><span class="inner mixed"></span></span><span class="lbl">Indeterminate</span></label>
-<label class="item disabled"><input type="checkbox" data-ds-peer checked disabled><span class="box on off-disabled" data-ds-peer-target><span class="inner"></span></span><span class="lbl disabled">Disabled</span></label>
+<label class="ds-check"><input type="checkbox" data-ds-peer checked><span class="ds-checkbox on" data-ds-peer-target><span class="ds-checkbox-inner"></span></span><span class="ds-check-label">Checked</span></label>
+<label class="ds-check"><input type="checkbox" data-ds-peer><span class="ds-checkbox" data-ds-peer-target></span><span class="ds-check-label">Unchecked</span></label>
+<label class="ds-check"><input type="checkbox" data-ds-peer aria-checked="mixed"><span class="ds-checkbox on" data-ds-peer-target><span class="ds-checkbox-inner mixed"></span></span><span class="ds-check-label">Indeterminate</span></label>
+<label class="ds-check disabled"><input type="checkbox" data-ds-peer checked disabled><span class="ds-checkbox on off-disabled" data-ds-peer-target><span class="ds-checkbox-inner"></span></span><span class="ds-check-label disabled">Disabled</span></label>
 </body></html>

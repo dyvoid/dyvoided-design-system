@@ -1,18 +1,8 @@
 <!-- @dsCard group="Components" viewport="700x220" name="Input" -->
 <html><head>
-
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../styles.css">
-<style>
-body{margin:0;background:var(--surface-app);padding:24px;font-family:var(--font-body);display:flex;gap:16px}
-.field{display:flex;flex-direction:column;gap:6px;width:220px}
-.label{font-size:var(--text-sm);color:var(--text-secondary);font-weight:500}
-.box{height:var(--control-height-md);padding:0 12px;border-radius:var(--radius-sm);background:var(--surface-sunken);border:1px solid var(--border-subtle);display:flex;align-items:center}
-.box.focus{border-color:var(--primary);box-shadow:var(--focus-ring)}
-.box.error{border-color:var(--danger-500)}
-input{border:none;outline:none;background:transparent;color:var(--text-primary);font-size:var(--text-base);font-family:var(--font-body);width:100%}
-.err{font-size:var(--text-xs);color:var(--danger-500)}
-</style></head>
+<style>body{margin:0;background:var(--surface-app);padding:24px;font-family:var(--font-body);display:flex;gap:16px}</style></head>
 <body data-theme="dark">
-<div class="field"><label class="label" for="f-name">Project name</label><div class="box focus"><input id="f-name" value="Pigments Session"></div></div>
-<div class="field"><label class="label" for="f-err">With error</label><div class="box error"><input id="f-err" placeholder="Session name" aria-invalid="true" aria-describedby="f-err-msg"></div><span class="err" id="f-err-msg">This field is required</span></div>
+<div class="ds-input-field" style="width:220px"><label class="ds-input-label" for="f-name">Project name</label><div class="ds-input-box focus"><input id="f-name" class="ds-input" value="Pigments Session"></div></div>
+<div class="ds-input-field" style="width:220px"><label class="ds-input-label" for="f-err">With error</label><div class="ds-input-box error"><input id="f-err" class="ds-input" placeholder="Session name" aria-invalid="true" aria-describedby="f-err-msg"></div><span class="ds-input-error" id="f-err-msg">This field is required</span></div>
 </body></html>

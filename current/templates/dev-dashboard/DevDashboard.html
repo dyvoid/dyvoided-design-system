@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dyvoided.2 — Dev Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/lucide@0.462.0/dist/umd/lucide.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--surface-sunken); font-family: var(--font-body); }
+  .shell { width: 1280px; height: 800px; margin: 0 auto; display: flex; flex-direction: column; overflow: hidden; }
+  .body { display: flex; flex: 1; min-height: 0; }
+  .sidebar { width: 200px; flex-shrink: 0; border-right: 1px solid var(--border-subtle); display: flex; flex-direction: column; background: linear-gradient(165deg, var(--surface-raised) 0%, var(--surface-panel) 55%, var(--accent-2-muted-bg) 160%); }
+  .sidebar-nav { flex: 1; min-height: 0; padding: var(--space-3) var(--space-2); }
+  .sidebar-foot { padding: var(--space-5); border-top: 1px solid var(--border-subtle); display: flex; flex-direction: column; gap: var(--space-4); }
+  .operator { display: flex; align-items: center; gap: 10px; }
+  .operator-name { font-size: var(--text-sm); color: var(--text-secondary); font-weight: 600; }
+  .main { flex: 1; padding: var(--space-7); overflow: auto; scrollbar-gutter: stable; }
+  .top-bar { display: flex; align-items: center; justify-content: space-between; gap: var(--space-5); margin-bottom: var(--space-6); }
+  .top-actions { display: flex; align-items: center; gap: 14px; }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-5); margin-bottom: var(--space-6); }
+  .stat-label { font-family: var(--font-mono); font-size: var(--font-size-xs); letter-spacing: var(--tracking-wide); color: var(--text-tertiary); text-transform: uppercase; margin-bottom: 6px; }
+  .stat-value { font-family: var(--font-display); font-weight: 700; font-size: var(--text-2xl); color: var(--text-primary); letter-spacing: var(--tracking-tight); }
+  .svc-row { display: flex; align-items: center; justify-content: space-between; padding: var(--space-3); }
+  .svc-left { display: flex; align-items: center; gap: 12px; }
+  .svc-name { font-family: var(--font-mono); font-size: var(--text-sm); color: var(--text-primary) }
+  .svc-right { display: flex; align-items: center; gap: 16px; position: relative; }
+  .log-line { font-family: var(--font-mono); font-size: var(--font-size-xs); color: var(--text-secondary); padding: var(--space-2) var(--space-3); border-bottom: 1px solid var(--border-subtle); }
+  .scrim { position: fixed; inset: 0; background: var(--scrim); display: flex; align-items: center; justify-content: center; z-index: 100; }
+  .scrim[hidden] { display: none; }
+  .cmd-scrim { position: fixed; inset: 0; background: var(--scrim); display: flex; align-items: flex-start; justify-content: center; padding-top: 80px; z-index: 100; }
+  .cmd-scrim[hidden] { display: none; }
+  .toast-stack { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 100; }
+</style>
+</head>
+<body data-theme="dark">
+
+<div class="shell">
+  <div class="ds-win-bar">
+    <div class="ds-win-dots"><span class="ds-win-dot" style="background:var(--danger-500)"></span><span class="ds-win-dot" style="background:var(--accent-1-500)"></span><span class="ds-win-dot" style="background:var(--success-500)"></span></div>
+    <span class="ds-win-title">Console</span>
+  </div>
+
+  <div class="body">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-nav">
+        <div class="ds-nav">
+          <div class="ds-nav-section">
+            <span class="ds-nav-header">Monitor</span>
+            <button class="ds-nav-item" data-nav="overview"><span class="l">Overview</span></button>
+            <button class="ds-nav-item active" data-nav="services" aria-current="page"><span class="l">Services</span><span class="ds-nav-meta">!</span></button>
+            <button class="ds-nav-item" data-nav="logs"><span class="l">Logs</span></button>
+          </div>
+          <div class="ds-nav-section">
+            <span class="ds-nav-header">Manage</span>
+            <button class="ds-nav-item" data-nav="deployments"><span class="l">Deployments</span></button>
+            <button class="ds-nav-item" data-nav="settings"><span class="l">Settings</span></button>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-foot">
+        <div class="operator">
+          <span class="ds-avatar ds-avatar-32 ds-avatar-t0">DR</span>
+          <span class="operator-name">Dana Reyes</span>
+        </div>
+        <div>
+          <div class="ds-group-label" style="margin-bottom: var(--space-3)">System status</div>
+          <span class="ds-badge ds-badge-warning" id="status-badge">Degraded</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main -->
+    <div class="main">
+      <div class="top-bar">
+        <div style="width:300px">
+          <div class="ds-input-box"><input class="ds-input" placeholder="Search services, logs, deploys" id="search"></div>
+        </div>
+        <div class="top-actions">
+          <div class="ds-tabs">
+            <button class="ds-tab active" data-env="prod">Production</button>
+            <button class="ds-tab" data-env="staging">Staging</button>
+          </div>
+          <button class="ds-btn ds-btn-ghost" id="open-cmd">⌘K search</button>
+          <button class="ds-btn ds-btn-primary" id="open-dialog">New deployment</button>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="ds-panel"><div class="ds-panel-body ds-panel-body-sm"><div class="stat-label">Requests/min</div><div class="stat-value">12.4k</div></div></div>
+        <div class="ds-panel"><div class="ds-panel-body ds-panel-body-sm"><div class="stat-label">Error rate</div><div class="stat-value">0.42%</div></div></div>
+        <div class="ds-panel"><div class="ds-panel-body ds-panel-body-sm"><div class="stat-label">Latency p95</div><div class="stat-value">184ms</div></div></div>
+        <div class="ds-panel"><div class="ds-panel-body ds-panel-body-sm"><div class="stat-label">Uptime</div><div class="stat-value">99.98%</div></div></div>
+      </div>
+
+      <div class="ds-panel" style="margin-bottom: var(--space-6)">
+        <div class="ds-panel-head"><span class="ds-panel-title">Services</span>
+          <div class="ds-tabs">
+            <button class="ds-tab active" data-svctab="all">All</button>
+            <button class="ds-tab" data-svctab="healthy">Healthy</button>
+            <button class="ds-tab" data-svctab="degraded">Degraded</button>
+          </div>
+        </div>
+        <div class="ds-panel-body" id="svc-list">
+          <div style="display:flex;flex-direction:column;gap:2px" id="svc-rows"></div>
+        </div>
+      </div>
+
+      <div class="ds-panel" style="margin-bottom: var(--space-6)">
+        <div class="ds-panel-head"><span class="ds-panel-title">Recent deployments</span></div>
+        <div class="ds-table-wrap">
+          <table class="ds-table"><thead><tr><th>Service</th><th>Version</th><th>Environment</th><th class="num">Duration</th><th>Finished</th></tr></thead><tbody>
+          <tr><td>api-gateway</td><td>v2.3.1</td><td>Production</td><td class="num">2m 14s</td><td>14:02</td></tr>
+          <tr><td>auth-service</td><td>v1.9.0</td><td>Production</td><td class="num">1m 48s</td><td>13:55</td></tr>
+          <tr><td>billing-worker</td><td>v0.8.4</td><td>Staging</td><td class="num">3m 02s</td><td>13:31</td></tr>
+          <tr><td>search-index</td><td>v4.1.0</td><td>Staging</td><td class="num">5m 27s</td><td>12:58</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+
+      <div class="ds-panel">
+        <div class="ds-panel-head"><span class="ds-panel-title">Activity</span></div>
+        <div class="ds-panel-body ds-panel-body-sm">
+          <div class="log-line">14:02:11 deploy api-gateway v2.3.1 succeeded</div>
+          <div class="log-line">14:00:47 scale billing-worker to 3 replicas</div>
+          <div class="log-line">13:58:02 alert notifications: 5xx spike</div>
+          <div class="log-line">13:55:19 deploy auth-service v1.9.0 succeeded</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Deploy dialog -->
+<div class="scrim" id="dialog" hidden>
+  <div class="ds-dialog" style="width:420px">
+    <div class="ds-dialog-head">Confirm deployment</div>
+    <div class="ds-dialog-body">
+      <div style="margin-bottom: var(--space-4)">Deploy the latest build to the <span id="env-label">production</span> environment. This restarts all affected services.</div>
+      <div class="ds-input-field"><label class="ds-input-label">Target environment</label>
+        <div style="display:flex;gap:8px">
+          <button class="ds-btn ds-btn-secondary ds-btn-sm" data-env-pick="prod">Production</button>
+          <button class="ds-btn ds-btn-ghost ds-btn-sm" data-env-pick="staging">Staging</button>
+        </div>
+      </div>
+      <div id="deploy-progress" hidden>
+        <div class="ds-progress-row" style="margin-top: var(--space-3)"><div class="ds-progress-label"><span>Rolling out build</span><span class="ds-progress-pct" id="pct">0%</span></div><div class="ds-progress-track"><div class="ds-progress-fill" id="fill" style="width:0%"></div></div></div>
+      </div>
+    </div>
+    <div class="ds-dialog-foot">
+      <button class="ds-btn ds-btn-ghost" id="cancel-deploy">Cancel</button>
+      <button class="ds-btn ds-btn-primary" id="deploy-now">Deploy</button>
+    </div>
+  </div>
+</div>
+
+<!-- Command palette -->
+<div class="cmd-scrim" id="cmd" hidden>
+  <div class="ds-cmd" style="width:560px">
+    <div class="ds-cmd-query"><i data-lucide="search"></i><input class="ds-cmd-input" placeholder="Search commands" id="cmd-input"><span class="ds-cmd-esc">ESC</span></div>
+    <div class="ds-cmd-list" id="cmd-list"></div>
+    <div class="ds-cmd-footer"><span>↑↓ navigate</span><span>⏎ run</span><span>⌘K toggle</span></div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast-stack" id="toasts"></div>
+
+<script>
+const services = [
+  { name: 'api-gateway', status: 'success', statusLabel: 'Healthy', enabled: true },
+  { name: 'auth-service', status: 'success', statusLabel: 'Healthy', enabled: true },
+  { name: 'billing-worker', status: 'warning', statusLabel: 'Degraded', enabled: true },
+  { name: 'notifications', status: 'danger', statusLabel: 'Down', enabled: false },
+  { name: 'search-index', status: 'success', statusLabel: 'Healthy', enabled: true }
+];
+const navItems = ['overview','services','deployments','logs','settings'];
+let svcTab = 'all', envTab = 'prod', deployPct = 0, deployTimer = null;
+
+function badgeClass(s) { return s === 'success' ? 'ds-badge-success' : s === 'warning' ? 'ds-badge-warning' : 'ds-badge-danger'; }
+
+function renderServices() {
+  const filtered = services.filter(svc => {
+    if (svcTab === 'healthy') return svc.status === 'success';
+    if (svcTab === 'degraded') return svc.status !== 'success';
+    return true;
+  });
+  const html = filtered.map(svc => `
+    <div class="svc-row">
+      <div class="svc-left">
+        <span class="ds-badge ${badgeClass(svc.status)}">${svc.statusLabel}</span>
+        <span class="svc-name">${svc.name}</span>
+      </div>
+      <div class="svc-right">
+        <span class="ds-switch-track ${svc.enabled ? 'on' : ''}" data-svc="${svc.name}"><span class="ds-switch-thumb"></span></span>
+        <button class="ds-btn ds-btn-ghost ds-btn-sm">⋯</button>
+      </div>
+    </div>`).join('');
+  document.getElementById('svc-rows').innerHTML = html || '<div class="ds-empty"><div class="ds-empty-icon"><i data-lucide="inbox" width="20" height="20"></i></div><span class="ds-empty-title">No services match</span><span class="ds-empty-desc">Nothing in this environment matches the current filter.</span></div>';
+  lucide.createIcons();
+  document.querySelectorAll('[data-svc]').forEach(el => {
+    el.addEventListener('click', () => {
+      const svc = services.find(s => s.name === el.dataset.svc);
+      svc.enabled = !svc.enabled;
+      el.classList.toggle('on', svc.enabled);
+    });
+  });
+}
+
+function updateStatus() {
+  const anyDown = services.some(s => s.status === 'danger');
+  const anyDegraded = services.some(s => s.status === 'warning');
+  const badge = document.getElementById('status-badge');
+  if (anyDown) { badge.className = 'ds-badge ds-badge-danger'; badge.textContent = 'Incident'; }
+  else if (anyDegraded) { badge.className = 'ds-badge ds-badge-warning'; badge.textContent = 'Degraded'; }
+  else { badge.className = 'ds-badge ds-badge-success'; badge.textContent = 'All systems go'; }
+}
+
+// Nav
+document.querySelectorAll('[data-nav]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('[data-nav]').forEach(b => { b.classList.remove('active'); b.removeAttribute('aria-current'); });
+    btn.classList.add('active'); btn.setAttribute('aria-current', 'page');
+  });
+});
+
+// Env tabs
+document.querySelectorAll('[data-env]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('[data-env]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    envTab = btn.dataset.env;
+    document.getElementById('env-label').textContent = envTab === 'prod' ? 'production' : 'staging';
+  });
+});
+
+// Service tabs
+document.querySelectorAll('[data-svctab]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('[data-svctab]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    svcTab = btn.dataset.svctab;
+    renderServices();
+  });
+});
+
+// Dialog
+const dialog = document.getElementById('dialog');
+document.getElementById('open-dialog').addEventListener('click', () => { dialog.hidden = false; });
+document.getElementById('cancel-deploy').addEventListener('click', () => { clearInterval(deployTimer); dialog.hidden = true; document.getElementById('deploy-progress').hidden = true; });
+document.querySelectorAll('[data-env-pick]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('[data-env-pick]').forEach(b => { b.className = 'ds-btn ds-btn-ghost ds-btn-sm'; });
+    btn.className = 'ds-btn ds-btn-secondary ds-btn-sm';
+    envTab = btn.dataset.envPick;
+    document.getElementById('env-label').textContent = envTab === 'prod' ? 'production' : 'staging';
+  });
+});
+document.getElementById('deploy-now').addEventListener('click', () => {
+  if (deployTimer) return;
+  deployPct = 0;
+  document.getElementById('deploy-progress').hidden = false;
+  document.getElementById('fill').style.width = '0%';
+  document.getElementById('pct').textContent = '0%';
+  deployTimer = setInterval(() => {
+    deployPct += 10;
+    if (deployPct >= 100) {
+      clearInterval(deployTimer); deployTimer = null;
+      dialog.hidden = true;
+      document.getElementById('deploy-progress').hidden = true;
+      showToast('Deployed to ' + (envTab === 'prod' ? 'production' : 'staging'));
+    } else {
+      document.getElementById('fill').style.width = deployPct + '%';
+      document.getElementById('pct').textContent = deployPct + '%';
+    }
+  }, 110);
+});
+
+// Command palette
+const cmd = document.getElementById('cmd');
+const cmdInput = document.getElementById('cmd-input');
+const cmdList = document.getElementById('cmd-list');
+document.getElementById('open-cmd').addEventListener('click', () => { cmd.hidden = false; cmdInput.focus(); renderCmd(''); });
+cmd.addEventListener('click', e => { if (e.target === cmd) cmd.hidden = true; });
+cmdInput.addEventListener('input', () => renderCmd(cmdInput.value));
+cmdInput.addEventListener('keydown', e => { if (e.key === 'Escape') cmd.hidden = true; });
+document.addEventListener('keydown', e => { if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); cmd.hidden = !cmd.hidden; if (!cmd.hidden) cmdInput.focus(); } });
+
+function renderCmd(q) {
+  const navMatches = navItems.filter(n => n.includes(q.toLowerCase()));
+  const svcMatches = services.filter(s => s.name.includes(q.toLowerCase())).map(s => 'restart-' + s.name);
+  cmdList.innerHTML = `
+    <div class="ds-cmd-group"><span class="ds-cmd-header">Navigate</span>
+      ${navMatches.map(n => `<button class="ds-cmd-item" data-cmd="nav-${n}"><span class="l">${n.charAt(0).toUpperCase()+n.slice(1)}</span></button>`).join('') || '<span class="ds-cmd-header">No matches</span>'}
+    </div>
+    <div class="ds-cmd-group"><span class="ds-cmd-header">Services</span>
+      ${svcMatches.map(s => `<button class="ds-cmd-item" data-cmd="${s}"><span class="l">Restart ${s.slice(8)}</span></button>`).join('') || ''}
+    </div>`;
+  cmdList.querySelectorAll('[data-cmd]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.cmd;
+      if (id.startsWith('nav-')) {
+        const navId = id.slice(4);
+        document.querySelectorAll('[data-nav]').forEach(b => { b.classList.toggle('active', b.dataset.nav === navId); });
+      } else if (id.startsWith('restart-')) {
+        const name = id.slice(8);
+        const svc = services.find(s => s.name === name);
+        if (svc) { svc.status = 'success'; svc.statusLabel = 'Healthy'; renderServices(); updateStatus(); showToast('Restarted ' + name); }
+      }
+      cmd.hidden = true;
+    });
+  });
+}
+
+// Toast
+function showToast(msg) {
+  const stack = document.getElementById('toasts');
+  const el = document.createElement('div');
+  el.className = 'ds-toast';
+  el.style.width = '340px';
+  el.innerHTML = `<span class="ds-toast-dot success"></span><div class="ds-toast-body"><span class="ds-toast-title">${msg}</span></div>`;
+  stack.appendChild(el);
+  setTimeout(() => el.remove(), 4000);
+}
+
+renderServices();
+updateStatus();
+lucide.createIcons();
+</script>
+</body>
+</html>

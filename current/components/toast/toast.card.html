@@ -3,23 +3,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../styles.css">
 <script src="https://unpkg.com/lucide@0.462.0/dist/umd/lucide.js"></script>
 <script>window.addEventListener('DOMContentLoaded',()=>lucide.createIcons({color:'var(--text-tertiary)',strokeWidth:1.75}));</script>
-
-<style>
-body{margin:0;background:var(--surface-app);padding:24px;font-family:var(--font-body);display:flex;flex-direction:column;gap:10px;align-items:flex-start}
-.toast{display:flex;align-items:flex-start;gap:10px;width:340px;padding:12px 12px 12px 14px;background:var(--surface-overlay);border-radius:var(--radius-md);border:1px solid var(--border-subtle);box-shadow:var(--shadow-md)}
-.dot{width:7px;height:7px;border-radius:var(--radius-full);margin-top:6px;flex-shrink:0}
-.i{background:var(--primary)}
-.s{background:var(--success-500)}
-.w{background:var(--warning-500)}
-.d{background:var(--danger-500)}
-.body{flex:1;display:flex;flex-direction:column;gap:3px}
-.t{font-size:var(--text-base);font-weight:600;color:var(--text-primary)}
-.m{font-size:var(--text-sm);color:var(--text-secondary);line-height:var(--leading-body)}
-.x{flex-shrink:0;width:14px;height:14px;margin-top:3px}
-</style></head>
+<style>body{margin:0;background:var(--surface-app);padding:24px;font-family:var(--font-body);display:flex;flex-direction:column;gap:10px;align-items:flex-start}</style></head>
 <body data-theme="dark">
-<div class="toast"><span class="dot s"></span><div class="body"><span class="t">Render complete</span><span class="m">Bounced 2 stems to /exports.</span></div><i data-lucide="x" class="x"></i></div>
-<div class="toast"><span class="dot i"></span><div class="body"><span class="t">Auto-save on</span></div></div>
-<div class="toast"><span class="dot w"></span><div class="body"><span class="t">Buffer underrun</span><span class="m">Raised buffer to 512 samples.</span></div></div>
-<div class="toast"><span class="dot d"></span><div class="body"><span class="t">Export failed</span><span class="m">Disk is full.</span></div></div>
+<div class="ds-toast" style="width:340px"><span class="ds-toast-dot success"></span><div class="ds-toast-body"><span class="ds-toast-title">Render complete</span><span class="ds-toast-msg">Bounced 2 stems to /exports.</span></div><i data-lucide="x" class="ds-toast-close"></i></div>
+<div class="ds-toast" style="width:340px"><span class="ds-toast-dot info"></span><div class="ds-toast-body"><span class="ds-toast-title">Auto-save on</span></div></div>
+<div class="ds-toast" style="width:340px"><span class="ds-toast-dot warning"></span><div class="ds-toast-body"><span class="ds-toast-title">Buffer underrun</span><span class="ds-toast-msg">Raised buffer to 512 samples.</span></div></div>
+<div class="ds-toast" style="width:340px"><span class="ds-toast-dot danger"></span><div class="ds-toast-body"><span class="ds-toast-title">Export failed</span><span class="ds-toast-msg">Disk is full.</span></div></div>
 </body></html>

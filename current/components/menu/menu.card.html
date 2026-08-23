@@ -1,27 +1,15 @@
 <!-- @dsCard group="Components" viewport="700x300" name="Menu" subtitle="Context and dropdown surface" -->
 <html><head>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../styles.css">
-<style>
-body{margin:0;background:var(--surface-app);padding:24px;font-family:var(--font-body)}
-.menu{width:220px;padding:4px;background:var(--surface-overlay);border-radius:var(--radius-md);border:1px solid var(--border-subtle);box-shadow:var(--shadow-md);display:flex;flex-direction:column;gap:1px}
-.hd{font-family:var(--font-mono);font-size:var(--text-xs);text-transform:uppercase;letter-spacing:var(--tracking-wide);color:var(--text-tertiary);padding:6px 10px 4px}
-.it{display:flex;align-items:center;gap:10px;padding:7px 10px;border-radius:var(--radius-xs);font-size:var(--text-base);color:var(--text-secondary);background:none;border:none;width:100%;text-align:left;cursor:pointer;font-family:var(--font-body)}
-.it:hover{background:var(--surface-hover);color:var(--text-primary)}
-.it:focus-visible{outline:none;box-shadow:var(--focus-ring)}
-.it.dis{color:var(--text-disabled);cursor:not-allowed}
-.it.dan{color:var(--danger-400)}
-.it span.l{flex:1}
-.sc{font-family:var(--font-mono);font-size:var(--text-xs);color:var(--text-tertiary)}
-.sep{height:1px;background:var(--border-subtle);margin:4px 6px}
-</style></head>
+<style>body{margin:0;background:var(--surface-app);padding:24px;font-family:var(--font-body)}</style></head>
 <body data-theme="dark">
-<div class="menu" role="menu">
-<span class="hd">Track 3</span>
-<button class="it" role="menuitem" data-ds-hover><span class="l">Rename</span><span class="sc">⌘R</span></button>
-<button class="it" role="menuitem" data-ds-hover><span class="l">Duplicate</span><span class="sc">⌘D</span></button>
-<button class="it" role="menuitem" data-ds-hover><span class="l">Freeze</span></button>
-<div class="sep" role="separator"></div>
-<button class="it dis" role="menuitem" disabled><span class="l">Export stem</span></button>
-<button class="it dan" role="menuitem" data-ds-hover><span class="l">Delete</span><span class="sc">⌫</span></button>
+<div class="ds-menu" role="menu" style="width:220px">
+<span class="ds-menu-header">Track 3</span>
+<button class="ds-menu-item" role="menuitem" data-ds-hover><span class="l">Rename</span><span class="ds-menu-sc">⌘R</span></button>
+<button class="ds-menu-item" role="menuitem" data-ds-hover><span class="l">Duplicate</span><span class="ds-menu-sc">⌘D</span></button>
+<button class="ds-menu-item" role="menuitem" data-ds-hover><span class="l">Freeze</span></button>
+<div class="ds-menu-sep" role="separator"></div>
+<button class="ds-menu-item disabled" role="menuitem" disabled><span class="l">Export stem</span></button>
+<button class="ds-menu-item danger" role="menuitem" data-ds-hover><span class="l">Delete</span><span class="ds-menu-sc">⌫</span></button>
 </div>
 </body></html>
