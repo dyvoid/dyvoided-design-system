@@ -31,11 +31,12 @@ Procedural theming via four `oklch` color seeds: one override rebrands an entire
 
 ## Capabilities and Constraints
 
-- Token layer is the commitment: colors, typography, spacing, effects (shadow/radius/blur), motion, interaction, scrollbar. Consuming apps bring their own framework.
-- JSX components in `current/components/` are reference implementations, not the committed component layer. HTML `.card.html` previews are the canonical visual specimens.
-- Procedural color: four `*-seed` custom properties drive all identity color. `--signature`, `--success`, `--danger`, `--warning` are fixed and must not be rebranded.
+- Token layer is the commitment: colors, typography, spacing, effects (shadow/radius/blur), motion, interaction, scrollbar. Consuming apps bring their own framework. Corners are sharp 2px on all controls and panels (`--radius-xs` through `--radius-xl`); full pill (`--radius-full`) only for switches, badges, dots, avatars, scrollbar thumbs. Browser surfaces (`::selection`, `caret-color`, `::placeholder`, `accent-color`) are themed via `tokens/interaction.css` and flip with `[data-theme]`.
+- JSX components in `current/components/` are reference implementations, not the committed component layer. HTML `.card.html` previews are the canonical visual specimens. All interactive specimens use semantic HTML (`<button>`, `<input>`, ARIA roles) with `:focus-visible` rings; `.jsx` mirrors these patterns.
+- Procedural color: four `*-seed` custom properties drive all identity color. `--signature`, `--success`, `--danger`, `--warning` are fixed and must not be rebranded. Identity color is expressed by category (slider modulation source, layer category), not by individual element — most of the UI stays primary; accents carry meaning.
 - Density: every spacing token has a `[data-density="compact"]` override. Default is spacious; compact exists for power-user and data-dense views.
 - Theming rule: never hardcode a hue in a component or screen; always reference the tokens. Token names are positional (`--accent-1`), never hue-named.
+- Motion: all animations are compositor-only (`transform`/`opacity`), never layout properties. Spring easing only on the Switch thumb.
 - Icons: Lucide, used sparingly. `.card.html` previews load the real CDN build; `.jsx` references vendor Lucide path data and instruct real apps to `npm install lucide-react`.
 - Window chrome: custom Electron titlebar, not OS-native, so macOS and Windows look identical. macOS traffic lights re-colored to brand danger/amber/success.
 - Current scope: 18 components, 10 app-shell templates. Component set is sized to the four app categories, not exhaustively enumerated from a real product yet.
@@ -44,7 +45,7 @@ Procedural theming via four `oklch` color seeds: one override rebrands an entire
 ## Brand Commitments
 
 - Name "dyvoided" is provisional. Compile namespace is auto-derived from the project name (`window.DyvoidedDesignSystem_7b704c` at time of writing); renaming the project changes it.
-- Voice: short, literal labels over cleverness. Second person, direct. Numbers and units in monospace wherever they are measurements or live values. No emoji. No exclamation points in UI copy. Sentence case for buttons and labels; uppercase only for small mono/tracking-wide microlabels.
+- Voice: short, literal labels over cleverness. Second person, direct. Numbers and units in monospace wherever they are measurements or live values. No emoji. No exclamation points in UI copy. Sentence case for buttons and labels. Panel titles use mono uppercase at `--font-size-xs`; sidebar group headers use the body font at `--font-size-2xs`, 600 weight, uppercase — a deliberate hierarchy step down from panel titles. Data keys (Sample rate, Cutoff) stay small/mono/uppercase.
 - Reference taste on record: Arturia Pigments (rich, precise creative-tool UI) and Obsidian (clean, calm, dark-first productivity). Explicitly avoided: flat/lifeless Microsoft-era UI and trend-driven "style over clarity" agency sites.
 - A separate reference (Cape Town Dam Levels) was considered for its finesse and lightness, not its structure or topic. Its overuse of italics and uppercase, and its neon turquoise accent, are explicitly rejected.
 
