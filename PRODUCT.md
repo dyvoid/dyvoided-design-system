@@ -36,11 +36,11 @@ Procedural theming via four `oklch` color seeds: one override rebrands an entire
 - Procedural color: four `*-seed` custom properties drive all identity color. `--signature`, `--success`, `--danger`, `--warning` are fixed and must not be rebranded. Identity color is expressed by category (slider modulation source, layer category), not by individual element — most of the UI stays primary; accents carry meaning.
 - Density: every spacing token has a `[data-density="compact"]` override. Default is spacious; compact exists for power-user and data-dense views.
 - Theming rule: never hardcode a hue in a component or screen; always reference the tokens. Token names are positional (`--accent-1`), never hue-named.
-- Motion: all animations are compositor-only (`transform`/`opacity`), never layout properties. Spring easing only on the Switch thumb.
+- Motion: all animations are compositor-only (`transform`/`opacity`), never layout properties. Spring easing only on the Switch thumb. Overlay entrances (dialog, command palette, menu, select pop, scrim) use `@starting-style` + `allow-discrete` for fade+scale on show. Toasts fade+rise on insertion via keyframe. Tab indicator fades between tabs via opacity transition. Checkbox, switch track, and select field ease through state changes.
 - Icons: Lucide, used sparingly. `.card.html` previews load the real CDN build; `.jsx` references vendor Lucide path data and instruct real apps to `npm install lucide-react`.
 - Window chrome: custom Electron titlebar, not OS-native, so macOS and Windows look identical. macOS traffic lights re-colored to brand danger/amber/success.
 - Current scope: 18 components, 10 app-shell templates. Component set is sized to the four app categories, not exhaustively enumerated from a real product yet.
-- `current/eval.html` is a sanctioned validation surface: an app-shell composition that assembles multiple components into a realistic layout. It inlines component CSS (not imports), so it can drift from the canonical `.card.html` specimens. The drift script (`current/scripts/drift.mjs`) scans it alongside cards and JSX to catch banned patterns, hardcoded hues, and non-token font sizes. When a component's canonical specimen changes, eval.html must be updated to match.
+- `current/eval.html` is a sanctioned validation surface: an app-shell composition that assembles multiple components into a realistic layout. It imports `styles.css` and iframes the canonical `.card.html` specimens, so it stays in sync with the component layer automatically. The drift script (`current/scripts/drift.mjs`) scans it alongside cards and JSX to catch banned patterns, hardcoded hues, and non-token font sizes.
 
 ## Brand Commitments
 
