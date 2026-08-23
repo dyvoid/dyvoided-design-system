@@ -92,6 +92,46 @@
   .workbench-subcard-text { display: flex; flex-direction: column; gap: 2px; }
   .workbench-subcard-title { font-size: var(--text-sm); font-weight: 600; color: var(--text-primary); }
   .workbench-subcard-sub { font-size: var(--text-xs); color: var(--text-tertiary); }
+
+  /* ===== Procedural Rebrand Console (eval-only) ===== */
+  .rb-console { max-width: 1280px; margin: 0 auto; }
+  .rb-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-5); margin-bottom: var(--space-5); flex-wrap: wrap; }
+  .rb-title { font-family: var(--font-display); font-weight: 500; font-size: var(--font-size-xl); letter-spacing: var(--tracking-tight); color: var(--text-primary); margin: 0; }
+  .rb-sub { font-family: var(--font-mono); font-size: var(--font-size-2xs); color: var(--text-tertiary); letter-spacing: var(--tracking-wide); text-transform: uppercase; display: inline-flex; align-items: center; gap: 6px; }
+  .rb-live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--success-500); box-shadow: 0 0 0 0 oklch(from var(--success-500) l c h / 0.5); animation: rb-pulse 2.4s var(--ease-standard) infinite; }
+  @keyframes rb-pulse { 0% { box-shadow: 0 0 0 0 oklch(from var(--success-500) l c h / 0.45); } 70% { box-shadow: 0 0 0 6px oklch(from var(--success-500) l c h / 0); } 100% { box-shadow: 0 0 0 0 oklch(from var(--success-500) l c h / 0); } }
+  .rb-seeds { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-4); margin-bottom: var(--space-5); }
+  .rb-seed { background: var(--surface-panel); border-top: var(--border-width) solid var(--border-strong); border-radius: var(--radius-lg); padding: var(--space-4) var(--space-4) var(--space-3); display: flex; flex-direction: column; align-items: center; gap: var(--space-3); }
+  .rb-seed-name { font-family: var(--font-mono); font-size: var(--font-size-xs); font-weight: 600; letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--text-primary); }
+  .rb-seed-role { font-family: var(--font-mono); font-size: var(--font-size-2xs); color: var(--text-tertiary); letter-spacing: var(--tracking-wide); text-transform: uppercase; margin-top: -10px; }
+  .hue-dial { position: relative; width: 132px; height: 132px; cursor: pointer; touch-action: none; outline: none; }
+  .hue-dial:focus-visible .hue-handle { box-shadow: 0 0 0 3px var(--surface-panel), 0 0 0 5px var(--primary); }
+  .hue-ring { position: absolute; inset: 0; border-radius: 50%; -webkit-mask: radial-gradient(circle at center, transparent 41px, #000 42px, #000 64px, transparent 65px); mask: radial-gradient(circle at center, transparent 41px, #000 42px, #000 64px, transparent 65px); }
+  .hue-handle { position: absolute; width: 16px; height: 16px; border-radius: 50%; background: var(--surface-panel); border: 2px solid var(--text-primary); transform: translate(-50%, -50%); pointer-events: none; box-shadow: var(--shadow-sm); transition: box-shadow var(--duration-fast) var(--ease-standard); }
+  .hue-core { position: absolute; top: 50%; left: 50%; width: 70px; height: 70px; border-radius: 50%; transform: translate(-50%, -50%); border: var(--border-width) solid var(--border-strong); box-shadow: var(--inset-highlight), var(--shadow-sm); pointer-events: none; }
+  .rb-sliders { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+  .rb-slider-row { display: flex; align-items: center; gap: 8px; }
+  .rb-slider-row .lbl { font-family: var(--font-mono); font-size: var(--font-size-2xs); color: var(--text-tertiary); width: 12px; text-transform: uppercase; }
+  .rb-slider-row input[type="range"] { flex: 1; height: 4px; accent-color: var(--primary); cursor: pointer; background: transparent; }
+  .rb-slider-row .val { font-family: var(--font-mono); font-size: var(--font-size-2xs); color: var(--text-secondary); min-width: 38px; text-align: right; }
+  .rb-readout { font-family: var(--font-mono); font-size: var(--font-size-2xs); color: var(--text-tertiary); letter-spacing: 0; text-align: center; line-height: 1.5; }
+  .rb-readout .ok { color: var(--text-secondary); display: block; }
+  .rb-readout .tok { color: var(--text-tertiary); display: block; }
+  .rb-actions { display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; }
+  .rb-presets { display: flex; gap: 8px; flex-wrap: wrap; }
+  .rb-preset { display: flex; flex-direction: column; gap: 5px; padding: 8px 10px; background: var(--surface-raised); border: var(--border-width) solid var(--border-subtle); border-radius: var(--radius-sm); cursor: pointer; transition: background var(--duration-fast) var(--ease-standard), border-color var(--duration-fast) var(--ease-standard); }
+  .rb-preset:hover { background: var(--surface-hover); border-color: var(--border-strong); }
+  .rb-preset-swatches { display: flex; gap: 3px; }
+  .rb-preset-swatches i { display: block; width: 14px; height: 14px; border-radius: 3px; }
+  .rb-preset-name { font-family: var(--font-mono); font-size: var(--font-size-2xs); color: var(--text-secondary); letter-spacing: var(--tracking-wide); text-transform: uppercase; }
+  .rb-spacer { flex: 1; }
+  .rb-btn { font-family: var(--font-mono); font-size: var(--font-size-xs); letter-spacing: var(--tracking-wide); text-transform: uppercase; background: var(--surface-raised); border: var(--border-width) solid var(--border-subtle); color: var(--text-secondary); padding: 8px 14px; border-radius: var(--radius-sm); cursor: pointer; transition: background var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard); }
+  .rb-btn:hover { background: var(--surface-hover); color: var(--text-primary); }
+  .rb-btn.primary { background: var(--primary-muted-bg); color: var(--primary-hover); border-color: transparent; }
+  .rb-btn.primary:hover { color: var(--primary); }
+  .rb-btn.copied { color: var(--success-500); }
+  @media (max-width: 920px) { .rb-seeds { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .rb-seeds { grid-template-columns: 1fr; } .rb-head { flex-direction: column; align-items: flex-start; } }
 </style>
 </head>
 <body data-theme="dark">
@@ -113,6 +153,24 @@
     <span>density</span>
     <button id="d-spacious" aria-pressed="true">spacious</button>
     <button id="d-compact" aria-pressed="false">compact</button>
+  </div>
+</div>
+
+<!-- ==================== PROCEDURAL REBRAND CONSOLE (eval-only) ==================== -->
+<div class="eval-section">
+  <div class="rb-console">
+    <div class="rb-head">
+      <h2 class="rb-title">Procedural Rebrand</h2>
+      <span class="rb-sub"><span class="rb-live-dot"></span>Drag any hue — the whole system recolors live, both themes</span>
+    </div>
+    <div class="rb-seeds" id="rb-seeds"><!-- seed cards injected by JS --></div>
+    <div class="rb-actions">
+      <div class="rb-presets" id="rb-presets"></div>
+      <span class="rb-spacer"></span>
+      <button class="rb-btn" id="rb-randomize">Randomize</button>
+      <button class="rb-btn" id="rb-reset">Reset</button>
+      <button class="rb-btn primary" id="rb-copy">Copy CSS</button>
+    </div>
   </div>
 </div>
 
@@ -434,7 +492,7 @@
 </div>
 
 <script>
-  // Eval-only toggle wiring. Not part of the system.
+  // Eval-only rebrand + state sync. Not part of the system.
   const body = document.body;
   const tDark = document.getElementById('t-dark');
   const tLight = document.getElementById('t-light');
@@ -443,80 +501,294 @@
   const bSlider = document.getElementById('b-slider');
   const bVal = document.getElementById('b-val');
 
-  let currentTheme = 'dark';
-  let currentPresence = '0.50';
-  let currentDensity = 'spacious';
+  // Seed defaults mirror tokens/colors.css. Order = display order.
+  const SEEDS = [
+    { key: 'primary',  token: '--primary-seed',  name: 'Primary',  role: 'identity', def: [58, 0.17, 275] },
+    { key: 'accent1',  token: '--accent-1-seed', name: 'Accent 1', role: 'warm',     def: [72, 0.15, 55]  },
+    { key: 'accent2',  token: '--accent-2-seed', name: 'Accent 2', role: 'cool',     def: [68, 0.10, 190] },
+    { key: 'accent3',  token: '--accent-3-seed', name: 'Accent 3', role: 'vivid',    def: [64, 0.17, 345] },
+  ];
 
-  // Iframes are loaded from file://, where cross-origin DOM access is blocked.
-  // Instead, pass theme + density + presence as query params on the iframe src.
-  // Each iframe loads scripts/ds-eval-apply.js (eval-only) which reads the params.
+  const PRESETS = {
+    'dyvoided': { primary: [58, 0.17, 275], accent1: [72, 0.15, 55],  accent2: [68, 0.10, 190], accent3: [64, 0.17, 345] },
+    'ember':    { primary: [60, 0.18, 28],  accent1: [70, 0.16, 50],  accent2: [62, 0.14, 12],  accent3: [66, 0.16, 345] },
+    'forest':   { primary: [58, 0.13, 145], accent1: [68, 0.12, 160], accent2: [60, 0.10, 95],  accent3: [70, 0.14, 40]  },
+    'cyber':    { primary: [62, 0.20, 295], accent1: [68, 0.18, 180], accent2: [64, 0.20, 325], accent3: [70, 0.19, 60]  },
+    'sunset':   { primary: [60, 0.16, 15],  accent1: [72, 0.15, 40],  accent2: [58, 0.14, 280], accent3: [66, 0.17, 340] },
+    'mono':     { primary: [60, 0.02, 275], accent1: [70, 0.02, 55],  accent2: [66, 0.02, 190], accent3: [64, 0.02, 345] },
+  };
+
+  const oklch = (s) => 'oklch(' + s[0] + '% ' + s[1] + ' ' + s[2] + ')';
+
+  // Current eval state. Seeds are [L, C, H] arrays.
+  const state = {
+    theme: 'dark',
+    density: 'spacious',
+    presence: '0.50',
+    seeds: { primary: [58, 0.17, 275], accent1: [72, 0.15, 55], accent2: [68, 0.10, 190], accent3: [64, 0.17, 345] },
+  };
+
+  // ---- apply seeds to this document (instant recolor) ----
+  function applySeedsLocal() {
+    const d = document.documentElement.style;
+    SEEDS.forEach((s) => d.setProperty(s.token, oklch(state.seeds[s.key])));
+  }
+
+  // ---- iframe + open-link sync ----
   const iframes = document.querySelectorAll('iframe');
-  iframes.forEach(iframe => {
+  iframes.forEach((iframe) => {
     iframe.dataset.baseSrc = iframe.getAttribute('src').split('?')[0];
+    iframe.dataset.loaded = '0';
+    iframe.addEventListener('load', () => { iframe.dataset.loaded = '1'; pushToIframe(iframe); });
   });
-
-  // "Open" links on template cards should also carry current state.
   const openLinks = document.querySelectorAll('.tpl-card-open');
-  openLinks.forEach(link => {
-    link.dataset.baseHref = link.getAttribute('href').split('?')[0];
-  });
+  openLinks.forEach((link) => { link.dataset.baseHref = link.getAttribute('href').split('?')[0]; });
 
+  function seedQuery() {
+    return '&primary=' + state.seeds.primary.join(',')
+         + '&accent1=' + state.seeds.accent1.join(',')
+         + '&accent2=' + state.seeds.accent2.join(',')
+         + '&accent3=' + state.seeds.accent3.join(',');
+  }
   function stateQueryString() {
-    return '?theme=' + encodeURIComponent(currentTheme)
-         + '&density=' + encodeURIComponent(currentDensity)
-         + '&presence=' + currentPresence;
+    return '?theme=' + encodeURIComponent(state.theme)
+         + '&density=' + encodeURIComponent(state.density)
+         + '&presence=' + state.presence
+         + seedQuery();
   }
-
-  function updateIframeSrcs() {
-    const qs = stateQueryString();
-    iframes.forEach(iframe => {
-      iframe.setAttribute('src', iframe.dataset.baseSrc + qs);
-    });
+  function seedMsg() {
+    const m = {};
+    SEEDS.forEach((s) => (m[s.key] = oklch(state.seeds[s.key])));
+    return m;
   }
-
+  // Loaded iframes update live via postMessage (no reload flash).
+  // Not-yet-loaded iframes get the full state on their src so they load correct.
+  function pushToIframe(iframe) {
+    if (iframe.dataset.loaded === '1') {
+      iframe.contentWindow.postMessage(
+        { type: 'ds-state', theme: state.theme, density: state.density, presence: state.presence, seeds: seedMsg() },
+        '*'
+      );
+    } else {
+      iframe.setAttribute('src', iframe.dataset.baseSrc + stateQueryString());
+    }
+  }
+  function pushToIframes() { iframes.forEach(pushToIframe); }
   function updateOpenLinks() {
     const qs = stateQueryString();
-    openLinks.forEach(link => {
-      link.setAttribute('href', link.dataset.baseHref + qs);
-    });
+    openLinks.forEach((link) => link.setAttribute('href', link.dataset.baseHref + qs));
+  }
+  // Lazy iframes announce readiness; push current state to them.
+  window.addEventListener('message', (e) => {
+    if (e.data && e.data.type === 'ds-ready') {
+      iframes.forEach((iframe) => { if (iframe.contentWindow === e.source) { iframe.dataset.loaded = '1'; pushToIframe(iframe); } });
+    }
+  });
+
+  // Coalesce broadcasts into one rAF so a hue drag doesn't flood iframes.
+  let broadcastScheduled = false;
+  function scheduleBroadcast() {
+    if (broadcastScheduled) return;
+    broadcastScheduled = true;
+    requestAnimationFrame(() => { broadcastScheduled = false; pushToIframes(); updateOpenLinks(); });
   }
 
+  // ---- theme / density / presence ----
   function setTheme(theme) {
-    currentTheme = theme;
+    state.theme = theme;
     body.setAttribute('data-theme', theme);
     const isDark = theme === 'dark';
     tDark.setAttribute('aria-pressed', isDark);
     tLight.setAttribute('aria-pressed', !isDark);
-    updateIframeSrcs();
-    updateOpenLinks();
+    pushToIframes(); updateOpenLinks();
   }
-
   function setDensity(compact) {
-    currentDensity = compact ? 'compact' : 'spacious';
+    state.density = compact ? 'compact' : 'spacious';
     dSpacious.setAttribute('aria-pressed', !compact);
     dCompact.setAttribute('aria-pressed', compact);
     if (compact) document.documentElement.setAttribute('data-density', 'compact');
     else document.documentElement.removeAttribute('data-density');
-    updateIframeSrcs();
-    updateOpenLinks();
+    pushToIframes(); updateOpenLinks();
   }
-
-  // Live update for the main page + workbench (instant, no iframe reload).
   function setPresence(val) {
-    currentPresence = (val / 100).toFixed(2);
-    document.documentElement.style.setProperty('--presence', currentPresence);
+    state.presence = (val / 100).toFixed(2);
+    document.documentElement.style.setProperty('--presence', state.presence);
     if (bVal) bVal.textContent = val + '%';
+    pushToIframes(); updateOpenLinks();
   }
 
+  // ---- seed setters ----
+  function setSeed(key, L, C, H) {
+    state.seeds[key] = [Math.round(L * 10) / 10, Math.round(C * 1000) / 1000, Math.round(H)];
+    applySeedsLocal();
+    refreshSeedCard(key);
+    scheduleBroadcast();
+  }
+  function setAllSeeds(obj) {
+    Object.keys(obj).forEach((k) => (state.seeds[k] = obj[k].slice()));
+    applySeedsLocal();
+    refreshAllSeedCards();
+    scheduleBroadcast();
+  }
+  function resetSeeds() {
+    const obj = {};
+    SEEDS.forEach((s) => (obj[s.key] = s.def.slice()));
+    setAllSeeds(obj);
+  }
+  function randomizeSeeds() {
+    const r = (a, b) => a + Math.random() * (b - a);
+    const baseH = Math.random() * 360;
+    const offs = [0, 60, 180, 240].map((o) => (baseH + o + r(-18, 18) + 360) % 360);
+    offs.sort(() => Math.random() - 0.5);
+    setAllSeeds({
+      primary: [r(56, 66), r(0.13, 0.20), offs[0]],
+      accent1: [r(66, 74), r(0.11, 0.18), offs[1]],
+      accent2: [r(60, 70), r(0.10, 0.17), offs[2]],
+      accent3: [r(62, 72), r(0.13, 0.20), offs[3]],
+    });
+  }
+
+  // ---- build seed cards ----
+  const seedsContainer = document.getElementById('rb-seeds');
+  const seedCardEls = {};
+  function buildSeedCards() {
+    seedsContainer.innerHTML = '';
+    SEEDS.forEach((s) => {
+      const card = document.createElement('div');
+      card.className = 'rb-seed';
+      card.innerHTML =
+        '<div class="rb-seed-name">' + s.name + '</div>' +
+        '<div class="rb-seed-role">' + s.role + '</div>' +
+        '<div class="hue-dial" data-key="' + s.key + '" tabindex="0" role="slider" aria-label="' + s.name + ' hue">' +
+          '<div class="hue-ring"></div>' +
+          '<div class="hue-handle"></div>' +
+          '<div class="hue-core"></div>' +
+        '</div>' +
+        '<div class="rb-sliders">' +
+          '<div class="rb-slider-row"><span class="lbl">L</span><input type="range" min="35" max="85" step="0.5" data-ax="L"><span class="val"></span></div>' +
+          '<div class="rb-slider-row"><span class="lbl">C</span><input type="range" min="0" max="0.25" step="0.005" data-ax="C"><span class="val"></span></div>' +
+        '</div>' +
+        '<div class="rb-readout"><span class="ok"></span><span class="tok">' + s.token + '</span></div>';
+      seedsContainer.appendChild(card);
+      seedCardEls[s.key] = card;
+      wireDial(card.querySelector('.hue-dial'), s.key);
+      wireSliders(card, s.key);
+    });
+    refreshAllSeedCards();
+  }
+  function ringGradient(key) {
+    const [L, C] = state.seeds[key];
+    const stops = [];
+    for (let h = 0; h <= 360; h += 10) stops.push('oklch(' + L + '% ' + C + ' ' + h + ') ' + h + 'deg');
+    return 'conic-gradient(' + stops.join(',') + ')';
+  }
+  function refreshSeedCard(key) {
+    const card = seedCardEls[key];
+    if (!card) return;
+    const [L, C, H] = state.seeds[key];
+    const dial = card.querySelector('.hue-dial');
+    dial.querySelector('.hue-ring').style.background = ringGradient(key);
+    dial.querySelector('.hue-core').style.background = oklch(state.seeds[key]);
+    const rad = (H - 90) * Math.PI / 180;
+    const r = 53;
+    dial.querySelector('.hue-handle').style.left = (66 + r * Math.cos(rad)) + 'px';
+    dial.querySelector('.hue-handle').style.top = (66 + r * Math.sin(rad)) + 'px';
+    dial.setAttribute('aria-valuenow', Math.round(H));
+    const LIn = card.querySelector('[data-ax="L"]');
+    const CIn = card.querySelector('[data-ax="C"]');
+    LIn.value = L; CIn.value = C;
+    LIn.nextElementSibling.textContent = L + '%';
+    CIn.nextElementSibling.textContent = C.toFixed(3);
+    card.querySelector('.rb-readout .ok').textContent = oklch(state.seeds[key]);
+  }
+  function refreshAllSeedCards() { SEEDS.forEach((s) => refreshSeedCard(s.key)); }
+
+  function wireDial(dial, key) {
+    let dragging = false;
+    function angleFromEvent(e) {
+      const rect = dial.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const dx = e.clientX - cx;
+      const dy = e.clientY - cy;
+      let deg = (Math.atan2(dy, dx) * 180) / Math.PI + 90;
+      if (deg < 0) deg += 360;
+      return deg;
+    }
+    function apply(e) {
+      const [L, C] = state.seeds[key];
+      setSeed(key, L, C, angleFromEvent(e));
+    }
+    dial.addEventListener('pointerdown', (e) => {
+      dragging = true;
+      try { dial.setPointerCapture(e.pointerId); } catch (_) {}
+      apply(e);
+      e.preventDefault();
+    });
+    dial.addEventListener('pointermove', (e) => { if (dragging) apply(e); });
+    dial.addEventListener('pointerup', (e) => { dragging = false; try { dial.releasePointerCapture(e.pointerId); } catch (_) {} });
+    dial.addEventListener('pointercancel', () => { dragging = false; });
+    dial.addEventListener('keydown', (e) => {
+      const [L, C, H] = state.seeds[key];
+      const step = e.shiftKey ? 15 : 1;
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') { setSeed(key, L, C, (H - step + 360) % 360); e.preventDefault(); }
+      else if (e.key === 'ArrowRight' || e.key === 'ArrowUp') { setSeed(key, L, C, (H + step) % 360); e.preventDefault(); }
+    });
+  }
+  function wireSliders(card, key) {
+    card.querySelectorAll('input[type="range"]').forEach((input) => {
+      input.addEventListener('input', () => {
+        const [L, C, H] = state.seeds[key];
+        if (input.dataset.ax === 'L') setSeed(key, +input.value, C, H);
+        else setSeed(key, L, +input.value, H);
+      });
+    });
+  }
+
+  // ---- presets ----
+  function buildPresets() {
+    const wrap = document.getElementById('rb-presets');
+    wrap.innerHTML = '';
+    Object.keys(PRESETS).forEach((name) => {
+      const p = PRESETS[name];
+      const btn = document.createElement('button');
+      btn.className = 'rb-preset';
+      btn.innerHTML =
+        '<div class="rb-preset-swatches">' +
+        ['primary', 'accent1', 'accent2', 'accent3'].map((k) => '<i style="background:' + oklch(p[k]) + '"></i>').join('') +
+        '</div><span class="rb-preset-name">' + name + '</span>';
+      btn.addEventListener('click', () => setAllSeeds(p));
+      wrap.appendChild(btn);
+    });
+  }
+
+  // ---- copy CSS ----
+  document.getElementById('rb-copy').addEventListener('click', function () {
+    const css = SEEDS.map((s) => '  ' + s.token + ': ' + oklch(state.seeds[s.key]) + ';').join('\n');
+    const text = ':root {\n' + css + '\n}';
+    navigator.clipboard.writeText(text).then(() => {
+      this.classList.add('copied');
+      this.textContent = 'Copied';
+      setTimeout(() => { this.classList.remove('copied'); this.textContent = 'Copy CSS'; }, 1500);
+    });
+  });
+  document.getElementById('rb-randomize').addEventListener('click', randomizeSeeds);
+  document.getElementById('rb-reset').addEventListener('click', resetSeeds);
+
+  // ---- eval-bar wiring ----
   tDark.addEventListener('click', () => setTheme('dark'));
   tLight.addEventListener('click', () => setTheme('light'));
   dSpacious.addEventListener('click', () => setDensity(false));
   dCompact.addEventListener('click', () => setDensity(true));
   if (bSlider) {
-    // Live update during drag (main page only), reload iframes on release.
     bSlider.addEventListener('input', (e) => setPresence(e.target.value));
-    bSlider.addEventListener('change', () => { updateIframeSrcs(); updateOpenLinks(); });
   }
+
+  // ---- init ----
+  buildSeedCards();
+  buildPresets();
+  applySeedsLocal();
+  updateOpenLinks();
 </script>
 
 </body>
