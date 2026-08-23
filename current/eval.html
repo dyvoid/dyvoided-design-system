@@ -16,7 +16,7 @@
     position: sticky; top: 0; z-index: 100;
     display: flex; align-items: center; gap: var(--space-5);
     padding: var(--space-3) var(--space-6);
-    background: var(--surface-panel); border-bottom: 1px solid var(--border-subtle);
+    background: var(--surface-panel); border-bottom: var(--border-width) solid var(--border-subtle);
     font-family: var(--font-mono); font-size: var(--font-size-xs);
     letter-spacing: var(--tracking-wide); text-transform: uppercase;
   }
@@ -24,7 +24,7 @@
   .eval-bar .spacer { flex: 1; }
   .eval-bar .group { display: flex; align-items: center; gap: var(--space-3); color: var(--text-tertiary); }
   .eval-bar button {
-    background: var(--surface-raised); border: 1px solid var(--border-subtle);
+    background: var(--surface-raised); border: var(--border-width) solid var(--border-subtle);
     color: var(--text-secondary); font-family: var(--font-mono); font-size: var(--font-size-xs);
     letter-spacing: var(--tracking-wide); text-transform: uppercase;
     padding: 4px 10px; border-radius: var(--radius-sm); cursor: pointer;
@@ -33,17 +33,17 @@
   .eval-bar button:hover { background: var(--surface-hover); color: var(--text-primary); }
   .eval-bar button[aria-pressed="true"] { background: var(--primary-muted-bg); color: var(--primary-hover); border-color: transparent; }
   .eval-section { padding: var(--space-8) var(--space-6); max-width: 1280px; margin: 0 auto; }
-  .eval-section + .eval-section { border-top: 1px solid var(--border-subtle); }
+  .eval-section + .eval-section { border-top: var(--border-width) solid var(--border-subtle); }
   .eval-h2 {
     font-family: var(--font-display); font-weight: 500; font-size: var(--font-size-lg);
     letter-spacing: var(--tracking-tight); color: var(--text-secondary);
-    margin: 0 0 var(--space-5); padding-bottom: var(--space-3); border-bottom: 1px solid var(--border-subtle);
+    margin: 0 0 var(--space-5); padding-bottom: var(--space-3); border-bottom: var(--border-width) solid var(--border-subtle);
   }
   .eval-note { font-family: var(--font-mono); font-size: var(--font-size-2xs); color: var(--text-tertiary); letter-spacing: var(--tracking-wide); text-transform: uppercase; margin-bottom: var(--space-4); }
 
   /* ===== Specimen row ===== */
   .specimen-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
-  .specimen { display: flex; flex-direction: column; gap: var(--space-3); padding: var(--space-4); background: var(--surface-panel); border-top: 1px solid var(--border-strong); border-radius: var(--radius-lg); }
+  .specimen { display: flex; flex-direction: column; gap: var(--space-3); padding: var(--space-4); background: var(--surface-panel); border-top: var(--border-width) solid var(--border-strong); border-radius: var(--radius-lg); }
   .specimen-label { font-family: var(--font-mono); font-size: var(--font-size-xs); font-weight: 500; letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--text-tertiary); }
   .specimen iframe { width: 100%; border: none; border-radius: var(--radius-sm); background: var(--surface-app); display: block; }
   .specimen.sm iframe { height: 160px; }
@@ -51,23 +51,23 @@
 
   /* ===== Template grid ===== */
   .tpl-grid { display: grid; grid-template-columns: repeat(auto-fill, 384px); gap: var(--space-5); justify-content: center; }
-  .tpl-card { display: flex; flex-direction: column; background: var(--surface-panel); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); overflow: hidden; }
-  .tpl-card-head { display: flex; align-items: center; justify-content: space-between; padding: var(--space-3) var(--space-4); border-bottom: 1px solid var(--border-subtle); }
+  .tpl-card { display: flex; flex-direction: column; background: var(--surface-panel); border: var(--border-width) solid var(--border-subtle); border-radius: var(--radius-lg); overflow: hidden; }
+  .tpl-card-head { display: flex; align-items: center; justify-content: space-between; padding: var(--space-3) var(--space-4); border-bottom: var(--border-width) solid var(--border-subtle); }
   .tpl-card-name { font-family: var(--font-body); font-size: var(--font-size-sm); font-weight: 600; color: var(--text-primary); }
-  .tpl-card-open { font-family: var(--font-mono); font-size: var(--font-size-2xs); color: var(--text-tertiary); text-decoration: none; padding: 3px 8px; border-radius: var(--radius-xs); border: 1px solid var(--border-subtle); transition: background var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard); }
+  .tpl-card-open { font-family: var(--font-mono); font-size: var(--font-size-2xs); color: var(--text-tertiary); text-decoration: none; padding: 3px 8px; border-radius: var(--radius-xs); border: var(--border-width) solid var(--border-subtle); transition: background var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard); }
   .tpl-card-open:hover { background: var(--surface-hover); color: var(--text-primary); }
   .tpl-card-frame { width: 384px; height: 240px; overflow: hidden; position: relative; }
   .tpl-card-frame iframe { width: 1280px; height: 800px; border: none; display: block; transform: scale(0.3); transform-origin: top left; pointer-events: none; }
 
   /* ===== Type scale specimen ===== */
-  .type-row { display: flex; align-items: baseline; gap: var(--space-4); border-bottom: 1px solid var(--border-subtle); padding: var(--space-2) 0; }
+  .type-row { display: flex; align-items: baseline; gap: var(--space-4); border-bottom: var(--border-width) solid var(--border-subtle); padding: var(--space-2) 0; }
   .type-row .lbl { font-family: var(--font-mono); font-weight: 400; font-size: var(--font-size-2xs); color: var(--text-tertiary); width: 90px; letter-spacing: 0; }
   .type-display { font-family: var(--font-display); font-weight: 600; letter-spacing: var(--tracking-tight); color: var(--text-primary); }
   .type-body { font-family: var(--font-body); font-weight: 400; color: var(--text-primary); }
 
   /* ===== Color specimen ===== */
   .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: var(--space-3); }
-  .color-chip { border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border-subtle); }
+  .color-chip { border-radius: var(--radius-sm); overflow: hidden; border: var(--border-width) solid var(--border-subtle); }
   .color-chip .swatch { height: 48px; }
   .color-chip .meta { padding: 6px 10px; font-family: var(--font-mono); font-size: var(--font-size-2xs); color: var(--text-secondary); background: var(--surface-panel); }
   .color-chip .meta .name { color: var(--text-primary); display: block; margin-bottom: 2px; }
@@ -94,7 +94,7 @@
 <div class="eval-section">
   <div class="eval-note">Validation template — Creative Studio Shell</div>
   <h2 class="eval-h2">Creative Studio</h2>
-  <iframe src="templates/creative-studio/CreativeStudio.html" style="width:1280px;height:800px;border:1px solid var(--border-strong);border-radius:10px;box-shadow:var(--shadow-lg);display:block;margin:0 auto;background:var(--surface-app);overflow:hidden" scrolling="no"></iframe>
+  <iframe src="templates/creative-studio/CreativeStudio.html" style="width:1280px;height:800px;border:var(--border-width) solid var(--border-strong);border-radius:10px;box-shadow:var(--shadow-lg);display:block;margin:0 auto;background:var(--surface-app);overflow:hidden" scrolling="no"></iframe>
 </div>
 
 <!-- ==================== COMPONENT SPECIMENS (iframed from .card.html) ==================== -->
@@ -296,7 +296,7 @@
     <div class="color-chip"><div class="swatch" style="background: var(--success-500)"></div><div class="meta"><span class="name">success-500</span>fixed</div></div>
     <div class="color-chip"><div class="swatch" style="background: var(--danger-500)"></div><div class="meta"><span class="name">danger-500</span>fixed</div></div>
     <div class="color-chip"><div class="swatch" style="background: var(--warning-500)"></div><div class="meta"><span class="name">warning-500</span>fixed</div></div>
-    <div class="color-chip"><div class="swatch" style="background: var(--surface-app); border-bottom: 1px solid var(--border-subtle)"></div><div class="meta"><span class="name">surface-app</span>base</div></div>
+    <div class="color-chip"><div class="swatch" style="background: var(--surface-app); border-bottom: var(--border-width) solid var(--border-subtle)"></div><div class="meta"><span class="name">surface-app</span>base</div></div>
     <div class="color-chip"><div class="swatch" style="background: var(--surface-panel)"></div><div class="meta"><span class="name">surface-panel</span>panel</div></div>
     <div class="color-chip"><div class="swatch" style="background: var(--surface-raised)"></div><div class="meta"><span class="name">surface-raised</span>raised</div></div>
   </div>

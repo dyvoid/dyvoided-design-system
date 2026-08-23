@@ -4,7 +4,7 @@ export function Menu({ items = [], onSelect, width = 220 }) {
   return (
     <div role="menu" style={{
       width, padding: 4, background: 'var(--surface-overlay)', borderRadius: 'var(--radius-md)',
-      border: '1px solid var(--border-subtle)', boxShadow: 'var(--shadow-md)',
+      border: 'var(--border-width) solid var(--border-subtle)', boxShadow: 'var(--shadow-md)',
       fontFamily: 'var(--font-body)', display: 'flex', flexDirection: 'column', gap: 1,
     }}>
       {items.map((item, i) => {

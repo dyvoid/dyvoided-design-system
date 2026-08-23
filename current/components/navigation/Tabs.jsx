@@ -2,7 +2,7 @@ import React from 'react';
 
 export function Tabs({ items, activeId, onChange }) {
   return (
-    <div style={{ display: 'flex', gap: 4, borderBottom: '1px solid var(--border-subtle)', fontFamily: 'var(--font-body)' }}>
+    <div style={{ display: 'flex', gap: 4, borderBottom: 'var(--border-width) solid var(--border-subtle)', fontFamily: 'var(--font-body)' }}>
       {items.map((item) => {
         const active = item.id === activeId;
         return (

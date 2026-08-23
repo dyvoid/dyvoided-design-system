@@ -5,7 +5,7 @@ export function SidebarNav({ sections = [], activeId, onChange, width = 220, col
     <nav style={{
       width: collapsed ? 56 : width, flexShrink: 0, height: '100%', boxSizing: 'border-box',
       padding: 'var(--space-3) var(--space-2)', display: 'flex', flexDirection: 'column', gap: 'var(--space-4)',
-      background: 'var(--surface-panel)', borderRight: '1px solid var(--border-subtle)',
+      background: 'var(--surface-panel)', borderRight: 'var(--border-width) solid var(--border-subtle)',
       fontFamily: 'var(--font-body)', overflowY: 'auto',
     }}>
       {sections.map((section, si) => (

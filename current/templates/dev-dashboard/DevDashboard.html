@@ -14,9 +14,9 @@
   html, body { margin: 0; padding: 0; background: var(--surface-sunken); font-family: var(--font-body); }
   .shell { width: 1280px; height: 800px; margin: 0 auto; display: flex; flex-direction: column; overflow: hidden; background: var(--surface-app); }
   .body { display: flex; flex: 1; min-height: 0; }
-  .sidebar { width: 200px; flex-shrink: 0; border-right: 1px solid var(--border-subtle); display: flex; flex-direction: column; background: linear-gradient(165deg, var(--surface-raised) 0%, var(--surface-panel) 55%, var(--accent-2-muted-bg) 160%); }
+  .sidebar { width: 200px; flex-shrink: 0; border-right: var(--border-width) solid var(--border-subtle); display: flex; flex-direction: column; background: linear-gradient(165deg, var(--surface-raised) 0%, var(--surface-panel) 55%, var(--accent-2-muted-bg) 160%); }
   .sidebar-nav { flex: 1; min-height: 0; padding: var(--space-3) var(--space-2); }
-  .sidebar-foot { padding: var(--space-5); border-top: 1px solid var(--border-subtle); display: flex; flex-direction: column; gap: var(--space-4); }
+  .sidebar-foot { padding: var(--space-5); border-top: var(--border-width) solid var(--border-subtle); display: flex; flex-direction: column; gap: var(--space-4); }
   .operator { display: flex; align-items: center; gap: 10px; }
   .operator-name { font-size: var(--text-sm); color: var(--text-secondary); font-weight: 600; }
   .main { flex: 1; padding: var(--space-7); overflow: auto; scrollbar-gutter: stable; }
@@ -29,7 +29,7 @@
   .svc-left { display: flex; align-items: center; gap: 12px; }
   .svc-name { font-family: var(--font-mono); font-size: var(--text-sm); color: var(--text-primary) }
   .svc-right { display: flex; align-items: center; gap: 16px; position: relative; }
-  .log-line { font-family: var(--font-mono); font-size: var(--font-size-xs); color: var(--text-secondary); padding: var(--space-2) var(--space-3); border-bottom: 1px solid var(--border-subtle); }
+  .log-line { font-family: var(--font-mono); font-size: var(--font-size-xs); color: var(--text-secondary); padding: var(--space-2) var(--space-3); border-bottom: var(--border-width) solid var(--border-subtle); }
   .scrim { position: fixed; inset: 0; background: var(--scrim); display: flex; align-items: center; justify-content: center; z-index: 100; }
   .scrim[hidden] { display: none; }
   .cmd-scrim { position: fixed; inset: 0; background: var(--scrim); display: flex; align-items: flex-start; justify-content: center; padding-top: 80px; z-index: 100; }

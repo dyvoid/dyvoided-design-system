@@ -22,12 +22,12 @@
   .kicker { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: var(--font-size-2xs); letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--primary); font-weight: 500; margin-bottom: var(--space-5); }
   .headline { font-family: var(--font-display); font-weight: 700; font-size: var(--font-size-4xl); line-height: var(--leading-tight); letter-spacing: var(--tracking-tight); color: var(--text-primary); text-wrap: balance; margin: 8px 0 var(--space-6); }
   .lede { font-size: var(--font-size-xl); line-height: var(--leading-snug); color: var(--text-secondary); max-width: 640px; text-wrap: pretty; margin: 0 0 var(--space-8); }
-  .byline { display: flex; align-items: center; gap: 12px; margin-top: var(--space-8); padding-top: var(--space-5); border-top: 1px solid var(--border-subtle); }
+  .byline { display: flex; align-items: center; gap: 12px; margin-top: var(--space-8); padding-top: var(--space-5); border-top: var(--border-width) solid var(--border-subtle); }
   .byline-text { display: flex; flex-direction: column; gap: 2px; }
   .byline-name { font-size: var(--text-base); font-weight: 600; color: var(--text-primary); }
   .byline-meta { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-tertiary); }
 
-  .hero { max-width: 960px; margin: 0 auto var(--space-9); height: 340px; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle); position: relative; overflow: hidden; background: radial-gradient(circle at 20% 20%, var(--accent-3-muted-bg), transparent 55%), radial-gradient(circle at 85% 70%, var(--primary-muted-bg), transparent 50%), linear-gradient(160deg, var(--surface-raised), var(--surface-panel)); }
+  .hero { max-width: 960px; margin: 0 auto var(--space-9); height: 340px; border-radius: var(--radius-lg); border: var(--border-width) solid var(--border-subtle); position: relative; overflow: hidden; background: radial-gradient(circle at 20% 20%, var(--accent-3-muted-bg), transparent 55%), radial-gradient(circle at 85% 70%, var(--primary-muted-bg), transparent 50%), linear-gradient(160deg, var(--surface-raised), var(--surface-panel)); }
   .hero-cap { position: absolute; left: 0; right: 0; bottom: 0; padding: var(--space-4) var(--space-6); font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-tertiary); background: linear-gradient(0deg, var(--scrim), transparent); }
 
   .article { max-width: 660px; margin: 0 auto; padding: 0 var(--space-9) var(--space-11); }
@@ -36,9 +36,9 @@
   .drop-cap { font-family: var(--font-display); font-weight: 700; font-size: var(--font-size-4xl); line-height: 0.8; float: left; padding: 6px 10px 0 0; color: var(--primary); }
   .pull-quote { margin: var(--space-9) 0; padding: var(--space-2) 0 var(--space-2) var(--space-6); border-left: 3px solid var(--primary); font-family: var(--font-display); font-weight: 600; font-size: var(--font-size-xl); line-height: var(--leading-snug); color: var(--text-primary); letter-spacing: var(--tracking-tight); text-wrap: pretty; }
   .article h2 { font-family: var(--font-display); font-weight: 600; font-size: var(--font-size-2xl); letter-spacing: var(--tracking-tight); color: var(--text-primary); margin: var(--space-9) 0 var(--space-4); }
-  .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: var(--space-8); padding-top: var(--space-6); border-top: 1px solid var(--border-subtle); }
+  .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: var(--space-8); padding-top: var(--space-6); border-top: var(--border-width) solid var(--border-subtle); }
 
-  .rail { width: 300px; flex-shrink: 0; border-left: 1px solid var(--border-subtle); background: var(--surface-panel); overflow: auto; padding: var(--space-6) var(--space-5); display: flex; flex-direction: column; gap: var(--space-5); }
+  .rail { width: 300px; flex-shrink: 0; border-left: var(--border-width) solid var(--border-subtle); background: var(--surface-panel); overflow: auto; padding: var(--space-6) var(--space-5); display: flex; flex-direction: column; gap: var(--space-5); }
   .rail .newsletter { margin-top: auto; }
   .related-list { display: flex; flex-direction: column; gap: var(--space-2); }
   .related-item { display: flex; gap: 10px; padding: var(--space-2); border-radius: var(--radius-md); }
@@ -48,7 +48,7 @@
   .related-title { font-size: var(--text-base); font-weight: 600; color: var(--text-primary); line-height: var(--leading-snug); }
   .related-time { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-tertiary); }
 
-  .newsletter { padding: var(--space-5); border-radius: var(--radius-lg); border: 1px solid var(--border-subtle); background: linear-gradient(160deg, var(--surface-raised), var(--surface-panel)); }
+  .newsletter { padding: var(--space-5); border-radius: var(--radius-lg); border: var(--border-width) solid var(--border-subtle); background: linear-gradient(160deg, var(--surface-raised), var(--surface-panel)); }
   .newsletter-title { font-family: var(--font-display); font-weight: 600; font-size: var(--text-lg); color: var(--text-primary); margin-bottom: var(--space-2); }
   .newsletter-desc { font-size: var(--text-sm); color: var(--text-tertiary); line-height: var(--leading-body); margin: 0 0 var(--space-4); }
   .newsletter-row { display: flex; flex-direction: column; gap: var(--space-3); }

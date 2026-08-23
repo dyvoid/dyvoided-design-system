@@ -29,7 +29,7 @@ export function Avatar({ name = '', src, size = 'md', tint, status, square }) {
         width: px, height: px, borderRadius: square ? 'var(--radius-sm)' : 'var(--radius-full)',
         display: 'inline-flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden',
         background: src ? 'var(--surface-sunken)' : t.bg, color: t.fg,
-        border: '1px solid var(--border-subtle)', boxSizing: 'border-box',
+        border: 'var(--border-width) solid var(--border-subtle)', boxSizing: 'border-box',
         fontFamily: 'var(--font-body)', fontWeight: 600, fontSize: Math.max(9, Math.round(px * 0.38)),
         letterSpacing: '0.01em', userSelect: 'none',
       }}>
@@ -55,7 +55,7 @@ export function AvatarGroup({ children, max = 4, size = 'md', overflow }) {
         <span style={{
           marginLeft: -Math.round(px * 0.3), width: px, height: px, borderRadius: 'var(--radius-full)',
           display: 'inline-flex', alignItems: 'center', justifyContent: 'center', boxSizing: 'border-box',
-          background: 'var(--surface-raised)', border: '1px solid var(--border-subtle)',
+          background: 'var(--surface-raised)', border: 'var(--border-width) solid var(--border-subtle)',
           color: 'var(--text-tertiary)', fontFamily: 'var(--font-mono)', fontSize: Math.max(9, Math.round(px * 0.34)),
         }}>+{rest}</span>
       )}

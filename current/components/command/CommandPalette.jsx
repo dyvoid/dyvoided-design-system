@@ -15,16 +15,16 @@ export function CommandPalette({ open, query = '', onQueryChange, groups = [], a
     }}>
       <div onClick={(e) => e.stopPropagation()} style={{
         width: 560, maxWidth: '90vw', background: 'var(--surface-overlay)', borderRadius: 'var(--radius-lg)',
-        border: '1px solid var(--border-strong)', boxShadow: 'var(--shadow-lg)', overflow: 'hidden',
+        border: 'var(--border-width) solid var(--border-strong)', boxShadow: 'var(--shadow-lg)', overflow: 'hidden',
         fontFamily: 'var(--font-body)',
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '0 14px', height: 48, borderBottom: '1px solid var(--border-subtle)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '0 14px', height: 48, borderBottom: 'var(--border-width) solid var(--border-subtle)' }}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
           <input autoFocus value={query} placeholder={placeholder} onChange={(e) => onQueryChange && onQueryChange(e.target.value)} style={{
             flex: 1, border: 'none', outline: 'none', background: 'transparent',
             color: 'var(--text-primary)', fontSize: 'var(--text-md)', fontFamily: 'var(--font-body)',
           }} />
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--text-tertiary)', border: '1px solid var(--border-subtle)', borderRadius: 'var(--radius-xs)', padding: '2px 6px' }}>ESC</span>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--text-tertiary)', border: 'var(--border-width) solid var(--border-subtle)', borderRadius: 'var(--radius-xs)', padding: '2px 6px' }}>ESC</span>
         </div>
         <div style={{ maxHeight: 340, overflowY: 'auto', padding: 6 }}>
           {groups.length === 0 && (
@@ -58,7 +58,7 @@ export function CommandPalette({ open, query = '', onQueryChange, groups = [], a
           ))}
         </div>
         {footer && (
-          <div style={{ padding: '8px 14px', borderTop: '1px solid var(--border-subtle)', display: 'flex', gap: 14, alignItems: 'center', fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--text-tertiary)' }}>{footer}</div>
+          <div style={{ padding: '8px 14px', borderTop: 'var(--border-width) solid var(--border-subtle)', display: 'flex', gap: 14, alignItems: 'center', fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', color: 'var(--text-tertiary)' }}>{footer}</div>
         )}
       </div>
     </div>

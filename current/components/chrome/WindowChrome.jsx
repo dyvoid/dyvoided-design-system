@@ -5,12 +5,12 @@ export function WindowChrome({ title, children, active = true, platform = 'mac' 
     <div style={{
       display: 'flex', flexDirection: 'column', height: '100%',
       background: 'var(--surface-app)', borderRadius: platform === 'mac' ? 10 : 0,
-      overflow: 'hidden', border: '1px solid var(--border-strong)', boxShadow: 'var(--shadow-lg)',
+      overflow: 'hidden', border: 'var(--border-width) solid var(--border-strong)', boxShadow: 'var(--shadow-lg)',
     }}>
       <div style={{
         height: 40, flexShrink: 0, display: 'flex', alignItems: 'center',
         padding: '0 14px', background: 'var(--surface-panel)',
-        borderBottom: '1px solid var(--border-subtle)', WebkitAppRegion: 'drag',
+        borderBottom: 'var(--border-width) solid var(--border-subtle)', WebkitAppRegion: 'drag',
         justifyContent: platform === 'mac' ? 'flex-start' : 'space-between',
       }}>
         {platform === 'mac' ? (

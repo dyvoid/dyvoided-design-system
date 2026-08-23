@@ -27,7 +27,7 @@ export function Button({ children, variant = 'primary', size = 'md', disabled = 
         display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8,
         height: s.height, padding: s.padding, fontSize: s.font,
         fontFamily: 'var(--font-body)', fontWeight: 500,
-        borderRadius: 'var(--radius-sm)', border: `1px solid ${disabled ? 'var(--border-subtle)' : v.border}`,
+        borderRadius: 'var(--radius-sm)', border: `var(--border-width) solid ${disabled ? 'var(--border-subtle)' : v.border}`,
         background: disabled ? 'var(--surface-raised)' : v.bg,
         color: disabled ? 'var(--text-disabled)' : v.color,
         cursor: disabled ? 'not-allowed' : 'pointer',

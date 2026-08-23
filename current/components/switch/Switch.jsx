@@ -10,7 +10,7 @@ export function Switch({ checked, onChange, label, disabled }) {
       <span data-ds-peer-target="" style={{
         width: 30, height: 17, boxSizing: 'border-box', borderRadius: 'var(--radius-xs)', position: 'relative', flexShrink: 0,
         background: checked ? 'var(--primary-muted-bg)' : 'var(--control-track)',
-        border: `1px solid ${checked ? 'var(--primary)' : 'var(--border-strong)'}`,
+        border: `var(--border-width) solid ${checked ? 'var(--primary)' : 'var(--border-strong)'}`,
         opacity: disabled ? 0.5 : 1,
         transition: 'border-color var(--duration-base) var(--ease-standard), background var(--duration-base) var(--ease-standard)',
       }}>

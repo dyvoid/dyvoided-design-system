@@ -103,7 +103,6 @@
 
   --scrim: oklch(5% 0 0 / 0.55);
   --control-track: var(--gray-700);
-  --dot-grid: oklch(100% 0 0 / 0.06);
 }
 
 [data-theme="light"] {
@@ -136,5 +135,4 @@
 
   --scrim: oklch(20% 0 0 / 0.35);
   --control-track: var(--gray-200);
-  --dot-grid: oklch(0% 0 0 / 0.06);
 }

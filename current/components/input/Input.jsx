@@ -12,7 +12,7 @@ export function Input({ label, placeholder, value, onChange, error, iconLeft, di
         height: 'var(--control-height-md)', padding: '0 12px',
         borderRadius: 'var(--radius-sm)',
         background: 'var(--surface-sunken)',
-        border: `1px solid ${error ? 'var(--danger-500)' : (focused ? 'var(--primary)' : 'var(--border-subtle)')}`,
+        border: `var(--border-width) solid ${error ? 'var(--danger-500)' : (focused ? 'var(--primary)' : 'var(--border-subtle)')}`,
         boxShadow: focused ? 'var(--focus-ring)' : 'none',
         transition: `border-color var(--duration-fast) var(--ease-standard)`,
       }}>

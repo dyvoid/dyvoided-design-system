@@ -13,7 +13,7 @@ export function Checkbox({ checked, onChange, label, disabled, indeterminate }) 
         width: 15, height: 15, boxSizing: 'border-box', borderRadius: 'var(--radius-xs)', flexShrink: 0,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         background: on ? 'var(--primary)' : 'var(--control-track)',
-        border: `1px solid ${on ? 'var(--primary)' : 'var(--border-strong)'}`,
+        border: `var(--border-width) solid ${on ? 'var(--primary)' : 'var(--border-strong)'}`,
         opacity: disabled ? 0.5 : 1,
         transition: 'border-color var(--duration-fast) var(--ease-standard), background var(--duration-fast) var(--ease-standard)',
       }}>

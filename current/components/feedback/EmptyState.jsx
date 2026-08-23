@@ -9,7 +9,7 @@ export function EmptyState({ icon, title, description, action }) {
       {icon && (
         <div style={{
           width: 44, height: 44, borderRadius: 'var(--radius-lg)', background: 'var(--surface-raised)',
-          border: '1px solid var(--border-subtle)', display: 'flex', alignItems: 'center', justifyContent: 'center',
+          border: 'var(--border-width) solid var(--border-subtle)', display: 'flex', alignItems: 'center', justifyContent: 'center',
           color: 'var(--text-tertiary)',
         }}>{icon}</div>
       )}

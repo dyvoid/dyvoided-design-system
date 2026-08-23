@@ -19,7 +19,7 @@ export function Toast({ variant = 'info', title, children, action, onClose }) {
     <div role="status" style={{
       display: 'flex', alignItems: 'flex-start', gap: 10, width: 340, padding: '12px 12px 12px 14px',
       background: 'var(--surface-overlay)', borderRadius: 'var(--radius-md)',
-      border: '1px solid var(--border-subtle)', boxShadow: 'var(--shadow-md)',
+      border: 'var(--border-width) solid var(--border-subtle)', boxShadow: 'var(--shadow-md)',
       fontFamily: 'var(--font-body)',
     }}>
       <span style={{ width: 7, height: 7, borderRadius: 'var(--radius-full)', background: tone, marginTop: 6, flexShrink: 0, boxShadow: `0 0 6px 0 ${tone}` }} />

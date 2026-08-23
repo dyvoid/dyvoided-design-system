@@ -23,7 +23,7 @@ export function Select({ label, options = [], value, onChange, placeholder = 'Se
         display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8,
         height: 'var(--control-height-md)', padding: '0 10px 0 12px', width: '100%',
         borderRadius: 'var(--radius-sm)', background: 'var(--surface-sunken)',
-        border: `1px solid ${error ? 'var(--danger-500)' : (open ? 'var(--primary)' : 'var(--border-subtle)')}`,
+        border: `var(--border-width) solid ${error ? 'var(--danger-500)' : (open ? 'var(--primary)' : 'var(--border-subtle)')}`,
         boxShadow: open ? 'var(--focus-ring)' : 'none',
         color: selected ? 'var(--text-primary)' : 'var(--text-tertiary)',
         fontSize: 'var(--text-base)', fontFamily: 'var(--font-body)',
@@ -38,7 +38,7 @@ export function Select({ label, options = [], value, onChange, placeholder = 'Se
         <div style={{
           position: 'absolute', top: '100%', left: 0, right: 0, marginTop: 6, zIndex: 50,
           padding: 4, background: 'var(--surface-overlay)', borderRadius: 'var(--radius-md)',
-          border: '1px solid var(--border-subtle)', boxShadow: 'var(--shadow-md)',
+          border: 'var(--border-width) solid var(--border-subtle)', boxShadow: 'var(--shadow-md)',
           maxHeight: 260, overflowY: 'auto',
         }}>
           {options.map((o) => {
