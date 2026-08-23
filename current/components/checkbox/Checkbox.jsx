@@ -10,17 +10,16 @@ export function Checkbox({ checked, onChange, label, disabled, indeterminate }) 
         onChange={() => onChange && onChange(!checked)}
       />
       <span data-ds-peer-target="" style={{
-        width: 16, height: 16, boxSizing: 'border-box', borderRadius: 'var(--radius-xs)', flexShrink: 0,
+        width: 15, height: 15, boxSizing: 'border-box', borderRadius: 'var(--radius-xs)', flexShrink: 0,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
-        background: 'var(--control-track)',
+        background: on ? 'var(--primary)' : 'var(--control-track)',
         border: `1px solid ${on ? 'var(--primary)' : 'var(--border-strong)'}`,
         opacity: disabled ? 0.5 : 1,
-        transition: 'border-color var(--duration-fast) var(--ease-standard)',
+        transition: 'border-color var(--duration-fast) var(--ease-standard), background var(--duration-fast) var(--ease-standard)',
       }}>
         {on && <span style={{
-          width: 12, height: 12, borderRadius: 3,
-          background: 'linear-gradient(180deg,var(--primary-400) 0%,var(--primary-600) 100%)',
-          boxShadow: 'inset 0 1px 0 oklch(100% 0 0 / .3), 0 0 4px 0 var(--primary-muted-bg)',
+          width: 7, height: 7, borderRadius: 2,
+          background: 'var(--text-on-accent)',
         }} />}
       </span>
       {label && <span style={{ fontSize: 'var(--font-size-base)', color: disabled ? 'var(--text-disabled)' : 'var(--text-primary)' }}>{label}</span>}

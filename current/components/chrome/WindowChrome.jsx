@@ -21,7 +21,7 @@ export function WindowChrome({ title, children, active = true, platform = 'mac' 
           </div>
         ) : <span />}
         <span style={{
-          fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 12, letterSpacing: 'var(--tracking-wide)',
+          fontFamily: 'var(--font-mono)', fontWeight: 500, fontSize: 'var(--text-xs)', letterSpacing: 'var(--tracking-wide)',
           color: 'var(--text-tertiary)', textTransform: 'uppercase',
           position: platform === 'mac' ? 'absolute' : 'static', left: 0, right: 0, textAlign: 'center', pointerEvents: 'none',
         }}>{title}</span>

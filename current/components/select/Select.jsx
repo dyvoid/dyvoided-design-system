@@ -18,7 +18,7 @@ export function Select({ label, options = [], value, onChange, placeholder = 'Se
   const selected = options.find((o) => o.value === value);
   return (
     <div ref={ref} style={{ display: 'flex', flexDirection: 'column', gap: 6, fontFamily: 'var(--font-body)', position: 'relative' }}>
-      {label && <span style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)', fontWeight: 600 }}>{label}</span>}
+      {label && <span style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)', fontWeight: 500 }}>{label}</span>}
       <button type="button" disabled={disabled} onClick={() => setOpen((o) => !o)} data-ds-focus="" style={{
         display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8,
         height: 'var(--control-height-md)', padding: '0 10px 0 12px', width: '100%',

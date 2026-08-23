@@ -10,7 +10,7 @@ export function DataTable({ columns, rows, rowKey }) {
               <th key={col.key} style={{
                 textAlign: col.align || 'left', padding: 'var(--space-3) var(--space-4)',
                 background: 'var(--surface-sunken)', borderBottom: '1px solid var(--border-subtle)',
-                fontFamily: 'var(--font-mono)', fontSize: 11, fontWeight: 500, letterSpacing: 'var(--tracking-wide)',
+                fontFamily: 'var(--font-mono)', fontSize: 'var(--text-xs)', fontWeight: 500, letterSpacing: 'var(--tracking-wide)',
                 textTransform: 'uppercase', color: 'var(--text-tertiary)', width: col.width,
               }}>{col.label}</th>
             ))}
@@ -25,6 +25,9 @@ export function DataTable({ columns, rows, rowKey }) {
                   borderBottom: i === rows.length - 1 ? 'none' : '1px solid var(--border-subtle)',
                   fontSize: 'var(--font-size-base)', color: 'var(--text-primary)',
                   fontFamily: col.numeric ? 'var(--font-mono)' : 'var(--font-body)',
+                  fontWeight: col.numeric ? 500 : undefined,
+                  fontFeatureSettings: col.numeric ? 'var(--tnum)' : undefined,
+                  letterSpacing: col.numeric ? '-0.01em' : undefined,
                 }}>{col.render ? col.render(row) : row[col.key]}</td>
               ))}
             </tr>

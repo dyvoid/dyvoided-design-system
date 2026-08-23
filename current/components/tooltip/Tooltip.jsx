@@ -14,7 +14,7 @@ export function Tooltip({ children, label, side = 'top' }) {
         <span style={{
           position: 'absolute', ...pos, whiteSpace: 'nowrap', zIndex: 10,
           background: 'var(--gray-950)', color: 'var(--gray-50)',
-          fontFamily: 'var(--font-body)', fontSize: 12, fontWeight: 600,
+          fontFamily: 'var(--font-body)', fontSize: 'var(--text-xs)', fontWeight: 500,
           padding: '5px 9px', borderRadius: 'var(--radius-xs)', boxShadow: 'var(--shadow-md)',
         }}>{label}</span>
       )}
