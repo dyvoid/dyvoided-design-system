@@ -1,69 +1,32 @@
 # dyvoided.2 — Design System
 
-A from-scratch design identity for a personal suite of applications: productivity/dashboard tools, developer tools, creative/media tools, and consumer-facing apps — with a specific eye toward Electron desktop shells. No existing codebase, Figma, or brand was attached; this was built from the brief below plus reference taste.
+A flexible design system for building apps with a consistent visual identity across productivity tools, developer tools, creative/media tools, and consumer-facing surfaces. Dark-first with light as a peer. Targets Electron desktop shells and browser-based web apps.
 
-**Reference taste (not copied, not literal sources):** Arturia Pigments (rich, precise creative-tool UI — soft elevation, tactile controls, confident but restrained color), Obsidian (clean, calm, dark-first productivity surface). Explicitly avoided: flat/lifeless Microsoft-era UI, and trend-driven "style over clarity" agency sites. The result sits between those two poles — sleek and professional, control-dense where it needs to be, never decorative for its own sake.
+The core idea: **one token layer, many apps**. Rebranding an app is a single seed override, not a rebuild. Components are framework-agnostic CSS classes — bring your own JS framework.
 
-Name is provisional. Components compile onto `window.DyvoidedDesignSystem_7b704c` (this project's auto-derived namespace) — every template's `x-import` tags reference that name. Rename the project and re-check with `check_design_system` to see the new namespace before updating those references.
+## Quick start
 
-## Index
+Import one file in your app:
 
-- `styles.css` — the one entry point. Import this file in any consuming app.
-- `tokens/` — colors, typography, spacing, effects (shadow/radius/blur/inset-rail/inset-highlight/focus-ring), motion, interaction (hover/press/focus-visible + reduced-motion, driven by `data-ds-*` attributes components set; also themes native browser surfaces: `::selection`, `caret-color`, `::placeholder`, `accent-color`).
-- `guidelines/` — foundation specimen cards (colors, type, spacing, elevation, radii).
-- `components/` — reusable primitives, grouped by concern:
-  - `button/` — Button
-  - `input/` — Input
-  - `checkbox/` — Checkbox
-  - `switch/` — Switch
-  - `select/` — Select
-  - `controls/` — Slider
-  - `surfaces/` — Panel, DataTable
-  - `feedback/` — Badge, Tooltip, Toast (+ ToastStack), EmptyState, ProgressBar, Spinner
-  - `navigation/` — Tabs, Breadcrumb; `sidebar/` — SidebarNav (tabs as a vertical rail)
-  - `overlays/` — Dialog, Menu, CommandPalette, Scrim (`.ds-scrim` utility — fixed full-screen overlay with `--scrim` background and fade transition via `@starting-style`)
-  - `avatar/` — Avatar (+ AvatarGroup)
-  - `chrome/` — WindowChrome (branded Electron titlebar)
-- `scripts/drift.mjs` — drift detector. Scans all `.card.html`, `.jsx`, and `index.html` for banned patterns (unpinned lucide, inline `oklch(from var())`, zero-offset halo box-shadows, non-token `px` font sizes, hardcoded hues, stale font links). Run `node scripts/drift.mjs` from the repo root. Exit 1 on findings.
-- `index.html` — landing page and sanctioned validation surface. An app-shell composition that assembles multiple components into a realistic layout. Imports `styles.css` and iframes the canonical `.card.html` specimens, so it stays in sync with the component layer automatically. The drift script scans it alongside cards and JSX to catch banned patterns.
-- `templates/` — ten full app-shell templates, each composed from the real components above via `x-import` (never hand-rolled CSS clones): DAW Sequencer Shell, Creative Studio Shell, Image Editor Shell, Dev Dashboard Shell, Dashboard Kanban Shell, Editorial Reader Shell, Messaging Shell, File Manager Shell, Marketing Landing Shell, Account Settings Shell.
+```html
+<link rel="stylesheet" href="styles.css">
+```
 
-No source codebase defined a component inventory, so the set above is a standard starter set sized to the four app types described in the brief. Add more as real screens need them — ask and I'll build them to match.
+That pulls in every token layer (colors, typography, spacing, effects, motion, interaction, scrollbar) and all component classes. Use the `ds-*` classes directly in your markup:
 
-## Content fundamentals
+```html
+<button class="ds-btn ds-btn-primary">Render</button>
+```
 
-No product copy exists yet (no real app to draw voice from). Provisional stance, matching the visual restraint:
+Open `index.html` in a browser to see the full showcase — live interactive workbench, every component specimen, all ten app-shell templates, and the type/color foundations.
 
-- Short, literal labels over cleverness: "Render", "Duplicate", "Auto-save" — not "Let's make magic happen."
-- Second person, direct: "Save changes", not "Your changes will be saved."
-- Numbers and units in monospace (`--font-mono`) wherever they're measurements or live values — buffer sizes, dB, Hz, timestamps — visually distinguishing "data" from "prose."
-- No emoji. No exclamation points in UI copy.
-- Sentence case for buttons and labels; uppercase only for small mono/tracking-wide microlabels (data keys like "Sample rate", "Cutoff"). Panel titles use mono uppercase at `--font-size-xs`. Sidebar group headers ("Workspace", "Layers", "Inspector") use the body font at `--font-size-2xs`, 600 weight, uppercase, slightly tighter tracking — a deliberate hierarchy step down from panel titles.
+## Rebranding
 
-## Visual foundations
-
-- **Color** *(procedural — see "Theming" below)*: a near-monochrome graphite scale (cool, slightly blue-gray, never pure black/white) carries the majority of the UI. On top sit **four identity colors** — a primary (`--primary`, primary actions/focus) plus three supporting accents (`--accent-1`/`--accent-2`/`--accent-3`) for per-parameter identity, so dense control surfaces read at a glance without turning into a rainbow: each is assigned a role, never picked freely per-element. These are **not fixed** — their default hues (indigo / amber / teal / magenta) are just the dyvoided.2 defaults; every app rebrands by overriding the seeds. A separate **fixed** signature neutral (`--signature`) is reserved for one decorative detail (the panel top-edge line) and is deliberately immune to rebranding. Functional colors (`--success`/`--danger`/`--warning`) are also fixed — semantic meaning must never be rebranded.
-- **Type**: Familjen Grotesk (display) is a characterful contemporary grotesque — used for page titles and big numbers, always at negative tracking for a tighter, more deliberate feel. Hanken Grotesk (body) is a clean humanist grotesk built for small UI text — labels, paragraphs, buttons. JetBrains Mono is the technical voice: uppercase, letter-spaced micro-labels (panel headers, tabs, field labels, window title) and anything literally numeric (timestamps, Hz, dB, code), with tabular figures where values change.
-- **Elevation**: soft, layered, never a single hard drop shadow. Shadows are two-layer (tight + soft) for real depth. Panels float on `--surface-panel` with a signature top edge (`--signature-500` 1px, the fixed neutral metallic line immune to rebranding) plus `--shadow-sm` and an inset highlight; no full 1px border — background contrast and the signature top edge do the definition work. Raised elements (dialogs, popovers) get `--shadow-md`/`--shadow-lg` plus a 1px hairline border. Recessed controls (slider track, checkbox, switch track) use `--inset-rail` for an inset shadow that reads as a recessed surface.
-- **Corners**: sharp 2px on all controls and panels (`--radius-xs` through `--radius-xl`), full pill (`--radius-full`, 999px) only for switches, badges, dots, avatars, and scrollbar thumbs. Never fully square, never bubble-rounded — precision and authority, not softness.
-- **Borders & surfaces**: hairline borders at low opacity (`--border-subtle` \~9-14%, `--border-strong` \~16-20%) rather than solid gray lines — reads as "glass panel edge," not a ruled line.
-- **Focus**: every interactive element shows `--focus-ring` on keyboard focus (`:focus-visible`, not mouse clicks) via a shared `data-ds-focus` attribute — never rely on browser default outlines.
-- **Density**: every spacing token has a `[data-density="compact"]` override. Default is spacious (Pigments/Obsidian both give content room); compact mode exists for power users and data-dense views (mixers, tables) without a second design language.
-- **Motion**: fast (120ms) for hover/press feedback, base (180ms) for state changes and overlay entrances, slow (280ms) for dialogs and toast entrance. Spring easing only on the Switch thumb (the one place a little personality is earned). Animations are compositor-only (`transform`/`opacity`); paint properties (`color`, `background`, `border-color`, `box-shadow`) are allowed for state transitions at ≤180ms. Never animate layout properties (`left`/`width`/`height`). No bounce anywhere else. Overlay entrances (dialog, command palette, menu, select pop, scrim) use `@starting-style` + `allow-discrete` for fade+scale on show, with `[hidden]` driving the exit. Toasts fade+rise on insertion via `@keyframes ds-toast-in`. The tab indicator is always rendered and toggled via opacity transition so the underline fades between tabs instead of jumping. Checkbox, switch track, and select field ease through state changes. `@keyframes ds-spin` (spinner) is defined in `components.css`. The existing `prefers-reduced-motion` override in `tokens/interaction.css` collapses all transitions and animations to 0.01ms — overlays still appear, feedback still registers, just instantly. The spinner is exempted from the collapse so it keeps spinning (a stationary spinner reads as "stuck").
-- **Backgrounds**: base surfaces (`--surface-app`, `--surface-panel`, `--surface-raised`) are flat — no noise/grain, no imagery-as-chrome. The one exception is the **main-area wash**: 1–2 soft `radial-gradient`s built from `*-muted-bg` tokens (18% opacity) fading to `transparent` by \~45% radius, laid over flat `--surface-app` — see `templates/dashboard-kanban`, `templates/marketing-landing`, `templates/daw-sequencer`, `templates/dev-dashboard` for the exact recipe. Never raise the opacity past the muted-bg tokens or use a full-strength/opaque gradient — the wash must stay faint enough that panel borders (`--border-subtle`, 7%) still read clearly on top of it.
-- **Browser surfaces**: `::selection`, `caret-color`, `::placeholder`, and `accent-color` (native checkboxes/radios) are themed via `tokens/interaction.css` and flip with `[data-theme]`. Consuming apps inherit themed browser surfaces automatically.
-- **Window chrome (Electron)**: custom titlebar, not OS-native, so the app looks identical on macOS and Windows. macOS traffic lights are re-colored to the brand's danger/amber/success rather than red/yellow/green — same affordance, on-brand.
-- **Identity color in use**: the four identity seeds are expressed by category, not by individual element. In creative tools, sliders get an accent color only when the parameter is being modulated (e.g., Cutoff gets teal because LFO 1 → Cutoff is active); other sliders stay primary. Layers get a colored left edge by category (drum, bass, lead, pad, fx), and colors repeat across layers. Most of the UI stays primary; accents carry meaning, not decoration. Sliders auto-render a 20-step tick rail below the track via `::after` (no markup required); an explicit `.ds-slider-ticks` element overrides the auto-render if present.
-
-## Theming (procedural color)
-
-Color is **fully procedural**. Each of the four identity colors is defined by a single **seed** custom property — `--primary-seed`, `--accent-1-seed`, `--accent-2-seed`, `--accent-3-seed` — and *everything else derives from it*: the 300–700 tint/shade ramp (via `oklch(from … )` relative color), the translucent `*-muted-bg` fills, the focus ring, and every accent-tinted surface in the kit (the main-area background wash, sidebar gradient, badges, slider fills, card bars). Change a seed and all of it recolors, in both light and dark themes.
-
-To rebrand an app, override **only the four seeds** — nothing else:
+Color is fully procedural. Four `oklch` seed values drive every identity color — ramps, muted fills, focus rings, accent-tinted surfaces. Override only the seeds to rebrand an entire app across both themes:
 
 ```css
 :root {
-  --primary-seed:  oklch(62% 0.19 25);   /* e.g. a red-brand app */
+  --primary-seed:  oklch(62% 0.19 25);    /* your brand hue */
   --accent-1-seed: oklch(72% 0.15 145);
   --accent-2-seed: oklch(68% 0.13 240);
   --accent-3-seed: oklch(66% 0.16 300);
@@ -71,27 +34,57 @@ To rebrand an app, override **only the four seeds** — nothing else:
 ```
 
 Rules:
+- Seeds accept any CSS color (hex, oklch, hsl). Ramps are recomputed perceptually.
+- Never hardcode a hue in a component or screen. Always reference tokens (`--primary`, `--accent-2-500`, `--primary-muted-bg`).
+- Token names are positional, never hue-named. It's `--accent-1`, not `--amber`.
+- `--signature`, `--success`, `--danger`, `--warning` are fixed. Semantic meaning must not be rebranded.
 
-- **Seeds accept any CSS color** (hex, oklch, …); ramps are recomputed perceptually so any hue stays balanced.
-- **Never hardcode a hue** in a component or screen — reference the tokens (`--primary`, `--accent-2-500`, `--primary-muted-bg`, …). Don't write raw `oklch(… 275)` accent literals; that breaks theming.
-- **Token names are positional, never hue-named** — it's `--accent-1`, not `--amber`. The color a name points at is app-defined.
-- `--signature`, `--success`, `--danger`, `--warning` are **fixed** and must not be themed.
+## What's in the box
 
-## Iconography
+- `styles.css` — the one entry point. Import this in any consuming app.
+- `tokens/` — colors, typography, spacing, effects (shadow/radius/focus-ring), motion, interaction (hover/press/focus-visible + reduced-motion + native browser surfaces), scrollbar.
+- `components/` — 18 reusable primitives, each with a canonical `.card.html` visual specimen and a `.jsx` reference implementation:
+  - Button, Input, Select, Checkbox, Switch, Slider
+  - Panel, DataTable
+  - Badge, Tooltip, Toast, EmptyState, ProgressBar, Spinner
+  - Tabs, Breadcrumb, SidebarNav
+  - Dialog, Menu, CommandPalette, Scrim
+  - Avatar, WindowChrome
+- `templates/` — 10 full app-shell templates built with `ds-*` classes: Creative Studio, DAW Sequencer, Image Editor, Dev Dashboard, Dashboard Kanban, Editorial Reader, Messaging, File Manager, Marketing Landing, Account Settings.
+- `guidelines/` — foundation specimen cards (colors, type, spacing, elevation, radii, scrollbars, density).
+- `scripts/drift.mjs` — drift detector. Scans all specimens, templates, and JSX for banned patterns (unpinned lucide, inline `oklch(from var())`, hardcoded hues, non-token px font sizes, stale font links). Run `node scripts/drift.mjs` from the repo root.
+- `index.html` — the showcase. Assembles components into a realistic layout and iframes every specimen and template.
 
-Icons are real **Lucide** glyphs, not hand-drawn approximations — but how they're wired in differs by file type, because this project's in-browser compiler can't resolve npm packages:
+## Foundations
 
-- **`*.card.html` previews** (plain HTML, no React) load the actual Lucide CDN build and render via `<i data-lucide="...">` + `lucide.createIcons()` — a real dependency.
-- **`.jsx` components** (Select, CommandPalette, Toast) inline Lucide's exact SVG path data directly, since `import { X } from 'lucide-react'` gets silently dropped by this compiler. Each of those files has a comment flagging this and instructing real consuming apps to `npm install lucide-react` and swap in the real components.
+**Color** — A cool graphite neutral scale carries the majority of the UI. Four identity colors (primary + three accents) sit on top, assigned by category not per-element. Dense control surfaces read at a glance without becoming a rainbow. A fixed signature neutral reserved for one decorative detail (the panel top-edge line). Functional colors (success/danger/warning) are fixed.
 
-Used sparingly: one icon per nav item, one per file/project row, one per header action button. Not used in badges (text + color carries state there) or inside dense control rows (checkboxes, sliders) to avoid clutter.
+**Type** — Familjen Grotesk for display (page titles, big numbers, negative tracking). Hanken Grotesk for body (labels, paragraphs, buttons). JetBrains Mono for technical voice: uppercase micro-labels (panel headers, data keys) and anything numeric (timestamps, Hz, dB), with tabular figures on changing values.
+
+**Elevation** — Soft layered shadows, never a single hard drop. Panels float on `--surface-panel` with a signature top edge and inset highlight. Raised elements (dialogs, popovers) get `--shadow-md`/`--shadow-lg` plus a hairline border. Recessed controls (slider track, checkbox, switch track) use `--inset-rail`.
+
+**Corners** — Sharp 2px on all controls and panels. Full pill (999px) only for switches, badges, dots, avatars, and scrollbar thumbs.
+
+**Density** — Every spacing token has a `[data-density="compact"]` override. Default is spacious; compact exists for power-user and data-dense views.
+
+**Motion** — 120ms for hover/press, 180ms for state changes and overlay entrances, 280ms for dialogs. Spring easing only on the Switch thumb. Compositor-only (`transform`/`opacity`); paint properties allowed for state transitions at 180ms or less. Never animate layout properties. Overlay entrances use `@starting-style` + `allow-discrete` for fade+scale. `prefers-reduced-motion` collapses all transitions to 0.01ms (spinner exempted).
+
+**Browser surfaces** — `::selection`, `caret-color`, `::placeholder`, and `accent-color` are themed via `tokens/interaction.css` and flip with `[data-theme]`. Consuming apps inherit themed browser surfaces automatically.
+
+**Window chrome** — Custom Electron titlebar, not OS-native. macOS and Windows look identical. Traffic lights re-colored to brand danger/amber/success.
+
+## Content guidelines
+
+- Short, literal labels over cleverness. "Render", "Duplicate", "Auto-save".
+- Second person, direct. "Save changes", not "Your changes will be saved."
+- Numbers and units in monospace wherever they're measurements or live values.
+- No emoji. No exclamation points in UI copy.
+- Sentence case for buttons and labels. Uppercase only for mono micro-labels (data keys like "Sample rate", "Cutoff"). Panel titles use mono uppercase at `--font-size-xs`. Sidebar group headers use body font at `--font-size-2xs`, 600 weight, uppercase.
+
+## Icons
+
+[Lucide](https://lucide.dev), used sparingly: one icon per nav item, one per file row, one per header action. Not used in badges or inside dense control rows. The `.card.html` specimens load Lucide from CDN; real apps should `npm install lucide-react` (or equivalent) and use the real package.
 
 ## Accessibility
 
-Every interactive element in the canonical `.card.html` specimens uses semantic HTML: `<button>` for tabs, nav items, menu items, select triggers, command palette items; `<input type="checkbox" role="switch">` for switches; `<input type="checkbox">` with `data-ds-peer` for checkboxes; `<input type="range">` inside `data-ds-track` for sliders. ARIA roles (`role="tab"`, `role="menuitem"`, `role="listbox"`, `role="option"`, `role="dialog"`) and states (`aria-selected`, `aria-current`, `aria-checked="mixed"`, `aria-haspopup`, `aria-labelledby`) are set on the appropriate elements. `:focus-visible` rings appear on keyboard focus via `--focus-ring`. The `.jsx` reference implementations mirror these patterns; `Input.jsx` uses `React.useId()` for explicit `htmlFor`/`id` label association.
-
-## Caveats / next steps
-
-- Icons in the `.jsx` components are vendored Lucide path data, not the real npm package (see Iconography above) — sync this repo to Claude Code to bundle with real dependencies if that matters for a real build.
-- Component set is sized to the brief's four app categories, not exhaustively enumerated from a real product yet — tell me the first real screen you want to build and I'll add whatever primitives it needs.
-- Remember to set this project's File type to **Design System** in the Share menu so other apps/collaborators can pull from it.
+Every interactive element uses semantic HTML with ARIA roles and states. `:focus-visible` rings appear on keyboard focus via `--focus-ring` — never rely on browser default outlines. Switches use `<input type="checkbox" role="switch">`. Checkboxes and sliders use native inputs with visual peer elements. The `.jsx` reference implementations mirror these patterns with `React.useId()` for label association.
