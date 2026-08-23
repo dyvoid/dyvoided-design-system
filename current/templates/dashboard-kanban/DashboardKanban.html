@@ -13,7 +13,7 @@
   html, body { margin: 0; padding: 0; background: var(--surface-sunken); font-family: var(--font-body); }
   .shell { width: 1280px; height: 800px; margin: 0 auto; display: flex; flex-direction: column; overflow: hidden; background: var(--surface-app); }
   .body { display: flex; flex: 1; min-height: 0; }
-  .sidebar { width: 220px; flex-shrink: 0; border-right: var(--border-width) solid var(--border-subtle); display: flex; flex-direction: column; background: linear-gradient(165deg, var(--surface-raised) 0%, var(--surface-panel) 55%, var(--primary-muted-bg) 160%); }
+  .sidebar { width: 220px; flex-shrink: 0; border-right: var(--border-width) solid var(--border-subtle); display: flex; flex-direction: column; background: linear-gradient(165deg, var(--surface-raised) 0%, var(--surface-panel) 55%, var(--panel-tint) 160%); }
   .sidebar-nav { flex: 1; min-height: 0; padding: var(--space-3) var(--space-2); }
   .sidebar-foot { padding: var(--space-5); border-top: var(--border-width) solid var(--border-subtle); display: flex; flex-direction: column; gap: var(--space-4); }
   .main { flex: 1; padding: var(--space-7); overflow: hidden; display: flex; flex-direction: column; min-height: 0; }
@@ -70,11 +70,13 @@
       </div>
       <div class="sidebar-foot">
         <label class="ds-switch-item">
-          <span class="ds-switch-track" id="theme-switch"><span class="ds-switch-thumb"></span></span>
+          <input type="checkbox" role="switch" data-ds-peer id="theme-switch">
+          <span class="ds-switch-track" data-ds-peer-target><span class="ds-switch-thumb"></span></span>
           <span class="ds-switch-label">Light theme</span>
         </label>
         <label class="ds-switch-item">
-          <span class="ds-switch-track on" id="notif-switch"><span class="ds-switch-thumb"></span></span>
+          <input type="checkbox" role="switch" data-ds-peer id="notif-switch" checked>
+          <span class="ds-switch-track on" data-ds-peer-target><span class="ds-switch-thumb"></span></span>
           <span class="ds-switch-label">Notifications</span>
         </label>
       </div>
@@ -199,13 +201,14 @@ document.querySelectorAll('[data-nav]').forEach(btn => {
 });
 
 // Switches
-document.getElementById('theme-switch').addEventListener('click', e => {
-  const track = e.currentTarget;
-  track.classList.toggle('on');
-  document.body.dataset.theme = track.classList.contains('on') ? 'light' : 'dark';
+document.getElementById('theme-switch').addEventListener('change', e => {
+  const track = e.target.parentElement.querySelector('[data-ds-peer-target]');
+  track.classList.toggle('on', e.target.checked);
+  document.body.dataset.theme = e.target.checked ? 'light' : 'dark';
 });
-document.getElementById('notif-switch').addEventListener('click', e => {
-  e.currentTarget.classList.toggle('on');
+document.getElementById('notif-switch').addEventListener('change', e => {
+  const track = e.target.parentElement.querySelector('[data-ds-peer-target]');
+  track.classList.toggle('on', e.target.checked);
 });
 </script>
 </body>

@@ -14,7 +14,7 @@
   html, body { margin: 0; padding: 0; background: var(--surface-sunken); font-family: var(--font-body); }
   .shell { width: 1280px; height: 800px; margin: 0 auto; display: flex; flex-direction: column; overflow: hidden; background: var(--surface-app); }
   .body { display: flex; flex: 1; min-height: 0; }
-  .sidebar { width: 200px; flex-shrink: 0; border-right: var(--border-width) solid var(--border-subtle); display: flex; flex-direction: column; background: linear-gradient(165deg, var(--surface-raised) 0%, var(--surface-panel) 55%, var(--accent-2-muted-bg) 160%); }
+  .sidebar { width: 200px; flex-shrink: 0; border-right: var(--border-width) solid var(--border-subtle); display: flex; flex-direction: column; background: linear-gradient(165deg, var(--surface-raised) 0%, var(--surface-panel) 55%, var(--panel-tint) 160%); }
   .sidebar-nav { flex: 1; min-height: 0; padding: var(--space-3) var(--space-2); }
   .sidebar-foot { padding: var(--space-5); border-top: var(--border-width) solid var(--border-subtle); display: flex; flex-direction: column; gap: var(--space-4); }
   .operator { display: flex; align-items: center; gap: 10px; }
@@ -30,10 +30,7 @@
   .svc-name { font-family: var(--font-mono); font-size: var(--text-sm); color: var(--text-primary) }
   .svc-right { display: flex; align-items: center; gap: 16px; position: relative; }
   .log-line { font-family: var(--font-mono); font-size: var(--font-size-xs); color: var(--text-secondary); padding: var(--space-2) var(--space-3); border-bottom: var(--border-width) solid var(--border-subtle); }
-  .scrim { position: fixed; inset: 0; background: var(--scrim); display: flex; align-items: center; justify-content: center; z-index: 100; }
-  .scrim[hidden] { display: none; }
-  .cmd-scrim { position: fixed; inset: 0; background: var(--scrim); display: flex; align-items: flex-start; justify-content: center; padding-top: 80px; z-index: 100; }
-  .cmd-scrim[hidden] { display: none; }
+  .cmd-scrim { align-items: flex-start; padding-top: 80px; }
   .toast-stack { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 100; }
 </style>
 </head>
@@ -137,7 +134,7 @@
 </div>
 
 <!-- Deploy dialog -->
-<div class="scrim" id="dialog" hidden>
+<div class="ds-scrim" id="dialog" hidden>
   <div class="ds-dialog" style="width:420px">
     <div class="ds-dialog-head">Confirm deployment</div>
     <div class="ds-dialog-body">
@@ -160,7 +157,7 @@
 </div>
 
 <!-- Command palette -->
-<div class="cmd-scrim" id="cmd" hidden>
+<div class="ds-scrim cmd-scrim" id="cmd" hidden>
   <div class="ds-cmd" style="width:560px">
     <div class="ds-cmd-query"><i data-lucide="search"></i><input class="ds-cmd-input" placeholder="Search commands" id="cmd-input"><span class="ds-cmd-esc">ESC</span></div>
     <div class="ds-cmd-list" id="cmd-list"></div>
@@ -197,17 +194,18 @@ function renderServices() {
         <span class="svc-name">${svc.name}</span>
       </div>
       <div class="svc-right">
-        <span class="ds-switch-track ${svc.enabled ? 'on' : ''}" data-svc="${svc.name}"><span class="ds-switch-thumb"></span></span>
-        <button class="ds-btn ds-btn-ghost ds-btn-sm">⋯</button>
+        <label class="ds-switch-item"><input type="checkbox" role="switch" data-ds-peer data-svc="${svc.name}"${svc.enabled ? ' checked' : ''}><span class="ds-switch-track ${svc.enabled ? 'on' : ''}" data-ds-peer-target><span class="ds-switch-thumb"></span></span></label>
+        <button class="ds-btn ds-btn-ghost ds-btn-sm" aria-label="More actions"><i data-lucide="more-horizontal"></i></button>
       </div>
     </div>`).join('');
   document.getElementById('svc-rows').innerHTML = html || '<div class="ds-empty"><div class="ds-empty-icon"><i data-lucide="inbox" width="20" height="20"></i></div><span class="ds-empty-title">No services match</span><span class="ds-empty-desc">Nothing in this environment matches the current filter.</span></div>';
   lucide.createIcons();
-  document.querySelectorAll('[data-svc]').forEach(el => {
-    el.addEventListener('click', () => {
-      const svc = services.find(s => s.name === el.dataset.svc);
-      svc.enabled = !svc.enabled;
-      el.classList.toggle('on', svc.enabled);
+  document.querySelectorAll('[data-svc]').forEach(input => {
+    input.addEventListener('change', () => {
+      const svc = services.find(s => s.name === input.dataset.svc);
+      svc.enabled = input.checked;
+      const track = input.parentElement.querySelector('[data-ds-peer-target]');
+      track.classList.toggle('on', input.checked);
     });
   });
 }

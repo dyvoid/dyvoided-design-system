@@ -8,7 +8,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../styles.css">
-<script src="https://unpkg.com/lucide@0.462.0/dist/umd/lucide.js"></script>
 <style>
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; background: var(--surface-sunken); font-family: var(--font-body); }
@@ -19,8 +18,7 @@
   .main-inner { padding: var(--space-9) var(--space-9) var(--space-11); max-width: 820px; margin: 0 auto; }
   .sticky-actions { position: sticky; top: 0; display: flex; justify-content: flex-end; gap: 8px; padding: var(--space-6) var(--space-7) 0; z-index: 5; }
 
-  .kicker { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: var(--font-size-2xs); letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--primary); font-weight: 500; margin-bottom: var(--space-5); }
-  .headline { font-family: var(--font-display); font-weight: 700; font-size: var(--font-size-4xl); line-height: var(--leading-tight); letter-spacing: var(--tracking-tight); color: var(--text-primary); text-wrap: balance; margin: 8px 0 var(--space-6); }
+  .headline { font-family: var(--font-display); font-weight: 700; font-size: var(--font-size-4xl); line-height: var(--leading-tight); letter-spacing: var(--tracking-tight); color: var(--text-primary); text-wrap: balance; margin: 0 0 var(--space-6); }
   .lede { font-size: var(--font-size-xl); line-height: var(--leading-snug); color: var(--text-secondary); max-width: 640px; text-wrap: pretty; margin: 0 0 var(--space-8); }
   .byline { display: flex; align-items: center; gap: 12px; margin-top: var(--space-8); padding-top: var(--space-5); border-top: var(--border-width) solid var(--border-subtle); }
   .byline-text { display: flex; flex-direction: column; gap: 2px; }
@@ -34,7 +32,7 @@
   .article-body { font-size: var(--font-size-md); line-height: var(--leading-body); color: var(--text-secondary); text-wrap: pretty; }
   .article-body p { margin: 0 0 var(--space-6); }
   .drop-cap { font-family: var(--font-display); font-weight: 700; font-size: var(--font-size-4xl); line-height: 0.8; float: left; padding: 6px 10px 0 0; color: var(--primary); }
-  .pull-quote { margin: var(--space-9) 0; padding: var(--space-2) 0 var(--space-2) var(--space-6); border-left: 3px solid var(--primary); font-family: var(--font-display); font-weight: 600; font-size: var(--font-size-xl); line-height: var(--leading-snug); color: var(--text-primary); letter-spacing: var(--tracking-tight); text-wrap: pretty; }
+  .pull-quote { margin: var(--space-9) 0; padding: var(--space-2) 0 var(--space-2) var(--space-6); border-left: 1px solid var(--primary); font-family: var(--font-display); font-weight: 600; font-size: var(--font-size-xl); line-height: var(--leading-snug); color: var(--text-primary); letter-spacing: var(--tracking-tight); text-wrap: pretty; }
   .article h2 { font-family: var(--font-display); font-weight: 600; font-size: var(--font-size-2xl); letter-spacing: var(--tracking-tight); color: var(--text-primary); margin: var(--space-9) 0 var(--space-4); }
   .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: var(--space-8); padding-top: var(--space-6); border-top: var(--border-width) solid var(--border-subtle); }
 
@@ -42,7 +40,6 @@
   .rail .newsletter { margin-top: auto; }
   .related-list { display: flex; flex-direction: column; gap: var(--space-2); }
   .related-item { display: flex; gap: 10px; padding: var(--space-2); border-radius: var(--radius-md); }
-  .related-num { font-family: var(--font-mono); font-size: var(--text-lg); color: var(--text-tertiary); font-weight: 500; width: 22px; flex-shrink: 0; }
   .related-body { display: flex; flex-direction: column; gap: 4px; }
   .related-cat { font-family: var(--font-mono); font-size:var(--font-size-2xs); letter-spacing: 0.08em; text-transform: uppercase; }
   .related-title { font-size: var(--text-base); font-weight: 600; color: var(--text-primary); line-height: var(--leading-snug); }
@@ -72,12 +69,11 @@
       </div>
 
       <div class="main-inner">
-        <span class="kicker">Field Notes · Issue 42</span>
         <h1 class="headline">The quiet return of the analog interface</h1>
         <p class="lede">After a decade of flat, frictionless screens, designers are rediscovering knobs, detents, and the reassuring weight of a control that pushes back.</p>
 
         <div class="byline">
-          <span class="ds-avatar ds-avatar-40 ds-avatar-t1">MW</span>
+          <span class="ds-avatar ds-avatar-44 ds-avatar-t1">MW</span>
           <div class="byline-text">
             <span class="byline-name">Mara Whitfield</span>
             <span class="byline-meta">14 min read · July 21, 2026</span>
@@ -124,7 +120,6 @@
       <div class="ds-group-label" style="margin-bottom:var(--space-5)">More in this issue</div>
       <div class="related-list">
         <div class="related-item">
-          <span class="related-num">01</span>
           <div class="related-body">
             <span class="related-cat" style="color:var(--accent-1-400)">Craft</span>
             <span class="related-title">Why grids are quietly disappearing from portfolios</span>
@@ -132,7 +127,6 @@
           </div>
         </div>
         <div class="related-item">
-          <span class="related-num">02</span>
           <div class="related-body">
             <span class="related-cat" style="color:var(--accent-2-400)">Research</span>
             <span class="related-title">A field study of the pause between taps</span>
@@ -140,7 +134,6 @@
           </div>
         </div>
         <div class="related-item">
-          <span class="related-num">03</span>
           <div class="related-body">
             <span class="related-cat" style="color:var(--accent-3-400)">Opinion</span>
             <span class="related-title">The case against the infinite feed</span>
@@ -148,7 +141,6 @@
           </div>
         </div>
         <div class="related-item">
-          <span class="related-num">04</span>
           <div class="related-body">
             <span class="related-cat" style="color:var(--primary-400)">Profile</span>
             <span class="related-title">The studio still setting type by hand in 2026</span>

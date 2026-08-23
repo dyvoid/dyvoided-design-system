@@ -39,11 +39,8 @@
   .row-menu-btn:hover { background: var(--surface-raised); color: var(--text-primary); }
   .row-menu { position: absolute; right: 0; top: 100%; z-index: 50; }
   .row-menu-wrap { position: relative; }
-  .upload-zone { border: 1px dashed var(--border-strong); border-radius: var(--radius-md); padding: var(--space-6); text-align: center; color: var(--text-tertiary); font-size: var(--text-sm); margin-bottom: var(--space-4); }
-  .scrim { position: fixed; inset: 0; background: var(--scrim); display: flex; align-items: center; justify-content: center; z-index: 100; }
-  .scrim[hidden] { display: none; }
-  .cmd-scrim { position: fixed; inset: 0; background: var(--scrim); display: flex; align-items: flex-start; justify-content: center; padding-top: 80px; z-index: 100; }
-  .cmd-scrim[hidden] { display: none; }
+  .upload-zone { border: var(--border-width) dashed var(--border-strong); border-radius: var(--radius-md); padding: var(--space-6); text-align: center; color: var(--text-tertiary); font-size: var(--text-sm); margin-bottom: var(--space-4); }
+  .cmd-scrim { align-items: flex-start; padding-top: 80px; }
   .toast-stack { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 100; }
   .list-head { display: flex; align-items: center; padding: 10px 16px; background: var(--surface-sunken); border-bottom: var(--border-width) solid var(--border-subtle); gap: 12px; }
   .list-head .file-name { font-family: var(--font-mono); font-size: var(--font-size-2xs); font-weight: 500; letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--text-tertiary); }
@@ -150,12 +147,12 @@
 </div>
 
 <!-- Row menu (reused) -->
-<div class="scrim" id="row-menu-scrim" hidden>
+<div class="ds-scrim" id="row-menu-scrim" hidden>
   <div class="ds-menu" id="row-menu" style="position:absolute"></div>
 </div>
 
 <!-- Command palette -->
-<div class="cmd-scrim" id="cmd" hidden>
+<div class="ds-scrim cmd-scrim" id="cmd" hidden>
   <div class="ds-cmd" style="width:560px">
     <div class="ds-cmd-query"><i data-lucide="search"></i><input class="ds-cmd-input" placeholder="Search files and actions" id="cmd-input"><span class="ds-cmd-esc">ESC</span></div>
     <div class="ds-cmd-list" id="cmd-list"></div>

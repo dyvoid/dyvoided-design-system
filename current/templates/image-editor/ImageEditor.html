@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/lucide@0.462.0/dist/umd/lucide.js"></script>
 <style>
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; background: var(--surface-sunken); font-family: var(--font-body); }
@@ -16,7 +17,7 @@
 
   /* Tool rail */
   .tool-rail { width: 52px; flex-shrink: 0; border-right: var(--border-width) solid var(--border-subtle); background: var(--surface-panel); display: flex; flex-direction: column; align-items: center; padding: var(--space-3) 0; gap: 4px; }
-  .tool-btn { width: 36px; height: 36px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text-tertiary); background: transparent; border: none; font-size:var(--font-size-lg); line-height: 1; }
+  .tool-btn { width: 36px; height: 36px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text-tertiary); background: transparent; border: none; }
   .tool-btn:hover { background: var(--surface-hover); color: var(--text-secondary); }
   .tool-btn.active { color: var(--text-on-accent); background: linear-gradient(180deg, var(--primary-400), var(--primary-600)); box-shadow: var(--inset-highlight), var(--shadow-sm); }
 
@@ -29,8 +30,8 @@
   .bar-sep { width: 1px; height: 20px; background: var(--border-subtle); }
 
   .canvas-stage { flex: 1; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; background-image: linear-gradient(45deg, var(--surface-app) 25%, transparent 25%), linear-gradient(-45deg, var(--surface-app) 25%, transparent 25%), linear-gradient(45deg, transparent 75%, var(--surface-app) 75%), linear-gradient(-45deg, transparent 75%, var(--surface-app) 75%); background-size: 22px 22px; background-position: 0 0, 0 11px, 11px -11px, -11px 0; }
-  .canvas-art { width: 560px; height: 400px; border-radius: 2px; box-shadow: var(--shadow-lg), 0 0 0 1px var(--border-strong); position: relative; overflow: hidden; background: radial-gradient(circle at 28% 26%, var(--accent-1-500), transparent 46%), radial-gradient(circle at 76% 34%, var(--accent-3-500), transparent 44%), radial-gradient(circle at 60% 82%, var(--accent-2-500), transparent 50%), linear-gradient(150deg, var(--primary-600), var(--gray-900)); }
-  .canvas-art::after { content: ""; position: absolute; inset: 0; outline: 1.5px solid var(--primary); outline-offset: -1px; }
+  .canvas-art { width: 560px; height: 400px; border-radius: var(--radius-xs); box-shadow: var(--shadow-lg), 0 0 0 1px var(--border-strong); position: relative; overflow: hidden; background: radial-gradient(circle at 28% 26%, var(--accent-1-500), transparent 46%), radial-gradient(circle at 76% 34%, var(--accent-3-500), transparent 44%), radial-gradient(circle at 60% 82%, var(--accent-2-500), transparent 50%), linear-gradient(150deg, var(--primary-600), var(--gray-900)); }
+  .canvas-art::after { content: ""; position: absolute; inset: 0; outline: var(--border-width) solid var(--primary); outline-offset: -1px; }
 
   .status-bar { height: 28px; flex-shrink: 0; border-top: var(--border-width) solid var(--border-subtle); background: var(--surface-panel); display: flex; align-items: center; justify-content: space-between; padding: 0 var(--space-5); font-family: var(--font-mono); font-size:var(--font-size-2xs); color: var(--text-tertiary); }
   .status-group { display: flex; gap: var(--space-6); align-items: center; }
@@ -62,12 +63,12 @@
   <div class="body">
     <!-- Tool rail -->
     <div class="tool-rail">
-      <button class="tool-btn active" data-tool="move" title="Move">✥</button>
-      <button class="tool-btn" data-tool="marquee" title="Marquee">▭</button>
-      <button class="tool-btn" data-tool="lasso" title="Lasso">⌇</button>
-      <button class="tool-btn" data-tool="crop" title="Crop">⤢</button>
-      <button class="tool-btn" data-tool="brush" title="Brush">✎</button>
-      <button class="tool-btn" data-tool="eyedrop" title="Eyedropper">⚲</button>
+      <button class="tool-btn active" data-tool="move" aria-label="Move"><i data-lucide="move"></i></button>
+      <button class="tool-btn" data-tool="marquee" aria-label="Marquee"><i data-lucide="square-dashed"></i></button>
+      <button class="tool-btn" data-tool="lasso" aria-label="Lasso"><i data-lucide="lasso"></i></button>
+      <button class="tool-btn" data-tool="crop" aria-label="Crop"><i data-lucide="crop"></i></button>
+      <button class="tool-btn" data-tool="brush" aria-label="Brush"><i data-lucide="brush"></i></button>
+      <button class="tool-btn" data-tool="eyedrop" aria-label="Eyedropper"><i data-lucide="pipette"></i></button>
     </div>
 
     <!-- Center canvas -->
@@ -103,15 +104,15 @@
         <div class="slider-stack">
           <div class="ds-slider-field">
             <div class="ds-slider-head"><span class="ds-slider-label">Exposure</span><span class="ds-slider-value">+0.12</span></div>
-            <div class="ds-slider-track"><div class="ds-slider-fill" style="width:62%"></div><div class="ds-slider-knob" style="left:calc(62% - 7px)"></div></div>
+            <div class="ds-slider-track" data-ds-track><div class="ds-slider-fill" style="width:62%"></div><div class="ds-slider-knob" style="left:calc(62% - 7px)"></div><input type="range" min="0" max="100" value="62" aria-label="Exposure"></div>
           </div>
           <div class="ds-slider-field">
             <div class="ds-slider-head"><span class="ds-slider-label">Contrast</span><span class="ds-slider-value">+11</span></div>
-            <div class="ds-slider-track"><div class="ds-slider-fill" style="width:64%"></div><div class="ds-slider-knob" style="left:calc(64% - 7px)"></div></div>
+            <div class="ds-slider-track" data-ds-track><div class="ds-slider-fill" style="width:64%"></div><div class="ds-slider-knob" style="left:calc(64% - 7px)"></div><input type="range" min="0" max="100" value="64" aria-label="Contrast"></div>
           </div>
           <div class="ds-slider-field">
             <div class="ds-slider-head"><span class="ds-slider-label">Highlights</span><span class="ds-slider-value">-7</span></div>
-            <div class="ds-slider-track"><div class="ds-slider-fill" style="width:41%"></div><div class="ds-slider-knob" style="left:calc(41% - 7px)"></div></div>
+            <div class="ds-slider-track" data-ds-track><div class="ds-slider-fill" style="width:41%"></div><div class="ds-slider-knob" style="left:calc(41% - 7px)"></div><input type="range" min="0" max="100" value="41" aria-label="Highlights"></div>
           </div>
         </div>
 
@@ -119,11 +120,11 @@
         <div class="slider-stack">
           <div class="ds-slider-field">
             <div class="ds-slider-head"><span class="ds-slider-label">Temperature</span><span class="ds-slider-value">+2</span></div>
-            <div class="ds-slider-track"><div class="ds-slider-fill" style="width:55%"></div><div class="ds-slider-knob" style="left:calc(55% - 7px)"></div></div>
+            <div class="ds-slider-track" data-ds-track><div class="ds-slider-fill" style="width:55%"></div><div class="ds-slider-knob" style="left:calc(55% - 7px)"></div><input type="range" min="0" max="100" value="55" aria-label="Temperature"></div>
           </div>
           <div class="ds-slider-field">
             <div class="ds-slider-head"><span class="ds-slider-label">Saturation</span><span class="ds-slider-value">+12</span></div>
-            <div class="ds-slider-track"><div class="ds-slider-fill" style="width:65%"></div><div class="ds-slider-knob" style="left:calc(65% - 7px)"></div></div>
+            <div class="ds-slider-track" data-ds-track><div class="ds-slider-fill" style="width:65%"></div><div class="ds-slider-knob" style="left:calc(65% - 7px)"></div><input type="range" min="0" max="100" value="65" aria-label="Saturation"></div>
           </div>
         </div>
 
@@ -176,6 +177,23 @@ document.querySelectorAll('[data-layer]').forEach(row => {
     row.classList.add('active');
   });
 });
+
+// Sliders: update fill, knob, and value label
+document.querySelectorAll('.ds-slider-track[data-ds-track]').forEach(track => {
+  const input = track.querySelector('input[type="range"]');
+  if (!input) return;
+  const fill = track.querySelector('.ds-slider-fill');
+  const knob = track.querySelector('.ds-slider-knob');
+  const valueEl = track.closest('.ds-slider-field').querySelector('.ds-slider-value');
+  const update = () => {
+    const pct = ((input.value - input.min) / (input.max - input.min)) * 100;
+    fill.style.width = pct + '%';
+    knob.style.left = `calc(${pct}% - 7px)`;
+  };
+  input.addEventListener('input', update);
+});
+
+lucide.createIcons({ color: 'var(--text-tertiary)', strokeWidth: 1.75 });
 </script>
 </body>
 </html>

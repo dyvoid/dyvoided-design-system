@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/lucide@0.462.0/dist/umd/lucide.js"></script>
 <style>
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; background: var(--surface-sunken); font-family: var(--font-body); }
@@ -17,7 +18,7 @@
   .transport { height: 56px; flex-shrink: 0; display: flex; align-items: center; gap: var(--space-6); padding: 0 var(--space-6); border-bottom: var(--border-width) solid var(--border-subtle); background: var(--surface-panel); }
   .transport-readout { display: flex; align-items: stretch; gap: 1px; background: var(--surface-sunken); border: var(--border-width) solid var(--border-strong); border-radius: var(--radius-sm); overflow: hidden; }
   .readout-cell { padding: 6px 12px; display: flex; flex-direction: column; align-items: center; gap: 2px; min-width: 60px; }
-  .readout-cap { font-family: var(--font-mono); font-size: 8.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--text-tertiary); }
+  .readout-cap { font-family: var(--font-mono); font-size: var(--font-size-2xs); letter-spacing: .12em; text-transform: uppercase; color: var(--text-tertiary); }
   .readout-val { font-family: var(--font-mono); font-size: var(--text-md); font-weight: 500; font-feature-settings: 'tnum'; }
   .transport-right { margin-left: auto; display: flex; align-items: center; gap: var(--space-5); }
 
@@ -31,7 +32,7 @@
   .track-item { display: flex; align-items: center; gap: 10px; padding: var(--space-3); border-radius: var(--radius-sm); cursor: pointer; }
   .track-item:hover { background: var(--surface-hover); }
   .track-item.sel { background: var(--primary-muted-bg); }
-  .track-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+  .track-dot { width: 8px; height: 8px; border-radius: var(--radius-xs); flex-shrink: 0; }
   .track-name { font-size: var(--text-sm); color: var(--text-primary); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .track-meta { font-family: var(--font-mono); font-size:var(--font-size-2xs); color: var(--text-tertiary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
@@ -49,7 +50,7 @@
   .lane-head-name { font-size: var(--text-xs); color: var(--text-secondary); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .lane-body { flex: 1; position: relative; }
   .clip { position: absolute; top: 8px; bottom: 8px; border-radius: var(--radius-xs); box-shadow: var(--shadow-sm); }
-  .lane-empty { position: absolute; left: var(--space-4); top: 50%; transform: translateY(-50%); font-family: var(--font-mono); font-size: 9.5px; letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--text-tertiary); opacity: .7; }
+  .lane-empty { position: absolute; left: var(--space-4); top: 50%; transform: translateY(-50%); font-family: var(--font-mono); font-size: var(--font-size-2xs); letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--text-tertiary); opacity: .7; }
 
   /* Inspector (right) */
   .inspector { width: 260px; flex-shrink: 0; border-left: var(--border-width) solid var(--border-subtle); background: var(--surface-panel); overflow: auto; }
@@ -61,7 +62,7 @@
   .insp-empty { padding: var(--space-4) 0; font-size: var(--text-sm); color: var(--text-tertiary); line-height: var(--leading-body); text-wrap: pretty; }
   .insp-params { display: flex; flex-direction: column; gap: var(--space-5); }
   .meters { display: flex; gap: 6px; align-items: flex-end; height: 70px; }
-  .meter { flex: 1; background: var(--surface-sunken); border: var(--border-width) solid var(--border-subtle); border-radius: 2px; position: relative; overflow: hidden; display: flex; flex-direction: column-reverse; }
+  .meter { flex: 1; background: var(--surface-sunken); border: var(--border-width) solid var(--border-subtle); border-radius: var(--radius-xs); position: relative; overflow: hidden; display: flex; flex-direction: column-reverse; }
   .meter-fill { width: 100%; background: linear-gradient(0deg, var(--success-500), var(--warning-500) 78%, var(--danger-500)); }
   .ds-slider-fill.a2 { background: var(--accent-2-500); }
   .ds-slider-knob.a2 { border-color: var(--accent-2-500); }
@@ -78,10 +79,10 @@
   <!-- Transport bar -->
   <div class="transport">
     <div style="display:flex;align-items:center;gap:6px">
-      <button class="ds-btn ds-btn-ghost ds-btn-sm" style="width:36px">⏮</button>
-      <button class="ds-btn ds-btn-ghost ds-btn-sm" style="width:36px">⏹</button>
-      <button class="ds-btn ds-btn-primary ds-btn-sm" style="width:36px" id="play-btn">▶</button>
-      <button class="ds-btn ds-btn-danger ds-btn-sm" style="width:36px" id="rec-btn">⏺</button>
+      <button class="ds-btn ds-btn-ghost ds-btn-sm" style="width:36px" aria-label="Skip to start"><i data-lucide="skip-back"></i></button>
+      <button class="ds-btn ds-btn-ghost ds-btn-sm" style="width:36px" aria-label="Stop"><i data-lucide="square"></i></button>
+      <button class="ds-btn ds-btn-primary ds-btn-sm" style="width:36px" id="play-btn" aria-label="Play"><i data-lucide="play"></i></button>
+      <button class="ds-btn ds-btn-danger ds-btn-sm" style="width:36px" id="rec-btn" aria-label="Record"><i data-lucide="circle"></i></button>
     </div>
     <div class="transport-readout">
       <div class="readout-cell"><span class="readout-cap">Bar · Beat</span><span class="readout-val" style="color:var(--primary)">009 · 3</span></div>
@@ -125,15 +126,15 @@
         <div class="insp-params">
           <div class="ds-slider-field">
             <div class="ds-slider-head"><span class="ds-slider-label">Volume</span><span class="ds-slider-value" id="vol-val">-5.6 dB</span></div>
-            <div class="ds-slider-track"><div class="ds-slider-fill" style="width:72%"></div><div class="ds-slider-knob" style="left:calc(72% - 7px)"></div><input type="range" min="0" max="100" value="72" id="vol"></div>
+            <div class="ds-slider-track" data-ds-track><div class="ds-slider-fill" style="width:72%"></div><div class="ds-slider-knob" style="left:calc(72% - 7px)"></div><input type="range" min="0" max="100" value="72" id="vol"></div>
           </div>
           <div class="ds-slider-field">
             <div class="ds-slider-head"><span class="ds-slider-label">Pan</span><span class="ds-slider-value" id="pan-val">L 12</span></div>
-            <div class="ds-slider-track"><div class="ds-slider-fill a2" style="width:38%"></div><div class="ds-slider-knob a2" style="left:calc(38% - 7px)"></div><input type="range" min="0" max="100" value="38" id="pan"></div>
+            <div class="ds-slider-track" data-ds-track><div class="ds-slider-fill a2" style="width:38%"></div><div class="ds-slider-knob a2" style="left:calc(38% - 7px)"></div><input type="range" min="0" max="100" value="38" id="pan"></div>
           </div>
           <div class="ds-slider-field">
             <div class="ds-slider-head"><span class="ds-slider-label">Send — Reverb</span><span class="ds-slider-value" id="rev-val">28%</span></div>
-            <div class="ds-slider-track"><div class="ds-slider-fill a2" style="width:28%"></div><div class="ds-slider-knob a2" style="left:calc(28% - 7px)"></div><input type="range" min="0" max="100" value="28" id="rev"></div>
+            <div class="ds-slider-track" data-ds-track><div class="ds-slider-fill a2" style="width:28%"></div><div class="ds-slider-knob a2" style="left:calc(28% - 7px)"></div><input type="range" min="0" max="100" value="28" id="rev"></div>
           </div>
         </div>
       </div>
@@ -227,7 +228,10 @@ function selectTrack(i) {
 let playing = false, recording = true;
 document.getElementById('play-btn').addEventListener('click', () => {
   playing = !playing;
-  document.getElementById('play-btn').textContent = playing ? '⏸' : '▶';
+  const btn = document.getElementById('play-btn');
+  btn.querySelector('i').setAttribute('data-lucide', playing ? 'pause' : 'play');
+  btn.setAttribute('aria-label', playing ? 'Pause' : 'Play');
+  lucide.createIcons();
 });
 document.getElementById('rec-btn').addEventListener('click', () => {
   recording = !recording;
@@ -235,6 +239,8 @@ document.getElementById('rec-btn').addEventListener('click', () => {
   btn.className = 'ds-btn ' + (recording ? 'ds-btn-danger' : 'ds-btn-ghost') + ' ds-btn-sm';
   btn.style.width = '36px';
 });
+
+lucide.createIcons({ color: 'var(--text-tertiary)', strokeWidth: 1.75 });
 
 // Sliders
 function bindSlider(id, valId, fmt) {

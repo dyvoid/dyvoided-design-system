@@ -360,7 +360,6 @@
                 <div class="ds-slider-knob" style="left:calc(40% - 7px)"></div>
                 <input type="range" min="11" max="22" value="14" aria-label="Font size" data-slider="px" data-min="11">
               </div>
-              <div class="ds-slider-ticks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
             </div>
             <div class="ds-slider-field" style="max-width:480px; margin-bottom: var(--space-5)">
               <div class="ds-slider-head"><span class="ds-slider-label">Line height</span><span class="ds-slider-value">1.6</span></div>
@@ -369,7 +368,6 @@
                 <div class="ds-slider-knob" style="left:calc(50% - 7px)"></div>
                 <input type="range" min="120" max="200" value="160" aria-label="Line height" data-slider="lh" data-min="120">
               </div>
-              <div class="ds-slider-ticks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
             </div>
             <div class="ds-group-label" style="margin-bottom: var(--space-3)">Options</div>
             <div class="check-grid">
@@ -394,7 +392,7 @@
             </div>
             <div class="pref-row">
               <div class="pref-text"><span class="pref-title">Allow tagging</span><span class="pref-desc">Let other people mention you in comments and documents.</span></div>
-              <label class="ds-check"><input type="checkbox" data-ds-peer checked data-sync><span class="ds-checkbox on" data-ds-peer-target><span class="ds-checkbox-inner"></span></span><span class="ds-check-label">Allow tagging</span></label>
+              <label class="ds-switch-item"><input type="checkbox" role="switch" data-ds-peer checked data-sync><span class="ds-switch-track on" data-ds-peer-target><span class="ds-switch-thumb"></span></span></label>
             </div>
           </div>
         </div>
@@ -423,7 +421,19 @@ document.querySelectorAll('[data-nav]').forEach(btn => {
 document.querySelectorAll('[data-sync]').forEach(input => {
   const target = input.parentElement.querySelector('[data-ds-peer-target]');
   if (!target) return;
-  const sync = () => target.classList.toggle('on', input.checked);
+  const sync = () => {
+    target.classList.toggle('on', input.checked);
+    if (target.classList.contains('ds-checkbox')) {
+      const inner = target.querySelector('.ds-checkbox-inner');
+      if (input.checked && !inner) {
+        const span = document.createElement('span');
+        span.className = 'ds-checkbox-inner';
+        target.appendChild(span);
+      } else if (!input.checked && inner) {
+        inner.remove();
+      }
+    }
+  };
   input.addEventListener('change', sync);
 });
 

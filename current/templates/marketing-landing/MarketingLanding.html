@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/lucide@0.462.0/dist/umd/lucide.js"></script>
 <style>
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; background: var(--surface-sunken); font-family: var(--font-body); }
@@ -33,7 +34,7 @@
   /* Bar chart */
   .chart { max-width: 920px; margin: var(--space-9) auto 0; height: 300px; border-radius: var(--radius-xl); border: var(--border-width) solid var(--border-strong); background: linear-gradient(160deg, var(--surface-raised), var(--surface-panel)); box-shadow: var(--shadow-lg); position: relative; overflow: hidden; }
   .chart-bars { position: absolute; left: 0; right: 0; bottom: 0; top: 44px; display: flex; align-items: flex-end; gap: 8px; padding: var(--space-7) var(--space-8); }
-  .chart-bar { flex: 1; border-radius: 3px 3px 0 0; }
+  .chart-bar { flex: 1; border-radius: var(--radius-xs) var(--radius-xs) 0 0; }
 
   /* Section */
   .section { padding: var(--space-11) var(--space-9); border-top: var(--border-width) solid var(--border-subtle); }
@@ -43,7 +44,7 @@
 
   /* Feature grid */
   .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); max-width: 1000px; margin: 0 auto; }
-  .feature-icon { width: 44px; height: 44px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; color: var(--text-on-accent); margin-bottom: var(--space-5); font-size: var(--text-lg); }
+  .feature-icon { width: 44px; height: 44px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; color: var(--text-on-accent); margin-bottom: var(--space-5); }
   .feature-h3 { font-family: var(--font-display); font-weight: 600; font-size: var(--text-lg); color: var(--text-primary); margin: 0 0 var(--space-2); }
   .feature-p { font-size: var(--text-sm); color: var(--text-tertiary); line-height: var(--leading-body); margin: 0; }
 
@@ -119,17 +120,17 @@
       </div>
       <div class="features">
         <div class="ds-panel"><div class="ds-panel-body">
-          <span class="feature-icon" style="background:linear-gradient(180deg,var(--primary-400),var(--primary-600))">↕</span>
+          <span class="feature-icon" style="background:linear-gradient(180deg,var(--primary-400),var(--primary-600))"><i data-lucide="sliders-vertical"></i></span>
           <h3 class="feature-h3">Tactile controls</h3>
           <p class="feature-p">Sliders with detents you can feel. Return to center without looking, every time.</p>
         </div></div>
         <div class="ds-panel"><div class="ds-panel-body">
-          <span class="feature-icon" style="background:linear-gradient(180deg,var(--accent-2-400),var(--accent-2-600))">⚡</span>
+          <span class="feature-icon" style="background:linear-gradient(180deg,var(--accent-2-400),var(--accent-2-600))"><i data-lucide="zap"></i></span>
           <h3 class="feature-h3">Live modulation</h3>
           <p class="feature-p">Route any source to any parameter and hear it move in real time — no reloading.</p>
         </div></div>
         <div class="ds-panel"><div class="ds-panel-body">
-          <span class="feature-icon" style="background:linear-gradient(180deg,var(--accent-3-400),var(--accent-3-600))">↓</span>
+          <span class="feature-icon" style="background:linear-gradient(180deg,var(--accent-3-400),var(--accent-3-600))"><i data-lucide="download"></i></span>
           <h3 class="feature-h3">One-click export</h3>
           <p class="feature-p">Render stems at studio quality and share a link before the idea gets cold.</p>
         </div></div>
@@ -174,5 +175,8 @@
   </div>
 </div>
 
+<script>
+lucide.createIcons({ color: 'var(--text-on-accent)', strokeWidth: 1.75 });
+</script>
 </body>
 </html>
