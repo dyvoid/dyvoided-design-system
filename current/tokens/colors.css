@@ -74,8 +74,8 @@
 :root,
 [data-theme="dark"] {
   --surface-app: var(--gray-950);
-  --surface-panel: oklch(25% 0.007 260);
-  --surface-raised: oklch(26% 0.008 260);
+  --surface-panel: oklch(17% 0.015 260);
+  --surface-raised: oklch(18% 0.016 260);
   --surface-overlay: var(--gray-850);
   --surface-sunken: oklch(12% 0.006 260);
   --surface-hover: oklch(100% 0 0 / 0.05);
