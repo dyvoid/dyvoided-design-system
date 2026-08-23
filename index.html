@@ -101,7 +101,7 @@
   <span class="spacer"></span>
   <div class="group">
     <span>boldness</span>
-    <input type="range" id="b-slider" class="b-slider" min="0" max="100" value="50">
+    <input type="range" id="b-slider" class="b-slider" aria-label="Boldness" min="0" max="100" value="50">
     <span id="b-val" class="b-val">50%</span>
   </div>
   <div class="group">
@@ -189,7 +189,7 @@
             <span>Buffer Load</span>
             <span class="ds-progress-pct">74%</span>
           </div>
-          <div class="ds-progress-track">
+          <div class="ds-progress-track" role="progressbar" aria-valuenow="74" aria-valuemin="0" aria-valuemax="100">
             <div class="ds-progress-fill" style="width: 74%;"></div>
           </div>
         </div>

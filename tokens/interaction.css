@@ -35,4 +35,10 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+  /* Spinner is a loading indicator, not decorative motion.
+     A stationary spinner reads as "stuck" — keep it spinning. */
+  .ds-spinner {
+    animation-duration: 0.9s !important;
+    animation-iteration-count: infinite !important;
+  }
 }

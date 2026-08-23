@@ -146,7 +146,7 @@
         </div>
       </div>
       <div id="deploy-progress" hidden>
-        <div class="ds-progress-row" style="margin-top: var(--space-3)"><div class="ds-progress-label"><span>Rolling out build</span><span class="ds-progress-pct" id="pct">0%</span></div><div class="ds-progress-track"><div class="ds-progress-fill" id="fill" style="width:0%"></div></div></div>
+        <div class="ds-progress-row" style="margin-top: var(--space-3)"><div class="ds-progress-label"><span>Rolling out build</span><span class="ds-progress-pct" id="pct">0%</span></div><div class="ds-progress-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"><div class="ds-progress-fill" id="fill" style="width:0%"></div></div></div>
       </div>
     </div>
     <div class="ds-dialog-foot">
@@ -265,6 +265,7 @@ document.getElementById('deploy-now').addEventListener('click', () => {
   document.getElementById('deploy-progress').hidden = false;
   document.getElementById('fill').style.width = '0%';
   document.getElementById('pct').textContent = '0%';
+  document.querySelector('#deploy-progress .ds-progress-track').setAttribute('aria-valuenow', '0');
   deployTimer = setInterval(() => {
     deployPct += 10;
     if (deployPct >= 100) {
@@ -275,6 +276,7 @@ document.getElementById('deploy-now').addEventListener('click', () => {
     } else {
       document.getElementById('fill').style.width = deployPct + '%';
       document.getElementById('pct').textContent = deployPct + '%';
+      document.querySelector('#deploy-progress .ds-progress-track').setAttribute('aria-valuenow', deployPct);
     }
   }, 110);
 });
