@@ -1,17 +1,18 @@
-/* Neutral graphite scale — cool, slightly desaturated. Shared by both themes. */
+/* Neutral graphite scale — cool, slightly desaturated. Shared by both themes.
+   Chroma held through more steps so the cool cast reads at every elevation. */
 :root {
-  --gray-950: oklch(14% 0.018 260);
-  --gray-900: oklch(18% 0.02 260);
-  --gray-850: oklch(21% 0.02 260);
-  --gray-800: oklch(25% 0.02 260);
-  --gray-700: oklch(32% 0.018 260);
-  --gray-600: oklch(42% 0.015 260);
-  --gray-500: oklch(52% 0.012 260);
-  --gray-400: oklch(63% 0.01 260);
-  --gray-300: oklch(74% 0.008 260);
-  --gray-200: oklch(85% 0.006 260);
-  --gray-100: oklch(93% 0.004 260);
-  --gray-50: oklch(98% 0.003 260);
+  --gray-950: oklch(14% 0.022 260);
+  --gray-900: oklch(18% 0.024 260);
+  --gray-850: oklch(21% 0.024 260);
+  --gray-800: oklch(25% 0.024 260);
+  --gray-700: oklch(32% 0.022 260);
+  --gray-600: oklch(42% 0.018 260);
+  --gray-500: oklch(52% 0.015 260);
+  --gray-400: oklch(63% 0.013 260);
+  --gray-300: oklch(74% 0.011 260);
+  --gray-200: oklch(85% 0.009 260);
+  --gray-100: oklch(93% 0.007 260);
+  --gray-50: oklch(98% 0.005 260);
 
   /* ============================================================
      IDENTITY COLORS — NOT FIXED.
@@ -26,10 +27,10 @@
      dyvoided.2 defaults and carry no special status — they are just
      defaults. Never hardcode a hue anywhere; reference the tokens.
      ============================================================ */
-  --primary-seed:  oklch(58% 0.12 275);   /* default: indigo  */
-  --accent-1-seed: oklch(70% 0.11 55);    /* default: amber   */
-  --accent-2-seed: oklch(66% 0.07 190);   /* default: teal    */
-  --accent-3-seed: oklch(64% 0.12 345);   /* default: magenta */
+  --primary-seed:  oklch(58% 0.17 275);   /* default: indigo  */
+  --accent-1-seed: oklch(72% 0.15 55);    /* default: amber   */
+  --accent-2-seed: oklch(68% 0.10 190);   /* default: teal    */
+  --accent-3-seed: oklch(64% 0.17 345);   /* default: magenta */
 
   /* Derived ramps — perceptually even steps off each seed.
      Darker steps hold chroma; lighter steps shed it (toward pastel). */
@@ -74,15 +75,15 @@
 :root,
 [data-theme="dark"] {
   --surface-app: var(--gray-950);
-  --surface-panel: oklch(17% 0.015 260);
-  --surface-raised: oklch(18% 0.016 260);
+  --surface-panel: oklch(17% 0.02 260);
+  --surface-raised: oklch(18% 0.022 260);
   --surface-overlay: var(--gray-850);
-  --surface-sunken: oklch(12% 0.006 260);
-  --surface-hover: oklch(100% 0 0 / 0.05);
-  --surface-active: oklch(100% 0 0 / 0.08);
+  --surface-sunken: oklch(12% 0.012 260);
+  --surface-hover: oklch(100% 0 0 / 0.06);
+  --surface-active: oklch(100% 0 0 / 0.09);
 
-  --border-subtle: oklch(100% 0 0 / 0.08);
-  --border-strong: oklch(100% 0 0 / 0.15);
+  --border-subtle: oklch(100% 0 0 / 0.10);
+  --border-strong: oklch(100% 0 0 / 0.18);
 
   --text-primary: var(--gray-50);
   --text-secondary: var(--gray-300);
@@ -93,29 +94,29 @@
   --primary: var(--primary-500);
   --primary-hover: var(--primary-400);
   --primary-active: var(--primary-600);
-  --primary-muted-bg:  oklch(from var(--primary-seed)  l c h / 0.14);
-  --accent-1-muted-bg: oklch(from var(--accent-1-seed) l c h / 0.14);
-  --accent-2-muted-bg: oklch(from var(--accent-2-seed) l c h / 0.14);
-  --accent-3-muted-bg: oklch(from var(--accent-3-seed) l c h / 0.14);
-  --signature-muted-bg: oklch(54.7% 0 0 / 0.18);
-  /* Side-panel wash — barely-there tint for sidebar/inspector gradients. */
-  --panel-tint: oklch(from var(--primary-seed) l calc(c * 0.35) h / 0.12);
+  --primary-muted-bg:  oklch(from var(--primary-seed)  l c h / 0.18);
+  --accent-1-muted-bg: oklch(from var(--accent-1-seed) l c h / 0.18);
+  --accent-2-muted-bg: oklch(from var(--accent-2-seed) l c h / 0.18);
+  --accent-3-muted-bg: oklch(from var(--accent-3-seed) l c h / 0.18);
+  --signature-muted-bg: oklch(54.7% 0 0 / 0.22);
+  /* Side-panel wash — primary-tinted, reads as a wash not a hint. */
+  --panel-tint: oklch(from var(--primary-seed) l calc(c * 0.4) h / 0.16);
 
-  --scrim: oklch(5% 0 0 / 0.55);
+  --scrim: oklch(5% 0 0 / 0.6);
   --control-track: var(--gray-700);
 }
 
 [data-theme="light"] {
-  --surface-app: oklch(95% 0.012 260);
-  --surface-panel: oklch(98.5% 0.007 260);
-  --surface-raised: oklch(99.5% 0.004 260);
-  --surface-overlay: oklch(99.5% 0.004 260);
+  --surface-app: oklch(95% 0.016 260);
+  --surface-panel: oklch(98.5% 0.011 260);
+  --surface-raised: oklch(99.5% 0.008 260);
+  --surface-overlay: oklch(99.5% 0.008 260);
   --surface-sunken: var(--gray-100);
-  --surface-hover: oklch(0% 0 0 / 0.035);
-  --surface-active: oklch(0% 0 0 / 0.06);
+  --surface-hover: oklch(0% 0 0 / 0.045);
+  --surface-active: oklch(0% 0 0 / 0.07);
 
-  --border-subtle: oklch(0% 0 0 / 0.06);
-  --border-strong: oklch(0% 0 0 / 0.12);
+  --border-subtle: oklch(0% 0 0 / 0.08);
+  --border-strong: oklch(0% 0 0 / 0.14);
 
   --text-primary: var(--gray-950);
   --text-secondary: var(--gray-700);
@@ -126,13 +127,13 @@
   --primary: var(--primary-600);
   --primary-hover: var(--primary-700);
   --primary-active: var(--primary-700);
-  --primary-muted-bg:  oklch(from var(--primary-seed)  l c h / 0.1);
-  --accent-1-muted-bg: oklch(from var(--accent-1-seed) l c h / 0.12);
-  --accent-2-muted-bg: oklch(from var(--accent-2-seed) l c h / 0.12);
-  --accent-3-muted-bg: oklch(from var(--accent-3-seed) l c h / 0.12);
-  --signature-muted-bg: oklch(54.7% 0 0 / 0.12);
-  --panel-tint: oklch(from var(--primary-seed) l calc(c * 0.35) h / 0.05);
+  --primary-muted-bg:  oklch(from var(--primary-seed)  l c h / 0.14);
+  --accent-1-muted-bg: oklch(from var(--accent-1-seed) l c h / 0.16);
+  --accent-2-muted-bg: oklch(from var(--accent-2-seed) l c h / 0.16);
+  --accent-3-muted-bg: oklch(from var(--accent-3-seed) l c h / 0.16);
+  --signature-muted-bg: oklch(54.7% 0 0 / 0.16);
+  --panel-tint: oklch(from var(--primary-seed) l calc(c * 0.4) h / 0.08);
 
-  --scrim: oklch(20% 0 0 / 0.35);
+  --scrim: oklch(20% 0 0 / 0.4);
   --control-track: var(--gray-200);
 }
