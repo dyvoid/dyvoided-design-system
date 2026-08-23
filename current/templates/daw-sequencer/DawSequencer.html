@@ -63,6 +63,8 @@
   .meters { display: flex; gap: 6px; align-items: flex-end; height: 70px; }
   .meter { flex: 1; background: var(--surface-sunken); border: 1px solid var(--border-subtle); border-radius: 2px; position: relative; overflow: hidden; display: flex; flex-direction: column-reverse; }
   .meter-fill { width: 100%; background: linear-gradient(0deg, var(--success-500), var(--warning-500) 78%, var(--danger-500)); }
+  .ds-slider-fill.a2 { background: var(--accent-2-500); }
+  .ds-slider-knob.a2 { border-color: var(--accent-2-500); }
 </style>
 </head>
 <body data-theme="dark">
@@ -127,11 +129,11 @@
           </div>
           <div class="ds-slider-field">
             <div class="ds-slider-head"><span class="ds-slider-label">Pan</span><span class="ds-slider-value" id="pan-val">L 12</span></div>
-            <div class="ds-slider-track"><div class="ds-slider-fill" style="width:38%"></div><div class="ds-slider-knob" style="left:calc(38% - 7px)"></div><input type="range" min="0" max="100" value="38" id="pan"></div>
+            <div class="ds-slider-track"><div class="ds-slider-fill a2" style="width:38%"></div><div class="ds-slider-knob a2" style="left:calc(38% - 7px)"></div><input type="range" min="0" max="100" value="38" id="pan"></div>
           </div>
           <div class="ds-slider-field">
             <div class="ds-slider-head"><span class="ds-slider-label">Send — Reverb</span><span class="ds-slider-value" id="rev-val">28%</span></div>
-            <div class="ds-slider-track"><div class="ds-slider-fill" style="width:28%"></div><div class="ds-slider-knob" style="left:calc(28% - 7px)"></div><input type="range" min="0" max="100" value="28" id="rev"></div>
+            <div class="ds-slider-track"><div class="ds-slider-fill a2" style="width:28%"></div><div class="ds-slider-knob a2" style="left:calc(28% - 7px)"></div><input type="range" min="0" max="100" value="28" id="rev"></div>
           </div>
         </div>
       </div>
@@ -237,8 +239,9 @@ document.getElementById('rec-btn').addEventListener('click', () => {
 // Sliders
 function bindSlider(id, valId, fmt) {
   const input = document.getElementById(id);
-  const fill = input.previousElementSibling;
-  const knob = fill.nextElementSibling;
+  const track = input.closest('.ds-slider-track');
+  const fill = track.querySelector('.ds-slider-fill');
+  const knob = track.querySelector('.ds-slider-knob');
   const val = document.getElementById(valId);
   input.addEventListener('input', () => {
     const v = +input.value;

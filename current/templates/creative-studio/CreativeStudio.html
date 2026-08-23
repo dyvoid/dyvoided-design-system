@@ -191,9 +191,9 @@
           <div class="ds-panel-head"><span class="ds-panel-title">Effects Chain</span></div>
           <div class="ds-panel-body ds-panel-body-sm">
             <div style="display:flex;flex-direction:column;gap:2px">
-              <div class="effect-row"><label class="ds-check"><input type="checkbox" class="ds-peer" checked data-effect="0"><span class="ds-checkbox on" data-peer-target><span class="ds-checkbox-inner"></span></span>LFO 1 → Cutoff</label><span class="effect-pct">+42%</span></div>
-              <div class="effect-row"><label class="ds-check"><input type="checkbox" class="ds-peer" checked data-effect="1"><span class="ds-checkbox on" data-peer-target><span class="ds-checkbox-inner"></span></span>Envelope 2 → Amp</label><span class="effect-pct">+68%</span></div>
-              <div class="effect-row"><label class="ds-check"><input type="checkbox" class="ds-peer" data-effect="2"><span class="ds-checkbox" data-peer-target></span>Velocity → Drive</label><span class="effect-pct">15%</span></div>
+              <div class="effect-row"><label class="ds-check"><input type="checkbox" data-ds-peer checked data-effect="0"><span class="ds-checkbox on" data-ds-peer-target><span class="ds-checkbox-inner"></span></span>LFO 1 → Cutoff</label><span class="effect-pct">+42%</span></div>
+              <div class="effect-row"><label class="ds-check"><input type="checkbox" data-ds-peer checked data-effect="1"><span class="ds-checkbox on" data-ds-peer-target><span class="ds-checkbox-inner"></span></span>Envelope 2 → Amp</label><span class="effect-pct">+68%</span></div>
+              <div class="effect-row"><label class="ds-check"><input type="checkbox" data-ds-peer data-effect="2"><span class="ds-checkbox" data-ds-peer-target></span>Velocity → Drive</label><span class="effect-pct">15%</span></div>
             </div>
           </div>
         </div>
@@ -314,9 +314,9 @@ document.querySelectorAll('[data-slider]').forEach(input => {
 });
 
 // Checkboxes
-document.querySelectorAll('.ds-peer').forEach(input => {
+document.querySelectorAll('[data-ds-peer]').forEach(input => {
   input.addEventListener('change', () => {
-    const box = input.parentElement.querySelector('[data-peer-target]');
+    const box = input.parentElement.querySelector('[data-ds-peer-target]');
     box.classList.toggle('on', input.checked);
     if (input.checked && !box.querySelector('.ds-checkbox-inner')) {
       const inner = document.createElement('span');
