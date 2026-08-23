@@ -1,20 +1,18 @@
-<!-- @dsCard group="Components" viewport="700x420" name="Command palette" subtitle="⌘K search over commands and files" -->
+<!-- @dsCard group="Components" viewport="700x320" name="Command palette" subtitle="⌘K search over commands and files" -->
 <html><head>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../styles.css">
 <script src="https://unpkg.com/lucide@0.462.0/dist/umd/lucide.js"></script>
 <script>window.addEventListener('DOMContentLoaded',()=>lucide.createIcons({color:'var(--text-tertiary)',strokeWidth:1.75}));</script>
-<style>body{margin:0;background:var(--surface-app);font-family:var(--font-body);height:420px;display:flex;justify-content:center;align-items:flex-start;padding-top:40px}</style></head>
+<style>body{margin:0;background:var(--surface-app);font-family:var(--font-body);display:flex;justify-content:center;align-items:flex-start;padding:20px}</style></head>
 <body data-theme="dark">
 <div class="ds-cmd" role="dialog" aria-label="Command palette" style="width:560px">
 <div class="ds-cmd-query"><i data-lucide="search"></i><input class="ds-cmd-input" value="ren" placeholder="Search commands" aria-label="Search commands"><span class="ds-cmd-esc">ESC</span></div>
 <div class="ds-cmd-list" role="listbox">
 <div class="ds-cmd-group"><span class="ds-cmd-header">Commands</span>
 <button class="ds-cmd-item active" role="option" aria-selected="true"><span class="l">Render project</span><span class="ds-cmd-sc">⌘⏎</span></button>
-<button class="ds-cmd-item" role="option"><span class="l">Rename layer</span><span class="ds-cmd-sc">⌘R</span></button>
-<button class="ds-cmd-item" role="option"><span class="l">Re-scan devices</span></button></div>
+<button class="ds-cmd-item" role="option"><span class="l">Rename layer</span><span class="ds-cmd-sc">⌘R</span></button></div>
 <div class="ds-cmd-group"><span class="ds-cmd-header">Files</span>
-<button class="ds-cmd-item" role="option"><span class="l">render-notes.md</span><span class="ds-cmd-hint">docs/</span></button>
-<button class="ds-cmd-item" role="option"><span class="l">renderer.ts</span><span class="ds-cmd-hint">src/core/</span></button></div>
+<button class="ds-cmd-item" role="option"><span class="l">render-notes.md</span><span class="ds-cmd-hint">docs/</span></button></div>
 </div>
 <div class="ds-cmd-footer"><span>↑↓ navigate</span><span>⏎ run</span><span>⌘K toggle</span></div>
 </div>

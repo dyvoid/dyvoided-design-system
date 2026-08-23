@@ -42,10 +42,12 @@
   .eval-note { font-family: var(--font-mono); font-size: var(--font-size-2xs); color: var(--text-tertiary); letter-spacing: var(--tracking-wide); text-transform: uppercase; margin-bottom: var(--space-4); }
 
   /* ===== Specimen row ===== */
+  .specimen-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
   .specimen { display: flex; flex-direction: column; gap: var(--space-3); padding: var(--space-4); background: var(--surface-panel); border-top: 1px solid var(--border-strong); border-radius: var(--radius-lg); }
-  .specimen + .specimen { margin-top: var(--space-4); }
   .specimen-label { font-family: var(--font-mono); font-size: var(--font-size-xs); font-weight: 500; letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--text-tertiary); }
   .specimen iframe { width: 100%; border: none; border-radius: var(--radius-sm); background: var(--surface-app); display: block; }
+  .specimen.sm iframe { height: 160px; }
+  .specimen.lg iframe { height: 320px; }
 
   /* ===== Template grid ===== */
   .tpl-grid { display: grid; grid-template-columns: repeat(auto-fill, 384px); gap: var(--space-5); justify-content: center; }
@@ -99,110 +101,113 @@
 <div class="eval-section">
   <div class="eval-note">Validation component — iframed from canonical .card.html specimens</div>
   <h2 class="eval-h2">Components</h2>
+  <div class="specimen-grid">
 
-  <div class="specimen">
-    <span class="specimen-label">Button</span>
-    <iframe src="components/button/button.card.html" loading="lazy"></iframe>
-  </div>
-
-  <div class="specimen">
-    <span class="specimen-label">Badge</span>
-    <iframe src="components/badge/badge.card.html" loading="lazy"></iframe>
-  </div>
-
-  <div class="specimen">
-    <span class="specimen-label">Panel</span>
-    <iframe src="components/surfaces/panel.card.html" loading="lazy"></iframe>
-  </div>
-
-  <div class="specimen">
-    <span class="specimen-label">Tabs</span>
-    <iframe src="components/navigation/tabs.card.html" loading="lazy"></iframe>
-  </div>
-
-  <div class="specimen">
-    <span class="specimen-label">Slider</span>
-    <iframe src="components/controls/slider.card.html" loading="lazy"></iframe>
-  </div>
-
-  <div class="specimen">
-    <span class="specimen-label">Checkbox</span>
-    <iframe src="components/checkbox/checkbox.card.html" loading="lazy"></iframe>
-  </div>
-
-  <div class="specimen">
-    <span class="specimen-label">Switch</span>
-    <iframe src="components/switch/switch.card.html" loading="lazy"></iframe>
-  </div>
-
-  <div class="specimen">
-    <span class="specimen-label">Input</span>
-    <iframe src="components/input/input.card.html" loading="lazy"></iframe>
-  </div>
-
-  <div class="specimen">
-    <span class="specimen-label">Select</span>
-    <iframe src="components/select/select.card.html" loading="lazy"></iframe>
-  </div>
-
-  <div class="specimen">
-    <span class="specimen-label">Menu</span>
-    <iframe src="components/menu/menu.card.html" loading="lazy"></iframe>
-  </div>
-
-  <div class="specimen">
-    <span class="specimen-label">Tooltip</span>
-    <iframe src="components/tooltip/tooltip.card.html" loading="lazy"></iframe>
-  </div>
-
-  <div class="specimen">
-    <span class="specimen-label">Toast</span>
-    <iframe src="components/toast/toast.card.html" loading="lazy"></iframe>
-  </div>
-
-  <div class="specimen">
-    <span class="specimen-label">Progress</span>
-    <iframe src="components/feedback/progress.card.html" loading="lazy"></iframe>
-  </div>
-
-  <div class="specimen">
-    <span class="specimen-label">EmptyState</span>
-    <iframe src="components/feedback/emptystate.card.html" loading="lazy"></iframe>
-  </div>
-
-  <div class="specimen">
-    <span class="specimen-label">Avatar</span>
-    <iframe src="components/avatar/avatar.card.html" loading="lazy"></iframe>
-  </div>
-
-  <div class="specimen">
+  <div class="specimen sm">
     <span class="specimen-label">Breadcrumb</span>
     <iframe src="components/navigation/breadcrumb.card.html" loading="lazy"></iframe>
   </div>
 
-  <div class="specimen">
+  <div class="specimen sm">
+    <span class="specimen-label">Badge</span>
+    <iframe src="components/badge/badge.card.html" loading="lazy"></iframe>
+  </div>
+
+  <div class="specimen sm">
+    <span class="specimen-label">Tabs</span>
+    <iframe src="components/navigation/tabs.card.html" loading="lazy"></iframe>
+  </div>
+
+  <div class="specimen sm">
+    <span class="specimen-label">Switch</span>
+    <iframe src="components/switch/switch.card.html" loading="lazy"></iframe>
+  </div>
+
+  <div class="specimen sm">
+    <span class="specimen-label">Progress</span>
+    <iframe src="components/feedback/progress.card.html" loading="lazy"></iframe>
+  </div>
+
+  <div class="specimen sm">
+    <span class="specimen-label">Checkbox</span>
+    <iframe src="components/checkbox/checkbox.card.html" loading="lazy"></iframe>
+  </div>
+
+  <div class="specimen sm">
+    <span class="specimen-label">Tooltip</span>
+    <iframe src="components/tooltip/tooltip.card.html" loading="lazy"></iframe>
+  </div>
+
+  <div class="specimen sm">
+    <span class="specimen-label">Avatar</span>
+    <iframe src="components/avatar/avatar.card.html" loading="lazy"></iframe>
+  </div>
+
+  <div class="specimen lg">
+    <span class="specimen-label">Button</span>
+    <iframe src="components/button/button.card.html" loading="lazy"></iframe>
+  </div>
+
+  <div class="specimen lg">
+    <span class="specimen-label">Slider</span>
+    <iframe src="components/controls/slider.card.html" loading="lazy"></iframe>
+  </div>
+
+  <div class="specimen lg">
+    <span class="specimen-label">Input</span>
+    <iframe src="components/input/input.card.html" loading="lazy"></iframe>
+  </div>
+
+  <div class="specimen lg">
+    <span class="specimen-label">Select</span>
+    <iframe src="components/select/select.card.html" loading="lazy"></iframe>
+  </div>
+
+  <div class="specimen lg">
     <span class="specimen-label">DataTable</span>
     <iframe src="components/surfaces/datatable.card.html" loading="lazy"></iframe>
   </div>
 
-  <div class="specimen">
-    <span class="specimen-label">SidebarNav</span>
-    <iframe src="components/sidebar/sidebarnav.card.html" loading="lazy"></iframe>
+  <div class="specimen lg">
+    <span class="specimen-label">Panel</span>
+    <iframe src="components/surfaces/panel.card.html" loading="lazy"></iframe>
   </div>
 
-  <div class="specimen">
-    <span class="specimen-label">CommandPalette</span>
-    <iframe src="components/command/commandpalette.card.html" loading="lazy"></iframe>
+  <div class="specimen lg">
+    <span class="specimen-label">EmptyState</span>
+    <iframe src="components/feedback/emptystate.card.html" loading="lazy"></iframe>
   </div>
 
-  <div class="specimen">
+  <div class="specimen lg">
+    <span class="specimen-label">Menu</span>
+    <iframe src="components/menu/menu.card.html" loading="lazy"></iframe>
+  </div>
+
+  <div class="specimen lg">
+    <span class="specimen-label">Toast</span>
+    <iframe src="components/toast/toast.card.html" loading="lazy"></iframe>
+  </div>
+
+  <div class="specimen lg">
     <span class="specimen-label">Dialog</span>
     <iframe src="components/overlays/dialog.card.html" loading="lazy"></iframe>
   </div>
 
-  <div class="specimen">
+  <div class="specimen lg">
+    <span class="specimen-label">SidebarNav</span>
+    <iframe src="components/sidebar/sidebarnav.card.html" loading="lazy"></iframe>
+  </div>
+
+  <div class="specimen lg">
     <span class="specimen-label">WindowChrome</span>
     <iframe src="components/chrome/windowchrome.card.html" loading="lazy"></iframe>
+  </div>
+
+  <div class="specimen lg">
+    <span class="specimen-label">CommandPalette</span>
+    <iframe src="components/command/commandpalette.card.html" loading="lazy"></iframe>
+  </div>
+
   </div>
 </div>
 
@@ -328,19 +333,7 @@
   dSpacious.addEventListener('click', () => setDensity(false));
   dCompact.addEventListener('click', () => setDensity(true));
 
-  // Auto-size specimen iframes to content height
-  function resizeIframe(iframe) {
-    try {
-      const doc = iframe.contentDocument;
-      if (doc && doc.body) { iframe.style.height = doc.body.scrollHeight + 'px'; }
-    } catch(e) {}
-  }
-  document.querySelectorAll('.specimen iframe').forEach(iframe => {
-    iframe.addEventListener('load', () => resizeIframe(iframe));
-  });
-  // Re-resize on theme change (colors shift, scrollHeight can change)
-  tDark.addEventListener('click', () => setTimeout(() => document.querySelectorAll('.specimen iframe').forEach(resizeIframe), 50));
-  tLight.addEventListener('click', () => setTimeout(() => document.querySelectorAll('.specimen iframe').forEach(resizeIframe), 50));
+
 </script>
 
 </body>
