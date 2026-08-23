@@ -455,12 +455,29 @@
     iframe.dataset.baseSrc = iframe.getAttribute('src').split('?')[0];
   });
 
+  // "Open" links on template cards should also carry current state.
+  const openLinks = document.querySelectorAll('.tpl-card-open');
+  openLinks.forEach(link => {
+    link.dataset.baseHref = link.getAttribute('href').split('?')[0];
+  });
+
+  function stateQueryString() {
+    return '?theme=' + encodeURIComponent(currentTheme)
+         + '&density=' + encodeURIComponent(currentDensity)
+         + '&boldness=' + currentBoldness;
+  }
+
   function updateIframeSrcs() {
-    const qs = '?theme=' + encodeURIComponent(currentTheme)
-             + '&density=' + encodeURIComponent(currentDensity)
-             + '&boldness=' + currentBoldness;
+    const qs = stateQueryString();
     iframes.forEach(iframe => {
       iframe.setAttribute('src', iframe.dataset.baseSrc + qs);
+    });
+  }
+
+  function updateOpenLinks() {
+    const qs = stateQueryString();
+    openLinks.forEach(link => {
+      link.setAttribute('href', link.dataset.baseHref + qs);
     });
   }
 
@@ -471,6 +488,7 @@
     tDark.setAttribute('aria-pressed', isDark);
     tLight.setAttribute('aria-pressed', !isDark);
     updateIframeSrcs();
+    updateOpenLinks();
   }
 
   function setDensity(compact) {
@@ -480,6 +498,7 @@
     if (compact) document.documentElement.setAttribute('data-density', 'compact');
     else document.documentElement.removeAttribute('data-density');
     updateIframeSrcs();
+    updateOpenLinks();
   }
 
   // Live update for the main page + workbench (instant, no iframe reload).
@@ -496,7 +515,7 @@
   if (bSlider) {
     // Live update during drag (main page only), reload iframes on release.
     bSlider.addEventListener('input', (e) => setBoldness(e.target.value));
-    bSlider.addEventListener('change', () => updateIframeSrcs());
+    bSlider.addEventListener('change', () => { updateIframeSrcs(); updateOpenLinks(); });
   }
 </script>
 
