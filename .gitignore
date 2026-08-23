@@ -11,6 +11,7 @@ desktop.ini
 
 # Impeccable skill — local override only (config.json is tracked)
 .impeccable/config.local.json
+.devin/config.local.json
 
 # Node (in case consuming apps land here later)
 node_modules/
