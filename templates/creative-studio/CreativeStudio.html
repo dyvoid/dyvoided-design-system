@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>dyvoided.2 — Creative Studio</title>
+<title>dyvoided.2 — Video Editor</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -82,7 +82,7 @@
 <div class="shell">
   <div class="ds-win-bar">
     <div class="ds-win-dots"><span class="ds-win-dot" style="background:var(--danger-500)"></span><span class="ds-win-dot" style="background:var(--accent-1-500)"></span><span class="ds-win-dot" style="background:var(--success-500)"></span></div>
-    <span class="ds-win-title">Oscilla</span>
+    <span class="ds-win-title">Spool</span>
   </div>
 
   <div class="body" id="body">
@@ -92,10 +92,10 @@
         <div class="ds-group-label" style="padding: 4px 10px 6px">Workspace</div>
         <div class="ds-nav">
           <div class="ds-nav-section">
-            <button class="ds-nav-item active" data-nav="sessions"><span class="l">Sessions</span></button>
-            <button class="ds-nav-item" data-nav="library"><span class="l">Sound Library</span></button>
-            <button class="ds-nav-item" data-nav="automation"><span class="l">Automation</span></button>
-            <button class="ds-nav-item" data-nav="mixer"><span class="l">Mixer</span></button>
+            <button class="ds-nav-item active" data-nav="sequences"><span class="l">Sequences</span></button>
+            <button class="ds-nav-item" data-nav="library"><span class="l">Media Library</span></button>
+            <button class="ds-nav-item" data-nav="transitions"><span class="l">Transitions</span></button>
+            <button class="ds-nav-item" data-nav="effects"><span class="l">Effects</span></button>
             <button class="ds-nav-item" data-nav="export"><span class="l">Export</span></button>
           </div>
         </div>
@@ -103,16 +103,16 @@
       <div class="sidebar-search">
         <div class="ds-input-box"><input class="ds-input" placeholder="Search library" id="search"></div>
       </div>
-      <div class="ds-group-label" style="padding: 0 var(--space-5); margin-top: var(--space-4)">Layers</div>
+      <div class="ds-group-label" style="padding: 0 var(--space-5); margin-top: var(--space-4)">Clips</div>
       <div class="sidebar-layers" id="layers">
-        <div class="layer active primary" data-layer="0">Intro Pad</div>
-        <div class="layer a1" data-layer="1">Kick Drum</div>
-        <div class="layer a1" data-layer="2">Snare Rim</div>
-        <div class="layer a2" data-layer="3">Bass Layer 02</div>
-        <div class="layer a3" data-layer="4">Lead — bright pluck</div>
-        <div class="layer a3" data-layer="5">Lead — soft</div>
-        <div class="layer a2" data-layer="6">FX sweep</div>
-        <div class="layer primary" data-layer="7">Ambient tail</div>
+        <div class="layer active primary" data-layer="0">Opening shot</div>
+        <div class="layer a1" data-layer="1">Interview — A cam</div>
+        <div class="layer a1" data-layer="2">B-roll — street</div>
+        <div class="layer a2" data-layer="3">Title card</div>
+        <div class="layer a3" data-layer="4">Lower third</div>
+        <div class="layer a3" data-layer="5">Transition wipe</div>
+        <div class="layer a2" data-layer="6">Color grade</div>
+        <div class="layer primary" data-layer="7">Outro</div>
       </div>
       <div class="sidebar-foot">
         <div class="operator">
@@ -136,9 +136,9 @@
     <div class="main">
       <div class="main-head">
         <div>
-          <div class="project-name" id="project-name">Intro Pad</div>
+          <div class="project-name" id="project-name">Opening shot</div>
           <div class="badges">
-            <span class="ds-badge ds-badge-accent">Session</span>
+            <span class="ds-badge ds-badge-accent">Sequence</span>
             <span class="ds-badge ds-badge-success">Saved</span>
           </div>
         </div>
@@ -158,28 +158,28 @@
 
       <!-- Macro Controls panel -->
       <div class="ds-panel" style="margin-bottom: var(--space-5)">
-        <div class="ds-panel-head"><span class="ds-panel-title">Macro Controls</span></div>
+        <div class="ds-panel-head"><span class="ds-panel-title">Color</span></div>
         <div class="ds-panel-body">
           <div class="ds-tabs" style="margin-bottom: var(--space-5)">
-            <button class="ds-tab active" data-macro-tab="macro">Macro</button>
-            <button class="ds-tab" data-macro-tab="env">Envelope</button>
+            <button class="ds-tab active" data-macro-tab="macro">Color</button>
+            <button class="ds-tab" data-macro-tab="env">Transform</button>
           </div>
           <div class="macro-grid" id="macro-sliders">
             <div class="ds-slider-field" style="margin-bottom:0">
-              <div class="ds-slider-head"><span class="ds-slider-label">Cutoff</span><span class="ds-slider-value">7.2 kHz</span></div>
-              <div class="ds-slider-track" data-ds-track><div class="ds-slider-fill a2" style="width:72%"></div><div class="ds-slider-knob a2" style="left:calc(72% - 7px)"></div><input type="range" min="0" max="100" value="72" data-slider="cutoff"></div>
+              <div class="ds-slider-head"><span class="ds-slider-label">Exposure</span><span class="ds-slider-value">+0.7</span></div>
+              <div class="ds-slider-track" data-ds-track><div class="ds-slider-fill a2" style="width:72%"></div><div class="ds-slider-knob a2" style="left:calc(72% - 7px)"></div><input type="range" min="0" max="100" value="72" data-slider="exposure"></div>
             </div>
             <div class="ds-slider-field" style="margin-bottom:0">
-              <div class="ds-slider-head"><span class="ds-slider-label">Resonance</span><span class="ds-slider-value">38%</span></div>
-              <div class="ds-slider-track" data-ds-track><div class="ds-slider-fill" style="width:38%"></div><div class="ds-slider-knob" style="left:calc(38% - 7px)"></div><input type="range" min="0" max="100" value="38" data-slider="resonance"></div>
+              <div class="ds-slider-head"><span class="ds-slider-label">Saturation</span><span class="ds-slider-value">38%</span></div>
+              <div class="ds-slider-track" data-ds-track><div class="ds-slider-fill" style="width:38%"></div><div class="ds-slider-knob" style="left:calc(38% - 7px)"></div><input type="range" min="0" max="100" value="38" data-slider="saturation"></div>
             </div>
             <div class="ds-slider-field" style="margin-bottom:0">
-              <div class="ds-slider-head"><span class="ds-slider-label">Drive</span><span class="ds-slider-value">22%</span></div>
-              <div class="ds-slider-track" data-ds-track><div class="ds-slider-fill" style="width:22%"></div><div class="ds-slider-knob" style="left:calc(22% - 7px)"></div><input type="range" min="0" max="100" value="22" data-slider="drive"></div>
+              <div class="ds-slider-head"><span class="ds-slider-label">Contrast</span><span class="ds-slider-value">22%</span></div>
+              <div class="ds-slider-track" data-ds-track><div class="ds-slider-fill" style="width:22%"></div><div class="ds-slider-knob" style="left:calc(22% - 7px)"></div><input type="range" min="0" max="100" value="22" data-slider="contrast"></div>
             </div>
             <div class="ds-slider-field" style="margin-bottom:0">
-              <div class="ds-slider-head"><span class="ds-slider-label">Mix</span><span class="ds-slider-value">64%</span></div>
-              <div class="ds-slider-track" data-ds-track><div class="ds-slider-fill" style="width:64%"></div><div class="ds-slider-knob" style="left:calc(64% - 7px)"></div><input type="range" min="0" max="100" value="64" data-slider="mix"></div>
+              <div class="ds-slider-head"><span class="ds-slider-label">Temperature</span><span class="ds-slider-value">64%</span></div>
+              <div class="ds-slider-track" data-ds-track><div class="ds-slider-fill" style="width:64%"></div><div class="ds-slider-knob" style="left:calc(64% - 7px)"></div><input type="range" min="0" max="100" value="64" data-slider="temperature"></div>
             </div>
           </div>
         </div>
@@ -188,17 +188,17 @@
       <!-- Effects + Output row -->
       <div class="effects-meter-row">
         <div class="ds-panel">
-          <div class="ds-panel-head"><span class="ds-panel-title">Effects Chain</span></div>
+          <div class="ds-panel-head"><span class="ds-panel-title">Effects</span></div>
           <div class="ds-panel-body ds-panel-body-sm">
             <div style="display:flex;flex-direction:column;gap:2px">
-              <div class="effect-row"><label class="ds-check"><input type="checkbox" data-ds-peer checked data-effect="0"><span class="ds-checkbox on" data-ds-peer-target><span class="ds-checkbox-inner"></span></span>LFO 1 → Cutoff</label><span class="effect-pct">+42%</span></div>
-              <div class="effect-row"><label class="ds-check"><input type="checkbox" data-ds-peer checked data-effect="1"><span class="ds-checkbox on" data-ds-peer-target><span class="ds-checkbox-inner"></span></span>Envelope 2 → Amp</label><span class="effect-pct">+68%</span></div>
-              <div class="effect-row"><label class="ds-check"><input type="checkbox" data-ds-peer data-effect="2"><span class="ds-checkbox" data-ds-peer-target></span>Velocity → Drive</label><span class="effect-pct">15%</span></div>
+              <div class="effect-row"><label class="ds-check"><input type="checkbox" data-ds-peer checked data-effect="0"><span class="ds-checkbox on" data-ds-peer-target><span class="ds-checkbox-inner"></span></span>Wipe → Opacity</label><span class="effect-pct">+42%</span></div>
+              <div class="effect-row"><label class="ds-check"><input type="checkbox" data-ds-peer checked data-effect="1"><span class="ds-checkbox on" data-ds-peer-target><span class="ds-checkbox-inner"></span></span>Zoom → Scale</label><span class="effect-pct">+68%</span></div>
+              <div class="effect-row"><label class="ds-check"><input type="checkbox" data-ds-peer data-effect="2"><span class="ds-checkbox" data-ds-peer-target></span>Position → X</label><span class="effect-pct">15%</span></div>
             </div>
           </div>
         </div>
         <div class="ds-panel">
-          <div class="ds-panel-head"><span class="ds-panel-title">Output Levels</span></div>
+          <div class="ds-panel-head"><span class="ds-panel-title">Luma waveform</span></div>
           <div class="ds-panel-body ds-panel-body-sm">
             <div class="meter">
               <span class="track" style="height:30%"></span>
@@ -217,9 +217,9 @@
     <!-- Inspector -->
     <div class="inspector">
       <div class="ds-group-label" style="margin-bottom: var(--space-5)">Inspector</div>
-      <div class="insp-row"><span class="insp-key">Sample rate</span><span class="insp-val">48 kHz</span></div>
-      <div class="insp-row"><span class="insp-key">Bit depth</span><span class="insp-val">24-bit</span></div>
-      <div class="insp-row"><span class="insp-key">Buffer</span><span class="insp-val">512</span></div>
+      <div class="insp-row"><span class="insp-key">Resolution</span><span class="insp-val">3840×2160</span></div>
+      <div class="insp-row"><span class="insp-key">Framerate</span><span class="insp-val">23.976</span></div>
+      <div class="insp-row"><span class="insp-key">Codec</span><span class="insp-val">H.265</span></div>
     </div>
   </div>
 </div>
@@ -229,13 +229,13 @@
   <div class="ds-dialog" style="width:420px">
     <div class="ds-dialog-head">Export settings</div>
     <div class="ds-dialog-body">
-      <div style="margin-bottom: var(--space-4)">Format, bit depth, and sample rate for the rendered file.</div>
+      <div style="margin-bottom: var(--space-4)">Format and quality for the rendered file.</div>
       <div class="ds-input-field"><label class="ds-input-label">Format</label>
-        <button class="ds-select-field" id="format-select"><span id="format-label">WAV</span><i data-lucide="chevron-down" class="ds-select-chev"></i></button>
+        <button class="ds-select-field" id="format-select"><span id="format-label">MP4</span><i data-lucide="chevron-down" class="ds-select-chev"></i></button>
       </div>
       <div class="ds-slider-field" style="margin-bottom:0">
-        <div class="ds-slider-head"><span class="ds-slider-label">Sample rate</span><span class="ds-slider-value">48.0 kHz</span></div>
-        <div class="ds-slider-track" data-ds-track><div class="ds-slider-fill" style="width:80%"></div><div class="ds-slider-knob" style="left:calc(80% - 7px)"></div><input type="range" min="0" max="100" value="80" data-slider="sampleRate"></div>
+        <div class="ds-slider-head"><span class="ds-slider-label">Quality</span><span class="ds-slider-value">80%</span></div>
+        <div class="ds-slider-track" data-ds-track><div class="ds-slider-fill" style="width:80%"></div><div class="ds-slider-knob" style="left:calc(80% - 7px)"></div><input type="range" min="0" max="100" value="80" data-slider="quality"></div>
       </div>
     </div>
     <div class="ds-dialog-foot">
@@ -258,9 +258,9 @@
 <div class="toast-stack" id="toasts" role="region" aria-live="polite" aria-label="Notifications"></div>
 
 <script>
-const projects = ['Intro Pad','Kick Drum','Snare Rim','Bass Layer 02','Lead — bright pluck','Lead — soft','FX sweep','Ambient tail'];
-const navItems = ['sessions','library','automation','mixer','export'];
-const formats = ['WAV','AIFF','MP3'];
+const projects = ['Opening shot','Interview — A cam','B-roll — street','Title card','Lower third','Transition wipe','Color grade','Outro'];
+const navItems = ['sequences','library','transitions','effects','export'];
+const formats = ['MP4','MOV','WebM'];
 let formatIdx = 0;
 
 // Nav
@@ -307,8 +307,7 @@ document.querySelectorAll('[data-slider]').forEach(input => {
     fill.style.width = v + '%';
     knob.style.left = 'calc(' + v + '% - 7px)';
     const name = input.dataset.slider;
-    if (name === 'cutoff') valEl.textContent = (v / 10).toFixed(1) + ' kHz';
-    else if (name === 'sampleRate') valEl.textContent = (v * 0.6).toFixed(1) + ' kHz';
+    if (name === 'exposure') valEl.textContent = (v > 50 ? '+' : '') + ((v - 50) / 10).toFixed(1);
     else valEl.textContent = v + '%';
   });
 });
