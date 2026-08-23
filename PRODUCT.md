@@ -39,6 +39,7 @@ Procedural theming via four `oklch` color seeds: one override rebrands an entire
 - Icons: Lucide, used sparingly. `.card.html` previews load the real CDN build; `.jsx` references vendor Lucide path data and instruct real apps to `npm install lucide-react`.
 - Window chrome: custom Electron titlebar, not OS-native, so macOS and Windows look identical. macOS traffic lights re-colored to brand danger/amber/success.
 - Current scope: 18 components, 10 app-shell templates. Component set is sized to the four app categories, not exhaustively enumerated from a real product yet.
+- `current/eval.html` is a sanctioned validation surface: an app-shell composition that assembles multiple components into a realistic layout. It inlines component CSS (not imports), so it can drift from the canonical `.card.html` specimens. The drift script (`current/scripts/drift.mjs`) scans it alongside cards and JSX to catch banned patterns, hardcoded hues, and non-token font sizes. When a component's canonical specimen changes, eval.html must be updated to match.
 
 ## Brand Commitments
 
