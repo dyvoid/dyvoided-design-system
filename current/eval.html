@@ -53,12 +53,10 @@
   .cs-sidebar { width: 220px; flex-shrink: 0; min-height: 0; overflow: hidden; border-right: 1px solid var(--border-subtle); display: flex; flex-direction: column; background: var(--surface-panel); }
   .cs-nav { padding: var(--space-3) var(--space-2); display: flex; flex-direction: column; gap: 2px; flex-shrink: 0; }
   .cs-nav-label { font-family: var(--font-mono); font-size: var(--font-size-xs); font-weight: 500; letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--text-tertiary); padding: 4px 10px 6px; }
-  .cs-nav-item { display: flex; align-items: center; gap: 10px; padding: 7px 10px; border: none; background: transparent; color: var(--text-secondary); font-family: var(--font-body); font-size: var(--font-size-sm); font-weight: 500; border-radius: var(--radius-sm); cursor: pointer; text-align: left; transition: background var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard); position: relative; }
+  .cs-nav-item { display: flex; align-items: center; padding: 7px 10px; border: none; background: transparent; color: var(--text-secondary); font-family: var(--font-body); font-size: var(--font-size-sm); font-weight: 500; border-radius: var(--radius-sm); cursor: pointer; text-align: left; transition: background var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard); position: relative; }
   .cs-nav-item:hover { background: var(--surface-hover); color: var(--text-primary); }
   .cs-nav-item.active { background: var(--surface-active); color: var(--text-primary); font-weight: 600; }
   .cs-nav-item.active::before { content: ''; position: absolute; left: 0; top: 7px; bottom: 7px; width: 2px; border-radius: 1px; background: var(--primary); }
-  .cs-nav-item .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--text-tertiary); flex-shrink: 0; }
-  .cs-nav-item.active .dot { background: var(--primary-400); }
   .cs-search { padding: 0 var(--space-5); margin-top: var(--space-4); }
   .cs-search input { width: 100%; height: var(--control-height-sm); padding: 0 12px; background: var(--surface-sunken); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); color: var(--text-primary); font-family: var(--font-body); font-size: var(--font-size-sm); outline: none; transition: border-color var(--duration-fast) var(--ease-standard); }
   .cs-search input:focus { border-color: var(--primary); box-shadow: var(--focus-ring); }
@@ -216,11 +214,11 @@
       <div class="cs-sidebar">
         <div class="cs-nav">
           <div class="cs-nav-label">Workspace</div>
-          <button class="cs-nav-item active"><span class="dot"></span>Sessions</button>
-          <button class="cs-nav-item"><span class="dot"></span>Sound Library</button>
-          <button class="cs-nav-item"><span class="dot"></span>Automation</button>
-          <button class="cs-nav-item"><span class="dot"></span>Mixer</button>
-          <button class="cs-nav-item"><span class="dot"></span>Export</button>
+          <button class="cs-nav-item active">Sessions</button>
+          <button class="cs-nav-item">Sound Library</button>
+          <button class="cs-nav-item">Automation</button>
+          <button class="cs-nav-item">Mixer</button>
+          <button class="cs-nav-item">Export</button>
         </div>
         <div class="cs-search">
           <input type="text" placeholder="Search library">
