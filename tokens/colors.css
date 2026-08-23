@@ -94,13 +94,13 @@
   --primary: var(--primary-500);
   --primary-hover: var(--primary-400);
   --primary-active: var(--primary-600);
-  --primary-muted-bg:  oklch(from var(--primary-seed)  l c h / calc(0.12 + (0.12 * var(--presence))));
-  --accent-1-muted-bg: oklch(from var(--accent-1-seed) l c h / calc(0.12 + (0.12 * var(--presence))));
-  --accent-2-muted-bg: oklch(from var(--accent-2-seed) l c h / calc(0.12 + (0.12 * var(--presence))));
-  --accent-3-muted-bg: oklch(from var(--accent-3-seed) l c h / calc(0.12 + (0.12 * var(--presence))));
-  --signature-muted-bg: oklch(54.7% 0 0 / calc(0.14 + (0.16 * var(--presence))));
+  --primary-muted-bg:  oklch(from var(--primary-seed)  l c h / calc(0.12 + (0.40 * var(--presence))));
+  --accent-1-muted-bg: oklch(from var(--accent-1-seed) l c h / calc(0.12 + (0.40 * var(--presence))));
+  --accent-2-muted-bg: oklch(from var(--accent-2-seed) l c h / calc(0.12 + (0.40 * var(--presence))));
+  --accent-3-muted-bg: oklch(from var(--accent-3-seed) l c h / calc(0.12 + (0.40 * var(--presence))));
+  --signature-muted-bg: oklch(54.7% 0 0 / calc(0.14 + (0.50 * var(--presence))));
   /* Side-panel wash — primary-tinted, scales with presence */
-  --panel-tint: oklch(from var(--primary-seed) l calc(c * 0.4) h / calc(0.08 + (0.16 * var(--presence))));
+  --panel-tint: oklch(from var(--primary-seed) l calc(c * 0.4) h / calc(0.08 + (0.48 * var(--presence))));
 
   --scrim: oklch(5% 0 0 / 0.6);
   --control-track: var(--gray-700);
@@ -127,12 +127,12 @@
   --primary: var(--primary-600);
   --primary-hover: var(--primary-700);
   --primary-active: var(--primary-700);
-  --primary-muted-bg:  oklch(from var(--primary-seed)  l c h / calc(0.10 + (0.08 * var(--presence))));
-  --accent-1-muted-bg: oklch(from var(--accent-1-seed) l c h / calc(0.10 + (0.10 * var(--presence))));
-  --accent-2-muted-bg: oklch(from var(--accent-2-seed) l c h / calc(0.10 + (0.10 * var(--presence))));
-  --accent-3-muted-bg: oklch(from var(--accent-3-seed) l c h / calc(0.10 + (0.10 * var(--presence))));
-  --signature-muted-bg: oklch(54.7% 0 0 / calc(0.10 + (0.12 * var(--presence))));
-  --panel-tint: oklch(from var(--primary-seed) l calc(c * 0.4) h / calc(0.04 + (0.08 * var(--presence))));
+  --primary-muted-bg:  oklch(from var(--primary-seed)  l c h / calc(0.10 + (0.24 * var(--presence))));
+  --accent-1-muted-bg: oklch(from var(--accent-1-seed) l c h / calc(0.10 + (0.28 * var(--presence))));
+  --accent-2-muted-bg: oklch(from var(--accent-2-seed) l c h / calc(0.10 + (0.28 * var(--presence))));
+  --accent-3-muted-bg: oklch(from var(--accent-3-seed) l c h / calc(0.10 + (0.28 * var(--presence))));
+  --signature-muted-bg: oklch(54.7% 0 0 / calc(0.10 + (0.36 * var(--presence))));
+  --panel-tint: oklch(from var(--primary-seed) l calc(c * 0.4) h / calc(0.04 + (0.24 * var(--presence))));
 
   --scrim: oklch(20% 0 0 / 0.4);
   --control-track: var(--gray-200);
