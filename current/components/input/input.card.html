@@ -5,7 +5,7 @@
 <style>
 body{margin:0;background:var(--surface-app);padding:24px;font-family:var(--font-body);display:flex;gap:16px}
 .field{display:flex;flex-direction:column;gap:6px;width:220px}
-.label{font-size:var(--text-sm);color:var(--text-secondary);font-weight:600}
+.label{font-size:var(--text-sm);color:var(--text-secondary);font-weight:500}
 .box{height:var(--control-height-md);padding:0 12px;border-radius:var(--radius-sm);background:var(--surface-sunken);border:1px solid var(--border-subtle);display:flex;align-items:center}
 .box.focus{border-color:var(--primary);box-shadow:var(--focus-ring)}
 .box.error{border-color:var(--danger-500)}
@@ -13,6 +13,6 @@ input{border:none;outline:none;background:transparent;color:var(--text-primary);
 .err{font-size:var(--text-xs);color:var(--danger-500)}
 </style></head>
 <body data-theme="dark">
-<div class="field"><span class="label">Project name</span><div class="box focus"><input value="Pigments Session"></div></div>
-<div class="field"><span class="label">With error</span><div class="box error"><input placeholder=""></div><span class="err">This field is required</span></div>
+<div class="field"><label class="label" for="f-name">Project name</label><div class="box focus"><input id="f-name" value="Pigments Session"></div></div>
+<div class="field"><label class="label" for="f-err">With error</label><div class="box error"><input id="f-err" placeholder="Session name" aria-invalid="true" aria-describedby="f-err-msg"></div><span class="err" id="f-err-msg">This field is required</span></div>
 </body></html>

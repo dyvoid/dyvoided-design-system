@@ -13,8 +13,9 @@ export function ProgressBar({ value = 0, variant = 'primary', label }) {
       )}
       <div style={{ height: 6, borderRadius: 'var(--radius-full)', background: 'var(--control-track)', overflow: 'hidden' }}>
         <div style={{
-          height: '100%', width: `${pct}%`, borderRadius: 'var(--radius-full)', background: color,
-          transition: `width var(--duration-base) var(--ease-standard)`,
+          height: '100%', width: '100%', borderRadius: 'var(--radius-full)', background: color,
+          transform: `scaleX(${pct / 100})`, transformOrigin: 'left center',
+          transition: `transform var(--duration-base) var(--ease-standard)`,
         }} />
       </div>
     </div>

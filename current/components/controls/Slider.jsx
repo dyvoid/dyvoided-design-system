@@ -13,7 +13,7 @@ export function Slider({ value = 50, min = 0, max = 100, onChange, label, valueL
       )}
       <div data-ds-track="" style={{ height: 3, borderRadius: 2, background: 'var(--control-track)', position: 'relative' }}>
         <div style={{ height: 3, borderRadius: 2, position: 'absolute', left: 0, top: 0, width: `${pct}%`, background: color }} />
-        <div style={{ position: 'absolute', top: -5, left: `calc(${pct}% - 6.5px)`, width: 13, height: 13, boxSizing: 'border-box', borderRadius: '50%', background: 'linear-gradient(180deg,oklch(100% 0 0),oklch(95% 0 0))', boxShadow: 'var(--shadow-sm)', border: `2px solid ${color}` }} />
+        <div style={{ position: 'absolute', top: -5, left: `calc(${pct}% - 6.5px)`, width: 13, height: 13, boxSizing: 'border-box', borderRadius: '50%', background: 'linear-gradient(180deg,var(--gray-50),var(--gray-100))', boxShadow: 'var(--shadow-sm)', border: `2px solid ${color}` }} />
         <input
           type="range" min={min} max={max} value={value}
           onChange={(e) => onChange && onChange(Number(e.target.value))}

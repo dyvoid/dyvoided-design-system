@@ -18,7 +18,8 @@ export function Checkbox({ checked, onChange, label, disabled, indeterminate }) 
         transition: 'border-color var(--duration-fast) var(--ease-standard), background var(--duration-fast) var(--ease-standard)',
       }}>
         {on && <span style={{
-          width: 7, height: 7, borderRadius: 2,
+          width: 7, height: indeterminate && !checked ? 2 : 7,
+          borderRadius: indeterminate && !checked ? 1 : 2,
           background: 'var(--text-on-accent)',
         }} />}
       </span>
