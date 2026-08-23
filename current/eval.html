@@ -46,7 +46,7 @@
   .cs-titlebar { height: 40px; flex-shrink: 0; display: flex; align-items: center; padding: 0 14px; background: var(--surface-panel); border-bottom: 1px solid var(--border-subtle); position: relative; }
   .cs-traffic { display: flex; gap: 8px; }
   .cs-traffic span { width: 11px; height: 11px; border-radius: 50%; }
-  .cs-title { position: absolute; left: 0; right: 0; text-align: center; font-family: var(--font-mono); font-weight: 500; font-size: 11px; letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--text-tertiary); pointer-events: none; }
+  .cs-title { position: absolute; left: 0; right: 0; text-align: center; font-family: var(--font-mono); font-weight: 500; font-size: var(--font-size-2xs); letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--text-tertiary); pointer-events: none; }
   .cs-body { display: flex; flex: 1; min-height: 0; overflow: hidden; font-family: var(--font-body); }
 
   /* Sidebar */
@@ -68,7 +68,7 @@
   .cs-layer.active { background: var(--primary-muted-bg); color: var(--text-primary); }
   .cs-sidebar-foot { padding: var(--space-5); border-top: 1px solid var(--border-subtle); display: flex; flex-direction: column; gap: var(--space-4); flex-shrink: 0; }
   .cs-operator { display: flex; align-items: center; gap: 10px; }
-  .cs-avatar { width: 26px; height: 26px; border-radius: 50%; background: var(--accent-2-muted-bg); color: var(--accent-2-400); display: inline-flex; align-items: center; justify-content: center; font-family: var(--font-body); font-weight: 600; font-size: 11px; border: 1px solid var(--border-subtle); }
+  .cs-avatar { width: 26px; height: 26px; border-radius: 50%; background: var(--accent-2-muted-bg); color: var(--accent-2-400); display: inline-flex; align-items: center; justify-content: center; font-family: var(--font-body); font-weight: 600; font-size: var(--font-size-2xs); border: 1px solid var(--border-subtle); }
   .cs-operator-name { font-size: var(--font-size-sm); color: var(--text-secondary); font-weight: 500; }
   .cs-toggle { display: flex; align-items: center; justify-content: space-between; font-size: var(--font-size-sm); color: var(--text-secondary); }
   .cs-switch { width: 30px; height: 17px; border-radius: var(--radius-xs); background: var(--control-track); border: 1px solid var(--border-strong); position: relative; cursor: pointer; transition: border-color var(--duration-base) var(--ease-standard), background var(--duration-base) var(--ease-standard); flex-shrink: 0; }
@@ -77,7 +77,7 @@
   .cs-switch.on .cs-switch-thumb { left: 15px; background: var(--primary-500); }
 
   /* Main canvas */
-  .cs-main { flex: 1; min-width: 0; min-height: 0; padding: var(--space-8); overflow: auto; scrollbar-gutter: stable; position: relative; background: var(--surface-app); background-image: radial-gradient(var(--dot-grid) 1px, transparent 1px); background-size: 22px 22px; background-position: -4px -4px; }
+  .cs-main { flex: 1; min-width: 0; min-height: 0; padding: var(--space-8); overflow: auto; scrollbar-gutter: stable; position: relative; background: var(--surface-app); }
   .cs-main-head { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: var(--space-8); }
   .cs-project-name { font-family: var(--font-display); font-weight: 600; font-size: var(--font-size-3xl); color: var(--text-primary); letter-spacing: var(--tracking-tight); line-height: 1.05; }
   .cs-badges { display: flex; gap: 8px; margin-top: 10px; }
@@ -105,7 +105,7 @@
   .slider-track { height: 3px; border-radius: 2px; background: var(--control-track); position: relative; }
   .slider-fill { height: 3px; border-radius: 2px; position: absolute; left: 0; top: 0; background: var(--primary); }
   .slider-fill.alt { background: var(--accent-1-500); }
-  .slider-thumb { position: absolute; top: -5px; width: 13px; height: 13px; box-sizing: border-box; border-radius: 50%; background: linear-gradient(180deg, oklch(100% 0 0), oklch(95% 0 0)); border: 2px solid var(--primary); box-shadow: var(--shadow-sm); }
+  .slider-thumb { position: absolute; top: -5px; width: 13px; height: 13px; box-sizing: border-box; border-radius: 50%; background: linear-gradient(180deg, var(--gray-50), var(--gray-100)); border: 2px solid var(--primary); box-shadow: var(--shadow-sm); }
   .slider-thumb.alt { border-color: var(--accent-1-500); }
   .slider-ticks { display: flex; justify-content: space-between; margin-top: 6px; padding: 0 1px; }
   .slider-ticks span { width: 1px; height: 4px; background: var(--gray-600); opacity: 0.6; }
