@@ -41,70 +41,6 @@
   }
   .eval-note { font-family: var(--font-mono); font-size: var(--font-size-2xs); color: var(--text-tertiary); letter-spacing: var(--tracking-wide); text-transform: uppercase; margin-bottom: var(--space-4); }
 
-  /* ===== Creative Studio template (recreated from CreativeStudio.dc.html, refined tokens) ===== */
-  .cs-shell { width: 1280px; height: 800px; border: 1px solid var(--border-strong); border-radius: 10px; overflow: hidden; box-shadow: var(--shadow-lg); display: flex; flex-direction: column; background: var(--surface-app); margin: 0 auto; }
-  .cs-titlebar { height: 40px; flex-shrink: 0; display: flex; align-items: center; padding: 0 14px; background: var(--surface-panel); border-bottom: 1px solid var(--border-subtle); position: relative; }
-  .cs-traffic { display: flex; gap: 8px; }
-  .cs-traffic span { width: 11px; height: 11px; border-radius: 50%; }
-  .cs-title { position: absolute; left: 0; right: 0; text-align: center; font-family: var(--font-mono); font-weight: 500; font-size: var(--font-size-2xs); letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--text-tertiary); pointer-events: none; }
-  .cs-body { display: flex; flex: 1; min-height: 0; overflow: hidden; font-family: var(--font-body); }
-
-  /* Sidebar */
-  .cs-sidebar { width: 220px; flex-shrink: 0; min-height: 0; overflow: hidden; border-right: 1px solid var(--border-subtle); display: flex; flex-direction: column; background: var(--surface-panel); }
-  .cs-nav { padding: var(--space-3) var(--space-2); display: flex; flex-direction: column; gap: 2px; flex-shrink: 0; }
-  .cs-search { padding: 0 var(--space-5); margin-top: var(--space-4); }
-  .cs-search input { width: 100%; height: var(--control-height-sm); padding: 0 12px; background: var(--surface-sunken); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); color: var(--text-primary); font-family: var(--font-body); font-size: var(--font-size-sm); outline: none; transition: border-color var(--duration-fast) var(--ease-standard); }
-  .cs-search input:focus { border-color: var(--primary); box-shadow: var(--focus-ring); }
-  .cs-search input::placeholder { color: var(--text-tertiary); }
-  .cs-layers { padding: var(--space-3) var(--space-5); display: flex; flex-direction: column; gap: 1px; flex: 1; min-height: 0; overflow: auto; scrollbar-gutter: stable; }
-  .cs-layer { padding: var(--space-2) var(--space-3); border-radius: var(--radius-xs); cursor: pointer; font-size: var(--font-size-sm); color: var(--text-secondary); border-left: 2px solid transparent; transition: background var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard); }
-  .cs-layer:hover { background: var(--surface-hover); color: var(--text-primary); }
-  .cs-layer.active { background: var(--surface-active); color: var(--text-primary); }
-  .cs-layer.primary { border-left-color: var(--primary); }
-  .cs-layer.a1 { border-left-color: var(--accent-1-500); }
-  .cs-layer.a2 { border-left-color: var(--accent-2-500); }
-  .cs-layer.a3 { border-left-color: var(--accent-3-500); }
-  .cs-sidebar-foot { padding: var(--space-5); border-top: 1px solid var(--border-subtle); display: flex; flex-direction: column; gap: var(--space-4); flex-shrink: 0; }
-  .cs-operator { display: flex; align-items: center; gap: 10px; }
-  .cs-operator-name { font-size: var(--font-size-sm); color: var(--text-secondary); font-weight: 500; }
-  .cs-toggle { display: flex; align-items: center; justify-content: space-between; font-size: var(--font-size-sm); color: var(--text-secondary); }
-
-  /* Main canvas */
-  .cs-main { flex: 1; min-width: 0; min-height: 0; padding: var(--space-8); overflow: auto; scrollbar-gutter: stable; position: relative; background: var(--surface-app); }
-  .cs-main-head { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: var(--space-8); }
-  .cs-project-name { font-family: var(--font-display); font-weight: 600; font-size: var(--font-size-3xl); color: var(--text-primary); letter-spacing: var(--tracking-tight); line-height: 1.05; }
-  .cs-badges { display: flex; gap: 8px; margin-top: 10px; }
-  .cs-head-actions { display: flex; gap: 8px; align-items: center; }
-
-  /* Slider color modifiers (eval-only, layout uses ds- classes) */
-  .ds-slider-fill.a1 { background: var(--accent-1-500); }
-  .ds-slider-fill.a2 { background: var(--accent-2-500); }
-  .ds-slider-fill.a3 { background: var(--accent-3-500); }
-  .ds-slider-knob.a1 { border-color: var(--accent-1-500); }
-  .ds-slider-knob.a2 { border-color: var(--accent-2-500); }
-  .ds-slider-knob.a3 { border-color: var(--accent-3-500); }
-
-  /* Effects chain row (eval-only layout) */
-  .cs-effect-row { display: flex; align-items: center; justify-content: space-between; padding: var(--space-2) var(--space-3); border-radius: var(--radius-xs); transition: background var(--duration-fast) var(--ease-standard); }
-  .cs-effect-row:hover { background: var(--surface-hover); }
-  .cs-effect-pct { font-family: var(--font-mono); font-size: var(--font-size-base); color: var(--text-primary); font-weight: 500; font-feature-settings: var(--tnum); letter-spacing: -0.01em; }
-
-  /* Output meter (eval-only) */
-  .cs-meter { display: flex; align-items: flex-end; gap: 3px; height: 100px; box-shadow: inset 0 -1px 0 0 var(--border-strong); }
-  .cs-meter span { flex: 1; border-radius: 1px; }
-  .cs-meter .track { background: var(--control-track); }
-  .cs-meter .p1 { background: var(--primary-500); }
-  .cs-meter .p2 { background: var(--accent-2-500); }
-  .cs-meter .p3 { background: var(--accent-1-500); }
-  .cs-meter .p4 { background: var(--accent-3-500); }
-
-  /* Inspector (eval-only) */
-  .cs-inspector { width: 260px; flex-shrink: 0; min-height: 0; overflow: auto; border-left: 1px solid var(--border-subtle); background: var(--surface-panel); padding: var(--space-6); }
-  .cs-insp-row { display: flex; align-items: baseline; justify-content: space-between; padding: var(--space-3) 0; border-bottom: 1px solid var(--border-subtle); }
-  .cs-insp-row:last-child { border-bottom: none; }
-  .cs-insp-key { font-size: var(--font-size-sm); color: var(--text-secondary); font-weight: 500; }
-  .cs-insp-val { font-size: var(--font-size-base); font-family: var(--font-mono); color: var(--text-primary); font-weight: 500; font-feature-settings: var(--tnum); letter-spacing: -0.01em; }
-
   /* ===== Specimen row ===== */
   .specimen { display: flex; flex-direction: column; gap: var(--space-3); padding: var(--space-4); background: var(--surface-panel); border-top: 1px solid var(--border-strong); border-radius: var(--radius-lg); }
   .specimen + .specimen { margin-top: var(--space-4); }
@@ -149,166 +85,6 @@
     <span>density</span>
     <button id="d-spacious" aria-pressed="true">spacious</button>
     <button id="d-compact" aria-pressed="false">compact</button>
-  </div>
-</div>
-
-<!-- ==================== CREATIVE STUDIO TEMPLATE ==================== -->
-<div class="eval-section">
-  <div class="eval-note">Validation template — Creative Studio Shell</div>
-  <h2 class="eval-h2">Creative Studio</h2>
-
-  <div class="cs-shell" id="cs-shell">
-    <div class="cs-titlebar">
-      <div class="cs-traffic">
-        <span style="background: var(--danger-500)"></span>
-        <span style="background: var(--accent-1-500)"></span>
-        <span style="background: var(--success-500)"></span>
-      </div>
-      <div class="cs-title">Oscilla</div>
-    </div>
-    <div class="cs-body" id="cs-body">
-
-      <!-- Sidebar -->
-      <div class="cs-sidebar">
-        <div class="cs-nav">
-          <div class="ds-group-label" style="padding: 4px 10px 6px">Workspace</div>
-          <button class="ds-nav-item active">Sessions</button>
-          <button class="ds-nav-item">Sound Library</button>
-          <button class="ds-nav-item">Automation</button>
-          <button class="ds-nav-item">Mixer</button>
-          <button class="ds-nav-item">Export</button>
-        </div>
-        <div class="cs-search">
-          <input type="text" placeholder="Search library">
-        </div>
-        <div class="ds-group-label" style="padding: 0 var(--space-5); margin-top: var(--space-4)">Layers</div>
-        <div class="cs-layers">
-          <div class="cs-layer active primary">Intro Pad</div>
-          <div class="cs-layer a1">Kick Drum</div>
-          <div class="cs-layer a1">Snare Rim</div>
-          <div class="cs-layer a2">Bass Layer 02</div>
-          <div class="cs-layer a3">Lead — bright pluck</div>
-          <div class="cs-layer a3">Lead — soft</div>
-          <div class="cs-layer a2">FX sweep</div>
-          <div class="cs-layer primary">Ambient tail</div>
-        </div>
-        <div class="cs-sidebar-foot">
-          <div class="cs-operator">
-            <span class="ds-avatar ds-avatar-26 ds-avatar-t2">MO</span>
-            <span class="cs-operator-name">Mo Okonkwo</span>
-          </div>
-          <div class="cs-toggle">
-            <span>Light theme</span>
-            <span class="ds-switch-track" id="cs-theme-toggle"><span class="ds-switch-thumb"></span></span>
-          </div>
-          <div class="cs-toggle">
-            <span>Compact density</span>
-            <span class="ds-switch-track" id="cs-density-toggle"><span class="ds-switch-thumb"></span></span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Main canvas -->
-      <div class="cs-main">
-        <div class="cs-main-head">
-          <div>
-            <div class="cs-project-name">Intro Pad</div>
-            <div class="cs-badges">
-              <span class="ds-badge ds-badge-accent">Session</span>
-              <span class="ds-badge ds-badge-success">Saved</span>
-            </div>
-          </div>
-          <div class="cs-head-actions">
-            <button class="ds-btn ds-btn-ghost ds-btn-sm">⌘K</button>
-            <button class="ds-btn ds-btn-ghost ds-btn-sm">⋯</button>
-            <button class="ds-btn ds-btn-secondary">Export</button>
-            <button class="ds-btn ds-btn-primary">Render</button>
-          </div>
-        </div>
-
-        <!-- Macro Controls panel -->
-        <div class="ds-panel" style="margin-bottom: var(--space-5)">
-          <div class="ds-panel-head">
-            <span class="ds-panel-title">Macro Controls</span>
-          </div>
-          <div class="ds-panel-body">
-            <div class="ds-tabs" style="margin-bottom: var(--space-5)">
-              <button class="ds-tab active">Macro</button>
-              <button class="ds-tab">Envelope</button>
-            </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6)">
-              <div class="ds-slider-field" style="margin-bottom:0">
-                <div class="ds-slider-head"><span class="ds-slider-label">Cutoff</span><span class="ds-slider-value">7.2 kHz</span></div>
-                <div class="ds-slider-track"><div class="ds-slider-fill a2" style="width: 72%"></div><div class="ds-slider-knob a2" style="left: calc(72% - 7px)"></div></div>
-                <div class="ds-slider-ticks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-              </div>
-              <div class="ds-slider-field" style="margin-bottom:0">
-                <div class="ds-slider-head"><span class="ds-slider-label">Resonance</span><span class="ds-slider-value">38%</span></div>
-                <div class="ds-slider-track"><div class="ds-slider-fill" style="width: 38%"></div><div class="ds-slider-knob" style="left: calc(38% - 7px)"></div></div>
-                <div class="ds-slider-ticks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-              </div>
-              <div class="ds-slider-field" style="margin-bottom:0">
-                <div class="ds-slider-head"><span class="ds-slider-label">Drive</span><span class="ds-slider-value">22%</span></div>
-                <div class="ds-slider-track"><div class="ds-slider-fill" style="width: 22%"></div><div class="ds-slider-knob" style="left: calc(22% - 7px)"></div></div>
-                <div class="ds-slider-ticks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-              </div>
-              <div class="ds-slider-field" style="margin-bottom:0">
-                <div class="ds-slider-head"><span class="ds-slider-label">Mix</span><span class="ds-slider-value">64%</span></div>
-                <div class="ds-slider-track"><div class="ds-slider-fill" style="width: 64%"></div><div class="ds-slider-knob" style="left: calc(64% - 7px)"></div></div>
-                <div class="ds-slider-ticks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-              </div>
-              <div class="ds-slider-field" style="margin-bottom:0">
-                <div class="ds-slider-head"><span class="ds-slider-label">Attack</span><span class="ds-slider-value">12 ms</span></div>
-                <div class="ds-slider-track"><div class="ds-slider-fill" style="width: 15%"></div><div class="ds-slider-knob" style="left: calc(15% - 7px)"></div></div>
-                <div class="ds-slider-ticks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-              </div>
-              <div class="ds-slider-field" style="margin-bottom:0">
-                <div class="ds-slider-head"><span class="ds-slider-label">Release</span><span class="ds-slider-value">480 ms</span></div>
-                <div class="ds-slider-track"><div class="ds-slider-fill" style="width: 55%"></div><div class="ds-slider-knob" style="left: calc(55% - 7px)"></div></div>
-                <div class="ds-slider-ticks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Effects + Output row -->
-        <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: var(--space-6)">
-          <div class="ds-panel">
-            <div class="ds-panel-head"><span class="ds-panel-title">Effects Chain</span></div>
-            <div class="ds-panel-body ds-panel-body-sm">
-              <div style="display: flex; flex-direction: column; gap: 2px">
-                <div class="cs-effect-row"><label class="ds-check"><input type="checkbox" data-ds-peer checked><span class="ds-checkbox on" data-ds-peer-target><span class="ds-checkbox-inner"></span></span>LFO 1 → Cutoff</label><span class="cs-effect-pct">+42%</span></div>
-                <div class="cs-effect-row"><label class="ds-check"><input type="checkbox" data-ds-peer checked><span class="ds-checkbox on" data-ds-peer-target><span class="ds-checkbox-inner"></span></span>Envelope 2 → Amp</label><span class="cs-effect-pct">+68%</span></div>
-                <div class="cs-effect-row"><label class="ds-check"><input type="checkbox" data-ds-peer><span class="ds-checkbox" data-ds-peer-target></span>Velocity → Drive</label><span class="cs-effect-pct">15%</span></div>
-              </div>
-            </div>
-          </div>
-          <div class="ds-panel">
-            <div class="ds-panel-head"><span class="ds-panel-title">Output Levels</span></div>
-            <div class="ds-panel-body ds-panel-body-sm">
-              <div class="cs-meter">
-                <span class="track" style="height: 30%"></span>
-                <span class="p1" style="height: 60%"></span>
-                <span class="p2" style="height: 45%"></span>
-                <span class="p3" style="height: 85%"></span>
-                <span class="track" style="height: 25%"></span>
-                <span class="p4" style="height: 70%"></span>
-                <span class="track" style="height: 15%"></span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Inspector -->
-      <div class="cs-inspector">
-        <div class="ds-group-label" style="margin-bottom: var(--space-5)">Inspector</div>
-        <div class="cs-insp-row"><span class="cs-insp-key">Sample rate</span><span class="cs-insp-val">48 kHz</span></div>
-        <div class="cs-insp-row"><span class="cs-insp-key">Bit depth</span><span class="cs-insp-val">24-bit</span></div>
-        <div class="cs-insp-row"><span class="cs-insp-key">Buffer</span><span class="cs-insp-val">512</span></div>
-      </div>
-
-    </div>
   </div>
 </div>
 
@@ -517,21 +293,16 @@
 <script>
   // Eval-only toggle wiring. Not part of the system.
   const body = document.body;
-  const csShell = document.getElementById('cs-shell');
-  const csBody = document.getElementById('cs-body');
   const tDark = document.getElementById('t-dark');
   const tLight = document.getElementById('t-light');
   const dSpacious = document.getElementById('d-spacious');
   const dCompact = document.getElementById('d-compact');
-  const csThemeToggle = document.getElementById('cs-theme-toggle');
-  const csDensityToggle = document.getElementById('cs-density-toggle');
 
   function setTheme(theme) {
     body.setAttribute('data-theme', theme);
     const isDark = theme === 'dark';
     tDark.setAttribute('aria-pressed', isDark);
     tLight.setAttribute('aria-pressed', !isDark);
-    csThemeToggle.classList.toggle('on', !isDark);
     // Sync theme to specimen iframes
     document.querySelectorAll('.specimen iframe').forEach(iframe => {
       try {
@@ -541,18 +312,14 @@
     });
   }
   function setDensity(compact) {
-    if (compact) { csBody.setAttribute('data-density', 'compact'); } else { csBody.removeAttribute('data-density'); }
     dSpacious.setAttribute('aria-pressed', !compact);
     dCompact.setAttribute('aria-pressed', compact);
-    csDensityToggle.classList.toggle('on', compact);
   }
 
   tDark.addEventListener('click', () => setTheme('dark'));
   tLight.addEventListener('click', () => setTheme('light'));
   dSpacious.addEventListener('click', () => setDensity(false));
   dCompact.addEventListener('click', () => setDensity(true));
-  csThemeToggle.addEventListener('click', () => setTheme(body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
-  csDensityToggle.addEventListener('click', () => setDensity(!csBody.hasAttribute('data-density')));
 
   // Auto-size specimen iframes to content height
   function resizeIframe(iframe) {
