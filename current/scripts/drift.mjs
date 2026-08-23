@@ -19,6 +19,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const componentsDir = join(root, 'components');
+const templatesDir = join(root, 'templates');
 const evalFile = join(root, 'eval.html');
 
 const CANONICAL_FONT_URL = 'https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap';
@@ -32,7 +33,17 @@ function walk(dir, acc = []) {
   return acc;
 }
 
+function walkTemplates(dir, acc = []) {
+  for (const entry of readdirSync(dir)) {
+    const p = join(dir, entry);
+    if (statSync(p).isDirectory()) walkTemplates(p, acc);
+    else if (/\.html$/.test(entry)) acc.push(p);
+  }
+  return acc;
+}
+
 const targets = walk(componentsDir);
+for (const t of walkTemplates(templatesDir)) targets.push(t);
 if (statSync(evalFile).isFile()) targets.push(evalFile);
 
 const findings = [];

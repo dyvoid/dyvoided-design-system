@@ -33,14 +33,14 @@
   .track-item.sel { background: var(--primary-muted-bg); }
   .track-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
   .track-name { font-size: var(--text-sm); color: var(--text-primary); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .track-meta { font-family: var(--font-mono); font-size: 10px; color: var(--text-tertiary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .track-meta { font-family: var(--font-mono); font-size:var(--font-size-2xs); color: var(--text-tertiary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
   /* Timeline (center) */
   .timeline { flex: 1; display: flex; flex-direction: column; min-width: 0; }
   .ruler { height: 32px; flex-shrink: 0; display: flex; border-bottom: 1px solid var(--border-subtle); background: var(--surface-panel); }
   .ruler-spacer { width: 120px; flex-shrink: 0; border-right: 1px solid var(--border-subtle); }
   .ruler-bar { flex: 1; position: relative; }
-  .ruler-tick { position: absolute; top: 0; bottom: 0; display: flex; align-items: center; padding-left: 6px; font-family: var(--font-mono); font-size: 10px; color: var(--text-tertiary); }
+  .ruler-tick { position: absolute; top: 0; bottom: 0; display: flex; align-items: center; padding-left: 6px; font-family: var(--font-mono); font-size:var(--font-size-2xs); color: var(--text-tertiary); }
   .ruler-tick::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--border-subtle); }
   .lanes { flex: 1; overflow: auto; }
   .lane { height: 56px; display: flex; border-bottom: 1px solid var(--border-subtle); position: relative; }
@@ -99,7 +99,7 @@
     <div class="track-list">
       <div class="track-list-head">
         <span class="ds-group-label">Tracks</span>
-        <span style="font-family:var(--font-mono);font-size:10px;color:var(--text-secondary)">12</span>
+        <span style="font-family:var(--font-mono);font-size:var(--font-size-2xs);color:var(--text-secondary)">12</span>
       </div>
       <div class="track-list-body" id="track-list"></div>
     </div>
