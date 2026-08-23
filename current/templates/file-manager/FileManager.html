@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dyvoided.2 — File Manager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/lucide@0.462.0/dist/umd/lucide.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--surface-sunken); font-family: var(--font-body); }
+  .shell { width: 1280px; height: 800px; margin: 0 auto; display: flex; flex-direction: column; overflow: hidden; }
+  .body { display: flex; flex: 1; min-height: 0; }
+  .sidebar { width: 200px; flex-shrink: 0; border-right: 1px solid var(--border-subtle); display: flex; flex-direction: column; background: var(--surface-panel); }
+  .sidebar-nav { flex: 1; min-height: 0; padding: var(--space-3) var(--space-2); }
+  .sidebar-foot { padding: var(--space-5); border-top: 1px solid var(--border-subtle); display: flex; flex-direction: column; gap: var(--space-4); }
+  .operator { display: flex; align-items: center; gap: 10px; }
+  .operator-name { font-size: var(--text-sm); color: var(--text-secondary); font-weight: 600; }
+  .main { flex: 1; padding: var(--space-7); overflow: auto; scrollbar-gutter: stable; display: flex; flex-direction: column; gap: var(--space-6); }
+  .top-bar { display: flex; align-items: center; justify-content: space-between; gap: var(--space-5); }
+  .top-actions { display: flex; align-items: center; gap: 14px; }
+  .file-row { display: flex; align-items: center; padding: 10px 16px; border-bottom: 1px solid var(--border-subtle); gap: 12px; }
+  .file-row:last-child { border-bottom: none; }
+  .file-row:hover { background: var(--surface-hover); }
+  .file-name { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; }
+  .file-icon { width: 32px; height: 32px; border-radius: var(--radius-sm); background: var(--surface-raised); border: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); flex-shrink: 0; }
+  .file-label { font-size: var(--text-base); color: var(--text-primary); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .file-owner { display: flex; align-items: center; gap: 8px; width: 140px; }
+  .owner-name { font-size: var(--text-sm); color: var(--text-secondary); }
+  .file-meta { font-family: var(--font-mono); font-size: var(--text-sm); color: var(--text-tertiary); }
+  .col-modified { width: 120px; }
+  .col-size { width: 90px; text-align: right; }
+  .col-status { width: 110px; display: flex; justify-content: flex-end; }
+  .col-menu { width: 40px; text-align: right; }
+  .row-menu-btn { background: none; border: none; cursor: pointer; color: var(--text-tertiary); padding: 4px; border-radius: var(--radius-xs); display: inline-flex; align-items: center; justify-content: center; }
+  .row-menu-btn:hover { background: var(--surface-raised); color: var(--text-primary); }
+  .row-menu { position: absolute; right: 0; top: 100%; z-index: 50; }
+  .row-menu-wrap { position: relative; }
+  .upload-zone { border: 1px dashed var(--border-strong); border-radius: var(--radius-md); padding: var(--space-6); text-align: center; color: var(--text-tertiary); font-size: var(--text-sm); margin-bottom: var(--space-4); }
+  .scrim { position: fixed; inset: 0; background: var(--scrim); display: flex; align-items: center; justify-content: center; z-index: 100; }
+  .scrim[hidden] { display: none; }
+  .cmd-scrim { position: fixed; inset: 0; background: var(--scrim); display: flex; align-items: flex-start; justify-content: center; padding-top: 80px; z-index: 100; }
+  .cmd-scrim[hidden] { display: none; }
+  .toast-stack { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 100; }
+  .list-head { display: flex; align-items: center; padding: 10px 16px; background: var(--surface-sunken); border-bottom: 1px solid var(--border-subtle); gap: 12px; }
+  .list-head .file-name { font-family: var(--font-mono); font-size: var(--font-size-2xs); font-weight: 500; letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--text-tertiary); }
+  .list-head .file-owner { font-family: var(--font-mono); font-size: var(--font-size-2xs); font-weight: 500; letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--text-tertiary); }
+  .list-head .file-meta { font-size: var(--font-size-2xs); }
+</style>
+</head>
+<body data-theme="dark">
+
+<div class="shell">
+  <div class="ds-win-bar">
+    <div class="ds-win-dots"><span class="ds-win-dot" style="background:var(--danger-500)"></span><span class="ds-win-dot" style="background:var(--accent-1-500)"></span><span class="ds-win-dot" style="background:var(--success-500)"></span></div>
+    <span class="ds-win-title">Files</span>
+  </div>
+
+  <div class="body">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-nav">
+        <div class="ds-nav">
+          <div class="ds-nav-section">
+            <span class="ds-nav-header">Library</span>
+            <button class="ds-nav-item active" data-nav="files" aria-current="page"><i data-lucide="folder" style="width:16px;height:16px"></i><span class="l">Files</span></button>
+            <button class="ds-nav-item" data-nav="recents"><i data-lucide="clock" style="width:16px;height:16px"></i><span class="l">Recents</span></button>
+            <button class="ds-nav-item" data-nav="shared"><i data-lucide="users" style="width:16px;height:16px"></i><span class="l">Shared</span><span class="ds-nav-meta">4</span></button>
+            <button class="ds-nav-item" data-nav="starred"><i data-lucide="star" style="width:16px;height:16px"></i><span class="l">Starred</span></button>
+          </div>
+          <div class="ds-nav-section">
+            <span class="ds-nav-header">System</span>
+            <button class="ds-nav-item" data-nav="trash"><i data-lucide="trash-2" style="width:16px;height:16px"></i><span class="l">Trash</span></button>
+            <button class="ds-nav-item" data-nav="settings"><i data-lucide="settings" style="width:16px;height:16px"></i><span class="l">Settings</span></button>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-foot">
+        <div class="operator">
+          <span class="ds-avatar ds-avatar-32 ds-avatar-t0">MK</span>
+          <span class="operator-name">Mira Kowalski</span>
+        </div>
+        <div>
+          <div class="ds-group-label" style="margin-bottom: var(--space-3)">Storage</div>
+          <div class="ds-progress-row">
+            <div class="ds-progress-label"><span>68.4 GB of 100 GB</span><span class="ds-progress-pct">68%</span></div>
+            <div class="ds-progress-track"><div class="ds-progress-fill" style="width:68%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main -->
+    <div class="main">
+      <div class="top-bar">
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <nav class="ds-breadcrumb">
+            <a href="#">Home</a>
+            <span class="ds-breadcrumb-sep">/</span>
+            <a href="#">Projects</a>
+            <span class="ds-breadcrumb-sep">/</span>
+            <span class="ds-breadcrumb-current">Design System</span>
+          </nav>
+        </div>
+        <div class="top-actions">
+          <div style="width:220px">
+            <div class="ds-input-box"><input class="ds-input" placeholder="Search files" id="search"></div>
+          </div>
+          <button class="ds-btn ds-btn-ghost" id="open-cmd"><i data-lucide="command" style="width:14px;height:14px"></i>Search</button>
+          <button class="ds-btn ds-btn-primary" id="upload-btn"><i data-lucide="upload" style="width:14px;height:14px"></i>Upload</button>
+        </div>
+      </div>
+
+      <!-- Upload progress (hidden until Upload clicked) -->
+      <div class="ds-panel" id="upload-panel" hidden>
+        <div class="ds-panel-head">
+          <span class="ds-panel-title">Uploading</span>
+          <button class="ds-btn ds-btn-ghost ds-btn-sm" id="cancel-upload">Cancel</button>
+        </div>
+        <div class="ds-panel-body ds-panel-body-sm" id="upload-list"></div>
+      </div>
+
+      <!-- File list -->
+      <div class="ds-panel" style="flex:1;display:flex;flex-direction:column;min-height:0">
+        <div class="ds-panel-head">
+          <span class="ds-panel-title">Files</span>
+          <div class="ds-tabs">
+            <button class="ds-tab active" data-filter="all">All</button>
+            <button class="ds-tab" data-filter="docs">Docs</button>
+            <button class="ds-tab" data-filter="media">Media</button>
+          </div>
+        </div>
+        <div style="flex:1;overflow:auto;min-height:0" id="file-list-container">
+          <div class="list-head">
+            <div class="file-name">Name</div>
+            <div class="file-owner">Owner</div>
+            <div class="file-meta col-modified">Modified</div>
+            <div class="file-meta col-size">Size</div>
+            <div class="col-status"></div>
+            <div class="col-menu"></div>
+          </div>
+          <div id="file-rows"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Row menu (reused) -->
+<div class="scrim" id="row-menu-scrim" hidden>
+  <div class="ds-menu" id="row-menu" style="position:absolute"></div>
+</div>
+
+<!-- Command palette -->
+<div class="cmd-scrim" id="cmd" hidden>
+  <div class="ds-cmd" style="width:560px">
+    <div class="ds-cmd-query"><i data-lucide="search"></i><input class="ds-cmd-input" placeholder="Search files and actions" id="cmd-input"><span class="ds-cmd-esc">ESC</span></div>
+    <div class="ds-cmd-list" id="cmd-list"></div>
+    <div class="ds-cmd-footer"><span>↑↓ navigate</span><span>⏎ run</span><span>⌘K toggle</span></div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast-stack" id="toasts"></div>
+
+<script>
+const files = [
+  { name: 'tokens-colors.css', icon: 'file-code', owner: 'MK', ownerName: 'Mira', ownerTone: 't0', modified: '2 min ago', size: '4.2 KB', status: 'synced', statusLabel: 'Synced' },
+  { name: 'components.css', icon: 'file-code', owner: 'DR', ownerName: 'Dana', ownerTone: 't1', modified: '14 min ago', size: '12.8 KB', status: 'synced', statusLabel: 'Synced' },
+  { name: 'hero-mockup.fig', icon: 'figma', owner: 'MK', ownerName: 'Mira', ownerTone: 't0', modified: '1 hr ago', size: '3.4 MB', status: 'shared', statusLabel: 'Shared' },
+  { name: 'quarterly-report.pdf', icon: 'file-text', owner: 'JL', ownerName: 'Jonas', ownerTone: 't2', modified: '3 hr ago', size: '892 KB', status: 'synced', statusLabel: 'Synced' },
+  { name: 'launch-photo.png', icon: 'image', owner: 'SA', ownerName: 'Sora', ownerTone: 't3', modified: 'Yesterday', size: '5.1 MB', status: 'processing', statusLabel: 'Processing' },
+  { name: 'roadmap.md', icon: 'file-text', owner: 'MK', ownerName: 'Mira', ownerTone: 't0', modified: 'Yesterday', size: '2.1 KB', status: 'synced', statusLabel: 'Synced' },
+  { name: 'demo-recording.mp4', icon: 'video', owner: 'DR', ownerName: 'Dana', ownerTone: 't1', modified: '2 days ago', size: '48.3 MB', status: 'synced', statusLabel: 'Synced' },
+  { name: 'budget-q3.xlsx', icon: 'sheet', owner: 'JL', ownerName: 'Jonas', ownerTone: 't2', modified: '3 days ago', size: '67 KB', status: 'locked', statusLabel: 'Locked' }
+];
+
+const navItems = ['files','recents','shared','starred','trash','settings'];
+let fileFilter = 'all';
+let uploadTimer = null;
+
+function statusBadgeClass(s) {
+  if (s === 'synced') return 'ds-badge-success';
+  if (s === 'shared') return 'ds-badge-accent';
+  if (s === 'processing') return 'ds-badge-warning';
+  if (s === 'locked') return 'ds-badge-neutral';
+  return 'ds-badge-neutral';
+}
+
+function filterFiles() {
+  if (fileFilter === 'docs') return files.filter(f => ['file-text','sheet','file-code'].includes(f.icon));
+  if (fileFilter === 'media') return files.filter(f => ['image','video','figma'].includes(f.icon));
+  return files;
+}
+
+function renderFiles() {
+  const list = filterFiles();
+  const html = list.map((f, i) => `
+    <div class="file-row" data-idx="${i}">
+      <div class="file-name">
+        <div class="file-icon"><i data-lucide="${f.icon}" style="width:16px;height:16px"></i></div>
+        <span class="file-label">${f.name}</span>
+      </div>
+      <div class="file-owner">
+        <span class="ds-avatar ds-avatar-26 ds-avatar-${f.ownerTone}">${f.owner}</span>
+        <span class="owner-name">${f.ownerName}</span>
+      </div>
+      <div class="file-meta col-modified">${f.modified}</div>
+      <div class="file-meta col-size">${f.size}</div>
+      <div class="col-status"><span class="ds-badge ${statusBadgeClass(f.status)}">${f.statusLabel}</span></div>
+      <div class="col-menu"><button class="row-menu-btn" data-row-menu="${i}"><i data-lucide="more-horizontal" style="width:16px;height:16px"></i></button></div>
+    </div>`).join('');
+  document.getElementById('file-rows').innerHTML = html || '<div class="ds-empty"><div class="ds-empty-icon"><i data-lucide="inbox" width="20" height="20"></i></div><span class="ds-empty-title">No files</span><span class="ds-empty-desc">Nothing matches the current filter.</span></div>';
+  lucide.createIcons();
+  document.querySelectorAll('[data-row-menu]').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      openRowMenu(parseInt(btn.dataset.rowMenu), btn);
+    });
+  });
+}
+
+// Row menu
+const rowScrim = document.getElementById('row-menu-scrim');
+const rowMenu = document.getElementById('row-menu');
+function openRowMenu(idx, anchor) {
+  const f = files[idx];
+  rowMenu.innerHTML = `
+    <button class="ds-menu-item"><i data-lucide="download" style="width:14px;height:14px"></i><span class="l">Download</span></button>
+    <button class="ds-menu-item"><i data-lucide="share-2" style="width:14px;height:14px"></i><span class="l">Share link</span></button>
+    <button class="ds-menu-item"><i data-lucide="star" style="width:14px;height:14px"></i><span class="l">Add to starred</span></button>
+    <button class="ds-menu-item"><i data-lucide="pencil" style="width:14px;height:14px"></i><span class="l">Rename</span></button>
+    <div class="ds-menu-sep"></div>
+    <button class="ds-menu-item danger"><i data-lucide="trash-2" style="width:14px;height:14px"></i><span class="l">Move to trash</span></button>`;
+  const rect = anchor.getBoundingClientRect();
+  rowMenu.style.top = (rect.bottom + 4) + 'px';
+  rowMenu.style.left = (rect.right - 180) + 'px';
+  rowMenu.style.width = '180px';
+  rowScrim.hidden = false;
+  lucide.createIcons();
+  rowMenu.querySelectorAll('.ds-menu-item').forEach((item, mi) => {
+    item.addEventListener('click', () => {
+      rowScrim.hidden = true;
+      if (mi === 0) showToast('Downloading ' + f.name);
+      else if (mi === 1) showToast('Link copied for ' + f.name);
+      else if (mi === 2) showToast('Added to starred');
+      else if (mi === 3) showToast('Rename ' + f.name);
+      else if (mi === 5) showToast('Moved ' + f.name + ' to trash');
+    });
+  });
+}
+rowScrim.addEventListener('click', e => { if (e.target === rowScrim) rowScrim.hidden = true; });
+
+// Nav
+document.querySelectorAll('[data-nav]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('[data-nav]').forEach(b => { b.classList.remove('active'); b.removeAttribute('aria-current'); });
+    btn.classList.add('active'); btn.setAttribute('aria-current', 'page');
+  });
+});
+
+// Filter tabs
+document.querySelectorAll('[data-filter]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('[data-filter]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    fileFilter = btn.dataset.filter;
+    renderFiles();
+  });
+});
+
+// Upload progress
+const uploadPanel = document.getElementById('upload-panel');
+const uploadList = document.getElementById('upload-list');
+const uploadQueue = [
+  { name: 'design-spec-v2.pdf', size: '2.4 MB', pct: 0 },
+  { name: 'assets-bundle.zip', size: '18.7 MB', pct: 0 }
+];
+
+document.getElementById('upload-btn').addEventListener('click', () => {
+  if (uploadTimer) return;
+  uploadPanel.hidden = false;
+  uploadQueue.forEach(f => f.pct = 0);
+  renderUpload();
+  uploadTimer = setInterval(() => {
+    let allDone = true;
+    uploadQueue.forEach(f => {
+      if (f.pct < 100) { f.pct += 12; allDone = false; }
+    });
+    renderUpload();
+    if (allDone) {
+      clearInterval(uploadTimer); uploadTimer = null;
+      showToast('Uploaded ' + uploadQueue.length + ' files');
+      setTimeout(() => { uploadPanel.hidden = true; }, 1200);
+    }
+  }, 130);
+});
+
+document.getElementById('cancel-upload').addEventListener('click', () => {
+  clearInterval(uploadTimer); uploadTimer = null;
+  uploadPanel.hidden = true;
+});
+
+function renderUpload() {
+  uploadList.innerHTML = uploadQueue.map(f => `
+    <div class="ds-progress-row" style="margin-bottom: var(--space-4)">
+      <div class="ds-progress-label"><span>${f.name} &middot; ${f.size}</span><span class="ds-progress-pct">${Math.min(f.pct,100)}%</span></div>
+      <div class="ds-progress-track"><div class="ds-progress-fill" style="width:${Math.min(f.pct,100)}%"></div></div>
+    </div>`).join('');
+}
+
+// Command palette
+const cmd = document.getElementById('cmd');
+const cmdInput = document.getElementById('cmd-input');
+const cmdList = document.getElementById('cmd-list');
+document.getElementById('open-cmd').addEventListener('click', () => { cmd.hidden = false; cmdInput.focus(); renderCmd(''); });
+cmd.addEventListener('click', e => { if (e.target === cmd) cmd.hidden = true; });
+cmdInput.addEventListener('input', () => renderCmd(cmdInput.value));
+cmdInput.addEventListener('keydown', e => { if (e.key === 'Escape') cmd.hidden = true; });
+document.addEventListener('keydown', e => { if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); cmd.hidden = !cmd.hidden; if (!cmd.hidden) cmdInput.focus(); } });
+
+function renderCmd(q) {
+  const navMatches = navItems.filter(n => n.includes(q.toLowerCase()));
+  const fileMatches = files.filter(f => f.name.toLowerCase().includes(q.toLowerCase()));
+  cmdList.innerHTML = `
+    <div class="ds-cmd-group"><span class="ds-cmd-header">Navigate</span>
+      ${navMatches.map(n => `<button class="ds-cmd-item" data-cmd="nav-${n}"><i data-lucide="corner-down-right" style="width:14px;height:14px"></i><span class="l">${n.charAt(0).toUpperCase()+n.slice(1)}</span></button>`).join('') || '<span class="ds-cmd-header">No matches</span>'}
+    </div>
+    <div class="ds-cmd-group"><span class="ds-cmd-header">Files</span>
+      ${fileMatches.map(f => `<button class="ds-cmd-item" data-cmd="file-${f.name}"><i data-lucide="${f.icon}" style="width:14px;height:14px"></i><span class="l">${f.name}</span><span class="ds-cmd-hint">${f.size}</span></button>`).join('') || ''}
+    </div>
+    <div class="ds-cmd-group"><span class="ds-cmd-header">Actions</span>
+      <button class="ds-cmd-item" data-cmd="act-upload"><i data-lucide="upload" style="width:14px;height:14px"></i><span class="l">Upload files</span><span class="ds-cmd-sc">U</span></button>
+      <button class="ds-cmd-item" data-cmd="act-newfolder"><i data-lucide="folder-plus" style="width:14px;height:14px"></i><span class="l">New folder</span><span class="ds-cmd-sc">N</span></button>
+    </div>`;
+  lucide.createIcons();
+  cmdList.querySelectorAll('[data-cmd]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.cmd;
+      if (id.startsWith('nav-')) {
+        const navId = id.slice(4);
+        document.querySelectorAll('[data-nav]').forEach(b => { b.classList.toggle('active', b.dataset.nav === navId); });
+      } else if (id === 'act-upload') {
+        document.getElementById('upload-btn').click();
+      } else if (id === 'act-newfolder') {
+        showToast('New folder created');
+      }
+      cmd.hidden = true;
+    });
+  });
+}
+
+// Toast
+function showToast(msg) {
+  const stack = document.getElementById('toasts');
+  const el = document.createElement('div');
+  el.className = 'ds-toast';
+  el.style.width = '340px';
+  el.innerHTML = `<span class="ds-toast-dot success"></span><div class="ds-toast-body"><span class="ds-toast-title">${msg}</span></div>`;
+  stack.appendChild(el);
+  setTimeout(() => el.remove(), 4000);
+}
+
+renderFiles();
+lucide.createIcons();
+</script>
+</body>
+</html>

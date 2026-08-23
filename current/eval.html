@@ -111,6 +111,15 @@
   .specimen-label { font-family: var(--font-mono); font-size: var(--font-size-xs); font-weight: 500; letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--text-tertiary); }
   .specimen iframe { width: 100%; border: none; border-radius: var(--radius-sm); background: var(--surface-app); display: block; }
 
+  /* ===== Template grid ===== */
+  .tpl-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: var(--space-5); }
+  .tpl-card { display: flex; flex-direction: column; gap: var(--space-3); background: var(--surface-panel); border-top: 1px solid var(--border-strong); border-radius: var(--radius-lg); overflow: hidden; }
+  .tpl-card-head { display: flex; align-items: center; justify-content: space-between; padding: var(--space-3) var(--space-4); }
+  .tpl-card-name { font-family: var(--font-body); font-size: var(--font-size-sm); font-weight: 600; color: var(--text-primary); }
+  .tpl-card-open { font-family: var(--font-mono); font-size: var(--font-size-2xs); color: var(--text-tertiary); text-decoration: none; padding: 3px 8px; border-radius: var(--radius-xs); border: 1px solid var(--border-subtle); transition: background var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard); }
+  .tpl-card-open:hover { background: var(--surface-hover); color: var(--text-primary); }
+  .tpl-card iframe { width: 100%; height: 220px; border: none; border-top: 1px solid var(--border-subtle); display: block; pointer-events: none; }
+
   /* ===== Type scale specimen ===== */
   .type-row { display: flex; align-items: baseline; gap: var(--space-4); border-bottom: 1px solid var(--border-subtle); padding: var(--space-2) 0; }
   .type-row .lbl { font-family: var(--font-mono); font-weight: 400; font-size: var(--font-size-2xs); color: var(--text-tertiary); width: 90px; letter-spacing: 0; }
@@ -410,6 +419,55 @@
   <div class="specimen">
     <span class="specimen-label">WindowChrome</span>
     <iframe src="components/chrome/windowchrome.card.html" loading="lazy"></iframe>
+  </div>
+</div>
+
+<!-- ==================== TEMPLATES ==================== -->
+<div class="eval-section">
+  <div class="eval-note">Validation templates — full app shells built with ds- classes</div>
+  <h2 class="eval-h2">Templates</h2>
+
+  <div class="tpl-grid">
+    <div class="tpl-card">
+      <div class="tpl-card-head"><span class="tpl-card-name">Creative Studio</span><a class="tpl-card-open" href="templates/creative-studio/CreativeStudio.html" target="_blank">Open ↗</a></div>
+      <iframe src="templates/creative-studio/CreativeStudio.html" loading="lazy"></iframe>
+    </div>
+    <div class="tpl-card">
+      <div class="tpl-card-head"><span class="tpl-card-name">Dev Dashboard</span><a class="tpl-card-open" href="templates/dev-dashboard/DevDashboard.html" target="_blank">Open ↗</a></div>
+      <iframe src="templates/dev-dashboard/DevDashboard.html" loading="lazy"></iframe>
+    </div>
+    <div class="tpl-card">
+      <div class="tpl-card-head"><span class="tpl-card-name">Account Settings</span><a class="tpl-card-open" href="templates/account-settings/AccountSettings.html" target="_blank">Open ↗</a></div>
+      <iframe src="templates/account-settings/AccountSettings.html" loading="lazy"></iframe>
+    </div>
+    <div class="tpl-card">
+      <div class="tpl-card-head"><span class="tpl-card-name">Dashboard Kanban</span><a class="tpl-card-open" href="templates/dashboard-kanban/DashboardKanban.html" target="_blank">Open ↗</a></div>
+      <iframe src="templates/dashboard-kanban/DashboardKanban.html" loading="lazy"></iframe>
+    </div>
+    <div class="tpl-card">
+      <div class="tpl-card-head"><span class="tpl-card-name">DAW Sequencer</span><a class="tpl-card-open" href="templates/daw-sequencer/DawSequencer.html" target="_blank">Open ↗</a></div>
+      <iframe src="templates/daw-sequencer/DawSequencer.html" loading="lazy"></iframe>
+    </div>
+    <div class="tpl-card">
+      <div class="tpl-card-head"><span class="tpl-card-name">Editorial Reader</span><a class="tpl-card-open" href="templates/editorial-reader/EditorialReader.html" target="_blank">Open ↗</a></div>
+      <iframe src="templates/editorial-reader/EditorialReader.html" loading="lazy"></iframe>
+    </div>
+    <div class="tpl-card">
+      <div class="tpl-card-head"><span class="tpl-card-name">File Manager</span><a class="tpl-card-open" href="templates/file-manager/FileManager.html" target="_blank">Open ↗</a></div>
+      <iframe src="templates/file-manager/FileManager.html" loading="lazy"></iframe>
+    </div>
+    <div class="tpl-card">
+      <div class="tpl-card-head"><span class="tpl-card-name">Image Editor</span><a class="tpl-card-open" href="templates/image-editor/ImageEditor.html" target="_blank">Open ↗</a></div>
+      <iframe src="templates/image-editor/ImageEditor.html" loading="lazy"></iframe>
+    </div>
+    <div class="tpl-card">
+      <div class="tpl-card-head"><span class="tpl-card-name">Marketing Landing</span><a class="tpl-card-open" href="templates/marketing-landing/MarketingLanding.html" target="_blank">Open ↗</a></div>
+      <iframe src="templates/marketing-landing/MarketingLanding.html" loading="lazy"></iframe>
+    </div>
+    <div class="tpl-card">
+      <div class="tpl-card-head"><span class="tpl-card-name">Messaging</span><a class="tpl-card-open" href="templates/messaging/Messaging.html" target="_blank">Open ↗</a></div>
+      <iframe src="templates/messaging/Messaging.html" loading="lazy"></iframe>
+    </div>
   </div>
 </div>
 

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dyvoided.2 — Marketing Landing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../styles.css">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--surface-sunken); font-family: var(--font-body); }
+  .shell { width: 1280px; height: 800px; margin: 0 auto; display: flex; flex-direction: column; overflow: hidden; }
+  .scroll { flex: 1; min-height: 0; overflow: auto; scrollbar-gutter: stable; }
+
+  /* Nav */
+  .nav { position: sticky; top: 0; z-index: 20; height: 60px; display: flex; align-items: center; justify-content: space-between; padding: 0 var(--space-9); background: color-mix(in srgb, var(--surface-app) 78%, transparent); backdrop-filter: blur(var(--blur-panel)); border-bottom: 1px solid var(--border-subtle); }
+  .nav-brand { display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 700; font-size: var(--text-lg); color: var(--text-primary); letter-spacing: var(--tracking-tight); }
+  .nav-brand-mark { width: 26px; height: 26px; border-radius: var(--radius-sm); background: linear-gradient(140deg, var(--primary-400), var(--accent-3-500)); }
+  .nav-links { display: flex; gap: var(--space-7); align-items: center; font-size: var(--text-base); color: var(--text-secondary); }
+  .nav-actions { display: flex; gap: 10px; align-items: center; }
+
+  /* Hero */
+  .hero { position: relative; padding: var(--space-12) var(--space-9) var(--space-11); text-align: center; overflow: hidden; background-image: radial-gradient(ellipse 60% 50% at 50% -10%, var(--primary-muted-bg), transparent 70%), radial-gradient(circle at 12% 40%, var(--accent-3-muted-bg), transparent 45%), radial-gradient(circle at 90% 30%, var(--accent-2-muted-bg), transparent 45%); }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; margin-bottom: var(--space-6); }
+  .hero-h1 { font-family: var(--font-display); font-weight: 700; font-size: var(--text-5xl); line-height: var(--leading-tight); letter-spacing: var(--tracking-tight); color: var(--text-primary); margin: 0 auto var(--space-6); max-width: 900px; text-wrap: balance; }
+  .hero-grad { background: linear-gradient(120deg, var(--primary-400), var(--accent-3-500)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hero-sub { font-size: var(--text-xl); line-height: var(--leading-snug); color: var(--text-secondary); max-width: 600px; margin: 0 auto var(--space-8); font-weight: 400; text-wrap: pretty; }
+  .hero-cta { display: flex; gap: 14px; justify-content: center; margin-bottom: var(--space-5); }
+  .hero-fine { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-tertiary); letter-spacing: .03em; }
+
+  /* Bar chart */
+  .chart { max-width: 920px; margin: var(--space-9) auto 0; height: 300px; border-radius: var(--radius-xl); border: 1px solid var(--border-strong); background: linear-gradient(160deg, var(--surface-raised), var(--surface-panel)); box-shadow: var(--shadow-lg); position: relative; overflow: hidden; }
+  .chart-bars { position: absolute; left: 0; right: 0; bottom: 0; top: 44px; display: flex; align-items: flex-end; gap: 8px; padding: var(--space-7) var(--space-8); }
+  .chart-bar { flex: 1; border-radius: 3px 3px 0 0; }
+
+  /* Section */
+  .section { padding: var(--space-11) var(--space-9); border-top: 1px solid var(--border-subtle); }
+  .section-head { text-align: center; max-width: 600px; margin: 0 auto var(--space-9); }
+  .section-h2 { font-family: var(--font-display); font-weight: 700; font-size: var(--text-3xl); letter-spacing: var(--tracking-tight); color: var(--text-primary); margin: var(--space-3) 0; }
+  .section-desc { font-size: var(--text-md); color: var(--text-secondary); line-height: var(--leading-body); margin: 0; }
+
+  /* Feature grid */
+  .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); max-width: 1000px; margin: 0 auto; }
+  .feature-icon { width: 44px; height: 44px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; color: #fff; margin-bottom: var(--space-5); font-size: 20px; }
+  .feature-h3 { font-family: var(--font-display); font-weight: 600; font-size: var(--text-lg); color: var(--text-primary); margin: 0 0 var(--space-2); }
+  .feature-p { font-size: var(--text-sm); color: var(--text-tertiary); line-height: var(--leading-body); margin: 0; }
+
+  /* Pricing */
+  .pricing { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); max-width: 1000px; margin: 0 auto; align-items: start; }
+  .price-card { padding: var(--space-8) var(--space-7); border-radius: var(--radius-lg); border: 1px solid var(--border-subtle); background: linear-gradient(160deg, var(--surface-raised), var(--surface-panel)); display: flex; flex-direction: column; gap: var(--space-5); position: relative; }
+  .price-card.elevated { transform: translateY(-10px); }
+  .price-amount { font-family: var(--font-display); font-weight: 700; font-size: var(--text-4xl); color: var(--text-primary); letter-spacing: var(--tracking-tight); line-height: 1; }
+  .price-per { font-family: var(--font-mono); font-size: var(--text-base); font-weight: 400; color: var(--text-tertiary); }
+  .price-desc { font-size: var(--text-sm); color: var(--text-secondary); line-height: var(--leading-body); }
+  .price-btn-outline { border-radius: var(--radius-sm); border: 1px solid var(--border-strong); }
+
+  /* Footer */
+  .footer { padding: var(--space-9); border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; color: var(--text-tertiary); font-size: var(--text-sm); background: var(--surface-panel); }
+  .footer-brand { display: flex; align-items: center; gap: 8px; font-family: var(--font-display); font-weight: 700; color: var(--text-primary); }
+  .footer-mark { width: 20px; height: 20px; border-radius: var(--radius-sm); background: linear-gradient(140deg, var(--primary-400), var(--accent-3-500)); }
+  .footer-links { display: flex; gap: var(--space-6); }
+</style>
+</head>
+<body data-theme="dark">
+
+<div class="shell">
+  <div class="ds-win-bar">
+    <div class="ds-win-dots"><span class="ds-win-dot" style="background:var(--danger-500)"></span><span class="ds-win-dot" style="background:var(--accent-1-500)"></span><span class="ds-win-dot" style="background:var(--success-500)"></span></div>
+    <span class="ds-win-title">reverb.fm</span>
+  </div>
+
+  <div class="scroll">
+    <!-- Nav -->
+    <nav class="nav">
+      <div class="nav-brand"><span class="nav-brand-mark"></span>Reverb</div>
+      <div class="nav-links"><span>Product</span><span>Sounds</span><span>Pricing</span><span>Docs</span></div>
+      <div class="nav-actions">
+        <button class="ds-btn ds-btn-ghost">Sign in</button>
+        <button class="ds-btn ds-btn-primary">Start free</button>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+      <span class="ds-badge ds-badge-accent hero-eyebrow">Now with tactile macro controls</span>
+      <h1 class="hero-h1">The studio that feels like <span class="hero-grad">hardware</span>.</h1>
+      <p class="hero-sub">Design sound with controls that push back. Detents, drive, and modulation you can feel — right in the browser.</p>
+      <div class="hero-cta">
+        <button class="ds-btn ds-btn-primary" style="height:48px;padding:0 24px;font-size:var(--text-md)">Start free</button>
+        <button class="ds-btn ds-btn-ghost" style="height:48px;padding:0 24px;font-size:var(--text-md)">Watch the tour</button>
+      </div>
+      <div class="hero-fine">No card required · Free for solo artists · Cancel anytime</div>
+      <div class="chart">
+        <div class="chart-bars">
+          <span class="chart-bar" style="height:40%;background:var(--control-track)"></span>
+          <span class="chart-bar" style="height:72%;background:var(--primary-500)"></span>
+          <span class="chart-bar" style="height:55%;background:var(--accent-2-500)"></span>
+          <span class="chart-bar" style="height:88%;background:var(--accent-1-500)"></span>
+          <span class="chart-bar" style="height:34%;background:var(--control-track)"></span>
+          <span class="chart-bar" style="height:66%;background:var(--accent-3-500)"></span>
+          <span class="chart-bar" style="height:48%;background:var(--primary-400)"></span>
+          <span class="chart-bar" style="height:78%;background:var(--accent-2-500)"></span>
+          <span class="chart-bar" style="height:28%;background:var(--control-track)"></span>
+          <span class="chart-bar" style="height:60%;background:var(--accent-1-500)"></span>
+          <span class="chart-bar" style="height:82%;background:var(--primary-500)"></span>
+          <span class="chart-bar" style="height:44%;background:var(--accent-3-500)"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="section">
+      <div class="section-head">
+        <span class="ds-group-label">Why Reverb</span>
+        <h2 class="section-h2">Everything responds to your hand</h2>
+        <p class="section-desc">Three ideas we obsess over, so your sessions feel less like software and more like an instrument.</p>
+      </div>
+      <div class="features">
+        <div class="ds-panel"><div class="ds-panel-body">
+          <span class="feature-icon" style="background:linear-gradient(180deg,var(--primary-400),var(--primary-600))">↕</span>
+          <h3 class="feature-h3">Tactile controls</h3>
+          <p class="feature-p">Sliders with detents you can feel. Return to center without looking, every time.</p>
+        </div></div>
+        <div class="ds-panel"><div class="ds-panel-body">
+          <span class="feature-icon" style="background:linear-gradient(180deg,var(--accent-2-400),var(--accent-2-600))">⚡</span>
+          <h3 class="feature-h3">Live modulation</h3>
+          <p class="feature-p">Route any source to any parameter and hear it move in real time — no reloading.</p>
+        </div></div>
+        <div class="ds-panel"><div class="ds-panel-body">
+          <span class="feature-icon" style="background:linear-gradient(180deg,var(--accent-3-400),var(--accent-3-600))">↓</span>
+          <h3 class="feature-h3">One-click export</h3>
+          <p class="feature-p">Render stems at studio quality and share a link before the idea gets cold.</p>
+        </div></div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="section">
+      <div class="section-head">
+        <span class="ds-group-label">Pricing</span>
+        <h2 class="section-h2">Start free, scale when you ship</h2>
+        <p class="section-desc">Every plan includes the full control surface. Pay only when your work grows.</p>
+      </div>
+      <div class="pricing">
+        <div class="price-card">
+          <span class="ds-group-label">Solo</span>
+          <div class="price-amount">$0<span class="price-per">/mo</span></div>
+          <div class="price-desc">For hobbyists and first sessions.</div>
+          <div class="price-btn-outline"><button class="ds-btn ds-btn-ghost" style="width:100%;height:44px">Get started</button></div>
+        </div>
+        <div class="price-card elevated">
+          <span class="ds-group-label">Studio</span>
+          <div class="price-amount">$18<span class="price-per">/mo</span></div>
+          <div class="price-desc">For working producers who ship weekly.</div>
+          <button class="ds-btn ds-btn-primary" style="height:44px">Start free trial</button>
+        </div>
+        <div class="price-card">
+          <span class="ds-group-label">Label</span>
+          <div class="price-amount">$52<span class="price-per">/mo</span></div>
+          <div class="price-desc">For teams and studios collaborating live.</div>
+          <div class="price-btn-outline"><button class="ds-btn ds-btn-ghost" style="width:100%;height:44px">Contact sales</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <div class="footer">
+      <div class="footer-brand"><span class="footer-mark"></span>Reverb</div>
+      <div class="footer-links"><span>Product</span><span>Pricing</span><span>Changelog</span><span>Privacy</span></div>
+      <div>© 2026 Reverb Audio</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

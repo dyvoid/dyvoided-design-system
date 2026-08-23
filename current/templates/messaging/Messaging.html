@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dyvoided.2 — Messaging</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../styles.css">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--surface-sunken); font-family: var(--font-body); }
+  .shell { width: 1280px; height: 800px; margin: 0 auto; display: flex; flex-direction: column; overflow: hidden; }
+  .body { display: flex; flex: 1; min-height: 0; }
+
+  /* Conversation rail */
+  .rail { width: 300px; flex-shrink: 0; border-right: 1px solid var(--border-subtle); display: flex; flex-direction: column; min-height: 0; background: var(--surface-panel); }
+  .rail-head { padding: var(--space-6) var(--space-5) var(--space-4); }
+  .rail-title { font-family: var(--font-display); font-weight: 700; font-size: var(--text-xl); color: var(--text-primary); letter-spacing: var(--tracking-tight); margin-bottom: var(--space-4); }
+  .rail-list { flex: 1; overflow: auto; padding: var(--space-2) var(--space-3); }
+
+  .conv { display: flex; gap: 12px; padding: var(--space-3); border-radius: var(--radius-md); cursor: pointer; }
+  .conv:hover { background: var(--surface-hover); }
+  .conv.active { background: var(--primary-muted-bg); }
+  .conv-body { flex: 1; min-width: 0; }
+  .conv-row { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  .conv-name { font-size: var(--text-base); font-weight: 600; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .conv-time { font-family: var(--font-mono); font-size: 10px; color: var(--text-tertiary); flex-shrink: 0; }
+  .conv-preview { font-size: var(--text-sm); color: var(--text-tertiary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px; }
+  .conv-preview-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 2px; }
+  .unread { flex-shrink: 0; min-width: 18px; height: 18px; padding: 0 5px; border-radius: var(--radius-full); background: var(--primary); color: var(--text-on-accent); font-family: var(--font-mono); font-size: 10px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+
+  /* Thread */
+  .thread { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+  .thread-head { height: 64px; flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; padding: 0 var(--space-6); border-bottom: 1px solid var(--border-subtle); background: var(--surface-panel); }
+  .thread-head-left { display: flex; align-items: center; gap: 12px; }
+  .thread-name { font-size: var(--text-md); font-weight: 600; color: var(--text-primary); }
+  .thread-presence { font-family: var(--font-mono); font-size: 11px; color: var(--success-500); }
+
+  .messages { flex: 1; overflow: auto; padding: var(--space-6) var(--space-8); display: flex; flex-direction: column; gap: var(--space-3); }
+  .day-divider { align-self: center; font-family: var(--font-mono); font-size: 10px; letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--text-tertiary); padding: 3px 12px; border-radius: var(--radius-full); background: var(--surface-panel); border: 1px solid var(--border-subtle); margin: var(--space-3) 0; }
+
+  .msg { display: flex; gap: 10px; max-width: 74%; }
+  .msg.in { align-self: flex-start; }
+  .msg.out { align-self: flex-end; flex-direction: row-reverse; }
+  .msg-stack { display: flex; flex-direction: column; gap: 3px; }
+  .msg-stack.in { align-items: flex-start; }
+  .msg-stack.out { align-items: flex-end; }
+  .bubble { padding: 10px 14px; border-radius: var(--radius-lg); font-size: var(--text-base); line-height: var(--leading-snug); border: 1px solid var(--border-subtle); box-shadow: var(--shadow-sm); text-wrap: pretty; }
+  .bubble.in { color: var(--text-primary); background: var(--surface-raised); }
+  .bubble.out { color: var(--text-on-accent); background: linear-gradient(180deg, var(--primary-400), var(--primary-600)); border-color: transparent; }
+  .msg-meta { font-family: var(--font-mono); font-size: 10px; color: var(--text-tertiary); padding: 0 4px; }
+
+  /* Composer */
+  .composer { flex-shrink: 0; padding: var(--space-4) var(--space-6) var(--space-6); border-top: 1px solid var(--border-subtle); background: var(--surface-panel); display: flex; align-items: center; gap: 10px; }
+  .composer .ds-input-box { flex: 1; }
+</style>
+</head>
+<body data-theme="dark">
+
+<div class="shell">
+  <div class="ds-win-bar">
+    <div class="ds-win-dots"><span class="ds-win-dot" style="background:var(--danger-500)"></span><span class="ds-win-dot" style="background:var(--accent-1-500)"></span><span class="ds-win-dot" style="background:var(--success-500)"></span></div>
+    <span class="ds-win-title">Relay</span>
+  </div>
+
+  <div class="body">
+    <!-- Conversation rail -->
+    <div class="rail">
+      <div class="rail-head">
+        <div class="rail-title">Messages</div>
+        <div class="ds-input-box"><input class="ds-input" placeholder="Search conversations"></div>
+      </div>
+      <div class="rail-list">
+        <div class="conv active">
+          <span class="ds-avatar-wrap"><span class="ds-avatar ds-avatar-44 ds-avatar-t0">DL</span><span class="ds-avatar-status online"></span></span>
+          <div class="conv-body">
+            <div class="conv-row"><span class="conv-name">Design Lab</span><span class="conv-time">9:41</span></div>
+            <div class="conv-preview-row"><span class="conv-preview">Priya: pushed the new detents build</span><span class="unread">3</span></div>
+          </div>
+        </div>
+        <div class="conv">
+          <span class="ds-avatar-wrap"><span class="ds-avatar ds-avatar-44 ds-avatar-t1">MW</span><span class="ds-avatar-status online"></span></span>
+          <div class="conv-body">
+            <div class="conv-row"><span class="conv-name">Mara Whitfield</span><span class="conv-time">9:12</span></div>
+            <div class="conv-preview">Perfect, ship it whenever you're ready</div>
+          </div>
+        </div>
+        <div class="conv">
+          <span class="ds-avatar-wrap"><span class="ds-avatar ds-avatar-44 ds-avatar-t2">JT</span><span class="ds-avatar-status busy"></span></span>
+          <div class="conv-body">
+            <div class="conv-row"><span class="conv-name">Jonas Tran</span><span class="conv-time">Yest</span></div>
+            <div class="conv-preview">You: sent the mixer specs</div>
+          </div>
+        </div>
+        <div class="conv">
+          <span class="ds-avatar-wrap"><span class="ds-avatar ds-avatar-44 ds-avatar-t3">RS</span></span>
+          <div class="conv-body">
+            <div class="conv-row"><span class="conv-name">Rhea Sen</span><span class="conv-time">Yest</span></div>
+            <div class="conv-preview">Voice message · 0:42</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Thread -->
+    <div class="thread">
+      <div class="thread-head">
+        <div class="thread-head-left">
+          <span class="ds-avatar-wrap"><span class="ds-avatar ds-avatar-32 ds-avatar-t0">DL</span><span class="ds-avatar-status online"></span></span>
+          <div>
+            <div class="thread-name">Design Lab</div>
+            <div class="thread-presence">Priya, Jonas + 4 online</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px">
+          <button class="ds-btn ds-btn-ghost ds-btn-sm">Call</button>
+        </div>
+      </div>
+
+      <div class="messages">
+        <div class="day-divider">Today</div>
+
+        <div class="msg in">
+          <span class="ds-avatar ds-avatar-26 ds-avatar-t0">PR</span>
+          <div class="msg-stack in">
+            <div class="bubble in">Morning! Pushed the build with the tactile detents on the macro sliders. Feels miles better.</div>
+            <span class="msg-meta">Priya · 9:32</span>
+          </div>
+        </div>
+
+        <div class="msg out">
+          <span class="ds-avatar ds-avatar-26 ds-avatar-t0">YO</span>
+          <div class="msg-stack out">
+            <div class="bubble out">That's gorgeous. The center detent on Mix is exactly what Mara asked for in the piece.</div>
+            <span class="msg-meta">9:38</span>
+          </div>
+        </div>
+
+        <div class="msg out">
+          <span class="ds-avatar ds-avatar-26 ds-avatar-t0">YO</span>
+          <div class="msg-stack out">
+            <div class="bubble out">Can we get the same feel on the resonance control before Friday?</div>
+            <span class="msg-meta">9:39</span>
+          </div>
+        </div>
+
+        <div class="msg in">
+          <span class="ds-avatar ds-avatar-26 ds-avatar-t2">JT</span>
+          <div class="msg-stack in">
+            <div class="bubble in">Already on it — should have a build for you by end of day.</div>
+            <span class="msg-meta">Jonas · 9:41</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="composer">
+        <div class="ds-input-box"><input class="ds-input" placeholder="Message Design Lab…"></div>
+        <button class="ds-btn ds-btn-primary">Send</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Conversation selection
+  document.querySelectorAll('.conv').forEach(el => {
+    el.addEventListener('click', () => {
+      document.querySelectorAll('.conv').forEach(c => c.classList.remove('active'));
+      el.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

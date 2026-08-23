@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dyvoided.2 — Image Editor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../styles.css">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--surface-sunken); font-family: var(--font-body); }
+  .shell { width: 1280px; height: 800px; margin: 0 auto; display: flex; flex-direction: column; overflow: hidden; }
+  .body { display: flex; flex: 1; min-height: 0; }
+
+  /* Tool rail */
+  .tool-rail { width: 52px; flex-shrink: 0; border-right: 1px solid var(--border-subtle); background: var(--surface-panel); display: flex; flex-direction: column; align-items: center; padding: var(--space-3) 0; gap: 4px; }
+  .tool-btn { width: 36px; height: 36px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text-tertiary); background: transparent; border: none; font-size: 18px; line-height: 1; }
+  .tool-btn:hover { background: var(--surface-hover); color: var(--text-secondary); }
+  .tool-btn.active { color: var(--text-on-accent); background: linear-gradient(180deg, var(--primary-400), var(--primary-600)); box-shadow: inset 0 1px 0 oklch(100% 0 0 / .3), var(--shadow-sm); }
+
+  /* Center column */
+  .center { flex: 1; min-width: 0; display: flex; flex-direction: column; background: var(--surface-sunken); }
+  .canvas-bar { height: 44px; flex-shrink: 0; display: flex; align-items: center; gap: var(--space-5); padding: 0 var(--space-5); border-bottom: 1px solid var(--border-subtle); background: var(--surface-panel); }
+  .bar-group { display: flex; align-items: center; gap: 8px; font-size: var(--text-sm); color: var(--text-secondary); }
+  .bar-key { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-tertiary); }
+  .bar-val { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-primary); background: var(--surface-sunken); border: 1px solid var(--border-strong); border-radius: var(--radius-xs); padding: 3px 9px; }
+  .bar-sep { width: 1px; height: 20px; background: var(--border-subtle); }
+
+  .canvas-stage { flex: 1; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; background-image: linear-gradient(45deg, var(--surface-app) 25%, transparent 25%), linear-gradient(-45deg, var(--surface-app) 25%, transparent 25%), linear-gradient(45deg, transparent 75%, var(--surface-app) 75%), linear-gradient(-45deg, transparent 75%, var(--surface-app) 75%); background-size: 22px 22px; background-position: 0 0, 0 11px, 11px -11px, -11px 0; }
+  .canvas-art { width: 560px; height: 400px; border-radius: 2px; box-shadow: var(--shadow-lg), 0 0 0 1px var(--border-strong); position: relative; overflow: hidden; background: radial-gradient(circle at 28% 26%, var(--accent-1-500), transparent 46%), radial-gradient(circle at 76% 34%, var(--accent-3-500), transparent 44%), radial-gradient(circle at 60% 82%, var(--accent-2-500), transparent 50%), linear-gradient(150deg, var(--primary-600), var(--gray-900)); }
+  .canvas-art::after { content: ""; position: absolute; inset: 0; outline: 1.5px solid var(--primary); outline-offset: -1px; }
+
+  .status-bar { height: 28px; flex-shrink: 0; border-top: 1px solid var(--border-subtle); background: var(--surface-panel); display: flex; align-items: center; justify-content: space-between; padding: 0 var(--space-5); font-family: var(--font-mono); font-size: 11px; color: var(--text-tertiary); }
+  .status-group { display: flex; gap: var(--space-6); align-items: center; }
+
+  /* Right panel */
+  .right-panel { width: 280px; flex-shrink: 0; border-left: 1px solid var(--border-subtle); background: var(--surface-panel); display: flex; flex-direction: column; min-height: 0; }
+  .right-tabs { padding: var(--space-4) var(--space-5) 0; }
+  .right-body { flex: 1; overflow: auto; padding: var(--space-5); }
+  .slider-stack { display: flex; flex-direction: column; gap: var(--space-5); margin-bottom: var(--space-6); }
+
+  /* Layer rows */
+  .layer-row { display: flex; align-items: center; gap: 10px; padding: var(--space-2); border-radius: var(--radius-sm); cursor: pointer; }
+  .layer-row:hover { background: var(--surface-hover); }
+  .layer-row.active { background: var(--primary-muted-bg); }
+  .layer-thumb { width: 34px; height: 26px; border-radius: var(--radius-xs); flex-shrink: 0; border: 1px solid var(--border-subtle); }
+  .layer-name { font-size: var(--text-sm); color: var(--text-primary); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .layer-name.dim { color: var(--text-tertiary); }
+  .layer-op { font-family: var(--font-mono); font-size: 10px; color: var(--text-tertiary); }
+</style>
+</head>
+<body data-theme="dark">
+
+<div class="shell">
+  <div class="ds-win-bar">
+    <div class="ds-win-dots"><span class="ds-win-dot" style="background:var(--danger-500)"></span><span class="ds-win-dot" style="background:var(--accent-1-500)"></span><span class="ds-win-dot" style="background:var(--success-500)"></span></div>
+    <span class="ds-win-title">Aperture — cover-art.psd</span>
+  </div>
+
+  <div class="body">
+    <!-- Tool rail -->
+    <div class="tool-rail">
+      <button class="tool-btn active" data-tool="move" title="Move">✥</button>
+      <button class="tool-btn" data-tool="marquee" title="Marquee">▭</button>
+      <button class="tool-btn" data-tool="lasso" title="Lasso">⌇</button>
+      <button class="tool-btn" data-tool="crop" title="Crop">⤢</button>
+      <button class="tool-btn" data-tool="brush" title="Brush">✎</button>
+      <button class="tool-btn" data-tool="eyedrop" title="Eyedropper">⚲</button>
+    </div>
+
+    <!-- Center canvas -->
+    <div class="center">
+      <div class="canvas-bar">
+        <div class="bar-group"><span class="bar-key">Tool</span><span class="bar-val" id="tool-name">move</span></div>
+        <div class="bar-sep"></div>
+        <div class="bar-group"><span class="bar-key">W</span><span class="bar-val">1440</span><span class="bar-key">H</span><span class="bar-val">1024</span></div>
+      </div>
+
+      <div class="canvas-stage">
+        <div class="canvas-art"></div>
+      </div>
+
+      <div class="status-bar">
+        <div class="status-group"><span>66.7%</span><span>1440 × 1024 px</span><span>RGB / 8-bit</span></div>
+        <div class="status-group"><span>Layer: Gradient wash</span><span>3.2 MB</span></div>
+      </div>
+    </div>
+
+    <!-- Right panel -->
+    <div class="right-panel">
+      <div class="right-tabs">
+        <div class="ds-tabs">
+          <button class="ds-tab active" data-rtab="adjust">Adjust</button>
+          <button class="ds-tab" data-rtab="layers">Layers</button>
+          <button class="ds-tab" data-rtab="history">History</button>
+        </div>
+      </div>
+
+      <div class="right-body">
+        <div class="ds-group-label" style="margin-bottom: var(--space-4)">Light</div>
+        <div class="slider-stack">
+          <div class="ds-slider-field">
+            <div class="ds-slider-head"><span class="ds-slider-label">Exposure</span><span class="ds-slider-value">+0.12</span></div>
+            <div class="ds-slider-track"><div class="ds-slider-fill" style="width:62%"></div><div class="ds-slider-knob" style="left:calc(62% - 7px)"></div></div>
+          </div>
+          <div class="ds-slider-field">
+            <div class="ds-slider-head"><span class="ds-slider-label">Contrast</span><span class="ds-slider-value">+11</span></div>
+            <div class="ds-slider-track"><div class="ds-slider-fill" style="width:64%"></div><div class="ds-slider-knob" style="left:calc(64% - 7px)"></div></div>
+          </div>
+          <div class="ds-slider-field">
+            <div class="ds-slider-head"><span class="ds-slider-label">Highlights</span><span class="ds-slider-value">-7</span></div>
+            <div class="ds-slider-track"><div class="ds-slider-fill" style="width:41%"></div><div class="ds-slider-knob" style="left:calc(41% - 7px)"></div></div>
+          </div>
+        </div>
+
+        <div class="ds-group-label" style="margin-bottom: var(--space-4)">Color</div>
+        <div class="slider-stack">
+          <div class="ds-slider-field">
+            <div class="ds-slider-head"><span class="ds-slider-label">Temperature</span><span class="ds-slider-value">+2</span></div>
+            <div class="ds-slider-track"><div class="ds-slider-fill" style="width:55%"></div><div class="ds-slider-knob" style="left:calc(55% - 7px)"></div></div>
+          </div>
+          <div class="ds-slider-field">
+            <div class="ds-slider-head"><span class="ds-slider-label">Saturation</span><span class="ds-slider-value">+12</span></div>
+            <div class="ds-slider-track"><div class="ds-slider-fill" style="width:65%"></div><div class="ds-slider-knob" style="left:calc(65% - 7px)"></div></div>
+          </div>
+        </div>
+
+        <div class="ds-group-label" style="margin-bottom: var(--space-4)">Layers</div>
+        <div id="layer-list" style="display:flex;flex-direction:column;gap:2px">
+          <div class="layer-row active" data-layer="0">
+            <span class="layer-thumb" style="background:linear-gradient(150deg,var(--primary-500),var(--accent-3-500))"></span>
+            <span class="layer-name">Gradient wash</span><span class="layer-op">100</span>
+          </div>
+          <div class="layer-row" data-layer="1">
+            <span class="layer-thumb" style="background:linear-gradient(150deg,var(--accent-1-500),var(--accent-2-500))"></span>
+            <span class="layer-name">Type — "ECHO"</span><span class="layer-op">92</span>
+          </div>
+          <div class="layer-row" data-layer="2">
+            <span class="layer-thumb" style="background:var(--surface-sunken)"></span>
+            <span class="layer-name dim">Grain overlay</span><span class="layer-op">40</span>
+          </div>
+          <div class="layer-row" data-layer="3">
+            <span class="layer-thumb" style="background:linear-gradient(150deg,var(--gray-700),var(--gray-900))"></span>
+            <span class="layer-name">Background</span><span class="layer-op">100</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Tool selection
+document.querySelectorAll('[data-tool]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('[data-tool]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tool-name').textContent = btn.dataset.tool;
+  });
+});
+
+// Right panel tabs (visual only)
+document.querySelectorAll('[data-rtab]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('[data-rtab]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+
+// Layer selection
+document.querySelectorAll('[data-layer]').forEach(row => {
+  row.addEventListener('click', () => {
+    document.querySelectorAll('[data-layer]').forEach(r => r.classList.remove('active'));
+    row.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

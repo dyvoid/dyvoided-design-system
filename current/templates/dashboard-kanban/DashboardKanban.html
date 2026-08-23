@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dyvoided.2 — Dashboard Kanban</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../styles.css">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--surface-sunken); font-family: var(--font-body); }
+  .shell { width: 1280px; height: 800px; margin: 0 auto; display: flex; flex-direction: column; overflow: hidden; }
+  .body { display: flex; flex: 1; min-height: 0; }
+  .sidebar { width: 220px; flex-shrink: 0; border-right: 1px solid var(--border-subtle); display: flex; flex-direction: column; background: linear-gradient(165deg, var(--surface-raised) 0%, var(--surface-panel) 55%, var(--primary-muted-bg) 160%); }
+  .sidebar-nav { flex: 1; min-height: 0; padding: var(--space-3) var(--space-2); }
+  .sidebar-foot { padding: var(--space-5); border-top: 1px solid var(--border-subtle); display: flex; flex-direction: column; gap: var(--space-4); }
+  .main { flex: 1; padding: var(--space-7); overflow: auto; scrollbar-gutter: stable; }
+  .top-bar { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-5); margin-bottom: var(--space-7); }
+  .top-title { font-family: var(--font-display); font-weight: 700; font-size: var(--text-3xl); color: var(--text-primary); letter-spacing: var(--tracking-tight); }
+  .top-badges { display: flex; gap: 8px; margin-top: 8px; }
+  .top-actions { display: flex; gap: 10px; }
+  .board { display: flex; gap: var(--space-5); align-items: flex-start; }
+  .col { width: 270px; flex-shrink: 0; display: flex; flex-direction: column; gap: var(--space-3); }
+  .col-head { display: flex; align-items: center; justify-content: space-between; padding: 0 var(--space-2); }
+  .col-count { background: var(--surface-raised); border-radius: var(--radius-full); padding: 1px 7px; font-family: var(--font-mono); font-size: 10px; color: var(--text-tertiary); }
+  .kanban-card { background: var(--surface-raised); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); padding: var(--space-4); position: relative; overflow: hidden; }
+  .kanban-card.accent::before { content: ""; position: absolute; top: 0; left: 0; bottom: 0; width: 2px; }
+  .kanban-card.accent-neutral::before { background: var(--border-strong); }
+  .kanban-card.accent-primary::before { background: var(--primary-500); }
+  .kanban-card.accent-1::before { background: var(--accent-1-500); }
+  .kanban-card.accent-3::before { background: var(--accent-3-500); }
+  .kanban-card.accent-success::before { background: var(--success-500); }
+  .kanban-card.done { opacity: .6; }
+  .card-title { font-size: var(--text-sm); font-weight: 600; color: var(--text-primary); margin-bottom: var(--space-3); }
+  .card-foot { display: flex; align-items: center; justify-content: space-between; }
+  .card-date { font-family: var(--font-mono); font-size: var(--font-size-2xs); color: var(--text-tertiary); }
+</style>
+</head>
+<body data-theme="dark">
+
+<div class="shell">
+  <div class="ds-win-bar">
+    <div class="ds-win-dots"><span class="ds-win-dot" style="background:var(--danger-500)"></span><span class="ds-win-dot" style="background:var(--accent-1-500)"></span><span class="ds-win-dot" style="background:var(--success-500)"></span></div>
+    <span class="ds-win-title">Cadre</span>
+  </div>
+
+  <div class="body">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-nav">
+        <div class="ds-nav">
+          <div class="ds-nav-section">
+            <span class="ds-nav-header">Workspace</span>
+            <button class="ds-nav-item active" data-nav="overview" aria-current="page"><span class="l">Overview</span></button>
+            <button class="ds-nav-item" data-nav="projects"><span class="l">Projects</span></button>
+            <button class="ds-nav-item" data-nav="team"><span class="l">Team</span></button>
+            <button class="ds-nav-item" data-nav="calendar"><span class="l">Calendar</span></button>
+            <button class="ds-nav-item" data-nav="settings"><span class="l">Settings</span></button>
+          </div>
+          <div class="ds-nav-section">
+            <span class="ds-nav-header">Projects</span>
+            <button class="ds-nav-item" data-nav="website-redesign"><span class="l">Website Redesign</span></button>
+            <button class="ds-nav-item" data-nav="mobile-app"><span class="l">Mobile App v2</span></button>
+            <button class="ds-nav-item" data-nav="q3-report"><span class="l">Q3 Report</span></button>
+            <button class="ds-nav-item" data-nav="marketing-site"><span class="l">Marketing Site</span></button>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-foot">
+        <label class="ds-switch-item">
+          <span class="ds-switch-track" id="theme-switch"><span class="ds-switch-thumb"></span></span>
+          <span class="ds-switch-label">Light theme</span>
+        </label>
+        <label class="ds-switch-item">
+          <span class="ds-switch-track on" id="notif-switch"><span class="ds-switch-thumb"></span></span>
+          <span class="ds-switch-label">Notifications</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Main -->
+    <div class="main">
+      <div class="top-bar">
+        <div>
+          <div class="top-title">Website Redesign</div>
+          <div class="top-badges">
+            <span class="ds-badge ds-badge-success">On track</span>
+            <span class="ds-badge ds-badge-warning">Needs review</span>
+          </div>
+        </div>
+        <div class="top-actions">
+          <button class="ds-btn ds-btn-ghost">Share</button>
+          <button class="ds-btn ds-btn-primary">New task</button>
+        </div>
+      </div>
+
+      <div class="board">
+        <!-- Backlog -->
+        <div class="col">
+          <div class="col-head">
+            <span class="ds-group-label">Backlog</span>
+            <span class="col-count">3</span>
+          </div>
+          <div class="kanban-card accent accent-neutral">
+            <div class="card-title">Audit accessibility on pricing page</div>
+            <div class="card-foot">
+              <span class="ds-avatar ds-avatar-20 ds-avatar-t0">EK</span>
+              <span class="card-date">Aug 22</span>
+            </div>
+          </div>
+          <div class="kanban-card accent accent-neutral">
+            <div class="card-title">Draft Q4 content calendar</div>
+            <div class="card-foot">
+              <span class="ds-avatar ds-avatar-20 ds-avatar-t1">AN</span>
+              <span class="card-date">Aug 25</span>
+            </div>
+          </div>
+          <div class="kanban-card accent accent-neutral">
+            <div class="card-title">Vendor contract renewal</div>
+            <div class="card-foot">
+              <span class="ds-avatar ds-avatar-20 ds-avatar-t2">RS</span>
+              <span class="card-date">Sep 2</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- In progress -->
+        <div class="col">
+          <div class="col-head">
+            <span class="ds-group-label">In progress</span>
+            <span class="col-count">2</span>
+          </div>
+          <div class="kanban-card accent accent-primary">
+            <div class="card-title">Build checkout flow</div>
+            <div class="card-foot">
+              <span class="ds-avatar ds-avatar-20 ds-avatar-t1">AN</span>
+              <span class="card-date">Aug 14</span>
+            </div>
+          </div>
+          <div class="kanban-card accent accent-1">
+            <div class="card-title">Cross-browser QA pass</div>
+            <div class="card-foot">
+              <span class="ds-avatar ds-avatar-20 ds-avatar-t2">RS</span>
+              <span class="card-date">Aug 16</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review -->
+        <div class="col">
+          <div class="col-head">
+            <span class="ds-group-label">Review</span>
+            <span class="col-count">1</span>
+          </div>
+          <div class="kanban-card accent accent-3">
+            <div class="card-title">Approve homepage copy</div>
+            <div class="card-foot">
+              <span class="ds-avatar ds-avatar-20 ds-avatar-t0">EK</span>
+              <span class="card-date">Aug 12</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Done -->
+        <div class="col">
+          <div class="col-head">
+            <span class="ds-group-label">Done</span>
+            <span class="col-count">2</span>
+          </div>
+          <div class="kanban-card accent accent-success done">
+            <div class="card-title">Finalize navigation structure</div>
+            <div class="card-foot">
+              <span class="ds-avatar ds-avatar-20 ds-avatar-t1">AN</span>
+              <span class="card-date">Aug 9</span>
+            </div>
+          </div>
+          <div class="kanban-card accent accent-success done">
+            <div class="card-title">Wireframe review with client</div>
+            <div class="card-foot">
+              <span class="ds-avatar ds-avatar-20 ds-avatar-t0">EK</span>
+              <span class="card-date">Aug 5</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Nav active state
+document.querySelectorAll('[data-nav]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('[data-nav]').forEach(b => { b.classList.remove('active'); b.removeAttribute('aria-current'); });
+    btn.classList.add('active'); btn.setAttribute('aria-current', 'page');
+  });
+});
+
+// Switches
+document.getElementById('theme-switch').addEventListener('click', e => {
+  const track = e.currentTarget;
+  track.classList.toggle('on');
+  document.body.dataset.theme = track.classList.contains('on') ? 'light' : 'dark';
+});
+document.getElementById('notif-switch').addEventListener('click', e => {
+  e.currentTarget.classList.toggle('on');
+});
+</script>
+</body>
+</html>

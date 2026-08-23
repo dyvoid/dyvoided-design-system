@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dyvoided.2 — Creative Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../styles.css">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--surface-sunken); font-family: var(--font-body); }
+  .shell { width: 1280px; height: 800px; margin: 0 auto; display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--border-strong); border-radius: 10px; box-shadow: var(--shadow-lg); background: var(--surface-app); }
+  .body { display: flex; flex: 1; min-height: 0; overflow: hidden; }
+
+  /* Sidebar */
+  .sidebar { width: 220px; flex-shrink: 0; min-height: 0; overflow: hidden; border-right: 1px solid var(--border-subtle); display: flex; flex-direction: column; background: var(--surface-panel); }
+  .sidebar-nav { padding: var(--space-3) var(--space-2); flex-shrink: 0; }
+  .sidebar-search { padding: 0 var(--space-5); margin-top: var(--space-4); }
+  .sidebar-layers { padding: var(--space-3) var(--space-5); display: flex; flex-direction: column; gap: 1px; flex: 1; min-height: 0; overflow: auto; scrollbar-gutter: stable; }
+  .layer { padding: var(--space-2) var(--space-3); border-radius: var(--radius-xs); cursor: pointer; font-size: var(--text-sm); color: var(--text-secondary); border-left: 2px solid transparent; transition: background var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard); }
+  .layer:hover { background: var(--surface-hover); color: var(--text-primary); }
+  .layer.active { background: var(--surface-active); color: var(--text-primary); font-weight: 500; }
+  .layer.primary { border-left-color: var(--primary-500); }
+  .layer.a1 { border-left-color: var(--accent-1-500); }
+  .layer.a2 { border-left-color: var(--accent-2-500); }
+  .layer.a3 { border-left-color: var(--accent-3-500); }
+  .sidebar-foot { padding: var(--space-5); border-top: 1px solid var(--border-subtle); display: flex; flex-direction: column; gap: var(--space-4); flex-shrink: 0; }
+  .operator { display: flex; align-items: center; gap: 10px; }
+  .operator-name { font-size: var(--text-sm); color: var(--text-secondary); font-weight: 500; }
+  .toggle-row { display: flex; align-items: center; justify-content: space-between; font-size: var(--text-sm); color: var(--text-secondary); cursor: pointer; }
+
+  /* Main canvas */
+  .main { flex: 1; min-width: 0; min-height: 0; padding: var(--space-8); overflow: auto; scrollbar-gutter: stable; background: var(--surface-app); }
+  .main-head { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: var(--space-8); }
+  .project-name { font-family: var(--font-display); font-weight: 600; font-size: var(--text-3xl); color: var(--text-primary); letter-spacing: var(--tracking-tight); line-height: 1.05; }
+  .badges { display: flex; gap: 8px; margin-top: 10px; }
+  .head-actions { display: flex; gap: 8px; align-items: center; }
+  .macro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); }
+  .effects-meter-row { display: grid; grid-template-columns: 1.4fr 1fr; gap: var(--space-6); margin-top: var(--space-6); }
+
+  /* Slider accent modifiers */
+  .ds-slider-fill.a1 { background: var(--accent-1-500); }
+  .ds-slider-fill.a2 { background: var(--accent-2-500); }
+  .ds-slider-fill.a3 { background: var(--accent-3-500); }
+  .ds-slider-knob.a1 { border-color: var(--accent-1-500); }
+  .ds-slider-knob.a2 { border-color: var(--accent-2-500); }
+  .ds-slider-knob.a3 { border-color: var(--accent-3-500); }
+
+  /* Effects chain row */
+  .effect-row { display: flex; align-items: center; justify-content: space-between; padding: var(--space-2) var(--space-3); border-radius: var(--radius-xs); transition: background var(--duration-fast) var(--ease-standard); }
+  .effect-row:hover { background: var(--surface-hover); }
+  .effect-pct { font-family: var(--font-mono); font-size: var(--text-base); color: var(--text-primary); font-weight: 500; font-feature-settings: var(--tnum); letter-spacing: -0.01em; }
+
+  /* Output meter */
+  .meter { display: flex; align-items: flex-end; gap: 3px; height: 100px; box-shadow: inset 0 -1px 0 0 var(--border-strong); }
+  .meter span { flex: 1; border-radius: 1px; }
+  .meter .track { background: var(--control-track); }
+  .meter .p1 { background: var(--primary-500); }
+  .meter .p2 { background: var(--accent-2-500); }
+  .meter .p3 { background: var(--accent-1-500); }
+  .meter .p4 { background: var(--accent-3-500); }
+
+  /* Inspector */
+  .inspector { width: 260px; flex-shrink: 0; min-height: 0; overflow: auto; border-left: 1px solid var(--border-subtle); background: var(--surface-panel); padding: var(--space-6); }
+  .insp-row { display: flex; align-items: baseline; justify-content: space-between; padding: var(--space-3) 0; border-bottom: 1px solid var(--border-subtle); }
+  .insp-row:last-child { border-bottom: none; }
+  .insp-key { font-size: var(--text-sm); color: var(--text-secondary); font-weight: 500; }
+  .insp-val { font-size: var(--text-base); font-family: var(--font-mono); color: var(--text-primary); font-weight: 500; font-feature-settings: var(--tnum); letter-spacing: -0.01em; }
+
+  /* Overlays */
+  .scrim { position: fixed; inset: 0; background: var(--scrim); display: flex; align-items: center; justify-content: center; z-index: 100; }
+  .scrim[hidden] { display: none; }
+  .cmd-scrim { position: fixed; inset: 0; background: var(--scrim); display: flex; align-items: flex-start; justify-content: center; padding-top: 80px; z-index: 100; }
+  .cmd-scrim[hidden] { display: none; }
+  .toast-stack { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 100; }
+  .proj-menu { position: absolute; top: 40px; left: 96px; z-index: 50; width: 180px; }
+  .proj-menu[hidden] { display: none; }
+</style>
+</head>
+<body data-theme="dark">
+
+<div class="shell">
+  <div class="ds-win-bar">
+    <div class="ds-win-dots"><span class="ds-win-dot" style="background:var(--danger-500)"></span><span class="ds-win-dot" style="background:var(--accent-1-500)"></span><span class="ds-win-dot" style="background:var(--success-500)"></span></div>
+    <span class="ds-win-title">Oscilla</span>
+  </div>
+
+  <div class="body" id="body">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-nav">
+        <div class="ds-group-label" style="padding: 4px 10px 6px">Workspace</div>
+        <div class="ds-nav">
+          <div class="ds-nav-section">
+            <button class="ds-nav-item active" data-nav="sessions"><span class="l">Sessions</span></button>
+            <button class="ds-nav-item" data-nav="library"><span class="l">Sound Library</span></button>
+            <button class="ds-nav-item" data-nav="automation"><span class="l">Automation</span></button>
+            <button class="ds-nav-item" data-nav="mixer"><span class="l">Mixer</span></button>
+            <button class="ds-nav-item" data-nav="export"><span class="l">Export</span></button>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-search">
+        <div class="ds-input-box"><input class="ds-input" placeholder="Search library" id="search"></div>
+      </div>
+      <div class="ds-group-label" style="padding: 0 var(--space-5); margin-top: var(--space-4)">Layers</div>
+      <div class="sidebar-layers" id="layers">
+        <div class="layer active primary" data-layer="0">Intro Pad</div>
+        <div class="layer a1" data-layer="1">Kick Drum</div>
+        <div class="layer a1" data-layer="2">Snare Rim</div>
+        <div class="layer a2" data-layer="3">Bass Layer 02</div>
+        <div class="layer a3" data-layer="4">Lead — bright pluck</div>
+        <div class="layer a3" data-layer="5">Lead — soft</div>
+        <div class="layer a2" data-layer="6">FX sweep</div>
+        <div class="layer primary" data-layer="7">Ambient tail</div>
+      </div>
+      <div class="sidebar-foot">
+        <div class="operator">
+          <span class="ds-avatar ds-avatar-26 ds-avatar-t2">MO</span>
+          <span class="operator-name">Mo Okonkwo</span>
+        </div>
+        <div class="toggle-row" id="theme-toggle">
+          <span>Light theme</span>
+          <span class="ds-switch-track"><span class="ds-switch-thumb"></span></span>
+        </div>
+        <div class="toggle-row" id="density-toggle">
+          <span>Compact density</span>
+          <span class="ds-switch-track"><span class="ds-switch-thumb"></span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main canvas -->
+    <div class="main">
+      <div class="main-head">
+        <div>
+          <div class="project-name" id="project-name">Intro Pad</div>
+          <div class="badges">
+            <span class="ds-badge ds-badge-accent">Session</span>
+            <span class="ds-badge ds-badge-success">Saved</span>
+          </div>
+        </div>
+        <div class="head-actions" style="position:relative">
+          <button class="ds-btn ds-btn-ghost ds-btn-sm" id="open-cmd">⌘K</button>
+          <button class="ds-btn ds-btn-ghost ds-btn-sm" id="proj-menu-btn">⋯</button>
+          <div class="ds-menu proj-menu" id="proj-menu" hidden>
+            <button class="ds-menu-item" data-proj="rename"><span class="l">Rename</span></button>
+            <button class="ds-menu-item" data-proj="duplicate"><span class="l">Duplicate</span></button>
+            <div class="ds-menu-sep"></div>
+            <button class="ds-menu-item danger" data-proj="delete"><span class="l">Delete</span></button>
+          </div>
+          <button class="ds-btn ds-btn-secondary" id="open-dialog">Export</button>
+          <button class="ds-btn ds-btn-primary" id="render-btn">Render</button>
+        </div>
+      </div>
+
+      <!-- Macro Controls panel -->
+      <div class="ds-panel" style="margin-bottom: var(--space-5)">
+        <div class="ds-panel-head"><span class="ds-panel-title">Macro Controls</span></div>
+        <div class="ds-panel-body">
+          <div class="ds-tabs" style="margin-bottom: var(--space-5)">
+            <button class="ds-tab active" data-macro-tab="macro">Macro</button>
+            <button class="ds-tab" data-macro-tab="env">Envelope</button>
+          </div>
+          <div class="macro-grid" id="macro-sliders">
+            <div class="ds-slider-field" style="margin-bottom:0">
+              <div class="ds-slider-head"><span class="ds-slider-label">Cutoff</span><span class="ds-slider-value">7.2 kHz</span></div>
+              <div class="ds-slider-track"><div class="ds-slider-fill a2" style="width:72%"></div><div class="ds-slider-knob a2" style="left:calc(72% - 7px)"></div><input type="range" min="0" max="100" value="72" data-slider="cutoff"></div>
+            </div>
+            <div class="ds-slider-field" style="margin-bottom:0">
+              <div class="ds-slider-head"><span class="ds-slider-label">Resonance</span><span class="ds-slider-value">38%</span></div>
+              <div class="ds-slider-track"><div class="ds-slider-fill" style="width:38%"></div><div class="ds-slider-knob" style="left:calc(38% - 7px)"></div><input type="range" min="0" max="100" value="38" data-slider="resonance"></div>
+            </div>
+            <div class="ds-slider-field" style="margin-bottom:0">
+              <div class="ds-slider-head"><span class="ds-slider-label">Drive</span><span class="ds-slider-value">22%</span></div>
+              <div class="ds-slider-track"><div class="ds-slider-fill" style="width:22%"></div><div class="ds-slider-knob" style="left:calc(22% - 7px)"></div><input type="range" min="0" max="100" value="22" data-slider="drive"></div>
+            </div>
+            <div class="ds-slider-field" style="margin-bottom:0">
+              <div class="ds-slider-head"><span class="ds-slider-label">Mix</span><span class="ds-slider-value">64%</span></div>
+              <div class="ds-slider-track"><div class="ds-slider-fill" style="width:64%"></div><div class="ds-slider-knob" style="left:calc(64% - 7px)"></div><input type="range" min="0" max="100" value="64" data-slider="mix"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Effects + Output row -->
+      <div class="effects-meter-row">
+        <div class="ds-panel">
+          <div class="ds-panel-head"><span class="ds-panel-title">Effects Chain</span></div>
+          <div class="ds-panel-body ds-panel-body-sm">
+            <div style="display:flex;flex-direction:column;gap:2px">
+              <div class="effect-row"><label class="ds-check"><input type="checkbox" class="ds-peer" checked data-effect="0"><span class="ds-checkbox on" data-peer-target><span class="ds-checkbox-inner"></span></span>LFO 1 → Cutoff</label><span class="effect-pct">+42%</span></div>
+              <div class="effect-row"><label class="ds-check"><input type="checkbox" class="ds-peer" checked data-effect="1"><span class="ds-checkbox on" data-peer-target><span class="ds-checkbox-inner"></span></span>Envelope 2 → Amp</label><span class="effect-pct">+68%</span></div>
+              <div class="effect-row"><label class="ds-check"><input type="checkbox" class="ds-peer" data-effect="2"><span class="ds-checkbox" data-peer-target></span>Velocity → Drive</label><span class="effect-pct">15%</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="ds-panel">
+          <div class="ds-panel-head"><span class="ds-panel-title">Output Levels</span></div>
+          <div class="ds-panel-body ds-panel-body-sm">
+            <div class="meter">
+              <span class="track" style="height:30%"></span>
+              <span class="p1" style="height:60%"></span>
+              <span class="p2" style="height:45%"></span>
+              <span class="p3" style="height:85%"></span>
+              <span class="track" style="height:25%"></span>
+              <span class="p4" style="height:70%"></span>
+              <span class="track" style="height:15%"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Inspector -->
+    <div class="inspector">
+      <div class="ds-group-label" style="margin-bottom: var(--space-5)">Inspector</div>
+      <div class="insp-row"><span class="insp-key">Sample rate</span><span class="insp-val">48 kHz</span></div>
+      <div class="insp-row"><span class="insp-key">Bit depth</span><span class="insp-val">24-bit</span></div>
+      <div class="insp-row"><span class="insp-key">Buffer</span><span class="insp-val">512</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Export dialog -->
+<div class="scrim" id="dialog" hidden>
+  <div class="ds-dialog" style="width:420px">
+    <div class="ds-dialog-head">Export settings</div>
+    <div class="ds-dialog-body">
+      <div style="margin-bottom: var(--space-4)">Format, bit depth, and sample rate for the rendered file.</div>
+      <div class="ds-input-field"><label class="ds-input-label">Format</label>
+        <button class="ds-select-field" id="format-select"><span id="format-label">WAV</span><svg class="ds-select-chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6l4 4 4-4"/></svg></button>
+      </div>
+      <div class="ds-slider-field" style="margin-bottom:0">
+        <div class="ds-slider-head"><span class="ds-slider-label">Sample rate</span><span class="ds-slider-value">48.0 kHz</span></div>
+        <div class="ds-slider-track"><div class="ds-slider-fill" style="width:80%"></div><div class="ds-slider-knob" style="left:calc(80% - 7px)"></div><input type="range" min="0" max="100" value="80" data-slider="sampleRate"></div>
+      </div>
+    </div>
+    <div class="ds-dialog-foot">
+      <button class="ds-btn ds-btn-ghost" id="cancel-dialog">Cancel</button>
+      <button class="ds-btn ds-btn-primary" id="confirm-export">Export</button>
+    </div>
+  </div>
+</div>
+
+<!-- Command palette -->
+<div class="cmd-scrim" id="cmd" hidden>
+  <div class="ds-cmd" style="width:560px">
+    <div class="ds-cmd-query"><input class="ds-cmd-input" placeholder="Search commands" id="cmd-input"><span class="ds-cmd-esc">ESC</span></div>
+    <div class="ds-cmd-list" id="cmd-list"></div>
+    <div class="ds-cmd-footer"><span>↑↓ navigate</span><span>⏎ run</span><span>⌘K toggle</span></div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast-stack" id="toasts"></div>
+
+<script>
+const projects = ['Intro Pad','Kick Drum','Snare Rim','Bass Layer 02','Lead — bright pluck','Lead — soft','FX sweep','Ambient tail'];
+const navItems = ['sessions','library','automation','mixer','export'];
+const formats = ['WAV','AIFF','MP3'];
+let formatIdx = 0;
+
+// Nav
+document.querySelectorAll('[data-nav]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('[data-nav]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+
+// Layers
+document.querySelectorAll('[data-layer]').forEach(el => {
+  el.addEventListener('click', () => {
+    document.querySelectorAll('[data-layer]').forEach(l => l.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById('project-name').textContent = el.textContent;
+  });
+});
+
+// Search filters layers
+document.getElementById('search').addEventListener('input', e => {
+  const q = e.target.value.toLowerCase();
+  document.querySelectorAll('[data-layer]').forEach(l => {
+    l.style.display = l.textContent.toLowerCase().includes(q) ? '' : 'none';
+  });
+});
+
+// Macro tabs
+document.querySelectorAll('[data-macro-tab]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('[data-macro-tab]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+
+// Sliders
+document.querySelectorAll('[data-slider]').forEach(input => {
+  input.addEventListener('input', () => {
+    const v = +input.value;
+    const track = input.closest('.ds-slider-track');
+    const fill = track.querySelector('.ds-slider-fill');
+    const knob = track.querySelector('.ds-slider-knob');
+    const valEl = input.closest('.ds-slider-field').querySelector('.ds-slider-value');
+    fill.style.width = v + '%';
+    knob.style.left = 'calc(' + v + '% - 7px)';
+    const name = input.dataset.slider;
+    if (name === 'cutoff') valEl.textContent = (v / 10).toFixed(1) + ' kHz';
+    else if (name === 'sampleRate') valEl.textContent = (v * 0.6).toFixed(1) + ' kHz';
+    else valEl.textContent = v + '%';
+  });
+});
+
+// Checkboxes
+document.querySelectorAll('.ds-peer').forEach(input => {
+  input.addEventListener('change', () => {
+    const box = input.parentElement.querySelector('[data-peer-target]');
+    box.classList.toggle('on', input.checked);
+    if (input.checked && !box.querySelector('.ds-checkbox-inner')) {
+      const inner = document.createElement('span');
+      inner.className = 'ds-checkbox-inner';
+      box.appendChild(inner);
+    } else if (!input.checked) {
+      const inner = box.querySelector('.ds-checkbox-inner');
+      if (inner) inner.remove();
+    }
+  });
+});
+
+// Theme + density toggles
+const themeToggle = document.getElementById('theme-toggle');
+const densityToggle = document.getElementById('density-toggle');
+themeToggle.addEventListener('click', () => {
+  const isDark = document.body.getAttribute('data-theme') === 'dark';
+  document.body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  themeToggle.querySelector('.ds-switch-track').classList.toggle('on', isDark);
+});
+densityToggle.addEventListener('click', () => {
+  const body = document.getElementById('body');
+  const compact = body.hasAttribute('data-density');
+  if (compact) body.removeAttribute('data-density'); else body.setAttribute('data-density','compact');
+  densityToggle.querySelector('.ds-switch-track').classList.toggle('on', !compact);
+});
+
+// Project menu
+const projMenu = document.getElementById('proj-menu');
+document.getElementById('proj-menu-btn').addEventListener('click', e => { e.stopPropagation(); projMenu.hidden = !projMenu.hidden; });
+document.addEventListener('click', () => projMenu.hidden = true);
+document.querySelectorAll('[data-proj]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    projMenu.hidden = true;
+    const action = btn.dataset.proj;
+    showToast(action === 'delete' ? 'Project deleted' : action === 'duplicate' ? 'Project duplicated' : 'Project renamed');
+  });
+});
+
+// Render
+document.getElementById('render-btn').addEventListener('click', () => showToast('Render complete'));
+
+// Export dialog
+const dialog = document.getElementById('dialog');
+document.getElementById('open-dialog').addEventListener('click', () => dialog.hidden = false);
+document.getElementById('cancel-dialog').addEventListener('click', () => dialog.hidden = true);
+document.getElementById('confirm-export').addEventListener('click', () => { dialog.hidden = true; showToast('Exported ' + formats[formatIdx]); });
+document.getElementById('format-select').addEventListener('click', () => {
+  formatIdx = (formatIdx + 1) % formats.length;
+  document.getElementById('format-label').textContent = formats[formatIdx];
+});
+
+// Command palette
+const cmd = document.getElementById('cmd');
+const cmdInput = document.getElementById('cmd-input');
+const cmdList = document.getElementById('cmd-list');
+document.getElementById('open-cmd').addEventListener('click', () => { cmd.hidden = false; cmdInput.focus(); renderCmd(''); });
+cmd.addEventListener('click', e => { if (e.target === cmd) cmd.hidden = true; });
+cmdInput.addEventListener('input', () => renderCmd(cmdInput.value));
+cmdInput.addEventListener('keydown', e => { if (e.key === 'Escape') cmd.hidden = true; });
+document.addEventListener('keydown', e => { if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); cmd.hidden = !cmd.hidden; if (!cmd.hidden) cmdInput.focus(); } });
+
+function renderCmd(q) {
+  const navMatches = navItems.filter(n => n.includes(q.toLowerCase()));
+  const projMatches = projects.filter(p => p.toLowerCase().includes(q.toLowerCase()));
+  cmdList.innerHTML =
+    '<div class="ds-cmd-group"><span class="ds-cmd-header">Navigate</span>' +
+    (navMatches.map(n => '<button class="ds-cmd-item" data-cmd="nav-' + n + '"><span class="l">' + n.charAt(0).toUpperCase()+n.slice(1) + '</span></button>').join('') || '<span class="ds-cmd-header">No matches</span>') +
+    '</div><div class="ds-cmd-group"><span class="ds-cmd-header">Projects</span>' +
+    projMatches.map(p => '<button class="ds-cmd-item" data-cmd="proj-' + encodeURIComponent(p) + '"><span class="l">' + p + '</span></button>').join('') +
+    '</div>';
+  cmdList.querySelectorAll('[data-cmd]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.cmd;
+      if (id.startsWith('nav-')) {
+        const navId = id.slice(4);
+        document.querySelectorAll('[data-nav]').forEach(b => b.classList.toggle('active', b.dataset.nav === navId));
+      } else if (id.startsWith('proj-')) {
+        const name = decodeURIComponent(id.slice(5));
+        document.querySelectorAll('[data-layer]').forEach(l => l.classList.toggle('active', l.textContent === name));
+        document.getElementById('project-name').textContent = name;
+      }
+      cmd.hidden = true;
+    });
+  });
+}
+
+// Toast
+function showToast(msg) {
+  const stack = document.getElementById('toasts');
+  const el = document.createElement('div');
+  el.className = 'ds-toast';
+  el.style.width = '340px';
+  el.innerHTML = '<span class="ds-toast-dot success"></span><div class="ds-toast-body"><span class="ds-toast-title">' + msg + '</span></div>';
+  stack.appendChild(el);
+  setTimeout(() => el.remove(), 4000);
+}
+</script>
+</body>
+</html>

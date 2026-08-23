@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dyvoided.2 — Editorial Reader</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/lucide@0.462.0/dist/umd/lucide.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--surface-sunken); font-family: var(--font-body); }
+  .shell { width: 1280px; height: 800px; margin: 0 auto; display: flex; flex-direction: column; overflow: hidden; }
+  .body { display: flex; flex: 1; min-height: 0; }
+
+  /* Main article column */
+  .main { flex: 1; overflow: auto; scrollbar-gutter: stable; padding: var(--space-8) var(--space-9) var(--space-10); }
+  .article { max-width: 640px; }
+  .article-head { margin-bottom: var(--space-6); }
+  .article-title { font-family: var(--font-display); font-weight: 700; font-size: var(--font-size-3xl); line-height: var(--leading-tight); letter-spacing: var(--tracking-tight); color: var(--text-primary); margin: var(--space-4) 0 var(--space-5); }
+  .article-byline { display: flex; align-items: center; gap: 10px; }
+  .byline-text { display: flex; flex-direction: column; gap: 2px; }
+  .author-name { font-size: var(--text-sm); color: var(--text-secondary); font-weight: 500; }
+  .author-meta { font-family: var(--font-mono); font-size: var(--font-size-xs); color: var(--text-tertiary); }
+  .article-actions { display: flex; gap: 8px; margin-left: auto; }
+  .article-actions .ds-btn { width: 32px; padding: 0; }
+  .article-actions .ds-btn svg { width: 16px; height: 16px; }
+  .article-bar { display: flex; align-items: center; gap: var(--space-4); }
+
+  .hero-img { width: 100%; height: 260px; border-radius: var(--radius-md); background: var(--surface-raised); border: 1px solid var(--border-subtle); margin-bottom: var(--space-7); display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); font-family: var(--font-mono); font-size: var(--font-size-xs); letter-spacing: var(--tracking-wide); text-transform: uppercase; }
+
+  .article-body { font-size: var(--font-size-md); line-height: 1.7; color: var(--text-secondary); }
+  .article-body p { margin: 0 0 var(--space-5); }
+  .article-body p:first-of-type::first-letter { font-family: var(--font-display); font-weight: 700; font-size: 3.6em; line-height: 0.82; float: left; margin: 4px 10px 0 0; color: var(--text-primary); }
+
+  .pull-quote { font-family: var(--font-display); font-weight: 500; font-size: var(--font-size-xl); line-height: var(--leading-snug); color: var(--text-primary); border-left: 2px solid var(--primary); padding: var(--space-2) 0 var(--space-2) var(--space-5); margin: var(--space-7) 0; letter-spacing: var(--tracking-tight); }
+
+  .article-foot { display: flex; align-items: center; gap: var(--space-3); margin-top: var(--space-8); padding-top: var(--space-6); border-top: 1px solid var(--border-subtle); }
+  .foot-label { font-family: var(--font-mono); font-size: var(--font-size-xs); color: var(--text-tertiary); letter-spacing: var(--tracking-wide); text-transform: uppercase; }
+
+  /* Right rail */
+  .rail { width: 300px; flex-shrink: 0; border-left: 1px solid var(--border-subtle); overflow: auto; padding: var(--space-7) var(--space-6); display: flex; flex-direction: column; gap: var(--space-7); }
+  .rail-section { display: flex; flex-direction: column; gap: var(--space-3); }
+  .related-item { display: flex; gap: var(--space-3); padding: var(--space-2) 0; }
+  .related-num { font-family: var(--font-mono); font-size: var(--font-size-sm); font-weight: 600; color: var(--text-tertiary); flex-shrink: 0; width: 22px; padding-top: 1px; }
+  .related-body { display: flex; flex-direction: column; gap: 3px; }
+  .related-cat { font-family: var(--font-mono); font-size: var(--font-size-2xs); font-weight: 500; letter-spacing: var(--tracking-wide); text-transform: uppercase; }
+  .related-title { font-size: var(--text-sm); color: var(--text-primary); font-weight: 500; line-height: var(--leading-snug); }
+
+  .newsletter-title { font-family: var(--font-display); font-weight: 600; font-size: var(--font-size-md); color: var(--text-primary); margin-bottom: var(--space-2); }
+  .newsletter-desc { font-size: var(--text-sm); color: var(--text-tertiary); line-height: var(--leading-body); margin-bottom: var(--space-4); }
+</style>
+</head>
+<body data-theme="dark">
+
+<div class="shell">
+  <div class="ds-win-bar">
+    <div class="ds-win-dots"><span class="ds-win-dot" style="background:var(--danger-500)"></span><span class="ds-win-dot" style="background:var(--accent-1-500)"></span><span class="ds-win-dot" style="background:var(--success-500)"></span></div>
+    <span class="ds-win-title">Reader</span>
+  </div>
+
+  <div class="body">
+    <!-- Main article column -->
+    <div class="main">
+      <div class="article">
+        <div class="article-head">
+          <div class="ds-breadcrumb" style="margin-bottom: var(--space-5)">
+            <a href="#">Dispatch</a>
+            <span class="ds-breadcrumb-sep">/</span>
+            <a href="#">Essays</a>
+            <span class="ds-breadcrumb-sep">/</span>
+            <span class="ds-breadcrumb-current">The Quiet Tools</span>
+          </div>
+
+          <span class="ds-badge ds-badge-accent">Essay</span>
+
+          <h1 class="article-title">The Quiet Tools</h1>
+
+          <div class="article-bar">
+            <div class="article-byline">
+              <span class="ds-avatar ds-avatar-32 ds-avatar-t1">MR</span>
+              <div class="byline-text">
+                <span class="author-name">Maren Rios</span>
+                <span class="author-meta">14 min &middot; Mar 12, 2025</span>
+              </div>
+            </div>
+            <div class="article-actions">
+              <button class="ds-btn ds-btn-ghost"><i data-lucide="bookmark"></i></button>
+              <button class="ds-btn ds-btn-ghost"><i data-lucide="share-2"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-img">Hero image</div>
+
+        <div class="article-body">
+          <p>For a decade now, the dominant question in software interface design has been how to make things feel alive. Gradients shift on hover, panels breathe with subtle motion, and every interaction earns a celebration. The result is often impressive and just as often exhausting. What we rarely ask is what a tool looks like when it stops trying to impress and starts trying to disappear.</p>
+
+          <p>The best tools I have used share a quality I can only describe as quietness. They do not announce themselves. They do not decorate their surfaces or animate their transitions beyond what clarifies a state change. They sit on the desk, as it were, and wait. Obsidian is like this. A well-configured Vim is like this. The terminal itself, for all its perceived austerity, is like this. The interface recedes and the work surfaces.</p>
+
+          <div class="pull-quote">The interface recedes and the work surfaces. That is the entire ambition, and it is harder than it looks.</div>
+
+          <p>This is not a minimalist aesthetic, though it can look minimal from the outside. Minimalism is a style. Quietness is a relationship between the tool and the person using it. A loud tool demands attention regardless of whether the task needs it. A quiet tool gives attention back to the task, and only asks for it when something is genuinely wrong or genuinely finished.</p>
+
+          <p>Consider the difference between a notification that slides in with a banner, a sound, and a badge increment, and a status indicator that changes color when you happen to glance at it. Both convey the same information. One interrupts. The other informs. The choice between them is not about information density but about respect for the user's current focus.</p>
+
+          <p>The same principle applies to visual hierarchy. A panel that uses one accent color for its primary action and reserves the other three for categorical meaning will always read faster than a panel where every element competes for chromatic attention. Restraint is not the absence of color. It is the presence of a system that tells you when color matters and when it does not.</p>
+
+          <p>None of this is new. People who build professional tools have known it for decades. What is new is the pressure to do otherwise. The economics of attention reward interfaces that perform. A screenshot that moves is more shareable than one that does not. A demo that animates sells better than one that waits. The quiet tools do not demo well, and that is precisely the point. They are not built to be watched. They are built to be used.</p>
+        </div>
+
+        <div class="article-foot">
+          <span class="foot-label">Tagged</span>
+          <span class="ds-badge ds-badge-neutral">Design</span>
+          <span class="ds-badge ds-badge-neutral">Tools</span>
+          <span class="ds-badge ds-badge-neutral">Craft</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right rail -->
+    <div class="rail">
+      <div class="rail-section">
+        <div class="ds-group-label">Related reading</div>
+
+        <div class="related-item">
+          <span class="related-num">01</span>
+          <div class="related-body">
+            <span class="related-cat" style="color: var(--accent-1-400)">Design</span>
+            <span class="related-title">Density without noise: reading layouts that breathe</span>
+          </div>
+        </div>
+
+        <div class="related-item">
+          <span class="related-num">02</span>
+          <div class="related-body">
+            <span class="related-cat" style="color: var(--accent-2-400)">Process</span>
+            <span class="related-title">From Figma to tokens: a migration diary</span>
+          </div>
+        </div>
+
+        <div class="related-item">
+          <span class="related-num">03</span>
+          <div class="related-body">
+            <span class="related-cat" style="color: var(--accent-3-400)">Engineering</span>
+            <span class="related-title">Building a color system that survives rebranding</span>
+          </div>
+        </div>
+
+        <div class="related-item">
+          <span class="related-num">04</span>
+          <div class="related-body">
+            <span class="related-cat" style="color: var(--primary-400)">Typography</span>
+            <span class="related-title">Pairing display and body faces for longform UI</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-panel">
+        <div class="ds-panel-body">
+          <div class="newsletter-title">The Dispatch</div>
+          <div class="newsletter-desc">A weekly note on tools, type, and the craft of building interfaces. No tracking, no growth hacks.</div>
+          <div class="ds-input-box" style="margin-bottom: var(--space-3)"><input class="ds-input" placeholder="you@domain.com"></div>
+          <button class="ds-btn ds-btn-primary" style="width:100%">Subscribe</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>lucide.createIcons();</script>
+</body>
+</html>
