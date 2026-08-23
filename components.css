@@ -141,8 +141,8 @@
 .ds-progress-row{display:flex;flex-direction:column;gap:4px}
 .ds-progress-label{display:flex;justify-content:space-between;font-size:var(--text-xs);color:var(--text-tertiary)}
 .ds-progress-pct{font-family:var(--font-mono)}
-.ds-progress-track{height:6px;border-radius:var(--radius-full);background:var(--control-track);overflow:hidden}
-.ds-progress-fill{height:100%;border-radius:var(--radius-full);background:var(--primary)}
+.ds-progress-track{height:6px;border-radius:2px;background:var(--control-track);box-shadow:var(--inset-rail);overflow:hidden}
+.ds-progress-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,oklch(from var(--primary) calc(l - 0.06 * var(--boldness)) c h),oklch(from var(--primary) calc(l + 0.06 * var(--boldness)) c h))}
 .ds-spinner{width:18px;height:18px;border-radius:50%;border:2px solid var(--border-strong);border-top-color:var(--primary);animation:ds-spin .7s linear infinite}
 
 /* ===== Keyframes ===== */
