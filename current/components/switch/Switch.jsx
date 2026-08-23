@@ -15,10 +15,11 @@ export function Switch({ checked, onChange, label, disabled }) {
         transition: 'border-color var(--duration-base) var(--ease-standard), background var(--duration-base) var(--ease-standard)',
       }}>
         <span style={{
-          position: 'absolute', top: 1, left: checked ? 15 : 1,
+          position: 'absolute', top: 1, left: 1,
           width: 13, height: 13, borderRadius: 2,
           background: checked ? 'var(--primary-500)' : 'var(--gray-500)',
-          transition: 'left var(--duration-base) var(--ease-spring), background var(--duration-base)',
+          transform: checked ? 'translateX(14px)' : 'none',
+          transition: 'transform var(--duration-base) var(--ease-spring), background var(--duration-base)',
         }} />
       </span>
       {label && <span style={{ fontSize: 'var(--font-size-base)', color: disabled ? 'var(--text-disabled)' : 'var(--text-primary)' }}>{label}</span>}

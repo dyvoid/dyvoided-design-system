@@ -73,8 +73,8 @@
   .cs-toggle { display: flex; align-items: center; justify-content: space-between; font-size: var(--font-size-sm); color: var(--text-secondary); }
   .cs-switch { width: 30px; height: 17px; border-radius: var(--radius-xs); background: var(--control-track); border: 1px solid var(--border-strong); position: relative; cursor: pointer; transition: border-color var(--duration-base) var(--ease-standard), background var(--duration-base) var(--ease-standard); flex-shrink: 0; }
   .cs-switch.on { background: var(--primary-muted-bg); border-color: var(--primary); }
-  .cs-switch-thumb { position: absolute; top: 1px; left: 1px; width: 13px; height: 13px; border-radius: 2px; background: var(--gray-500); transition: left var(--duration-base) var(--ease-spring), background var(--duration-base); }
-  .cs-switch.on .cs-switch-thumb { left: 15px; background: var(--primary-500); }
+  .cs-switch-thumb { position: absolute; top: 1px; left: 1px; width: 13px; height: 13px; border-radius: 2px; background: var(--gray-500); transition: transform var(--duration-base) var(--ease-spring), background var(--duration-base); }
+  .cs-switch.on .cs-switch-thumb { transform: translateX(14px); background: var(--primary-500); }
 
   /* Main canvas */
   .cs-main { flex: 1; min-width: 0; min-height: 0; padding: var(--space-8); overflow: auto; scrollbar-gutter: stable; position: relative; background: var(--surface-app); }
