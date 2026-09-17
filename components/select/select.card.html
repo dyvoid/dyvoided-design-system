@@ -1,4 +1,4 @@
-<!-- @dsCard group="Components" viewport="700x220" name="Select" subtitle="Closed field and open popover" -->
+<!-- @dsCard group="Components" viewport="760x240" name="Select" subtitle="Closed, open with a keyboard-highlighted option, and disabled" -->
 <html><head>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../styles.css">
 <script src="https://unpkg.com/lucide@0.462.0/dist/umd/lucide.js"></script>
@@ -6,8 +6,10 @@
 <style>body{margin:0;background:var(--surface-app);padding:24px;font-family:var(--font-body);display:flex;gap:32px;align-items:flex-start}.col{width:220px;display:flex;flex-direction:column;gap:6px}.lbl{font-size:var(--text-sm);color:var(--text-secondary);font-weight:500}</style></head>
 <body data-theme="dark">
 <div class="col"><span class="lbl" id="lbl-device">Theme</span>
-<button class="ds-select-field" aria-haspopup="listbox" aria-labelledby="lbl-device"><span>Dark</span><i data-lucide="chevron-down" class="ds-select-chev"></i></button></div>
+<button class="ds-select-field" role="combobox" aria-haspopup="listbox" aria-expanded="false" aria-controls="pop-device" aria-labelledby="lbl-device"><span>Dark</span><i data-lucide="chevron-down" class="ds-select-chev"></i></button></div>
 <div class="col"><span class="lbl" id="lbl-rate">Density</span>
-<button class="ds-select-field open" aria-haspopup="listbox" aria-labelledby="lbl-rate" aria-expanded="true"><span>Spacious</span><i data-lucide="chevron-up" class="ds-select-chev"></i></button>
-<div class="ds-select-pop" role="listbox" aria-labelledby="lbl-rate"><button class="ds-select-option" role="option">Compact</button><button class="ds-select-option sel" role="option" aria-selected="true"><span>Spacious</span><span class="ds-select-hint">default</span></button><button class="ds-select-option" role="option">Comfortable</button></div></div>
+<button class="ds-select-field open" role="combobox" aria-haspopup="listbox" aria-expanded="true" aria-controls="pop-rate" aria-activedescendant="opt-comfortable" aria-labelledby="lbl-rate"><span>Spacious</span><i data-lucide="chevron-up" class="ds-select-chev"></i></button>
+<div class="ds-select-pop" id="pop-rate" role="listbox" aria-labelledby="lbl-rate"><div class="ds-select-option" id="opt-compact" role="option" aria-selected="false">Compact</div><div class="ds-select-option sel" id="opt-spacious" role="option" aria-selected="true"><span>Spacious</span><span class="ds-select-hint">default</span></div><div class="ds-select-option active" id="opt-comfortable" role="option" aria-selected="false">Comfortable</div></div></div>
+<div class="col"><span class="lbl" id="lbl-disabled">Output</span>
+<button class="ds-select-field" role="combobox" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="lbl-disabled" disabled><span>48 kHz</span><i data-lucide="chevron-down" class="ds-select-chev"></i></button></div>
 <script src="../../scripts/ds-eval-apply.js"></script></body></html>
