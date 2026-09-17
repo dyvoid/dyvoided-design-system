@@ -90,3 +90,17 @@ Rules:
 ## Accessibility
 
 Every interactive element uses semantic HTML with ARIA roles and states. `:focus-visible` rings appear on keyboard focus via `--focus-ring` — never rely on browser default outlines. Switches use `<input type="checkbox" role="switch">`. Checkboxes and sliders use native inputs with visual peer elements. The `.jsx` reference implementations mirror these patterns with `React.useId()` for label association.
+
+**Hiding things from sight but not from screen readers.** Two different tools, and picking the wrong one loses the focus ring:
+
+- `.ds-sr-only` — for *text*: live-region status, a label whose visible form is an icon.
+- `[data-ds-peer]` (in `tokens/interaction.css`) — for a *form control* that must stay focusable. It rings its visible `[data-ds-peer-target]` on `:focus-visible`, which a hand-rolled visually-hidden class does not.
+
+**Select is a combobox, and owes the keyboard what a native `<select>` gives for free.** Focus stays on the trigger and `aria-activedescendant` names the highlighted option, so options are `<div role="option">` rather than buttons — making them tab stops would mean the tab count changes with the option count, and Escape would never reach the trigger that owns the open state.
+
+| State | Keys |
+|---|---|
+| Closed | `Enter` / `Space` / `ArrowDown` open the list |
+| Open | `ArrowUp`/`ArrowDown` move, `Home`/`End` jump, letters type-ahead, `Enter` commits, `Escape` closes and returns focus, `Tab` closes and moves on |
+
+`.ds-select-option.active` marks where the keyboard is, which is a different thing from `.sel`, the chosen value. `.ds-select-field:disabled` covers the disabled trigger.
