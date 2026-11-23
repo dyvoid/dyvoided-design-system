@@ -43,7 +43,7 @@ Rules:
 
 - `styles.css` — the one entry point. Import this in any consuming app.
 - `tokens/` — colors, typography, spacing, effects (shadow/radius/focus-ring), motion, interaction (hover/press/focus-visible + reduced-motion + native browser surfaces), scrollbar.
-- `components/` — 18 reusable primitives, each with a canonical `.card.html` visual specimen and a `.jsx` reference implementation:
+- `components/` — 22 reusable primitives, each with a `.jsx` reference implementation and a canonical `.card.html` visual specimen (ProgressBar and Spinner share `progress.card.html`), plus the CSS-only Scrim:
   - Button, Input, Select, Checkbox, Switch, Slider
   - Panel, DataTable
   - Badge, Tooltip, Toast, EmptyState, ProgressBar, Spinner
